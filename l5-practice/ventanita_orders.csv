@@ -1,0 +1,602 @@
+Order ID,Order Date,Store,Order Code,Item,Qty,Unit Price,Order Total,Cashier,Customer
+26001,9/1/2026,Doral,WU-CA,Colada,4,2.50,10.00,Daniela,Walk-in
+26002,9/1/2026,Hialeah,WU-CD,Cortadito,1,2.25,2.25,Jean-Pierre,Walk-in
+26003,9/1/2026,Kendall,WU-CD,Cafe con leche,2,3.75,7.50,Daniela,Walk-in
+26004,9/1/2026,Kendall,DL-CD,Pan con bistec,1,11.50,11.50,Jean-Pierre,Ana Rodriguez
+26005,9/1/2026,Little Havana,WU-CD,Cafe con leche,2,3.75,7.50,Andres,Walk-in
+26006,9/1/2026,Kendall,DL-CD,Cafe con leche,6,3.75,22.50,Rosa,Keisha Gonzalez
+26007,9/1/2026,Little Havana,WU-CA,Pastelito de guayaba,2,1.50,3.00,Kevin,Walk-in
+26008,9/1/2026,Westchester,DL-CD,Colada,3,2.50,7.50,Osvaldo,Isabel Delgado
+26009,9/1/2026,Little Havana,DL-CD,Pastelito de carne,1,1.75,1.75,Jean-Pierre,Wilfredo Gonzalez
+26010,9/1/2026,Westchester,WU-CD,Cafe con leche,4,3.75,15.00,Daniela,Walk-in
+26011,9/1/2026,Little Havana,DL-CD,Tostada,3,2.75,8.25,Osvaldo,Marc Romero
+26012,9/1/2026,Little Havana,WU-CD,Media noche,2,7.25,14.50,Marisol,Walk-in
+26013,9/1/2026,Little Havana,WU-CD,Cuban sandwich,2,9.50,19.00,Marisol,Walk-in
+26014,9/1/2026,Hialeah,WU-CA,Colada,1,2.50,2.50,Yamilet,Walk-in
+26015,9/1/2026,Hialeah,WU-CD,Colada,2,2.50,5.00,Rosa,Walk-in
+26016,9/2/2026,Westchester,WU-CD,Cuban sandwich,1,9.50,9.50,Yamilet,Walk-in
+26017,9/2/2026,Little Havana,WU-CA,Tostada,2,2.75,5.50,Kevin,Walk-in
+26018,9/2/2026,Doral,DL-CD,Pastelito de carne,3,1.75,5.25,Andres,Wilfredo Rodriguez
+26019,9/2/2026,Little Havana,DL-CD,Pan con bistec,6,11.50,69.00,Jean-Pierre,Diego Pierre
+26020,9/2/2026,Westchester,WU-CA,Croqueta de jamon,4,1.25,5.00,Marisol,Walk-in
+26021,9/2/2026,Doral,WU-CD,Croqueta de jamon,1,1.25,1.25,Osvaldo,Walk-in
+26022,9/2/2026,Doral,WU-CA,Pastelito de guayaba,1,1.50,1.50,Yamilet,Walk-in
+26023,9/2/2026,Doral,WU-CD,Pan con bistec,1,11.50,11.50,Daniela,Walk-in
+26024,9/2/2026,Westchester,WU-CA,Pastelito de carne,1,1.75,1.75,Yamilet,Walk-in
+26025,9/2/2026,Little Havana,WU-CD,Cafecito,2,1.50,3.00,Daniela,Walk-in
+26026,9/2/2026,Kendall,WU-CD,Pastelito de carne,3,1.75,5.25,Yamilet,Walk-in
+26027,9/2/2026,Little Havana,DL-CD,Colada,1,2.50,2.50,Marisol,Diego Campbell
+26028,9/2/2026,Kendall,WU-CD,Pastelito de guayaba,1,1.50,1.50,Kevin,Walk-in
+26029,9/2/2026,Hialeah,WU-CA,Pastelito de guayaba,2,1.50,3.00,Yamilet,Walk-in
+26030,9/2/2026,Kendall,WU-CA,Pastelito de carne,3,1.75,5.25,Yamilet,Walk-in
+26031,9/3/2026,Little Havana,WU-CD,Pan con bistec,1,11.50,11.50,Marisol,Walk-in
+26032,9/3/2026,Doral,DL-CD,Tostada,,2.75,8.25,Osvaldo,Miguel Delgado
+26033,9/3/2026,Little Havana,WU-CD,Pastelito de guayaba y queso,1,1.75,1.75,Daniela,Walk-in
+26034,9/3/2026,Hialeah,DL-CD,Cafecito,1,1.50,1.50,Rosa,Junior Baptiste
+26035,9/3/2026,Hialeah,DL-CD,Cuban sandwich,,9.50,38.00,Kevin,Tamara Suarez
+26036,9/3/2026,Hialeah,WU-CD,Pan con bistec,1,11.50,11.50,Yamilet,Walk-in
+26037,9/3/2026,Little Havana,WU-CD,Pastelito de guayaba y queso,1,1.75,1.75,Yamilet,Walk-in
+26038,9/3/2026,Little Havana,WU-CA,Colada,1,2.50,2.50,Kevin,Walk-in
+26039,9/3/2026,Kendall,DL-CD,Pastelito de queso,4,1.50,6.00,Rosa,Alexis Morales
+26040,9/3/2026,Westchester,WU-CD,Cortadito,1,2.25,2.25,Kevin,Walk-in
+26041,9/3/2026,Westchester,WU-CA,Colada,4,2.50,10.00,Marisol,Walk-in
+26042,9/3/2026,Westchester,WU-CA,Cafecito,2,1.50,3.00,Jean-Pierre,Walk-in
+26043,9/3/2026,Kendall,DL-CD,Cafecito,2,1.50,3.00,Andres,Marc Hernandez
+26044,9/3/2026,Westchester,WU-CD,Cafe con leche,4,3.75,15.00,Daniela,Walk-in
+26045,9/3/2026,Westchester,WU-CD,Pastelito de queso,2,1.50,3.00,Jean-Pierre,Walk-in
+26046,9/4/2026,Little Havana,DL-CD,Croqueta de jamon,2,1.25,2.50,Kevin,Andres Garcia
+26047,9/4/2026,Doral,WU-CD,Cafe con leche,2,3.75,7.50,Rosa,Walk-in
+26048,9/4/2026,Kendall,WU-CD,Cafe con leche,1,3.75,3.75,Jean-Pierre,Walk-in
+26049,9/4/2026,Little Havana,WU-CD,Pastelito de guayaba y queso,1,1.75,1.75,Andres,Walk-in
+26050,9/4/2026,Kendall,DL-CD,Cuban sandwich,6,9.50,57.00,Daniela,Carlos Suarez
+26051,9/4/2026,Doral,WU-CD,Cafecito,3,1.50,4.50,Daniela,Walk-in
+26052,9/4/2026,Little Havana,WU-CA,Croqueta de jamon,3,1.25,3.75,Rosa,Walk-in
+26053,9/4/2026,Hialeah,WU-CA,Cortadito,1,2.25,2.25,Jean-Pierre,Walk-in
+26054,9/4/2026,Kendall,WU-CA,Media noche,2,7.25,14.50,Daniela,Walk-in
+26055,9/4/2026,Little Havana,WU-CD,Pastelito de queso,2,1.50,3.00,Jean-Pierre,Walk-in
+26056,9/4/2026,Westchester,WU-CA,Cafe con leche,1,3.75,3.75,Jean-Pierre,Walk-in
+26057,9/4/2026,Hialeah,DL-CD,Colada,2,2.50,5.00,Daniela,Fabiola Alvarez
+26058,9/4/2026,Kendall,WU-CD,Croqueta de jamon,1,1.25,1.25,Jean-Pierre,Walk-in
+26059,9/4/2026,Westchester,WU-CD,Pastelito de guayaba,4,1.50,6.00,Andres,Walk-in
+26060,9/4/2026,Kendall,WU-CD,Colada,1,2.50,2.50,Kevin,Walk-in
+26061,9/5/2026,Little Havana,WU-CD,Croqueta de pollo,2,1.25,2.50,Osvaldo,Walk-in
+26062,9/5/2026,Westchester,DL-CD,Cortadito,2,2.25,4.50,Marisol,Gabriela Pierre
+26063,9/5/2026,Little Havana,WU-CD,Pan con bistec,2,11.50,23.00,Osvaldo,Walk-in
+26064,9/5/2026,Hialeah,WU-CD,Croqueta de pollo,1,1.25,1.25,Rosa,Walk-in
+26065,9/5/2026,Doral,DL-CD,Cafe con leche,6,3.75,22.50,Yamilet,Isabel Sanchez
+26066,9/5/2026,Little Havana,WU-CD,Cortadito,2,2.25,4.50,Daniela,Walk-in
+26067,9/5/2026,Hialeah,DL-CD,Cuban sandwich,1,9.50,9.50,Yamilet,Fabiola Rodriguez
+26068,9/5/2026,Hialeah,DL-CD,Cortadito,1,2.25,2.25,Kevin,Alexis Alvarez
+26069,9/5/2026,Doral,DL-CD,Media noche,3,7.25,21.75,Osvaldo,Andres Cabrera
+26070,9/5/2026,Hialeah,DL-CD,Cafe con leche,2,3.75,7.50,Andres,Fabiola Rodriguez
+26071,9/5/2026,Kendall,WU-CD,Pastelito de queso,4,1.50,6.00,Osvaldo,Walk-in
+26072,9/5/2026,Doral,DL-CD,Pastelito de queso,6,1.50,9.00,Andres,Maria Ortiz
+26073,9/5/2026,Hialeah,WU-CA,Colada,3,2.50,7.50,Andres,Walk-in
+26074,9/5/2026,Little Havana,WU-CD,Pastelito de guayaba y queso,2,1.75,3.50,Osvaldo,Walk-in
+26075,9/5/2026,Hialeah,WU-CA,Cafecito,4,1.50,6.00,Andres,Walk-in
+26076,9/6/2026,Kendall,DL-CD,Colada,3,2.50,7.50,Andres,Ricardo Pierre
+26077,9/6/2026,Doral,WU-CA,Cortadito,1,2.25,2.25,Kevin,Walk-in
+26078,9/6/2026,Westchester,DL-CD,Medianoche,2,7.25,1450,Marisol,Yesenia Baptiste
+26079,9/6/2026,Little Havana,WU-CA,Cortadito,2,2.25,4.50,Jean-Pierre,Walk-in
+26080,9/6/2026,Kendall,WU-CD,Pastelito de carne,2,1.75,3.50,Marisol,Walk-in
+26081,9/6/2026,Doral,WU-CD,Cuban sandwich,4,9.50,38.00,Andres,Walk-in
+26082,9/6/2026,Hialeah,WU-CD,Pan con bistec,2,11.50,23.00,Andres,Walk-in
+26083,9/6/2026,Hialeah,WU-CD,Pastelito de guayaba,1,1.50,1.50,Daniela,Walk-in
+26084,9/6/2026,Little Havana,WU-CD,Cortadito,2,2.25,4.50,Yamilet,Walk-in
+26085,9/6/2026,Kendall,WU-CD,Pastelito de guayaba y queso,1,1.75,1.75,Andres,Walk-in
+26086,9/6/2026,Doral,DL-CD,Pastelito de guayaba,2,1.50,3.00,Osvaldo,Gabriela Delgado
+26087,9/6/2026,Hialeah,WU-CA,Pastelito de guayaba y queso,1,1.75,1.75,Marisol,Walk-in
+26088,9/6/2026,Westchester,WU-CD,Cortadito,2,2.25,4.50,Andres,Walk-in
+26089,9/6/2026,Hialeah,DL-CD,Cuban sandwich,4,9.50,38.00,Yamilet,Daniela Campbell
+26090,9/6/2026,Westchester,WU-CD,Cafecito,2,1.50,3.00,Daniela,Walk-in
+26091,9/7/2026,Little Havana,DL-CD,Cuban sandwich,4,9.50,38.00,Yamilet,Isabel Cabrera
+26092,9/7/2026,Little Havana,DL-CD,Pastelito de queso,4,1.50,6.00,Osvaldo,Jean Morales
+26093,9/7/2026,Kendall,WU-CA,Pastelito de carne,4,1.75,7.00,Andres,Walk-in
+26094,9/7/2026,Hialeah,DL-CD,Cuban sandwich,2,9.50,19.00,Jean-Pierre,Ernesto Delgado
+26095,9/7/2026,Little Havana,DL-CD,Croqueta de jamon,6,1.25,7.50,Rosa,Wilfredo Campbell
+26096,9/7/2026,Doral,WU-CA,Cortadito,3,2.25,6.75,Kevin,Walk-in
+26097,9/7/2026,Hialeah,DL-CD,Cafecito,3,1.50,4.50,Daniela,Keisha Martinez
+26098,9/7/2026,Kendall,DL-CD,Tostada,3,2.75,8.25,Andres,Andres Suarez
+26099,9/7/2026,Westchester,WU-CA,Cafe con leche,1,3.75,3.75,Daniela,Walk-in
+26100,9/7/2026,Kendall,WU-CD,Cafe con leche,2,3.75,7.50,Yamilet,Walk-in
+26101,9/7/2026,Westchester,DL-CD,Pastelito de guayaba y queso,6,1.75,10.50,Marisol,Luis Rivera
+26102,9/7/2026,Little Havana,DL-CD,Tostada,1,2.75,2.75,Yamilet,Alexis Castillo
+26103,9/7/2026,Doral,WU-CA,Croqueta de jamon,4,1.25,5.00,Jean-Pierre,Walk-in
+26104,9/7/2026,Westchester,WU-CD,Cortadito,1,2.25,2.25,Yamilet,Walk-in
+26105,9/7/2026,Little Havana,WU-CA,Medianoche,2,7.25,14.50,Osvaldo,Walk-in
+26106,9/8/2026,Kendall,WU-CA,Colada,1,2.50,2.50,Daniela,Walk-in
+26107,9/8/2026,Doral,WU-CD,Pastelito de queso,1,1.50,1.50,Rosa,Walk-in
+26108,9/8/2026,Little Havana,WU-CA,Cafecito,2,1.50,3.00,Andres,Walk-in
+26109,9/8/2026,Little Havana,WU-CD,Colada,3,2.50,7.50,Yamilet,Walk-in
+26110,9/8/2026, Doral,DL-CD,Pastelito de guayaba y queso,3,1.75,5.25,Rosa,Ana Alvarez
+26111,9/8/2026,Hialeah,DL-CD,Croqueta de pollo,1,1.25,1.25,Daniela,Marc Perez
+26112,9/8/2026,Doral,WU-CD,Croqueta de pollo,2,1.25,2.50,Yamilet,Walk-in
+26113,9/8/2026,Kendall,DL-CD,Medianoche,1,7.25,7.25,Daniela,Luis Diaz
+26114,9/8/2026,Kendall,DL-CD,Cuban sandwich,3,9.50,28.50,Yamilet,Alexis Ortiz
+26115,9/8/2026,Doral,DL-CD,Colada,6,2.50,15.00,Daniela,Pedro Lopez
+26116,9/8/2026,Hialeah,WU-CD,Cafe con leche,1,3.75,3.75,Marisol,Walk-in
+26117,9/8/2026,Little Havana,DL-CD,Croqueta de pollo,2,1.25,2.50,Daniela,Luis Gonzalez
+26118,9/8/2026,Kendall,WU-CA,Pastelito de queso,1,1.50,1.50,Jean-Pierre,Walk-in
+26119,9/8/2026,Hialeah,DL-CD,Croqueta de pollo,2,1.25,2.50,Marisol,Daniela Ortiz
+26120,9/8/2026,Westchester,WU-CD,Cortadito,3,2.25,6.75,Kevin,Walk-in
+26121,9/9/2026,Westchester,WU-CD,Cortadito,4,2.25,9.00,Rosa,Walk-in
+26122,9/9/2026,Westchester,DL-CD,Cuban sandwich,6,9.50,57.00,Rosa,Marc Lopez
+26123,9/9/2026,Little Havana,WU-CD,Pastelito de guayaba y queso,2,1.75,3.50,Rosa,Walk-in
+26124,9/9/2026,Westchester,WU-CA,Cafe con leche,3,3.75,11.25,Jean-Pierre,Walk-in
+26125,9/9/2026,Little Havana,WU-CA,Croqueta de jamon,4,1.25,5.00,Andres,Walk-in
+26126,9/9/2026,Hialeah,WU-CD,Cafecito,3,1.50,4.50,Yamilet,Walk-in
+26127,9/9/2026,Hialeah,DL-CD,Pan con bistec,2,11.50,23.00,Rosa,Alexis Rivera
+26128,9/9/2026,Little Havana,CT-CD,Pastelito de carne,60,1.75,105.00,Jean-Pierre,Luis Martinez
+26129,9/9/2026,Doral,WU-CA,Pastelito de carne,2,1.75,3.50,Rosa,Walk-in
+26130,9/9/2026,Little Havana,DL-CD,Tostada,4,2.75,11.00,Osvaldo,Claudette Campbell
+26131,9/9/2026,Westchester,WU-CD,Pastelito de guayaba,4,1.50,6.00,Marisol,Walk-in
+26132,9/9/2026,Hialeah,WU-CA,Cuban sandwich,1,9.50,9.50,Andres,Walk-in
+26133,9/9/2026,Westchester,DL-CD,Croqueta de jamon,6,1.25,7.50,Marisol,Andres Morales
+26134,9/9/2026,Hialeah,DL-CD,Cafecito,3,1.50,4.50,Kevin,Yesenia Sanchez
+26135,9/9/2026,Doral,WU-CA,Pastelito de carne,1,1.75,1.75,Yamilet,Walk-in
+26136,9/10/2026,Westchester,WU-CA,Cafecito,2,1.50,3.00,Osvaldo,Walk-in
+26137,9/10/2026,Little Havana,DL-CD,Pastelito de guayaba,4,1.50,6.00,Yamilet,Daniela Thompson
+26138,9/10/2026,Kendall,WU-CA,Pastelito de queso,1,1.50,1.50,Osvaldo,Walk-in
+26139,9/10/2026,Kendall,WU-CD,Cafecito,1,1.50,1.50,Osvaldo,Walk-in
+26140,9/10/2026,Kendall,DL-CD,Pan con bistec,3,11.50,34.50,Daniela,Rafael Ortiz
+26141,9/10/2026,Hialeah,WU-CA,Pastelito de guayaba y queso,2,1.75,3.50,Marisol,Walk-in
+26142,9/10/2026,Kendall,WU-CA,Pastelito de carne,3,1.75,5.25,Rosa,Walk-in
+26143,9/10/2026,Doral,WU-CA,Pastelito de guayaba y queso,1,1.75,1.75,Andres,Walk-in
+26144,9/10/2026,Doral,WU-CA,Colada,1,2.50,2.50,Andres,Walk-in
+26145,9/10/2026,Little Havana,WU-CD,Croqueta de jamon,1,1.25,1.25,Yamilet,Walk-in
+26146,9/10/2026,Doral,DL-CD,Pastelito de guayaba y queso,3,1.75,5.25,Daniela,Rosa Vargas
+26147,9/10/2026,Kendall,WU-CD,Cafecito,1,1.50,1.50,Kevin,Walk-in
+26148,9/10/2026,Kendall,DL-CD,Cafe con leche,3,3.75,11.25,Osvaldo,Andres Suarez
+26149,9/10/2026,Doral,WU-CD,Pastelito de guayaba,4,1.50,6.00,Kevin,Walk-in
+26150,9/10/2026,Doral,WU-CA,Medianoche,1,7.25,7.25,Kevin,Walk-in
+26151,9/11/2026,Hialeah,WU-CD,Cafe con leche,4,3.75,15.00,Jean-Pierre,Walk-in
+26152,9/11/2026,Little Havana,WU-CD,Cortadito,1,2.25,2.25,Osvaldo,Walk-in
+26153,9/11/2026,Hialeah,DL-CD,Medianoche,3,7.25,21.75,Marisol,Alexis Ortiz
+26154,9/11/2026,Little Havana,WU-CD,Tostada,1,2.75,2.75,Marisol,Walk-in
+26155,9/11/2026,Westchester,DL-CD,Pastelito de carne,2,1.75,3.50,Kevin,Ana Suarez
+26156,9/11/2026,Hialeah,WU-CD,Pastelito de guayaba,3,1.50,4.50,Daniela,Walk-in
+26157,9/11/2026,Westchester,WU-CD,Cafecito,2,1.50,3.00,Rosa,Walk-in
+26158,9/11/2026,Hialeah,WU-CD,Tostada,2,2.75,5.50,Yamilet,Walk-in
+26159,9/11/2026,Doral,WU-CD,Cafecito,1,1.50,1.50,Jean-Pierre,Walk-in
+26160,9/11/2026,Little Havana,DL-CD,Cuban sandwich,3,9.50,28.50,Jean-Pierre,Alexis Lopez
+26161,9/11/2026,Little Havana,DL-CD,Pastelito de carne,1,1.75,1.75,Marisol,Isabel Pierre
+26162,9/11/2026,Hialeah,WU-CA,Tostada,4,2.75,11.00,Rosa,Walk-in
+26163,9/11/2026,Kendall,WU-CA,Cuban sandwich,1,9.50,9.50,Andres,Walk-in
+26164,9/11/2026,Kendall,DL-CD,Croqueta de jamon,3,1.25,3.75,Kevin,Ricardo Rodriguez
+26165,9/11/2026,Hialeah,WU-CD,Medianoche,1,7.25,7.25,Kevin,Walk-in
+26166,9/12/2026,Hialeah,WU-CD,Pastelito de guayaba,2,1.50,3.00,Kevin,Walk-in
+26167,9/12/2026,Little Havana,WU-CD,Cafecito,3,1.50,4.50,Yamilet,Walk-in
+26168,9/12/2026,Little Havana,DL-CD,Colada,2,2.50,5.00,Rosa,Lourdes Jean-Baptiste
+26169,9/12/2026,Doral,DL-CD,Pan con bistec,2,11.50,23.00,Andres,Junior Baptiste
+26170,9/12/2026, Doral,WU-CA,Croqueta de jamon,2,1.25,2.50,Osvaldo,Walk-in
+26171,9/12/2026,Doral,DL-CD,Medianoche,4,7.25,29.00,Marisol,Jose Baptiste
+26172,9/12/2026,Little Havana,WU-CD,Cafe con leche,1,3.75,3.75,Osvaldo,Walk-in
+26173,9/12/2026,Doral,WU-CA,Pan con bistec,2,11.50,23.00,Andres,Walk-in
+26174,9/12/2026,Hialeah,DL-CD,Pastelito de guayaba,2,1.50,3.00,Kevin,Miguel Pierre
+26175,9/12/2026,Kendall,WU-CA,Pastelito de queso,2,1.50,3.00,Yamilet,Walk-in
+26176,9/12/2026,Hialeah,WU-CD,Pastelito de carne,1,1.75,1.75,Andres,Walk-in
+26177,9/12/2026,Doral,DL-CD,Cuban sandwich,2,9.50,19.00,Marisol,Daniela Pierre
+26178,9/12/2026,Westchester,WU-CD,Croqueta de jamon,4,1.25,5.00,Andres,Walk-in
+26179,9/12/2026,Kendall,WU-CD,Tostada,3,2.75,8.25,Osvaldo,Walk-in
+26180,9/12/2026,Little Havana,WU-CD,Tostada,2,2.75,5.50,Yamilet,Walk-in
+26181,9/13/2026,Little Havana,DL-CD,Colada,4,2.50,10.00,Andres,Gabriela Delgado
+26182,9/13/2026,Little Havana,DL-CD,Croqueta de pollo,2,1.25,2.50,Marisol,Tamara Morales
+26183,9/13/2026,Kendall,WU-CA,Cafe con leche,4,3.75,15.00,Kevin,Walk-in
+26184,9/13/2026,Kendall,WU-CD,Cafecito,1,1.50,1.50,Jean-Pierre,Walk-in
+26185,9/13/2026,Little Havana,WU-CA,Medianoche,1,7.25,7.25,Jean-Pierre,Walk-in
+26186,9/13/2026,Hialeah,WU-CD,Cafecito,1,1.50,1.50,Kevin,Walk-in
+26187,9/13/2026,Kendall,WU-CD,Tostada,2,2.75,5.50,Jean-Pierre,Walk-in
+26188,9/13/2026,Little Havana,WU-CA,Cortadito,4,2.25,9.00,Kevin,Walk-in
+26189,9/13/2026,Hialeah,WU-CD,Cafecito,1,1.50,1.50,Andres,Walk-in
+26190,9/13/2026,Kendall,WU-CD,Cortadito,1,2.25,2.25,Osvaldo,Walk-in
+26191,9/13/2026,Westchester,WU-CA,Cafecito,2,1.50,3.00,Marisol,Walk-in
+26192,9/13/2026,Kendall,WU-CD,Pastelito de guayaba,1,1.50,1.50,Rosa,Walk-in
+26193,9/13/2026,Doral,WU-CA,Croqueta de jamon,4,1.25,5.00,Jean-Pierre,Walk-in
+26194,9/13/2026,Kendall,DL-CD,Cafecito,2,1.50,3.00,Andres,Andres Ortiz
+26195,9/13/2026,Westchester,DL-CD,Tostada,2,2.75,5.50,Kevin,Pedro Jean-Baptiste
+26196,9/14/2026,Doral,WU-CD,Medianoche,1,7.25,7.25,Daniela,Walk-in
+26197,9/14/2026,Westchester,WU-CD,Cafe con leche,1,3.75,3.75,Jean-Pierre,Walk-in
+26198,9/14/2026,Westchester,DL-CD,Cuban sandwich,3,9.50,28.50,Daniela,Yesenia Suarez
+26199,9/14/2026,Hialeah,WU-CD,Pastelito de guayaba y queso,2,1.75,3.50,Yamilet,Walk-in
+26200,9/14/2026,Doral,WU-CD,Colada,1,2.50,2.50,Jean-Pierre,Walk-in
+26201,9/14/2026,Westchester,WU-CD,Cafecito,3,1.50,4.50,Osvaldo,Walk-in
+26202,9/14/2026,Hialeah,DL-CD,Tostada,2,2.75,5.50,Jean-Pierre,Junior Suarez
+26203,9/14/2026,Little Havana,WU-CD,Cuban sandwich,1,9.50,9.50,Marisol,Walk-in
+26204,9/14/2026,Hialeah,DL-CD,Tostada,2,2.75,5.50,Yamilet,Fabiola Baptiste
+26205,9/14/2026,Doral,WU-CA,Pastelito de guayaba y queso,3,1.75,5.25,Marisol,Walk-in
+26206,9/14/2026,Hialeah,WU-CD,Cortadito,4,2.25,9.00,Daniela,Walk-in
+26207,9/14/2026,Hialeah,DL-CD,Pan con bistec,1,11.50,11.50,Rosa,Isabel Vargas
+26208,9/14/2026,Hialeah,WU-CD,Pastelito de guayaba,1,1.50,1.50,Andres,Walk-in
+26209,9/14/2026,Hialeah,WU-CA,Cafe con leche,1,3.75,3.75,Jean-Pierre,Walk-in
+26210,9/14/2026,Kendall,WU-CD,Colada,4,2.50,10.00,Marisol,Walk-in
+26211,9/15/2026,Little Havana,WU-CD,Colada,1,2.50,2.50,Osvaldo,Walk-in
+26212,9/15/2026,Little Havana,WU-CD,Pastelito de guayaba y queso,1,1.75,1.75,Andres,Walk-in
+26213,9/15/2026,Kendall,DL-CD,Tostada,1,2.75,2.75,Rosa,Luis Morales
+26214,9/15/2026,Westchester,DL-CD,Pastelito de guayaba,4,1.50,6.00,Daniela,Keisha Pierre
+26215,9/15/2026,Kendall,WU-CD,Cortadito,1,2.25,2.25,Daniela,Walk-in
+26216,9/15/2026,Kendall,WU-CA,Cafe con leche,2,3.75,7.50,Kevin,Walk-in
+26217,9/15/2026,Doral,WU-CA,Colada,2,2.50,5.00,Osvaldo,Walk-in
+26218,9/15/2026, Kendall,WU-CA,Pan con bistec,2,11.50,23.00,Osvaldo,Walk-in
+26219,9/15/2026,Little Havana,WU-CA,Pastelito de guayaba y queso,1,1.75,1.75,Yamilet,Walk-in
+26220,9/15/2026,Little Havana,WU-CA,Pastelito de carne,2,1.75,3.50,Andres,Walk-in
+26221,9/15/2026,Doral,WU-CA,Pastelito de carne,2,1.75,3.50,Yamilet,Walk-in
+26222,9/15/2026,Hialeah,WU-CD,Colada,2,2.50,5.00,Osvaldo,Walk-in
+26223,9/15/2026,Hialeah,DL-CD,Pan con bistec,6,11.50,69.00,Daniela,Daniela Vargas
+26224,9/15/2026,Hialeah,WU-CA,Cafe con leche,2,3.75,7.50,Osvaldo,Walk-in
+26225,9/15/2026,Kendall,WU-CD,Tostada,2,2.75,5.50,Rosa,Walk-in
+26226,9/16/2026,Little Havana,WU-CD,Tostada,1,2.75,2.75,Jean-Pierre,Walk-in
+26227,9/16/2026,Doral,DL-CD,Cafecito,2,1.50,3.00,Yamilet,Alexis Rivera
+26228,9/16/2026,Little Havana,WU-CD,Medianoche,1,7.25,7.25,Rosa,Walk-in
+26229,9/16/2026,Little Havana,WU-CA,Cafe con leche,2,3.75,7.50,Andres,Walk-in
+26230,9/16/2026,Doral,DL-CD,Pastelito de queso,2,1.50,3.00,Kevin,Ana Fernandez
+26231,9/16/2026,Little Havana,WU-CD,Croqueta de pollo,1,1.25,1.25,Rosa,Walk-in
+26232,9/16/2026,Kendall,WU-CA,Cortadito,1,2.25,2.25,Andres,Walk-in
+26233,9/16/2026,Doral,WU-CD,Cortadito,3,2.25,6.75,Yamilet,Walk-in
+26234,9/16/2026,Little Havana,WU-CA,Croqueta de pollo,3,1.25,3.75,Osvaldo,Walk-in
+26235,9/16/2026,Hialeah,DL-CD,Pastelito de carne,2,1.75,3.50,Jean-Pierre,Junior Garcia
+26236,9/16/2026,Kendall,DL-CD,Medianoche,2,7.25,14.50,Rosa,Miguel Suarez
+26237,9/16/2026,Little Havana,DL-CD,Croqueta de jamon,2,1.25,2.50,Osvaldo,Gabriela Diaz
+26238,9/16/2026,Hialeah,CT-CD,Croqueta de pollo,48,1.25,60.00,Andres,Claudette Jean-Baptiste
+26239,9/16/2026,Little Havana,WU-CD,Croqueta de jamon,1,1.25,1.25,Yamilet,Walk-in
+26240,9/16/2026,Doral,WU-CD,Croqueta de pollo,3,1.25,3.75,Daniela,Walk-in
+26241,9/17/2026,Little Havana,DL-CD,Cafe con leche,2,3.75,7.50,Rosa,Kevin Gonzalez
+26242,9/17/2026,Kendall,DL-CD,Tostada,3,2.75,8.25,Rosa,Yesenia Hernandez
+26243,9/17/2026,Westchester,WU-CD,Croqueta de pollo,2,1.25,2.50,Daniela,Walk-in
+26244,9/17/2026,Westchester,CT-CD,Pastelito de guayaba,24,1.50,36.00,Jean-Pierre,Rafael Castillo
+26245,9/17/2026,Doral,WU-CA,Croqueta de jamon,2,1.25,2.50,Daniela,Walk-in
+26246,9/17/2026,Hialeah,WU-CD,Pastelito de carne,2,1.75,3.50,Kevin,Walk-in
+26247,9/17/2026,Hialeah,WU-CD,Pastelito de guayaba,1,1.50,1.50,Andres,Walk-in
+26248,9/17/2026,Little Havana,WU-CA,Croqueta de pollo,1,1.25,1.25,Marisol,Walk-in
+26249,9/17/2026,Hialeah,DL-CD,Cortadito,2,2.25,4.50,Daniela,Alexis Rivera
+26250,9/17/2026,Little Havana,WU-CD,Pastelito de guayaba,1,1.50,1.50,Marisol,Walk-in
+26251,9/17/2026,Westchester,WU-CA,Croqueta de jamon,4,1.25,5.00,Andres,Walk-in
+26252,9/17/2026,Westchester,DL-CD,Cafe con leche,4,3.75,15.00,Yamilet,Keisha Fernandez
+26253,9/17/2026,Kendall,WU-CA,Pastelito de carne,1,1.75,1.75,Marisol,Walk-in
+26254,9/17/2026,Hialeah,WU-CA,Pastelito de guayaba,4,1.50,6.00,Daniela,Walk-in
+26255,9/17/2026,Hialeah,DL-CD,Cuban sandwich,1,9.50,9.50,Marisol,Alexis Fernandez
+26256,9/18/2026,Hialeah,WU-CA,Cafe con leche,3,3.75,11.25,Daniela,Walk-in
+26257,9/18/2026,Westchester,WU-CD,Cortadito,4,2.25,9.00,Kevin,Walk-in
+26258,9/18/2026,Kendall,DL-CD,Medianoche,1,7.25,7.25,Rosa,Junior Campbell
+26259,9/18/2026,Little Havana,WU-CA,Pastelito de guayaba,2,1.50,3.00,Jean-Pierre,Walk-in
+26260,9/18/2026,Doral,WU-CA,Cortadito,2,2.25,4.50,Rosa,Walk-in
+26261,9/18/2026,Westchester,WU-CA,Pastelito de carne,1,1.75,1.75,Rosa,Walk-in
+26262,9/18/2026,Westchester,WU-CA,Cafecito,2,1.50,3.00,Marisol,Walk-in
+26263,9/18/2026,Little Havana,DL-CD,Pan con bistec,1,11.50,11.50,Daniela,Keisha Perez
+26264,9/18/2026,Little Havana,WU-CA,Pastelito de queso,1,1.50,1.50,Daniela,Walk-in
+26265,9/18/2026,Doral,WU-CA,Pastelito de guayaba,2,1.50,3.00,Marisol,Walk-in
+26266,9/18/2026,Hialeah,DL-CD,Cafe con leche,4,3.75,15.00,Andres,Alexis Rivera
+26267,9/18/2026,Doral,WU-CA,Cafecito,1,1.50,1.50,Andres,Walk-in
+26268,9/18/2026,Hialeah,DL-CD,Pastelito de guayaba,2,1.50,3.00,Osvaldo,Rafael Romero
+26269,9/18/2026,Hialeah,CT-CD,Pastelito de guayaba y queso,12,1.75,21.00,Kevin,Natalia Diaz
+26270,9/18/2026,Hialeah,WU-CD,Pastelito de carne,4,1.75,7.00,Jean-Pierre,Walk-in
+26271,9/19/2026,Little Havana,WU-CD,Pastelito de queso,1,1.50,1.50,Marisol,Walk-in
+26272,9/19/2026,Hialeah,DL-CD,Cuban sandwich,2,9.50,19.00,Osvaldo,Diego Cabrera
+26273,9/19/2026,Hialeah,DL-CD,Pastelito de guayaba,3,1.50,4.50,Andres,Maria Fernandez
+26274,9/19/2026,Kendall,DL-CD,Cafe con leche,2,3.75,7.50,Rosa,Yolanda Suarez
+26275,9/19/2026,Doral,WU-CA,Cafe con leche,2,3.75,7.50,Osvaldo,Walk-in
+26276,9/19/2026,Hialeah,WU-CA,Cortadito,1,2.25,2.25,Osvaldo,Walk-in
+26277,9/19/2026,Hialeah,WU-CD,Pastelito de carne,1,1.75,1.75,Osvaldo,Walk-in
+26278,9/19/2026,Hialeah,WU-CD,Cafe con leche,3,3.75,11.25,Andres,Walk-in
+26279,9/19/2026,Kendall,DL-CD,Croqueta de jamon,1,1.25,1.25,Kevin,Tamara Vargas
+26280,9/19/2026,Westchester,DL-CD,Colada,2,2.50,5.00,Rosa,Wilfredo Rodriguez
+26281,9/19/2026,Doral,WU-CA,Cafecito,2,1.50,3.00,Andres,Walk-in
+26282,9/19/2026,Doral,WU-CA,Cortadito,1,2.25,2.25,Rosa,Walk-in
+26283,9/19/2026,Westchester,DL-CD,Medianoche,3,7.25,21.75,Daniela,Rosa Ortiz
+26284,9/19/2026,Doral,WU-CD,Pastelito de guayaba,3,1.50,4.50,Rosa,Walk-in
+26285,9/19/2026,Hialeah,WU-CA,Croqueta de jamon,1,1.25,1.25,Andres,Walk-in
+26286,9/20/2026,Little Havana,WU-CD,Croqueta de pollo,2,1.25,2.50,Kevin,Walk-in
+26287,9/20/2026,Kendall,DL-CD,Croqueta de jamon,4,1.25,5.00,Marisol,Pedro Romero
+26288,9/20/2026,Westchester,DL-CD,Pan con bistec,6,11.50,69.00,Jean-Pierre,Marc Castillo
+26289,9/20/2026,Hialeah,CT-CD,Croqueta de jamon,60,1.25,75.00,Osvaldo,Rosa Rodriguez
+26290,9/20/2026,Kendall,WU-CA,Cafe con leche,1,3.75,3.75,Rosa,Walk-in
+26291,9/20/2026,Doral,WU-CD,Pan con bistec,1,11.50,11.50,Rosa,Walk-in
+26292,9/20/2026,Westchester,WU-CD,Cafecito,1,1.50,1.50,Jean-Pierre,Walk-in
+26293,9/20/2026,Little Havana,WU-CA,Croqueta de jamon,3,1.25,3.75,Osvaldo,Walk-in
+26294,9/20/2026,Westchester,DL-CD,Cafecito,4,1.50,6.00,Kevin,Tamara Campbell
+26295,9/20/2026,Doral,DL-CD,Cuban sandwich,4,9.50,38.00,Rosa,Isabel Perez
+26296,9/20/2026,Little Havana,WU-CD,Cafecito,1,1.50,1.50,Yamilet,Walk-in
+26297,9/20/2026,Kendall,WU-CD,Cortadito,2,2.25,4.50,Jean-Pierre,Walk-in
+26298,9/20/2026,Hialeah,DL-CD,Cortadito,2,2.25,4.50,Jean-Pierre,Luis Garcia
+26299,9/20/2026,Kendall,CT-CA,Pastelito de guayaba y queso,24,1.75,42.00,Kevin,Tamara Pierre
+26300,9/20/2026,Little Havana,WU-CD,Croqueta de pollo,2,1.25,2.50,Marisol,Walk-in
+26301,9/21/2026,Hialeah,WU-CD,Croqueta de jamon,1,1.25,1.25,Andres,Walk-in
+26302,9/21/2026,Doral,DL-CD,Cafecito,1,1.50,1.50,Andres,Tamara Cabrera
+26303,9/21/2026,Westchester,WU-CD,Tostada,2,2.75,5.50,Daniela,Walk-in
+26304,9/21/2026,Westchester,WU-CD,Tostada,1,2.75,2.75,Marisol,Walk-in
+26305,9/21/2026,Hialeah,WU-CD,Cafecito,3,1.50,4.50,Osvaldo,Walk-in
+26306,9/21/2026, Kendall,WU-CA,Cafe con leche,1,3.75,3.75,Jean-Pierre,Walk-in
+26307,9/21/2026,Hialeah,WU-CA,Colada,1,2.50,2.50,Kevin,Walk-in
+26308,9/21/2026,Little Havana,WU-CA,Colada,2,2.50,5.00,Kevin,
+26309,9/21/2026,Doral,WU-CA,Cortadito,3,2.25,6.75,Daniela,Walk-in
+26310,9/21/2026,Doral,WU-CD,Pastelito de carne,1,1.75,1.75,Osvaldo,Walk-in
+26311,9/21/2026,Westchester,WU-CA,Cafe con leche,4,3.75,15.00,Rosa,Walk-in
+26312,9/21/2026,Kendall,WU-CA,Cafecito,1,1.50,1.50,Kevin,Walk-in
+26313,9/21/2026,Hialeah,WU-CD,Croqueta de jamon,1,1.25,1.25,Osvaldo,Walk-in
+26314,9/21/2026,Hialeah,DL-CD,Cafecito,2,1.50,3.00,Kevin,Yesenia Perez
+26315,9/21/2026,Hialeah,WU-CD,Cortadito,2,2.25,4.50,Marisol,Walk-in
+26316,9/22/2026,Kendall,DL-CD,Cuban sandwich,6,9.50,57.00,Yamilet,Gabriela Lopez
+26317,9/22/2026,Kendall,DL-CD,Colada,4,2.50,10.00,Osvaldo,Keisha Rivera
+26318,9/22/2026,Little Havana,WU-CD,Pastelito de carne,1,1.75,1.75,Yamilet,Walk-in
+26319,9/22/2026,Doral,DL-CD,Cortadito,4,2.25,9.00,Yamilet,Diego Jean-Baptiste
+26320,9/22/2026,Little Havana,DL-CD,Pastelito de queso,2,1.50,3.00,Rosa,Marc Alvarez
+26321,9/22/2026,Hialeah,WU-CA,Cafecito,2,1.50,3.00,Andres,Walk-in
+26322,9/22/2026,Doral,WU-CA,Tostada,1,2.75,2.75,Jean-Pierre,Walk-in
+26323,9/22/2026,Kendall,DL-CD,Cuban sandwich,2,9.50,19.00,Andres,Claudette Alvarez
+26324,9/22/2026,Little Havana,DL-CD,Pastelito de queso,1,1.50,1.50,Yamilet,Ana Romero
+26325,9/22/2026,Little Havana,DL-CD,Croqueta de jamon,2,1.25,2.50,Kevin,Lourdes Jean-Baptiste
+26326,9/22/2026,Kendall,DL-CD,Croqueta de jamon,4,1.25,5.00,Jean-Pierre,Gabriela Sanchez
+26327,9/22/2026,Hialeah,DL-CD,Cafecito,1,1.50,1.50,Kevin,Carlos Castillo
+26328,9/22/2026,Little Havana,DL-CD,Cafe con leche,3,3.75,11.25,Osvaldo,Yesenia Lopez
+26329,9/22/2026,Little Havana,WU-CA,Pastelito de guayaba y queso,1,1.75,1.75,Marisol,Walk-in
+26330,9/22/2026,Westchester,WU-CA,Croqueta de pollo,2,1.25,2.50,Yamilet,Walk-in
+26331,9/23/2026,Westchester,WU-CD,Cafe con leche,3,3.75,11.25,Kevin,Walk-in
+26332,9/23/2026,Little Havana,DL-CD,Medianoche,1,7.25,7.25,Yamilet,Natalia Gonzalez
+26333,9/23/2026,Doral,WU-CA,Pastelito de queso,1,1.50,1.50,Kevin,Walk-in
+26334,9/23/2026,Westchester,DL-CD,Cafe con leche,2,3.75,7.50,Rosa,Jean Romero
+26335,9/23/2026,Westchester,WU-CD,Pastelito de carne,1,1.75,1.75,Yamilet,Walk-in
+26336,9/23/2026,Doral,WU-CD,Pastelito de queso,4,1.50,6.00,Jean-Pierre,Walk-in
+26337,9/23/2026,Doral,WU-CA,Colada,2,2.50,5.00,Daniela,Walk-in
+26338,9/23/2026,Little Havana,WU-CA,Cafecito,2,1.50,3.00,Jean-Pierre,Walk-in
+26339,9/23/2026,Hialeah,WU-CA,Cuban sandwich,2,9.50,19.00,Jean-Pierre,Walk-in
+26340,9/23/2026,Little Havana,WU-CD,Cortadito,1,2.25,2.25,Yamilet,Walk-in
+26341,9/23/2026,Doral,WU-CA,Pastelito de guayaba,2,1.50,3.00,Jean-Pierre,Walk-in
+26342,9/23/2026,Westchester,WU-CD,Croqueta de pollo,2,1.25,2.50,Kevin,Walk-in
+26343,9/23/2026,Little Havana,DL-CD,Cafecito,2,1.50,3.00,Marisol,Daniela Baptiste
+26344,9/23/2026,Westchester,DL-CD,Cafe con leche,2,3.75,7.50,Yamilet,Ricardo Suarez
+26345,9/23/2026,Hialeah,WU-CD,Pastelito de queso,1,1.50,1.50,Osvaldo,Walk-in
+26346,9/24/2026,Hialeah,DL-CD,Medianoche,3,7.25,21.75,Marisol,Daniela Pierre
+26347,9/24/2026,Hialeah,WU-CD,Pastelito de guayaba,2,1.50,3.00,Jean-Pierre,Walk-in
+26348,9/24/2026,Kendall,WU-CA,Cafe con leche,2,3.75,7.50,Yamilet,Walk-in
+26349,9/24/2026,Westchester,WU-CA,Pastelito de guayaba,3,1.50,4.50,Kevin,Walk-in
+26350,9/24/2026,Doral,WU-CD,Cortadito,2,2.25,4.50,Osvaldo,Walk-in
+26351,9/24/2026,Little Havana,WU-CD,Croqueta de jamon,4,1.25,5.00,Osvaldo,Walk-in
+26352,9/24/2026,Westchester,WU-CD,Pastelito de guayaba y queso,1,1.75,1.75,Osvaldo,Walk-in
+26353,9/24/2026,Kendall,WU-CD,Pastelito de carne,2,1.75,3.50,Marisol,Walk-in
+26354,9/24/2026,Hialeah,CT-CD,Pastelito de guayaba,36,1.50,54.00,Jean-Pierre,Yesenia Fernandez
+26355,9/24/2026,Little Havana,WU-CD,Pastelito de guayaba y queso,4,1.75,7.00,Jean-Pierre,Walk-in
+26356,9/24/2026,Kendall,DL-CD,Tostada,2,2.75,5.50,Osvaldo,Pedro Campbell
+26357,9/24/2026,Little Havana,DL-CD,Croqueta de pollo,3,1.25,3.75,Kevin,Isabel Ortiz
+26358,9/24/2026,Westchester,WU-CD,Pastelito de guayaba y queso,2,1.75,3.50,Rosa,Walk-in
+26359,9/24/2026,Doral,DL-CD,Pastelito de guayaba y queso,1,1.75,1.75,Osvaldo,Tamara Cabrera
+26360,9/24/2026,Kendall,WU-CA,Cafe con leche,4,3.75,15.00,Yamilet,Walk-in
+26361,9/25/2026,Hialeah,DL-CD,Cafecito,2,1.50,3.00,Rosa,Natalia Pierre
+26362,9/25/2026,Doral,CT-CD,Pastelito de queso,36,1.50,54.00,Rosa,Ernesto Pierre
+26363,9/25/2026,Kendall,CT-CA,Pastelito de queso,36,1.50,54.00,Yamilet,Marc Campbell
+26364,9/25/2026,Little Havana,WU-CD,Cafecito,1,1.50,1.50,Yamilet,Walk-in
+26365,9/25/2026,Kendall,DL-CD,Cafecito,3,1.50,4.50,Marisol,Jean Ortiz
+26366,9/25/2026,Hialeah,CT-CA,Pastelito de guayaba,12,1.50,18.00,Yamilet,Kevin Suarez
+26367,9/25/2026,Hialeah,WU-CD,Croqueta de jamon,2,1.25,2.50,Jean-Pierre,Walk-in
+26368,9/25/2026,Hialeah,WU-CD,Pastelito de guayaba y queso,1,1.75,1.75,Jean-Pierre,Walk-in
+26369,9/25/2026,Little Havana,DL-CD,Cuban sandwich,4,9.50,38.00,Marisol,Junior Gonzalez
+26370,9/25/2026,Doral,DL-CD,Pastelito de guayaba y queso,4,1.75,7.00,Andres,Maria Rivera
+26371,9/25/2026,Little Havana,WU-CD,Pastelito de carne,2,1.75,3.50,Daniela,Walk-in
+26372,9/25/2026,Hialeah,DL-CD,Pan con bistec,2,11.50,23.00,Marisol,Wilfredo Thompson
+26373,9/25/2026, Doral,DL-CD,Medianoche,6,7.25,43.50,Osvaldo,Daniela Martinez
+26374,9/25/2026,Hialeah,WU-CD,Pan con bistec,2,11.50,23.00,Yamilet,Walk-in
+26375,9/25/2026,Hialeah,WU-CA,Cortadito,3,2.25,6.75,Yamilet,Walk-in
+26376,9/26/2026,Hialeah,DL-CD,Cortadito,6,2.25,13.50,Osvaldo,Ernesto Morales
+26377,9/26/2026,Little Havana,CT-CD,Pastelito de guayaba y queso,36,1.75,63.00,Osvaldo,Miguel Suarez
+26378,9/26/2026,Kendall,WU-CD,Cafe con leche,3,3.75,11.25,Kevin,Walk-in
+26379,9/26/2026,Doral,DL-CD,Cafe con leche,6,3.75,22.50,Daniela,Jose Cabrera
+26380,9/26/2026,Doral,WU-CA,Cafe con leche,2,3.75,7.50,Yamilet,Walk-in
+26381,9/26/2026,Kendall,WU-CD,Pastelito de guayaba,1,1.50,1.50,Marisol,Walk-in
+26382,9/26/2026,Kendall,WU-CD,Cortadito,1,2.25,2.25,Jean-Pierre,Walk-in
+26383,9/26/2026,Doral,WU-CD,Cafe con leche,2,3.75,7.50,Yamilet,Walk-in
+26384,9/26/2026,Little Havana,DL-CD,Cafecito,2,1.50,3.00,Jean-Pierre,Maria Diaz
+26385,9/26/2026,Kendall,DL-CD,Medianoche,4,7.25,29.00,Jean-Pierre,Ana Martinez
+26386,9/26/2026,Hialeah,WU-CA,Medianoche,2,7.25,14.50,Kevin,Walk-in
+26387,9/26/2026,Doral,WU-CA,Cortadito,3,2.25,6.75,Marisol,Walk-in
+26388,9/26/2026,Doral,WU-CA,Medianoche,1,7.25,7.25,Kevin,Walk-in
+26389,9/26/2026,Hialeah,DL-CD,Cortadito,6,2.25,13.50,Kevin,Maria Campbell
+26390,9/26/2026,Hialeah,CT-CD,Pastelito de carne,60,1.75,105.00,Jean-Pierre,Rosa Vargas
+26391,9/27/2026,Little Havana,WU-CA,Pastelito de guayaba,2,1.50,3.00,Marisol,Walk-in
+26392,9/27/2026,Hialeah,DL-CD,Cortadito,3,2.25,6.75,Daniela,Rosa Baptiste
+26393,9/27/2026,Little Havana,WU-CA,Medianoche,1,7.25,7.25,Osvaldo,Walk-in
+26394,9/27/2026,Kendall,WU-CA,Pastelito de carne,1,1.75,1.75,Osvaldo,Walk-in
+26395,9/27/2026,Kendall,WU-CA,Cafecito,3,1.50,4.50,Marisol,Walk-in
+26396,9/27/2026,Kendall,DL-CD,Pastelito de queso,2,1.50,3.00,Kevin,Rafael Lopez
+26397,9/27/2026,Little Havana,DL-CD,Pastelito de guayaba,4,1.50,6.00,Andres,Lourdes Hernandez
+26398,9/27/2026,Hialeah,WU-CA,Cafecito,4,1.50,6.00,Andres,Walk-in
+26399,9/27/2026,Westchester,WU-CD,Cafe con leche,3,3.75,11.25,Daniela,Walk-in
+26400,9/27/2026,Doral,WU-CD,Cuban sandwich,2,9.50,19.00,Kevin,Walk-in
+26401,9/27/2026,Little Havana,DL-CD,Cafecito,2,1.50,3.00,Yamilet,Wilfredo Morales
+26402,9/27/2026,Little Havana,WU-CA,Tostada,3,2.75,8.25,Yamilet,Walk-in
+26403,9/27/2026,Little Havana,WU-CD,Cafecito,4,1.50,6.00,Daniela,Walk-in
+26404,9/27/2026,Doral,DL-CD,Cuban sandwich,2,9.50,19.00,Kevin,Rosa Fernandez
+26405,9/27/2026,Kendall,DL-CD,Cortadito,2,2.25,4.50,Rosa,Kevin Cabrera
+26406,9/28/2026,Little Havana,WU-CD,Pan con bistec,3,11.50,34.50,Kevin,Walk-in
+26407,9/28/2026,Westchester,WU-CD,Pastelito de carne,2,1.75,3.50,Daniela,Walk-in
+26408,9/28/2026,Kendall,WU-CD,Pastelito de guayaba y queso,4,1.75,7.00,Kevin,Walk-in
+26409,9/28/2026,Doral,WU-CD,Colada,1,2.50,2.50,Andres,Walk-in
+26410,9/28/2026,Hialeah,WU-CA,Pastelito de queso,3,1.50,4.50,Daniela,Walk-in
+26411,9/28/2026,Little Havana,DL-CD,Pan con bistec,2,11.50,23.00,Osvaldo,Marc Vargas
+26412,9/28/2026,Hialeah,WU-CA,Colada,4,2.50,10.00,Jean-Pierre,Walk-in
+26141,9/10/2026,Hialeah,WU-CA,Pastelito de guayaba y queso,2,1.75,3.50,Marisol,Walk-in
+26413,9/28/2026,Doral,WU-CA,Croqueta de pollo,2,1.25,2.50,Marisol,Walk-in
+26414,9/28/2026,Little Havana,DL-CD,Cuban sandwich,3,9.50,28.50,Yamilet,Ernesto Cabrera
+26415,9/28/2026,Kendall,WU-CD,Cortadito,1,2.25,2.25,Marisol,Walk-in
+26416,9/28/2026,Doral,DL-CD,Pastelito de guayaba,1,1.50,1.50,Osvaldo,Andres Martinez
+26417,9/28/2026,Hialeah,WU-CA,Pastelito de guayaba,1,1.50,1.50,Marisol,Walk-in
+26418,9/28/2026,Hialeah,WU-CD,Croqueta de pollo,2,1.25,2.50,Daniela,Walk-in
+26419,9/28/2026,Hialeah,DL-CD,Cafecito,6,1.50,9.00,Kevin,Tamara Hernandez
+26420,9/28/2026,Kendall,WU-CA,Croqueta de jamon,1,1.25,1.25,Marisol,Walk-in
+26421,9/29/2026, Kendall,WU-CA,Pastelito de carne,1,1.75,1.75,Andres,Walk-in
+26422,9/29/2026,Westchester,DL-CD,Cortadito,6,2.25,13.50,Daniela,Diego Campbell
+26423,9/29/2026,Doral,WU-CA,Cafecito,1,1.50,1.50,Kevin,Walk-in
+26424,9/29/2026,Little Havana,DL-CD,Colada,6,2.50,15.00,Marisol,Marc Baptiste
+26425,9/29/2026,Doral,WU-CD,Colada,2,2.50,5.00,Jean-Pierre,Walk-in
+26426,9/29/2026,Little Havana,WU-CA,Croqueta de pollo,4,1.25,5.00,Marisol,Walk-in
+26427,9/29/2026,Doral,CT-CD,Croqueta de jamon,48,1.25,60.00,Yamilet,Rafael Alvarez
+26428,9/29/2026,Doral,WU-CD,Colada,4,2.50,10.00,Rosa,Walk-in
+26429,9/29/2026,Westchester,WU-CD,Cafecito,1,1.50,1.50,Yamilet,Walk-in
+26430,9/29/2026,Hialeah,WU-CA,Cafe con leche,1,3.75,3.75,Osvaldo,Walk-in
+26431,9/29/2026,Little Havana,WU-CA,Pastelito de queso,2,1.50,3.00,Andres,Walk-in
+26432,9/29/2026,Little Havana,WU-CA,Colada,2,2.50,5.00,Andres,Walk-in
+26433,9/29/2026,Westchester,WU-CA,Cuban sandwich,1,9.50,9.50,Yamilet,Walk-in
+26434,9/29/2026,Hialeah,WU-CD,Croqueta de jamon,1,1.25,1.25,Kevin,Walk-in
+26435,9/29/2026,Westchester,WU-CD,Cafecito,2,1.50,3.00,Kevin,Walk-in
+26436,9/30/2026,Kendall,CT-CD,Pastelito de guayaba y queso,60,1.75,105.00,Jean-Pierre,Ricardo Cabrera
+26437,9/30/2026,Little Havana,CT-CA,Croqueta de pollo,48,1.25,60.00,Yamilet,Andres Castillo
+26438,9/30/2026,Kendall,WU-CD,Cortadito,3,2.25,6.75,Daniela,Walk-in
+26439,9/30/2026,Hialeah,WU-CD,Pastelito de queso,2,1.50,3.00,Daniela,Walk-in
+26440,9/30/2026,Doral,WU-CA,Pastelito de carne,1,1.75,1.75,Osvaldo,Walk-in
+26441,9/30/2026,Hialeah,WU-CD,Cafe con leche,2,3.75,7.50,Jean-Pierre,Walk-in
+26442,9/30/2026,Doral,DL-CD,Cuban sandwich,4,9.50,38.00,Jean-Pierre,Tamara Ortiz
+26443,9/30/2026,Little Havana,WU-CA,Cortadito,1,2.25,2.25,Rosa,Walk-in
+26444,9/30/2026,Doral,WU-CA,Medianoche,2,7.25,14.50,Rosa,Walk-in
+26445,9/30/2026,Doral,WU-CD,Cafecito,2,1.50,3.00,Kevin,Walk-in
+26446,9/30/2026,Kendall,DL-CD,Medianoche,2,7.25,14.50,Jean-Pierre,Yolanda Jean-Baptiste
+26447,9/30/2026,Kendall,DL-CD,Medianoche,2,7.25,14.50,Kevin,Kevin Baptiste
+26448,9/30/2026,Hialeah,WU-CD,Croqueta de pollo,2,1.25,2.50,Yamilet,Walk-in
+26449,9/30/2026,Kendall,WU-CD,Pastelito de queso,2,1.50,3.00,Andres,Walk-in
+26450,9/30/2026,Westchester,DL-CD,Pastelito de guayaba y queso,1,1.75,1.75,Marisol,Kevin Perez
+26451,10/1/2026,Hialeah,WU-CA,Cafecito,2,1.50,3.00,Kevin,Walk-in
+26452,10/1/2026,Kendall,DL-CD,Cuban sandwich,2,9.50,19.00,Daniela,Andres Castillo
+26453,10/1/2026,Little Havana,DL-CD,Colada,2,2.50,5.00,Osvaldo,Pedro Morales
+26454,10/1/2026,Kendall,WU-CA,Pastelito de queso,1,1.50,1.50,Yamilet,Walk-in
+26455,10/1/2026,Kendall,WU-CD,Tostada,3,2.75,8.25,Yamilet,Walk-in
+26456,10/1/2026,Doral,WU-CD,Pastelito de guayaba y queso,3,1.75,5.25,Jean-Pierre,Walk-in
+26457,10/1/2026,Doral,WU-CD,Medianoche,1,7.25,7.25,Marisol,Walk-in
+26458,10/1/2026,Kendall,WU-CD,Cafecito,3,1.50,4.50,Andres,Walk-in
+26459,10/1/2026,Little Havana,WU-CD,Croqueta de jamon,2,1.25,2.50,Osvaldo,Walk-in
+26460,10/1/2026,Hialeah,DL-CD,Cuban sandwich,4,9.50,38.00,Osvaldo,Daniela Lopez
+26461,10/1/2026,Kendall,DL-CD,Cuban sandwich,6,9.50,57.00,Osvaldo,Tamara Hernandez
+26462,10/1/2026,Hialeah,WU-CA,Colada,2,2.50,5.00,Osvaldo,Walk-in
+26463,10/1/2026,Doral,WU-CD,Cortadito,4,2.25,9.00,Yamilet,Walk-in
+26464,10/1/2026,Little Havana,WU-CD,Cafecito,1,1.50,1.50,Andres,Walk-in
+26465,10/1/2026,Westchester,DL-CD,Cafe con leche,4,3.75,15.00,Yamilet,Tamara Martinez
+26466,10/2/2026,Little Havana,WU-CD,Cafe con leche,3,3.75,11.25,Yamilet,Walk-in
+26467,10/2/2026,Westchester,WU-CA,Cafecito,1,1.50,1.50,Andres,Walk-in
+26468,10/2/2026,Westchester,WU-CD,Pastelito de carne,1,1.75,1.75,Kevin,Walk-in
+26469,10/2/2026,Westchester,WU-CD,Pastelito de queso,4,1.50,6.00,Osvaldo,Walk-in
+26470,10/2/2026,Little Havana,WU-CD,Cafe con leche,1,3.75,3.75,Jean-Pierre,Walk-in
+26471,10/2/2026,Hialeah,DL-CD,Medianoche,4,7.25,29.00,Daniela,Carlos Lopez
+26472,10/2/2026,Little Havana,DL-CD,Cafecito,2,1.50,3.00,Yamilet,Fabiola Perez
+26473,10/2/2026,Westchester,DL-CD,Cortadito,6,2.25,13.50,Jean-Pierre,Ernesto Suarez
+26474,10/2/2026,Little Havana,WU-CD,Cuban sandwich,1,9.50,9.50,Osvaldo,Walk-in
+26475,10/2/2026,Westchester,DL-CD,Pan con bistec,4,11.50,46.00,Kevin,Natalia Perez
+26476,10/2/2026,Doral,WU-CD,Medianoche,2,7.25,14.50,Kevin,Walk-in
+26477,10/2/2026,Doral,DL-CD,Pastelito de queso,2,1.50,3.00,Osvaldo,Natalia Fernandez
+26478,10/2/2026,Kendall,WU-CA,Medianoche,2,7.25,14.50,Jean-Pierre,Walk-in
+26479,10/2/2026,Hialeah,DL-CD,Colada,6,2.50,15.00,Andres,Carlos Martinez
+26480,10/2/2026,Kendall,DL-CD,Pan con bistec,2,11.50,23.00,Kevin,Natalia Morales
+26481,10/3/2026,Little Havana,WU-CD,Cafecito,3,1.50,4.50,Osvaldo,Walk-in
+26482,10/3/2026,Little Havana,WU-CA,Medianoche,2,7.25,14.50,Osvaldo,Walk-in
+26483,10/3/2026,Hialeah,WU-CD,Cafe con leche,1,3.75,3.75,Jean-Pierre,Walk-in
+26484,10/3/2026,Hialeah,WU-CA,Pastelito de guayaba,1,1.50,1.50,Marisol,Walk-in
+26485,10/3/2026,Westchester,WU-CD,Cafecito,2,1.50,3.00,Marisol,Walk-in
+26486,10/3/2026,Kendall,CT-CD,Pastelito de guayaba y queso,36,1.75,63.00,Jean-Pierre,Marc Ortiz
+26487,10/3/2026,Kendall,WU-CA,Colada,3,2.50,7.50,Osvaldo,Walk-in
+26488,10/3/2026,Hialeah,WU-CD,Cuban sandwich,2,9.50,19.00,Yamilet,Walk-in
+26489,10/3/2026,Little Havana,WU-CD,Medianoche,1,7.25,7.25,Daniela,Walk-in
+26490,10/3/2026,Hialeah,WU-CD,Cafe con leche,1,3.75,3.75,Osvaldo,Walk-in
+26491,10/3/2026,Westchester,DL-CD,Cortadito,4,2.25,9.00,Yamilet,Ricardo Sanchez
+26492,10/3/2026,Hialeah,WU-CD,Cafecito,2,1.50,3.00,Osvaldo,Walk-in
+26493,10/3/2026,Little Havana,DL-CD,Pastelito de guayaba y queso,1,1.75,1.75,Yamilet,Rosa Alvarez
+26494,10/3/2026,Little Havana,DL-CD,Cuban sandwich,3,9.50,28.50,Kevin,Jose Garcia
+26495,10/3/2026,Little Havana,WU-CA,Croqueta de jamon,3,1.25,3.75,Daniela,Walk-in
+26496,10/4/2026,Kendall,DL-CD,Pastelito de queso,6,1.50,9.00,Daniela,Natalia Lopez
+26497,10/4/2026,Kendall,DL-CD,Medianoche,2,7.25,14.50,Rosa,Wilfredo Perez
+26498,10/4/2026,Little Havana,DL-CD,Colada,2,2.50,5.00,Osvaldo,Luis Rodriguez
+26499,10/4/2026,Doral,DL-CD,Colada,3,2.50,7.50,Yamilet,Fabiola Martinez
+26500,10/4/2026,Little Havana,DL-CD,Cafecito,4,1.50,6.00,Rosa,Junior Campbell
+26501,10/4/2026,Little Havana,DL-CD,Medianoche,4,7.25,29.00,Jean-Pierre,Isabel Castillo
+26502,10/4/2026,Little Havana,WU-CD,Pastelito de queso,2,1.50,3.00,Kevin,Walk-in
+26503,10/4/2026,Hialeah,DL-CD,Cafe con leche,1,3.75,3.75,Osvaldo,Fabiola Vargas
+26504,10/4/2026,Little Havana,WU-CD,Cafe con leche,2,3.75,7.50,Andres,Walk-in
+26505,10/4/2026,Kendall,WU-CD,Croqueta de pollo,2,1.25,2.50,Jean-Pierre,Walk-in
+26506,10/4/2026,Little Havana,CT-CD,Pastelito de guayaba,24,1.50,36.00,Andres,Lourdes Cabrera
+26507,10/4/2026,Little Havana,WU-CD,Pastelito de guayaba,2,1.50,3.00,Marisol,Walk-in
+26508,10/4/2026,Westchester,DL-CD,Cortadito,2,2.25,4.50,Daniela,Wilfredo Suarez
+26509,10/4/2026,Little Havana,WU-CA,Pastelito de carne,1,1.75,1.75,Kevin,Walk-in
+26510,10/4/2026,Hialeah,DL-CD,Medianoche,2,7.25,14.50,Daniela,Andres Lopez
+26511,10/5/2026,Little Havana,DL-CD,Pastelito de guayaba,2,1.50,3.00,Marisol,Rosa Garcia
+26512,10/5/2026,Kendall,WU-CA,Cafecito,4,1.50,6.00,Rosa,Walk-in
+26513,10/5/2026,Little Havana,WU-CA,Croqueta de jamon,2,1.25,2.50,Kevin,Walk-in
+26514,10/5/2026,Little Havana,WU-CD,Pastelito de guayaba y queso,1,1.75,1.75,Yamilet,Walk-in
+26515,10/5/2026,Doral,DL-CD,Cafe con leche,2,3.75,7.50,Rosa,Kevin Suarez
+26516,10/5/2026,Westchester,DL-CD,Croqueta de jamon,4,1.25,5.00,Kevin,Gabriela Lopez
+26517,10/5/2026,Hialeah,WU-CA,Croqueta de jamon,1,1.25,1.25,Andres,Walk-in
+26518,10/5/2026,Little Havana,WU-CA,Pan con bistec,1,11.50,11.50,Yamilet,Walk-in
+26519,10/5/2026,Little Havana,WU-CD,Pastelito de guayaba,4,1.50,6.00,Marisol,Walk-in
+26520,10/5/2026,Westchester,DL-CD,Pastelito de queso,3,1.50,4.50,Osvaldo,Natalia Sanchez
+26521,10/5/2026,Doral,WU-CA,Cafe con leche,2,3.75,7.50,Yamilet,Walk-in
+26522,10/5/2026,Hialeah,WU-CD,Medianoche,2,7.25,14.50,Marisol,Walk-in
+26523,10/5/2026,Little Havana,DL-CD,Cuban sandwich,3,9.50,28.50,Yamilet,Maria Suarez
+26524,10/5/2026,Kendall,DL-CD,Croqueta de jamon,3,1.25,3.75,Marisol,Ernesto Castillo
+26525,10/5/2026,Hialeah,WU-CD,Cuban sandwich,2,9.50,19.00,Andres,Walk-in
+26526,10/6/2026,Little Havana,WU-CA,Cortadito,3,2.25,6.75,Andres,Walk-in
+26527,10/6/2026,Little Havana,DL-CD,Croqueta de pollo,6,1.25,7.50,Osvaldo,Maria Sanchez
+26528,10/6/2026,Hialeah,WU-CA,Cafecito,1,1.50,1.50,Jean-Pierre,Walk-in
+26529,10/6/2026,Hialeah,WU-CD,Tostada,1,2.75,2.75,Jean-Pierre,Walk-in
+26530,10/6/2026,Doral,DL-CD,Cortadito,2,2.25,4.50,Andres,Tamara Sanchez
+26531,10/6/2026,Hialeah,DL-CD,Pastelito de guayaba y queso,1,1.75,1.75,Jean-Pierre,Fabiola Vargas
+26532,10/6/2026,Hialeah,WU-CD,Pastelito de guayaba,1,1.50,1.50,Jean-Pierre,Walk-in
+26533,10/6/2026,Hialeah,DL-CD,Cortadito,3,2.25,6.75,Marisol,Diego Alvarez
+26534,10/6/2026,Hialeah,WU-CA,Tostada,2,2.75,5.50,Rosa,Walk-in
+26535,10/6/2026,Little Havana,DL-CD,Pastelito de guayaba y queso,4,1.75,7.00,Marisol,Rafael Delgado
+26536,10/6/2026,Hialeah,DL-CD,Pastelito de guayaba,1,1.50,1.50,Daniela,Andres Lopez
+26537,10/6/2026,Hialeah,WU-CD,Medianoche,1,7.25,7.25,Yamilet,Walk-in
+26538,10/6/2026,Hialeah,DL-CD,Pastelito de queso,4,1.50,6.00,Rosa,Isabel Sanchez
+26539,10/6/2026,Doral,DL-CD,Cortadito,6,2.25,13.50,Osvaldo,Ana Fernandez
+26540,10/6/2026,Little Havana,WU-CD,Pastelito de guayaba,1,1.50,1.50,Kevin,Walk-in
+26541,10/7/2026,Hialeah,WU-CD,Pastelito de guayaba y queso,1,1.75,1.75,Rosa,Walk-in
+26542,10/7/2026, Kendall,WU-CD,Croqueta de pollo,1,1.25,1.25,Rosa,Walk-in
+26543,10/7/2026,Kendall,DL-CD,Croqueta de pollo,2,1.25,2.50,Marisol,Jean Alvarez
+26544,10/7/2026,Westchester,WU-CA,Pastelito de carne,2,1.75,3.50,Kevin,Walk-in
+26545,10/7/2026,Hialeah,DL-CD,Cafe con leche,4,3.75,15.00,Kevin,Isabel Hernandez
+26546,10/7/2026,Little Havana,WU-CD,Croqueta de pollo,2,1.25,2.50,Jean-Pierre,Walk-in
+26547,10/7/2026,Little Havana,WU-CD,Pastelito de guayaba,3,1.50,4.50,Andres,Walk-in
+26548,10/7/2026,Little Havana,DL-CD,Pastelito de carne,2,1.75,3.50,Osvaldo,Isabel Gonzalez
+26549,10/7/2026,Kendall,WU-CD,Cafecito,1,1.50,1.50,Marisol,Walk-in
+26550,10/7/2026,Hialeah,WU-CA,Pan con bistec,1,11.50,11.50,Kevin,Walk-in
+26551,10/7/2026,Little Havana,WU-CD,Cafe con leche,1,3.75,3.75,Osvaldo,Walk-in
+26552,10/7/2026,Westchester,DL-CD,Pastelito de guayaba,2,1.50,3.00,Andres,Gabriela Vargas
+26553,10/7/2026,Hialeah,DL-CD,Tostada,3,2.75,8.25,Osvaldo,Gabriela Alvarez
+26554,10/7/2026,Hialeah,DL-CD,Cafecito,6,1.50,9.00,Marisol,Tamara Campbell
+26555,10/7/2026,Doral,DL-CD,Pastelito de guayaba y queso,2,1.75,3.50,Rosa,Jose Martinez
+26556,10/8/2026,Westchester,WU-CD,Tostada,4,2.75,11.00,Kevin,Walk-in
+26557,10/8/2026,Little Havana,WU-CD,Cuban sandwich,1,9.50,9.50,Andres,Walk-in
+26558,10/8/2026,Kendall,WU-CD,Croqueta de jamon,3,1.25,3.75,Osvaldo,Walk-in
+26559,10/8/2026,Hialeah,DL-CD,Medianoche,6,7.25,43.50,Jean-Pierre,Tamara Castillo
+26560,10/8/2026,Doral,DL-CD,Cuban sandwich,2,9.50,19.00,Jean-Pierre,Andres Baptiste
+26561,10/8/2026,Little Havana,WU-CA,Pastelito de guayaba y queso,3,1.75,5.25,Osvaldo,Walk-in
+26562,10/8/2026,Doral,WU-CD,Cafe con leche,3,3.75,11.25,Andres,Walk-in
+26563,10/8/2026,Little Havana,DL-CD,Tostada,2,2.75,5.50,Andres,Rosa Rivera
+26564,10/8/2026,Doral,DL-CD,Pastelito de guayaba y queso,2,1.75,3.50,Rosa,Marc Garcia
+26565,10/8/2026,Hialeah,WU-CD,Croqueta de jamon,2,1.25,2.50,Marisol,Walk-in
+26566,10/8/2026,Kendall,WU-CD,Tostada,1,2.75,2.75,Yamilet,Walk-in
+26567,10/8/2026,Westchester,DL-CD,Croqueta de jamon,2,1.25,2.50,Rosa,Keisha Jean-Baptiste
+26568,10/8/2026,Little Havana,DL-CD,Cafecito,4,1.50,6.00,Yamilet,Kevin Cabrera
+26569,10/8/2026,Hialeah,WU-CA,Pan con bistec,2,11.50,23.00,Yamilet,Walk-in
+26570,10/8/2026,Hialeah,WU-CA,Pastelito de queso,1,1.50,1.50,Kevin,Walk-in
+26571,10/9/2026,Little Havana,WU-CD,Cafe con leche,1,3.75,3.75,Daniela,Walk-in
+26572,10/9/2026,Doral,WU-CD,Cafe con leche,1,3.75,3.75,Daniela,Walk-in
+26573,10/9/2026,Hialeah,DL-CD,Pastelito de guayaba y queso,3,1.75,5.25,Osvaldo,Jose Sanchez
+26574,10/9/2026,Little Havana,WU-CA,Cafecito,1,1.50,1.50,Osvaldo,Walk-in
+26575,10/9/2026,Hialeah,DL-CD,Tostada,1,2.75,2.75,Rosa,Carlos Thompson
+26576,10/9/2026,Little Havana,WU-CD,Cafecito,1,1.50,1.50,Daniela,Walk-in
+26577,10/9/2026,Doral,DL-CD,Pastelito de queso,2,1.50,3.00,Daniela,Jose Campbell
+26578,10/9/2026,Kendall,WU-CD,Pastelito de carne,1,1.75,1.75,Kevin,Walk-in
+26579,10/9/2026,Hialeah,WU-CD,Pastelito de carne,3,1.75,5.25,Jean-Pierre,Walk-in
+26580,10/9/2026,Hialeah,WU-CD,Cafecito,2,1.50,3.00,Rosa,Walk-in
+26581,10/9/2026,Westchester,WU-CA,Croqueta de pollo,3,1.25,3.75,Rosa,Walk-in
+26582,10/9/2026,Westchester,WU-CD,Cuban sandwich,1,9.50,9.50,Daniela,Walk-in
+26583,10/9/2026,Doral,DL-CD,Cafecito,4,1.50,6.00,Osvaldo,Kevin Jean-Baptiste
+26584,10/9/2026,Little Havana,WU-CA,Pastelito de carne,2,1.75,3.50,Kevin,Walk-in
+26585,10/9/2026,Hialeah,WU-CD,Tostada,2,2.75,5.50,Kevin,Walk-in
+26586,10/10/2026,Doral,WU-CA,Cortadito,3,2.25,6.75,Osvaldo,Walk-in
+26587,10/10/2026,Hialeah,WU-CD,Pastelito de queso,4,1.50,6.00,Osvaldo,Walk-in
+26588,10/10/2026,Hialeah,WU-CA,Medianoche,1,7.25,7.25,Andres,Walk-in
+26589,10/10/2026,Little Havana,WU-CA,Cafecito,1,1.50,1.50,Osvaldo,Walk-in
+26590,10/10/2026,Little Havana,WU-CA,Cafe con leche,1,3.75,3.75,Osvaldo,Walk-in
+26591,10/10/2026,Doral,WU-CA,Pastelito de guayaba,3,1.50,4.50,Rosa,Walk-in
+26592,10/10/2026,Hialeah,DL-CD,Medianoche,3,7.25,21.75,Marisol,Jean Hernandez
+26593,10/10/2026,Kendall,CT-CA,Pastelito de guayaba y queso,24,1.75,42.00,Andres,Ernesto Suarez
+26594,10/10/2026,Kendall,DL-CD,Cafecito,4,1.50,6.00,Marisol,Jean Baptiste
+26595,10/10/2026,Little Havana,DL-CD,Pastelito de carne,3,1.75,5.25,Daniela,Lourdes Thompson
+26596,10/10/2026,Little Havana,DL-CD,Croqueta de jamon,1,1.25,1.25,Marisol,Fabiola Jean-Baptiste
+26597,10/10/2026,Kendall,WU-CD,Pastelito de carne,1,1.75,1.75,Kevin,Walk-in
+26598,10/10/2026,Westchester,WU-CA,Croqueta de pollo,2,1.25,2.50,Daniela,Walk-in
+26599,10/10/2026,Doral,WU-CA,Pastelito de queso,2,1.50,3.00,Osvaldo,Walk-in
+26600,10/10/2026,Westchester,WU-CD,Pastelito de guayaba,2,1.50,3.00,Daniela,Walk-in

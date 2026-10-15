@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>La Ventanita Data Cleanup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one reading column; one card per Part, worked top to bottom; answers checked in place */
+:root{
+  --bg:#FAFAF7; --surface:#FFFFFF; --fg:#1F2328; --muted:#5B6168; --line:#E2E1DA;
+  --accent:#0E7C7B; --accent-soft:#E0F2F1; --code-bg:#F2F1EC;
+  --ok:#1E7A46; --ok-soft:#E3F4EA; --no:#B03A2E;
+  --core:#1E7A46; --extra:#8A6D00; --extra-soft:#FFF4C2;
+  --font-body:"Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  --font-mono:"JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#5FD0CD; --accent-soft:#16302F; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#5FD0CD; --accent-soft:#16302F; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:18px;line-height:1.6;margin:0}
+.wrap{max-width:800px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:22px}
+h1{font-size:2rem;line-height:1.2;margin:0;text-wrap:balance}
+h2{font-size:1.35rem;margin:0;text-wrap:balance}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+p{margin:0}
+code,.f{font-family:var(--font-mono);font-size:.92em;background:var(--code-bg);padding:2px 7px;border-radius:5px;white-space:nowrap}
+.f{white-space:normal;word-break:break-all}
+kbd{font-family:var(--font-mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:3px;border-radius:5px;padding:0 6px;background:var(--surface)}
+.top{display:flex;flex-direction:column;gap:10px}
+.progress{display:flex;align-items:center;gap:12px;font-weight:700}
+.bar{flex:1;height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.story{background:var(--accent-soft);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.rules{display:flex;flex-direction:column;gap:6px;margin:0;padding-left:22px}
+.tablebox{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--code-bg)}
+td.l{font-family:var(--font-mono);font-weight:700;width:3.2em;text-align:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.card.done{border-color:var(--ok)}
+.card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:20px}
+.tag.core{background:var(--ok-soft);color:var(--core)}
+.tag.extra{background:var(--extra-soft);color:var(--extra)}
+.why{color:var(--muted)}
+.q{font-size:1.1rem;font-weight:700}
+ol.do{margin:0;padding-left:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:10px}
+ol.do>li{counter-increment:s;display:grid;grid-template-columns:2.2em 1fr;gap:8px;align-items:start}
+ol.do>li::before{content:counter(s);font-weight:700;background:var(--fg);color:var(--bg);border-radius:50%;width:1.7em;height:1.7em;display:grid;place-items:center;font-size:.85rem;margin-top:2px}
+ol.do>li>div{min-width:0}
+.see{display:block;color:var(--muted);font-size:.92rem}
+.see::before{content:"You should see: ";font-weight:700}
+.answers{display:flex;flex-direction:column;gap:10px;background:var(--code-bg);border-radius:10px;padding:14px}
+.ans{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ans label{flex:1 1 240px;font-weight:700}
+.ans input{font:inherit;width:9.5em;padding:6px 10px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.ans button,.donebtn,.dl{font:inherit;font-weight:700;padding:6px 14px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer;text-decoration:none;display:inline-block}
+.ans button:hover,.donebtn:hover,.dl:hover{background:var(--accent-soft)}
+.fb{flex-basis:100%;font-weight:700;font-size:.95rem}
+.fb.yes{color:var(--ok)} .fb.no{color:var(--no)}
+details{border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+details>summary{cursor:pointer;padding:10px 14px;font-weight:700;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ ";color:var(--accent)}
+details[open]>summary::before{content:"▾ "}
+details>div{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px}
+details.sol>summary{color:var(--accent)}
+.warn{border-left:4px solid var(--accent);padding:4px 0 4px 12px;font-size:.95rem}
+.donebtn{align-self:flex-start}
+.donebtn.on{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:480px){body{font-size:17px}h1{font-size:1.6rem}}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">CAP1788 · Lecture 5 · Practice on your own · Review on Tuesday</div>
+  <h1>La Ventanita Data Cleanup</h1>
+  <div class="progress"><span id="ptext">0 of 8 done</span><div class="bar"><span id="pbar"></span></div></div>
+</header>
+
+<section class="story">
+  <p><strong>The story:</strong> La Ventanita is a family bakery with 5 window counters around Miami-Dade. The owner, Doña Carmen, sent us 6 weeks of orders (September 1 to October 10, 2026). One row is one order.</p>
+  <p>She wants to know: Which store is busiest? How many orders are delivery? How many pastelitos do we sell? Her file has problems. We clean it first, then we answer her.</p>
+  <p>You will use <strong>everything</strong> from the SAT/ACT and Bees exercises. This is harder on purpose. Use the hints. They are there to help you learn.</p>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>How to use this page</h2>
+  <ul class="rules">
+    <li>Do one Part at a time, top to bottom. Each Part builds on the one before.</li>
+    <li>Type your answer in the box and click <strong>Check</strong>.</li>
+    <li>Stuck? Open <strong>Hint 1</strong>, then <strong>Hint 2</strong>. The <strong>Solution</strong> is last. Try first.</li>
+    <li>Your checkmarks save on this computer. Use the same computer to keep your place.</li>
+    <li><strong>Save your Excel file</strong> at the end of every Part: <kbd>Ctrl</kbd> + <kbd>S</kbd>.</li>
+  </ul>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>The columns in the file</h2>
+  <div class="tablebox"><table>
+    <tr><th>Col</th><th>Name</th><th>What it means</th></tr>
+    <tr><td class="l">A</td><td>Order ID</td><td>The order's number, like 26001</td></tr>
+    <tr><td class="l">B</td><td>Order Date</td><td>The day of the order</td></tr>
+    <tr><td class="l">C</td><td>Store</td><td>Hialeah, Little Havana, Kendall, Doral, or Westchester</td></tr>
+    <tr><td class="l">D</td><td>Order Code</td><td>Two codes in one cell. See the table below.</td></tr>
+    <tr><td class="l">E</td><td>Item</td><td>What they bought</td></tr>
+    <tr><td class="l">F</td><td>Qty</td><td>How many</td></tr>
+    <tr><td class="l">G</td><td>Unit Price</td><td>Price for one</td></tr>
+    <tr><td class="l">H</td><td>Order Total</td><td>Qty × Unit Price</td></tr>
+    <tr><td class="l">I</td><td>Cashier</td><td>Who rang it up</td></tr>
+    <tr><td class="l">J</td><td>Customer</td><td>Customer name, or Walk-in</td></tr>
+  </table></div>
+  <div class="tablebox"><table>
+    <tr><th>Order Code</th><th>First 2 letters: how they ordered</th><th>Last 2 letters: how they paid</th></tr>
+    <tr><td><code>WU-CA</code></td><td><code>WU</code> = walk-up window</td><td><code>CA</code> = cash</td></tr>
+    <tr><td><code>DL-CD</code></td><td><code>DL</code> = delivery app</td><td><code>CD</code> = card</td></tr>
+    <tr><td><code>CT-CD</code></td><td><code>CT</code> = catering</td><td><code>CD</code> = card</td></tr>
+  </table></div>
+  <p class="warn"><strong>Your answer area is columns R to U.</strong> Type your labels and formulas there, far away from the data.</p>
+</section>
+
+<!-- ============ PART 1 ============ -->
+<section class="card" data-card="p1">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 1 · Explore and set up</h2></div>
+  <p class="why">Phase 1 and 2: get the file, protect the original, and turn the data into a table.</p>
+  <ol class="do">
+    <li><div>Download the data: <a class="dl" href="ventanita_orders.csv" download>ventanita_orders.csv</a> (it is also on Canvas). Open it from your <strong>Downloads</strong> folder.</div></li>
+    <li><div><strong>File → Save As → Browse → Desktop</strong>. Name: <code>Ventanita-YourLastName</code>. Save as type: <strong>Excel Workbook (*.xlsx)</strong>. Click <strong>Save</strong>.<span class="see">The top of Excel says Ventanita-YourLastName.xlsx</span></div></li>
+    <li><div>Double-click the sheet tab at the bottom. Type <code>Original</code>. Press <kbd>Enter</kbd>.</div></li>
+    <li><div>Right-click the <strong>Original</strong> tab → <strong>Move or Copy…</strong> → check <strong>Create a copy</strong> → OK. Rename the new tab <code>Cleaning</code>.</div></li>
+    <li><div>On <strong>Cleaning</strong>: click <code>A1</code> → <strong>Home → Format as Table</strong> → pick a style → check <strong>My table has headers</strong> → OK.<span class="see">Colored rows and arrows in every column name.</span></div></li>
+    <li><div>Click <code>R1</code>, type <code>Orders</code>. Click <code>S1</code>, type <span class="f">=COUNT(A:A)</span></div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="601"><label for="p1a">How many orders are in the file?</label><input id="p1a" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1</summary><div><p><code>COUNT</code> counts cells that hold numbers. Every Order ID is a number. The column name "Order ID" is text, so it is not counted.</p></div></details>
+  <details><summary>Hint 2</summary><div><p>Why do we keep an Original sheet? If we break something on Cleaning, the original data is still safe. We never change Original.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div><p><strong>601</strong> orders. Keep this number in mind. Doña Carmen said she sent 600.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ PART 2 ============ -->
+<section class="card" data-card="p2">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 2 · Organize</h2></div>
+  <p class="why">Sort to find problems, remove what the owner doesn't need, and write a Note for every change. Stay on the <strong>Cleaning</strong> sheet for Parts 2 to 5.</p>
+  <ol class="do">
+    <li><div>Click the arrow in <code>C1</code> (Store) → <strong>Sort A to Z</strong>. Look at the first rows. Some stores are out of order.</div></li>
+    <li><div>Click the arrow in <code>A1</code> (Order ID) → <strong>Sort Smallest to Largest</strong>.<span class="see">Order 26001 is back in row 2.</span></div></li>
+    <li><div>Right-click <code>I1</code> (Cashier) → <strong>Delete → Table Columns</strong>. Then right-click <code>I1</code> (now Customer) → <strong>New Note</strong>. Type: <em>Deleted Cashier. The owner did not ask about cashiers.</em></div></li>
+    <li><div>Click <code>J1</code>. Type <code>Trim Store</code>, press <kbd>Enter</kbd>. In <code>J2</code> type <span class="f">=TRIM(C2)</span> and press <kbd>Enter</kbd>.<span class="see">The formula fills all the way down by itself.</span></div></li>
+    <li><div>Right-click <code>J1</code> → <strong>New Note</strong>. Type: <em>TRIM removes extra spaces before some store names.</em></div></li>
+    <li><div><code>R2</code>: <code>Kendall (Store)</code> · <code>S2</code>: <span class="f">=COUNTIF(C:C,"Kendall")</span><br><code>R3</code>: <code>Kendall (Trim)</code> · <code>S3</code>: <span class="f">=COUNTIF(J:J,"Kendall")</span></div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="7"><label for="p2a">In Step 1, how many rows were at the top, out of order?</label><input id="p2a" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="105"><label for="p2b">Kendall orders, Store column (S2):</label><input id="p2b" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="109"><label for="p2c">Kendall orders, Trim column (S3):</label><input id="p2c" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1</summary><div><p>Remember " Maryland" in the SAT/ACT file? A space before a name sorts <strong>before</strong> the letter A. Count the rows that show a Doral or Kendall above Doral.</p></div></details>
+  <details><summary>Hint 2</summary><div><p>If your formula shows <code>=TRIM([@Store])</code> instead of <code>=TRIM(C2)</code>, that is correct. Inside a table, Excel uses the column name.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p><strong>7</strong> rows: 3 say " Doral" and 4 say " Kendall", each with a space in front.</p>
+    <p>Store column: <strong>105</strong> Kendall. Trim column: <strong>109</strong> Kendall. COUNTIF missed the 4 with a space, just like " F" in the Bees file.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ PART 3 ============ -->
+<section class="card" data-card="p3">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 3 · Clean: find and label the problems</h2></div>
+  <p class="why">Today we <strong>find</strong> problems and <strong>label</strong> them with Notes and yellow fill. We fix them in Part 6.</p>
+  <ol class="do">
+    <li><div><strong>Duplicates.</strong> Click the <strong>Name Box</strong> (left of the formula bar), type <code>A2:A602</code>, press <kbd>Enter</kbd>. <strong>Home → Conditional Formatting → Highlight Cells Rules → Duplicate Values</strong> → OK.</div></li>
+    <li><div>Click the arrow in <code>A1</code> → <strong>Filter by Color</strong> → click the red color.<span class="see">Two rows with the same Order ID.</span>Right-click the <strong>second</strong> red cell → <strong>New Note</strong>: <em>Duplicate. Delete this row on the Final sheet.</em> Then arrow in <code>A1</code> → <strong>Clear Filter From "Order ID"</strong>.</div></li>
+    <li><div><strong>Stats block.</strong> Type labels: <code>S5</code> Qty · <code>T5</code> Unit Price · <code>U5</code> Order Total. Then <code>R6</code> AVERAGE · <code>R7</code> MEDIAN · <code>R8</code> MIN · <code>R9</code> MAX · <code>R10</code> COUNTBLANK · <code>R11</code> COUNT.<br>
+      In column S type: <code>S6</code> <span class="f">=AVERAGE(F2:F602)</span> · <code>S7</code> <span class="f">=MEDIAN(F2:F602)</span> · <code>S8</code> <span class="f">=MIN(F2:F602)</span> · <code>S9</code> <span class="f">=MAX(F2:F602)</span> · <code>S10</code> <span class="f">=COUNTBLANK(F2:F602)</span> · <code>S11</code> <span class="f">=COUNT(F2:F602)</span><br>
+      Select <code>S6:S11</code>. Drag the <strong>Fill Handle</strong> (small square, bottom right) to column <code>U</code>.<span class="see">Numbers in S6 to U11.</span></div></li>
+    <li><div><strong>Outlier.</strong> Look at row 9 (MAX). One MAX is much bigger than its MEDIAN. Press <kbd>Ctrl</kbd> + <kbd>F</kbd>, type that MAX number, click <strong>Find Next</strong>, then <strong>Close</strong>. Add a Note on that cell: <em>Should be 14.50 (2 × 7.25).</em></div></li>
+    <li><div><strong>Missing Qty.</strong> Row 10 (COUNTBLANK) shows empty Qty cells. Arrow in <code>F1</code> → uncheck <strong>(Select All)</strong> → check <strong>(Blanks)</strong> → OK. For each order, find the Qty: Order Total ÷ Unit Price. Add a Note: <em>Qty should be ___.</em> Then clear the filter.</div></li>
+    <li><div><strong>Missing Customer.</strong> <code>R12</code>: <code>Customer blanks</code> · <code>S12</code>: <span class="f">=COUNTBLANK(I2:I602)</span>. Filter column <code>I</code> for (Blanks). Look at its Order Code. Add a Note with what it should say. Clear the filter.</div></li>
+    <li><div>Hold <kbd>Ctrl</kbd> and click each cell you put a Note on in Steps 4 to 6. <strong>Home → Fill Color arrow → Yellow</strong>. Save.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="26141"><label for="p3a">Which Order ID is duplicated?</label><input id="p3a" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="1450"><label for="p3b">MAX of Order Total (U9):</label><input id="p3b" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="5"><label for="p3c">MEDIAN of Order Total (U7):</label><input id="p3c" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="26078"><label for="p3d">Order ID of the outlier:</label><input id="p3d" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="2"><label for="p3e">Empty Qty cells (S10):</label><input id="p3e" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="3"><label for="p3f">Correct Qty for order 26032:</label><input id="p3f" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="4"><label for="p3g">Correct Qty for order 26035:</label><input id="p3g" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="walk-in|walkin|walk in"><label for="p3h">What should the empty Customer say?</label><input id="p3h"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1 · Duplicates and the outlier</summary><div>
+    <p>Filter by Color only shows up after Conditional Formatting colors some cells. If it is gray, check Step 1 again.</p>
+    <p>For the outlier: most orders are a few dollars. The MEDIAN says the middle order is about $5. Which MAX looks impossible for a bakery window?</p></div></details>
+  <details><summary>Hint 2 · Missing values</summary><div>
+    <p>Order 26032 is a Tostada: $8.25 ÷ $2.75 = ?. Order 26035 is a Cuban sandwich: $38.00 ÷ $9.50 = ?</p>
+    <p>The empty Customer is on order 26308. Its code starts with <code>WU</code>. What does every other walk-up order say in the Customer column?</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>Duplicate: <strong>26141</strong> (a Hialeah order for 2 guayaba y queso pastelitos, typed twice).</p>
+    <p>Order Total: MEDIAN <strong>5</strong>, MAX <strong>1450</strong>. Order <strong>26078</strong> is 2 Medianoches at $7.25, so it should be $14.50. Someone dropped the decimal point.</p>
+    <p>Empty Qty: <strong>2</strong>. Order 26032 should be <strong>3</strong>. Order 26035 should be <strong>4</strong>. Qty COUNT is 599, not 601. That's another clue.</p>
+    <p>Empty Customer: order 26308 is a walk-up (WU), so it should say <strong>Walk-in</strong>.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ PART 4 ============ -->
+<section class="card" data-card="p4">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 4 · Transform the Order Code</h2></div>
+  <p class="why"><code>DL-CD</code> hides two facts in one cell. We turn them into plain Yes or No columns. This is a nested function: LEFT runs first, then IF.</p>
+  <ol class="do">
+    <li><div><code>K1</code>: <code>Delivery?</code> · <code>K2</code>: <span class="f">=IF(LEFT(D2,2)="DL","Yes","No")</span></div></li>
+    <li><div><code>L1</code>: <code>Card?</code> · <code>L2</code>: <span class="f">=IF(RIGHT(D2,2)="CD","Yes","No")</span></div></li>
+    <li><div>Right-click <code>K1</code> → <strong>New Note</strong>: <em>Turned the Order Code into Yes/No columns.</em></div></li>
+    <li><div><code>R14</code>: <code>Delivery orders</code> · <code>S14</code>: <span class="f">=COUNTIF(K:K,"Yes")</span><br><code>R15</code>: <code>Card orders</code> · <code>S15</code>: <span class="f">=COUNTIF(L:L,"Yes")</span></div></li>
+    <li><div>Challenge: <code>R16</code>: <code>Catering orders</code> · <code>S16</code>: count the Order Codes that <strong>start with</strong> CT. Use the star from the Bees exercise.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="203"><label for="p4a">Delivery orders (S14):</label><input id="p4a" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="435"><label for="p4b">Card orders (S15):</label><input id="p4b" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="18"><label for="p4c">Catering orders (S16):</label><input id="p4c" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1</summary><div><p>Type K1 right next to the table, with no empty column in between. Then the formula fills down by itself. <code>#NAME?</code> means a quote mark is missing around <code>"DL"</code>, <code>"Yes"</code>, or <code>"No"</code>.</p></div></details>
+  <details><summary>Hint 2 · Catering</summary><div><p><code>"*bumble*"</code> meant "bumble anywhere." <code>"CT*"</code> means "starts with CT, then anything." Use it on column D.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>Delivery <strong>203</strong> · Card <strong>435</strong> · Catering <span class="f">=COUNTIF(D:D,"CT*")</span> = <strong>18</strong>.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ PART 5 ============ -->
+<section class="card" data-card="p5">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 5 · Answer Doña Carmen's questions</h2></div>
+  <p class="why">COUNTIF, the star, and a Comment for the team. Stay on <strong>Cleaning</strong>.</p>
+  <ol class="do">
+    <li><div><code>R18</code>: <code>Medianoche</code> · <code>S18</code>: <span class="f">=COUNTIF(E:E,"Medianoche")</span></div></li>
+    <li><div>Arrow in <code>E1</code> → type <code>noche</code> in the search box. Look at the spellings. Click <strong>Cancel</strong>. Right-click a <strong>Medianoche</strong> cell → <strong>New Comment</strong>: <em>We use two spellings. Which one should we use?</em> Post it.<span class="see">A purple corner on the cell.</span></div></li>
+    <li><div><code>R19</code>: <code>Pastelitos</code> · <code>S19</code>: count every item with "pastelito" anywhere in the name.</div></li>
+    <li><div><code>R20</code>: <code>Guayaba</code> · <code>S20</code>: count every item with "guayaba" anywhere in the name.</div></li>
+    <li><div><code>R22</code> to <code>R26</code>: type the 5 store names. In <code>S22</code> to <code>S26</code>, count each store. Use the <strong>Trim Store</strong> column, not the Store column.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="37"><label for="p5a">Medianoche (S18):</label><input id="p5a" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="3"><label for="p5b">How many orders use the other spelling?</label><input id="p5b" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="166"><label for="p5c">Pastelitos (S19):</label><input id="p5c" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="89"><label for="p5d">Guayaba (S20):</label><input id="p5d" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="little havana"><label for="p5e">Busiest store (name):</label><input id="p5e"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="154"><label for="p5f">Orders at the busiest store:</label><input id="p5f" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1</summary><div><p>Pastelitos: <span class="f">=COUNTIF(E:E,"*pastelito*")</span>. Now write the guayaba one the same way.</p></div></details>
+  <details><summary>Hint 2</summary><div><p>Hialeah: <span class="f">=COUNTIF(J:J,"Hialeah")</span>. Column J is Trim Store. Do the same for the other 4 stores. Why J? Column C still has the hidden spaces.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>Medianoche <strong>37</strong>, plus <strong>3</strong> spelled "Media noche." That's why we ask the team with a Comment.</p>
+    <p>Pastelitos <strong>166</strong> (4 kinds). Guayaba <strong>89</strong> (guayaba 47 + guayaba y queso 42).</p>
+    <p>Stores: <strong>Little Havana 154</strong> · Hialeah 148 · Kendall 109 · Doral 105 · Westchester 85. Little Havana is the busiest.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ PART 6 ============ -->
+<section class="card" data-card="p6">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 6 · Build the Final sheet</h2></div>
+  <p class="why">Phase 5: fix every problem you labeled, remove the scratch work, and leave a clean sheet for Doña Carmen. Go slowly. One step at a time.</p>
+  <ol class="do">
+    <li><div>Right-click the <strong>Cleaning</strong> tab → <strong>Move or Copy…</strong> → <strong>Create a copy</strong> → OK. Rename it <code>Final</code>. Do everything below on <strong>Final</strong>.</div></li>
+    <li><div>Click the column letter <strong>R</strong> and drag to <strong>U</strong>. Right-click → <strong>Delete</strong>.<span class="see">Your answer area is gone on Final only. Cleaning still has it.</span></div></li>
+    <li><div>Arrow in <code>A1</code> → <strong>Filter by Color</strong> → red. Right-click the Order ID in the <strong>second</strong> row → <strong>Delete → Table Rows</strong>. Clear the filter.</div></li>
+    <li><div>Fix the 4 yellow cells. Use <kbd>Ctrl</kbd> + <kbd>F</kbd> to find each Order ID: <code>26078</code> Order Total = <code>14.50</code> · <code>26032</code> Qty = <code>3</code> · <code>26035</code> Qty = <code>4</code> · <code>26308</code> Customer = <code>Walk-in</code></div></li>
+    <li><div>Right-click <code>J2</code> (Trim Store) → <strong>Select → Table Column Data</strong> → <kbd>Ctrl</kbd> + <kbd>C</kbd>. Click <code>C2</code> → <strong>Paste arrow → Values (123)</strong>. Then right-click <code>J1</code> → <strong>Delete → Table Columns</strong>.</div></li>
+    <li><div>Click in the table, press <kbd>Ctrl</kbd> + <kbd>A</kbd>. <strong>Home → Clear (eraser) → Clear Comments and Notes</strong>. <strong>Fill Color → No Fill</strong>. <strong>Conditional Formatting → Clear Rules → Clear Rules from Entire Sheet</strong>.</div></li>
+    <li><div>Check your work. <code>N1</code>: <span class="f">=COUNT(A:A)</span> · <code>N2</code>: <span class="f">=COUNTBLANK(A2:K601)</span> · <code>N3</code>: <span class="f">=AVERAGE(H:H)</span> · <code>N4</code>: <span class="f">=MAX(H:H)</span></div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="600"><label for="p6a">Orders now (N1):</label><input id="p6a" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="0"><label for="p6b">Empty cells now (N2):</label><input id="p6b" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="9.39" data-tol="0.006"><label for="p6c">Average Order Total now (N3), 2 decimals:</label><input id="p6c" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="105"><label for="p6d">Biggest Order Total now (N4):</label><input id="p6d" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="11.77" data-tol="0.006"><label for="p6e">Go back to Cleaning. Average Order Total there (U6), 2 decimals:</label><input id="p6e" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1</summary><div>
+    <p>In Step 2, click the gray letter <strong>R</strong> at the very top of the sheet, not a cell. The whole column turns gray.</p>
+    <p>In Step 5, <strong>Values (123)</strong> pastes the answer, not the formula. That way, deleting the Trim Store column does not break column C.</p></div></details>
+  <details><summary>Hint 2</summary><div>
+    <p>N2 is not 0? One fix is missing. Filter each column for (Blanks) to find it. N1 is 601? The duplicate row is still there.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>Orders <strong>600</strong>. Empty cells <strong>0</strong>. Average Order Total <strong>9.39</strong>. Biggest order <strong>105</strong>. That one is real: a catering order of 60 pastelitos at $1.75.</p>
+    <p>On Cleaning, the average was <strong>11.77</strong>. The $1,450 typo made the average look about $2.38 higher. That's why we clean before we analyze.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ EXTRA A ============ -->
+<section class="card" data-card="xa">
+  <div class="card-head"><span class="tag extra">EXTRA</span><h2>Extra A · Doña Carmen answered</h2></div>
+  <p class="q">She replied to your Comment: "Use Medianoche, one word." Fix the spelling on the Final sheet.</p>
+  <ol class="do">
+    <li><div>On <strong>Final</strong>, click the column letter <strong>E</strong>.</div></li>
+    <li><div>Press <kbd>Ctrl</kbd> + <kbd>H</kbd>. Find what: <code>Media noche</code>. Replace with: <code>Medianoche</code>.</div></li>
+    <li><div>Click <strong>Options</strong> → check <strong>Match entire cell contents</strong> → <strong>Replace All</strong>.</div></li>
+    <li><div><code>N6</code>: <span class="f">=COUNTIF(E:E,"Medianoche")</span></div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="3"><label for="xa1">How many replacements did Excel make?</label><input id="xa1" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="40"><label for="xa2">Medianoche now (N6):</label><input id="xa2" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details class="sol"><summary>Solution</summary><div><p><strong>3</strong> replacements. Medianoche is now <strong>40</strong> (37 + 3).</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ EXTRA B ============ -->
+<section class="card" data-card="xb">
+  <div class="card-head"><span class="tag extra">EXTRA</span><h2>Extra B · First names for a thank-you text</h2></div>
+  <p class="q">Doña Carmen wants to text delivery and catering customers by first name. Pull the first name out of Customer.</p>
+  <ol class="do">
+    <li><div>On <strong>Final</strong>, click <code>L1</code>. Type <code>First Name</code>. In <code>L2</code> type:<br><span class="f">=LEFT(I2,SEARCH(" ",I2)-1)</span></div></li>
+    <li><div>Scroll down. Some rows show <code>#VALUE!</code>. Look at their Customer. Why?</div></li>
+    <li><div>Change <code>L2</code> to:<br><span class="f">=IFERROR(LEFT(I2,SEARCH(" ",I2)-1),"Walk-in")</span></div></li>
+    <li><div><code>N8</code>: <span class="f">=COUNTIF(L:L,"Walk-in")</span></div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="379"><label for="xb1">Rows that show Walk-in (N8):</label><input id="xb1" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint</summary><div><p>SEARCH looks for a space. "Walk-in" has a dash, not a space, so SEARCH fails. IFERROR says: if there is an error, show "Walk-in" instead.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div><p><strong>379</strong> walk-in orders. The other 221 orders have a real first name, like Tamara or Andres.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var KEY="cap1788-l5-ventanita-v1", state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  var cards=[].slice.call(document.querySelectorAll("[data-card]"));
+  function paint(){
+    var n=0;
+    cards.forEach(function(c){
+      var on=!!state[c.dataset.card], b=c.querySelector(".donebtn");
+      c.classList.toggle("done",on); b.classList.toggle("on",on);
+      b.textContent=on?"✓ Done (click to undo)":"I finished this Part";
+      if(on)n++;
+    });
+    document.getElementById("ptext").textContent=n+" of "+cards.length+" done";
+    document.getElementById("pbar").style.width=(100*n/cards.length)+"%";
+  }
+  cards.forEach(function(c){
+    c.querySelector(".donebtn").addEventListener("click",function(){state[c.dataset.card]=!state[c.dataset.card];save();paint();});
+  });
+  [].slice.call(document.querySelectorAll(".ans")).forEach(function(row){
+    var input=row.querySelector("input"), fb=row.querySelector(".fb"), ok=row.dataset.answer.split("|"), tol=parseFloat(row.dataset.tol||"0");
+    function check(){
+      var raw=input.value.trim().toLowerCase(), v=raw.replace(/[,$\s]/g,"");
+      if(raw===""){fb.className="fb no";fb.textContent="Type an answer first.";return;}
+      var good=ok.some(function(a){
+        var n=parseFloat(a), x=parseFloat(v);
+        if(!isNaN(n) && /^-?\d*\.?\d+$/.test(v)) return Math.abs(x-n)<=(tol||1e-9);
+        return raw.replace(/\s+/g," ")===a;
+      });
+      if(good){fb.className="fb yes";fb.textContent="✓ Correct!";}
+      else{fb.className="fb no";fb.textContent="Not yet. Check your formula, then open Hint 1.";}
+    }
+    row.querySelector("button").addEventListener("click",check);
+    input.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
