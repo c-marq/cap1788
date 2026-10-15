@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Bees Data Detective</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one calm reading column; one card per question, worked top to bottom */
+:root{
+  --bg:#FAFAF7; --surface:#FFFFFF; --fg:#1F2328; --muted:#5B6168; --line:#E2E1DA;
+  --honey:#B7791F; --honey-soft:#FFF4DC; --code-bg:#F2F1EC;
+  --ok:#1E7A46; --ok-soft:#E3F4EA; --no:#B03A2E; --no-soft:#FBE7E4;
+  --core:#1E7A46; --extra:#8A6D00; --extra-soft:#FFF4C2;
+  --font-body:"Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  --font-mono:"JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --honey:#F0B44C; --honey-soft:#33291A; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E; --no-soft:#3A1F1C;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --honey:#F0B44C; --honey-soft:#33291A; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E; --no-soft:#3A1F1C;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:18px;line-height:1.6;margin:0}
+.wrap{max-width:780px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:22px}
+h1{font-size:2rem;line-height:1.2;margin:0;text-wrap:balance}
+h2{font-size:1.35rem;margin:0;text-wrap:balance}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+p{margin:0}
+code,.f{font-family:var(--font-mono);font-size:.92em;background:var(--code-bg);padding:2px 7px;border-radius:5px;white-space:nowrap}
+.f{white-space:normal;word-break:break-all}
+kbd{font-family:var(--font-mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:3px;border-radius:5px;padding:0 6px;background:var(--surface)}
+.top{display:flex;flex-direction:column;gap:10px}
+.progress{display:flex;align-items:center;gap:12px;font-weight:700}
+.bar{flex:1;height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:var(--honey);transition:width .3s}
+.story{background:var(--honey-soft);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.rules{display:flex;flex-direction:column;gap:6px;margin:0;padding-left:22px}
+.tablebox{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left}
+th{background:var(--code-bg)}
+td.l{font-family:var(--font-mono);font-weight:700;width:3.2em;text-align:center}
+tr.hot td{background:var(--honey-soft);font-weight:700}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.card.done{border-color:var(--ok)}
+.card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:20px}
+.tag.core{background:var(--ok-soft);color:var(--core)}
+.tag.extra{background:var(--extra-soft);color:var(--extra)}
+.q{font-size:1.15rem;font-weight:700}
+ol.do{margin:0;padding-left:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:10px}
+ol.do>li{counter-increment:s;display:grid;grid-template-columns:2.2em 1fr;gap:8px;align-items:start}
+ol.do>li::before{content:counter(s);font-weight:700;background:var(--fg);color:var(--bg);border-radius:50%;width:1.7em;height:1.7em;display:grid;place-items:center;font-size:.85rem;margin-top:2px}
+ol.do>li>div{min-width:0}
+.see{display:block;color:var(--muted);font-size:.92rem}
+.see::before{content:"You should see: ";font-weight:700}
+.answers{display:flex;flex-direction:column;gap:10px;background:var(--code-bg);border-radius:10px;padding:14px}
+.ans{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ans label{flex:1 1 220px;font-weight:700}
+.ans input{font:inherit;width:8.5em;padding:6px 10px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.ans button,.donebtn{font:inherit;font-weight:700;padding:6px 14px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer}
+.ans button:hover,.donebtn:hover{background:var(--honey-soft)}
+.fb{flex-basis:100%;font-weight:700;font-size:.95rem}
+.fb.yes{color:var(--ok)} .fb.no{color:var(--no)}
+details{border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+details>summary{cursor:pointer;padding:10px 14px;font-weight:700;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ ";color:var(--honey)}
+details[open]>summary::before{content:"▾ "}
+details>div{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px}
+details.sol>summary{color:var(--honey)}
+.warn{border-left:4px solid var(--honey);padding:4px 0 4px 12px;font-size:.95rem}
+.donebtn.on{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+:focus-visible{outline:3px solid var(--honey);outline-offset:2px}
+@media (max-width:480px){body{font-size:17px}h1{font-size:1.6rem}}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">CAP1788 · Lecture 5 · Exercise 2</div>
+  <h1>Bees Data Detective</h1>
+  <div class="progress"><span id="ptext">0 of 6 done</span><div class="bar"><span id="pbar"></span></div></div>
+</header>
+
+<section class="story">
+  <p><strong>The story:</strong> A team in Louisiana caught <strong>4,165 bees</strong> from 2015 to 2017. They wrote one row for each bee. Before anyone can study the bees, we check the data for problems.</p>
+  <p><strong><code>nd</code></strong> means "no data." It is written on purpose. An <strong>empty cell</strong> is different: somebody forgot to type something.</p>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>How to use this page</h2>
+  <ul class="rules">
+    <li>Do one card at a time, top to bottom.</li>
+    <li>Type your answer in the box and click <strong>Check</strong>.</li>
+    <li>Stuck? Open <strong>Hint 1</strong>. Still stuck? Open <strong>Hint 2</strong>. The <strong>Solution</strong> is last.</li>
+    <li><span class="tag core">CORE</span> = everyone. <span class="tag extra">EXTRA</span> = only if you finish early.</li>
+    <li>Lost? Raise your hand and say the card name.</li>
+  </ul>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>The columns in the Bees file</h2>
+  <p>We use the 3 highlighted columns today.</p>
+  <div class="tablebox"><table>
+    <tr><th>Col</th><th>Name</th><th>Col</th><th>Name</th></tr>
+    <tr><td class="l">A</td><td>Specimen ID (the bee's number)</td><td class="l">H</td><td style="background:var(--honey-soft);font-weight:700">Sex</td></tr>
+    <tr><td class="l">B</td><td>Location</td><td class="l">I</td><td>Family</td></tr>
+    <tr><td class="l">C</td><td>Latitude</td><td class="l">J</td><td>Scientific name</td></tr>
+    <tr><td class="l">D</td><td>Longitude</td><td class="l">K</td><td style="background:var(--honey-soft);font-weight:700">Common name</td></tr>
+    <tr><td class="l">E</td><td>Date</td><td class="l">L</td><td style="background:var(--honey-soft);font-weight:700">ID by</td></tr>
+    <tr><td class="l">F</td><td>Collected InOn</td><td class="l">M</td><td>Notes</td></tr>
+    <tr><td class="l">G</td><td>Collectors</td><td class="l"></td><td></td></tr>
+  </table></div>
+  <p class="see">Sex codes: <code>F</code> = female, <code>M</code> = male, <code>Q</code> = queen.</p>
+</section>
+
+<!-- ============ CARD 0 ============ -->
+<section class="card" data-card="setup">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Card 0 · Open and save the file</h2></div>
+  <ol class="do">
+    <li><div>Go to <strong>Canvas</strong>. Download <code>lec5_Bee-Data.csv</code>.</div></li>
+    <li><div>Open your <strong>Downloads</strong> folder. Double-click the file.<span class="see">Excel opens with bees in rows.</span></div></li>
+    <li><div>Click <strong>File</strong>. Click <strong>Save As</strong>. Click <strong>Browse</strong>.</div></li>
+    <li><div>On the left, click <strong>Desktop</strong>.</div></li>
+    <li><div>File name: type <code>Bees-YourLastName</code></div></li>
+    <li><div>Save as type: pick <strong>Excel Workbook (*.xlsx)</strong>. Click <strong>Save</strong>.<span class="see">The top of the Excel window says Bees-YourLastName.xlsx</span></div></li>
+  </ol>
+  <details><summary>Hint 1 · I can't find the file</summary><div>
+    <p>Open File Explorer (the yellow folder at the bottom of the screen). Click <strong>Downloads</strong> on the left. The newest file is at the top.</p></div></details>
+  <details><summary>Hint 2 · How do I find my file next class?</summary><div>
+    <p>Open Excel. Click <strong>File</strong>, then <strong>Open</strong>, then <strong>Recent</strong>. Your file is in the list. It is also on your Desktop.</p></div></details>
+  <div class="warn">Why .xlsx? A CSV file cannot keep your formulas, comments, or fixes the right way. Always save as .xlsx first.</div>
+  <button class="donebtn" type="button">I finished this card</button>
+</section>
+
+<!-- ============ CARD 1 ============ -->
+<section class="card" data-card="q1">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Card 1 · Find the empty cells</h2></div>
+  <p class="q">How many cells in the data are empty?</p>
+  <ol class="do">
+    <li><div>Click cell <code>O1</code>. Type <code>Empty cells</code> and press <kbd>Enter</kbd>.</div></li>
+    <li><div>Click cell <code>P1</code>. Type this exactly, then press <kbd>Enter</kbd>:<br><span class="f">=COUNTBLANK(A2:M4166)</span></div></li>
+    <li><div>Type the number from P1 in the box below.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="3"><label for="a-empty">Empty cells:</label><input id="a-empty" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1</summary><div>
+    <p>COUNTBLANK counts empty cells. <code>A2:M4166</code> means "every bee, every column." Row 1 is the column names, so we start at row 2.</p></div></details>
+  <details><summary>Hint 2</summary><div>
+    <p>If you see the formula as text, check that it starts with <code>=</code> and has no space in front.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p><strong>3</strong> empty cells.</p></div></details>
+
+  <p class="q">Now find them and fill them in.</p>
+  <ol class="do">
+    <li><div>Click cell <code>A1</code>. Click the <strong>Data</strong> tab. Click <strong>Filter</strong>.<span class="see">Small arrows in every column name.</span></div></li>
+    <li><div>Click the arrow in <code>K1</code> (Common name).</div></li>
+    <li><div>Uncheck <strong>(Select All)</strong>. Scroll to the bottom. Check <strong>(Blanks)</strong>. Click <strong>OK</strong>.<span class="see">Only one bee is left: Specimen 1502182.</span></div></li>
+    <li><div>Look at that bee's row. Cells K, L, and M are empty. Type in them:<br>K: <code>Sweat bee</code> · L: <code>Brittany Owens</code> · M: <code>nd</code></div></li>
+    <li><div>Click the arrow in <code>K1</code> again. Click <strong>Clear Filter From "Common name"</strong>.<span class="see">All the bees are back. Cell P1 now says 0.</span></div></li>
+  </ol>
+  <details><summary>Hint · Why "Sweat bee"?</summary><div>
+    <p>Look at column J (Scientific name). This bee is a <em>Lasioglossum</em>. In this file, 988 other <em>Lasioglossum</em> bees are called Sweat bee. The bee next to it (1502183) is the same kind and was identified by Brittany Owens. We use what the data already tells us.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>All 3 empty cells were on one bee, Specimen 1502182 (row 2086). After the fix, <code>P1</code> = <strong>0</strong>.</p></div></details>
+  <button class="donebtn" type="button">I finished this card</button>
+</section>
+
+<!-- ============ CARD 2 ============ -->
+<section class="card" data-card="q2">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Card 2 · Count the bees by sex</h2></div>
+  <p class="q">How many female, male, and queen bees are there?</p>
+  <ol class="do">
+    <li><div>Type these labels in column O:<br><code>O3</code> Female · <code>O4</code> Male · <code>O5</code> Queen · <code>O6</code> No data · <code>O7</code> Total</div></li>
+    <li><div>Type these formulas in column P:<br>
+      <code>P3</code> <span class="f">=COUNTIF(H:H,"F")</span><br>
+      <code>P4</code> <span class="f">=COUNTIF(H:H,"M")</span><br>
+      <code>P5</code> <span class="f">=COUNTIF(H:H,"Q")</span><br>
+      <code>P6</code> <span class="f">=COUNTIF(H:H,"nd")</span><br>
+      <code>P7</code> <span class="f">=SUM(P3:P6)</span></div></li>
+    <li><div>Type your numbers in the boxes below.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="2624"><label for="a-f">Female:</label><input id="a-f" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="358"><label for="a-m">Male:</label><input id="a-m" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="41"><label for="a-q">Queen:</label><input id="a-q" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="1138"><label for="a-nd">No data (nd):</label><input id="a-nd" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="4161"><label for="a-tot">Total:</label><input id="a-tot" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1</summary><div>
+    <p>COUNTIF counts cells that match. <code>H:H</code> means "all of column H," the Sex column. <code>"F"</code> is what we look for. Text in a formula always needs quotes.</p></div></details>
+  <details><summary>Hint 2</summary><div>
+    <p>Seeing <code>#NAME?</code> means a quote mark is missing. Each letter needs a quote on both sides: <code>"F"</code>.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>Female <strong>2,624</strong> · Male <strong>358</strong> · Queen <strong>41</strong> · No data <strong>1,138</strong> · Total <strong>4,161</strong></p></div></details>
+
+  <p class="q">Detective question: the file has 4,165 bees. Your total is 4,161. Where are the missing 4?</p>
+  <ol class="do">
+    <li><div>Click the arrow in <code>H1</code> (Sex). Look at the list of values.</div></li>
+    <li><div>Find the strange one. Then click <strong>Cancel</strong>.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="4"><label for="a-missing">How many bees are missing from the total?</label><input id="a-missing" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1</summary><div>
+    <p>Two of the values in the filter list look almost the same. Look very closely at the space in front of them.</p></div></details>
+  <details><summary>Hint 2</summary><div>
+    <p>Remember the SAT/ACT file? " Maryland" had a hidden space in front. That is the same problem here.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p><strong>4</strong> cells say <code>&nbsp;F</code> (a space, then F). COUNTIF looks for an <strong>exact</strong> match, so <code>"F"</code> does not count them. The real female count is 2,624 + 4 = <strong>2,628</strong>. You can fix this in Extra B.</p></div></details>
+  <button class="donebtn" type="button">I finished this card</button>
+</section>
+
+<!-- ============ CARD 3 ============ -->
+<section class="card" data-card="q3">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Card 3 · Count the bumble bees</h2></div>
+  <p class="q">How many bumble bees did the team catch?</p>
+  <ol class="do">
+    <li><div><code>O9</code>: type <code>bumble bee (exact)</code>. <code>P9</code>: type<br><span class="f">=COUNTIF(K:K,"bumble bee")</span></div></li>
+    <li><div>Look at P9. Is that number right? Type it in the first box.</div></li>
+    <li><div><code>O10</code>: type <code>bumble (any)</code>. <code>P10</code>: type<br><span class="f">=COUNTIF(K:K,"*bumble*")</span></div></li>
+    <li><div>Type the new number in the second box.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="0"><label for="a-b1">"bumble bee" (exact):</label><input id="a-b1" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="474"><label for="a-b2">"*bumble*" (any):</label><input id="a-b2" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1 · Why is the first one 0?</summary><div>
+    <p>Filter column K and type <code>bumble</code> in the search box. The names are longer, like "American bumble bee." No cell says only "bumble bee."</p></div></details>
+  <details><summary>Hint 2 · What does the star do?</summary><div>
+    <p>The star <code>*</code> means "any text here." <code>"*bumble*"</code> means "bumble with anything before it or after it."</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>Exact match: <strong>0</strong>. With the stars: <strong>474</strong>.</p>
+    <p>That is American bumble bee 314 + Common eastern bumble bee 80 + Brown belted Bumble Bee 79 + two spotted bumblebee 1.</p></div></details>
+  <div class="warn">Save your file now: press <kbd>Ctrl</kbd> + <kbd>S</kbd>.</div>
+  <button class="donebtn" type="button">I finished this card</button>
+</section>
+
+<!-- ============ EXTRA A ============ -->
+<section class="card" data-card="xa">
+  <div class="card-head"><span class="tag extra">EXTRA</span><h2>Extra A · Two spellings of honeybee</h2></div>
+  <p class="q">How many bees are spelled "honeybee"? Then ask your team about the other spelling.</p>
+  <ol class="do">
+    <li><div><code>O12</code>: type <code>honeybee</code>. <code>P12</code>: type <span class="f">=COUNTIF(K:K,"honeybee")</span></div></li>
+    <li><div>Click the arrow in <code>K1</code>. Type <code>honey</code> in the search box.<span class="see">Two spellings: honeybee and honey bee.</span></div></li>
+    <li><div>Click <strong>Cancel</strong>. Click any cell that says <code>honeybee</code>.</div></li>
+    <li><div>Right-click the cell. Click <strong>New Comment</strong>. Type:<br><em>We use two spellings. Which one should we use?</em></div></li>
+    <li><div>Click the arrow button to post it.<span class="see">A purple corner on the cell.</span></div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="186|187"><label for="a-honey">"honeybee" count:</label><input id="a-honey" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint · Comment or Note?</summary><div>
+    <p>A <strong>Note</strong> explains something. A <strong>Comment</strong> asks a question and waits for a reply. We are asking the team a question, so we use a Comment.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p><strong>186</strong> say "honeybee." <strong>1</strong> says "honey bee." If you already fixed that one, you get 187.</p></div></details>
+  <button class="donebtn" type="button">I finished this card</button>
+</section>
+
+<!-- ============ EXTRA B ============ -->
+<section class="card" data-card="xb">
+  <div class="card-head"><span class="tag extra">EXTRA</span><h2>Extra B · Fix the 4 hidden spaces</h2></div>
+  <p class="q">Fix the 4 " F" cells so the total matches 4,165.</p>
+  <ol class="do">
+    <li><div>Click the letter <strong>H</strong> at the very top of column H. The whole column turns gray.</div></li>
+    <li><div>Press <kbd>Ctrl</kbd> + <kbd>H</kbd>. The Find and Replace box opens.</div></li>
+    <li><div>Find what: press the <kbd>Space</kbd> bar once, then type <code>F</code>.</div></li>
+    <li><div>Replace with: type <code>F</code> (no space).</div></li>
+    <li><div>Click <strong>Options</strong>. Check <strong>Match entire cell contents</strong>. Click <strong>Replace All</strong>.<span class="see">"We made 4 replacements." Click OK, then Close.</span></div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="2628"><label for="a-f2">Female (P3) now:</label><input id="a-f2" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="4165"><label for="a-tot2">Total (P7) now:</label><input id="a-tot2" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint · Why "Match entire cell contents"?</summary><div>
+    <p>Without it, Excel changes a space-F inside longer text too. With it, Excel only changes cells that are exactly " F".</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>Female = <strong>2,628</strong>. Total = <strong>4,165</strong>. Every bee is counted now. Save with <kbd>Ctrl</kbd> + <kbd>S</kbd>.</p></div></details>
+  <button class="donebtn" type="button">I finished this card</button>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var KEY="cap1788-l5-bees-v1", state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  var cards=[].slice.call(document.querySelectorAll("[data-card]"));
+  function paint(){
+    var n=0;
+    cards.forEach(function(c){
+      var on=!!state[c.dataset.card], b=c.querySelector(".donebtn");
+      c.classList.toggle("done",on); b.classList.toggle("on",on);
+      b.textContent=on?"✓ Done (click to undo)":"I finished this card";
+      if(on)n++;
+    });
+    document.getElementById("ptext").textContent=n+" of "+cards.length+" done";
+    document.getElementById("pbar").style.width=(100*n/cards.length)+"%";
+  }
+  cards.forEach(function(c){
+    c.querySelector(".donebtn").addEventListener("click",function(){state[c.dataset.card]=!state[c.dataset.card];save();paint();});
+  });
+  [].slice.call(document.querySelectorAll(".ans")).forEach(function(row){
+    var input=row.querySelector("input"), fb=row.querySelector(".fb"), ok=row.dataset.answer.split("|");
+    function check(){
+      var v=input.value.replace(/[,\s]/g,"");
+      if(v===""){fb.className="fb no";fb.textContent="Type a number first.";return;}
+      if(ok.indexOf(v)>-1){fb.className="fb yes";fb.textContent="✓ Correct!";}
+      else{fb.className="fb no";fb.textContent="Not yet. Check your formula, then open Hint 1.";}
+    }
+    row.querySelector("button").addEventListener("click",check);
+    input.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
