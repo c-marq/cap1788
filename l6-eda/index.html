@@ -98,7 +98,7 @@ details.sol>summary{color:var(--accent)}
 <section class="story">
   <p><strong>The story:</strong> We have sales data for <strong>16,715 video games</strong>, from 1980 to 2016. One row is one game on one console.</p>
   <p><strong>Global_Sales</strong> is the money the game made around the world, in <strong>millions of dollars</strong>. For example, 82.53 means 82.53 million.</p>
-  <p>This lesson takes <strong>3 days</strong>. Today is <strong>Day 1</strong>. Day 2 and Day 3 will appear on this page later.</p>
+  <p>This lesson takes <strong>3 days</strong>. Each Day has its own Parts. Start where your instructor tells you.</p>
 </section>
 
 <section class="card" style="gap:10px">
@@ -204,6 +204,192 @@ details.sol>summary{color:var(--accent)}
 
 <div class="warn"><strong>End of Day 1.</strong> Press <kbd>Ctrl</kbd> + <kbd>S</kbd>. Keep <code>Games-YourLastName.xlsx</code> on your Desktop. Next class we open the same file.</div>
 
+<div class="eyebrow" style="font-size:1rem;color:var(--fg);margin-top:10px">Day 2</div>
+<p>Open <code>Games-YourLastName.xlsx</code> from your Desktop. Can't find it? In Excel: <strong>File → Open → Recent</strong>.</p>
+
+<!-- ============ PART 4 ============ -->
+<section class="card" data-card="d2p4">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 4 · Sales by Rating</h2></div>
+  <p class="why">Ratings are the letters on the game box: <code>E</code> Everyone · <code>E10+</code> Everyone 10+ · <code>T</code> Teen · <code>M</code> Mature 17+. A few rare ones: AO, EC, K-A, RP.</p>
+  <p class="q">Guess first: which rating made the most money?</p>
+  <ol class="do">
+    <li><div>Go to the <strong>lec6-video_games_sales</strong> sheet (the first tab). Click inside the table. <strong>Insert → PivotTable → OK</strong>.</div></li>
+    <li><div>Drag <strong>Rating</strong> to <strong>Rows</strong>. Drag <strong>Global_Sales</strong> to <strong>Values</strong>.</div></li>
+    <li><div>Right-click any number → <strong>Sort → Sort Largest to Smallest</strong>. Look at the top row.</div></li>
+    <li><div>Click the arrow next to <strong>Row Labels</strong> → uncheck <strong>(blank)</strong> → OK.<span class="see">E is now at the top.</span></div></li>
+    <li><div>Select the numbers → <strong>Home → Comma Style</strong>. Rename the sheet tab <code>Sales by Rating</code>. Save.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="blank|(blank)"><label for="d4a">Step 3: what was at the top?</label><input id="d4a"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="2848.73" data-tol="0.01"><label for="d4b">Step 3: its sales:</label><input id="d4b" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="e"><label for="d4c">Step 4: top rating now:</label><input id="d4c"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="6068.8" data-tol="0.01"><label for="d4d">Step 4: Grand Total now:</label><input id="d4d" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1 · Why is blank on top?</summary><div><p>Thousands of games have no rating at all, especially old ones. The rating system started in 1994. Together, those games made a lot of money.</p></div></details>
+  <details><summary>Hint 2 · Where is the Row Labels arrow?</summary><div><p>It's in the top-left cell of the PivotTable, usually <code>A3</code>. It looks like a small filter arrow.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>At first, <strong>(blank)</strong> is on top with <strong>2,848.73</strong>. A blank is not a rating, so we filter it out.</p>
+    <p>Then <strong>E</strong> wins with 2,436.61. Grand Total: <strong>6,068.80</strong>.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ PART 5 ============ -->
+<section class="card" data-card="d2p5">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 5 · Sales % by Genre</h2></div>
+  <p class="why">A percent shows each genre's slice of the whole pizza.</p>
+  <ol class="do">
+    <li><div>Right-click the <strong>Sales by Genre</strong> tab → <strong>Move or Copy…</strong> → check <strong>Create a copy</strong> → OK. Rename the new tab <code>Sales % by Genre</code>.</div></li>
+    <li><div>On the new sheet, right-click any number → <strong>Show Values As → % of Grand Total</strong>.<span class="see">Numbers turn into percents. Grand Total is 100.00%.</span></div></li>
+    <li><div>Save.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="19.57" data-tol="0.01"><label for="d5a">Action's percent (number only):</label><input id="d5a" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="14.94" data-tol="0.01"><label for="d5b">Sports' percent:</label><input id="d5b" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="1.96" data-tol="0.01"><label for="d5c">Strategy's percent:</label><input id="d5c" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1</summary><div><p>Right-click a <strong>number</strong>, not a genre name. <strong>Show Values As</strong> is near the bottom of the menu.</p></div></details>
+  <details><summary>Hint 2</summary><div><p>Type only the number. For 19.57%, type <code>19.57</code>.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div><p>Action <strong>19.57%</strong> (almost 1 of every 5 dollars) · Sports <strong>14.94%</strong> · Strategy <strong>1.96%</strong>.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ PART 6 ============ -->
+<section class="card" data-card="d2p6">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 6 · Count of Rating</h2></div>
+  <p class="why">New question: how <strong>many</strong> games got each rating? We count, we don't add.</p>
+  <ol class="do">
+    <li><div>Go to the first tab. Click inside the table. <strong>Insert → PivotTable → OK</strong>.</div></li>
+    <li><div>Drag <strong>Rating</strong> to <strong>Rows</strong>. Drag <strong>Rating</strong> to <strong>Values</strong> too.<span class="see">Values says Count of Rating.</span></div></li>
+    <li><div>Right-click a number → <strong>Sort → Sort Largest to Smallest</strong>.</div></li>
+    <li><div>Drag <strong>Name</strong> to <strong>Values</strong>.<span class="see">A second column: Count of Name.</span></div></li>
+    <li><div>Rename the sheet tab <code>Count of Rating</code>. Save.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="3990"><label for="d6a">How many E games?</label><input id="d6a" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="9949"><label for="d6b">Grand Total, Count of Rating:</label><input id="d6b" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="16713"><label for="d6c">Grand Total, Count of Name:</label><input id="d6c" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="6764"><label for="d6d">Count of Name for (blank):</label><input id="d6d" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1 · Why are the two totals different?</summary><div><p>COUNT skips empty cells. Games with no rating have an empty Rating cell, so Count of Rating misses them. Every game has a name, so Count of Name counts them all.</p></div></details>
+  <details><summary>Hint 2</summary><div><p>If Values says Sum of Global_Sales, drag it <strong>out</strong> of the Values box first.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div><p>E: <strong>3,990</strong>. Count of Rating: <strong>9,949</strong>. Count of Name: <strong>16,713</strong>. The difference, <strong>6,764</strong>, is the games with no rating.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ PART 7 ============ -->
+<section class="card" data-card="d2p7">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 7 · Blank Ratings per Year</h2></div>
+  <p class="why">This time we use the <strong>Filters</strong> box to look only at games with no rating.</p>
+  <ol class="do">
+    <li><div>Go to the first tab. Click inside the table. <strong>Insert → PivotTable → OK</strong>.</div></li>
+    <li><div>Drag <strong>Rating</strong> to <strong>Filters</strong>. Drag <strong>Year_of_Release</strong> to <strong>Rows</strong>. Drag <strong>Year_of_Release</strong> to <strong>Values</strong>.</div></li>
+    <li><div>Click the arrow next to <strong>Rating (All)</strong> above the table → click <strong>(blank)</strong> → OK.<span class="see">Grand Total: 6,764.</span></div></li>
+    <li><div>Rename the sheet tab <code>Blank Ratings per Year</code>. Save.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="222"><label for="d7a">Games with no rating in 2016:</label><input id="d7a" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="2010"><label for="d7b">Which year has the most?</label><input id="d7b" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="88"><label for="d7c">The N/A row (games with no year):</label><input id="d7c" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1</summary><div><p>If Values says Sum of Year_of_Release, right-click a number → <strong>Summarize Values By → Count</strong>.</p></div></details>
+  <details><summary>Hint 2 · Finding the biggest year</summary><div><p>Right-click a number → <strong>Sort → Sort Largest to Smallest</strong>. The top year is your answer. Press <kbd>Ctrl</kbd> + <kbd>Z</kbd> to undo the sort after.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div><p>2016: <strong>222</strong>. The most: <strong>2010</strong> with 456. N/A: <strong>88</strong>. So it's not only old games. Many new games have no rating too. That's a new question to explore.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<div class="warn"><strong>End of Day 2.</strong> Press <kbd>Ctrl</kbd> + <kbd>S</kbd>. Same file next class.</div>
+
+<div class="eyebrow" style="font-size:1rem;color:var(--fg);margin-top:10px">Day 3</div>
+<p>Open <code>Games-YourLastName.xlsx</code> from your Desktop.</p>
+
+<!-- ============ PART 8 ============ -->
+<section class="card" data-card="d3p8">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 8 · Avg Sales by Critic Score</h2></div>
+  <p class="q">Guess first: do games with better critic scores sell more?</p>
+  <ol class="do">
+    <li><div>Go to the first tab. Click inside the table. <strong>Insert → PivotTable → OK</strong>.</div></li>
+    <li><div>Drag <strong>Critic_Score</strong> to <strong>Rows</strong>. Drag <strong>Global_Sales</strong> to <strong>Values</strong>.<span class="see">A very long list of scores.</span></div></li>
+    <li><div>Right-click any score in column A → <strong>Group…</strong> → Starting at <code>10</code> · Ending at <code>100</code> · By <code>5</code> → OK.<span class="see">Buckets like 70-74, 75-79.</span></div></li>
+    <li><div>Right-click any number → <strong>Summarize Values By → Average</strong>.</div></li>
+    <li><div>Drag <strong>Critic_Score</strong> to <strong>Values</strong> too. Right-click one of those numbers → <strong>Summarize Values By → Count</strong>.<span class="see">A second column shows how many games are in each bucket.</span></div></li>
+    <li><div>Rename the sheet tab <code>Avg Sales by Critic Score</code>. Save.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="6.26" data-tol="0.006"><label for="d8a">Average sales for 95-100 (2 decimals):</label><input id="d8a" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="49"><label for="d8b">How many games are in 95-100?</label><input id="d8b" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="0.53" data-tol="0.006"><label for="d8c">Average sales for 70-74:</label><input id="d8c" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="yes"><label for="d8d">Do better scores sell more? (yes / no)</label><input id="d8d"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1 · Group is gray</summary><div><p>Right-click a <strong>score</strong> in column A, not a sales number. If it still won't group, click a different score and try again.</p></div></details>
+  <details><summary>Hint 2 · Why Average?</summary><div><p>The 70-74 bucket has 1,200 games. The 95-100 bucket has only 49. A Sum makes the big bucket win just because it has more games. Average tells us the money <strong>per game</strong>, which is fair.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div><p>95-100: <strong>6.26</strong> million per game, from <strong>49</strong> games. 70-74: <strong>0.53</strong>. <strong>Yes</strong>, the higher the score, the more money per game. Ignore the "&lt;10 or (blank)" row. Those are games with no score.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ PART 9 ============ -->
+<section class="card" data-card="d3p9">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 9 · Best Genre + Rating combo</h2></div>
+  <p class="why">Same data, two ways to measure. Watch the answer change.</p>
+  <ol class="do">
+    <li><div>Go to the first tab. Click inside the table. <strong>Insert → PivotTable → OK</strong>.</div></li>
+    <li><div>Drag <strong>Genre</strong> to <strong>Rows</strong>, <strong>Rating</strong> to <strong>Columns</strong>, <strong>Global_Sales</strong> to <strong>Values</strong>.</div></li>
+    <li><div>Select all the numbers inside the grid (not the Grand Totals). <strong>Home → Conditional Formatting → Top/Bottom Rules → Top 10 Items → OK</strong>. Find the biggest one.</div></li>
+    <li><div>Right-click any number → <strong>Summarize Values By → Average</strong>.</div></li>
+    <li><div>Click the arrow next to <strong>Column Labels</strong> → uncheck <strong>(blank)</strong>, <strong>AO</strong>, <strong>EC</strong>, <strong>K-A</strong>, <strong>RP</strong> → OK.<span class="see">Only 4 rating columns: E, E10+, M, T.</span></div></li>
+    <li><div>Find the biggest number now. Rename the sheet tab <code>Avg Sales by Genre and Rating</code>. Save.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="sports e|sports, e|sports+e|sports + e|e sports"><label for="d9a">Step 3, with Sum: top Genre + Rating (like "Action T")</label><input id="d9a"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="845.87" data-tol="0.01"><label for="d9b">Step 3: its sales:</label><input id="d9b" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="shooter m|shooter, m|shooter+m|shooter + m|m shooter"><label for="d9c">Step 6, with Average and filters: top combo</label><input id="d9c"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="1.11" data-tol="0.006"><label for="d9d">Step 6: its average (2 decimals):</label><input id="d9d" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1 · Why remove AO, EC, K-A, RP?</summary><div><p>Each has only 1 to 8 games. One lucky game can make the average look huge. That's not fair to compare.</p></div></details>
+  <details><summary>Hint 2 · Finding the top cell</summary><div><p>After Step 5, the Top 10 colors update by themselves. Look for the darkest highlighted cell, then read its row (Genre) and column (Rating).</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>With Sum: <strong>Sports + E</strong>, <strong>845.87</strong> million in total.</p>
+    <p>With Average and the filters: <strong>Shooter + M</strong>, <strong>1.11</strong> million per game. Both are right. They answer different questions: total money vs. money per game.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ PART 10 ============ -->
+<section class="card" data-card="d3p10">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 10 · XLOOKUP: give every game a grade</h2></div>
+  <p class="why">XLOOKUP finds a value in one column and brings back the value next to it, like finding a dish on a menu and reading its price.</p>
+  <ol class="do">
+    <li><div>Click the <strong>+</strong> next to the sheet tabs. Rename the new sheet <code>Grades</code>. Type this table:
+      <div class="tablebox" style="margin-top:6px"><table>
+        <tr><th>Cell</th><th>Type</th><th>Cell</th><th>Type</th></tr>
+        <tr><td>A1</td><td>Critic Grade Scale</td><td></td><td></td></tr>
+        <tr><td>A3</td><td>90</td><td>B3</td><td>A</td></tr>
+        <tr><td>A4</td><td>80</td><td>B4</td><td>B</td></tr>
+        <tr><td>A5</td><td>70</td><td>B5</td><td>C</td></tr>
+        <tr><td>A6</td><td>60</td><td>B6</td><td>D</td></tr>
+        <tr><td>A7</td><td>0</td><td>B7</td><td>F</td></tr>
+        <tr><td>A8</td><td><em>leave empty</em></td><td>B8</td><td>N/A</td></tr>
+      </table></div></div></li>
+    <li><div>Go to the first tab. Right-click <code>G1</code> (Critic_Score) → <strong>Insert → Table Columns to the Right</strong>. Click the new header <code>H1</code> and type <code>Critic_Grade</code>.</div></li>
+    <li><div>Try the short version first. In <code>H2</code> type:<br><span class="f">=XLOOKUP(G2,Grades!$A$3:$A$8,Grades!$B$3:$B$8)</span><span class="see">Wii Sports shows #N/A. Its score, 76, is not in the grade table.</span></div></li>
+    <li><div>Click <code>H2</code> and replace it with the full version:<br><span class="f">=XLOOKUP(G2,Grades!$A$3:$A$8,Grades!$B$3:$B$8,"Not Found",-1)</span><span class="see">Wii Sports shows C. The formula fills down the whole column.</span></div></li>
+    <li><div>Click <code>N1</code>, type <code>A grades</code>. Click <code>O1</code>, type <span class="f">=COUNTIF(H:H,"A")</span>. Save.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="c"><label for="d10a">Wii Sports' grade (score 76):</label><input id="d10a"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="b"><label for="d10b">Mario Kart Wii's grade (score 82, row 4):</label><input id="d10b"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="n/a|na"><label for="d10c">Super Mario Bros. (row 3, no score):</label><input id="d10c"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="333"><label for="d10d">How many A games? (O1)</label><input id="d10d" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1 · What do the 5 parts mean?</summary><div>
+    <p>1) <code>G2</code>: the score to look for. 2) <code>Grades!$A$3:$A$8</code>: where to look. 3) <code>Grades!$B$3:$B$8</code>: what to bring back. 4) <code>"Not Found"</code>: what to show if nothing matches. 5) <code>-1</code>: if there's no exact match, use the next <strong>smaller</strong> score. 76 has no exact match, so it uses 70 and returns C.</p></div></details>
+  <details><summary>Hint 2 · Your formula looks different</summary><div><p>If you click <code>G2</code> instead of typing it, Excel writes <code>[@Critic_Score]</code>. That is the same thing. Don't forget the <code>$</code> signs. Without them, the grade table moves as the formula fills down.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>Wii Sports <strong>C</strong> · Mario Kart Wii <strong>B</strong> · Super Mario Bros. <strong>N/A</strong> · A games: <strong>333</strong>.</p>
+    <p>All grades: A 333 · B 1,679 · C 2,363 · D 1,849 · F 1,913 · N/A 8,576.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<div class="warn"><strong>End of Lecture 6.</strong> Save your file. You now know PivotTables, Sort, Group, Summarize Values By, Show Values As, PivotChart, Comma Style, and XLOOKUP.</div>
+
 </div>
 
 <script>
@@ -229,7 +415,7 @@ details.sol>summary{color:var(--accent)}
   [].slice.call(document.querySelectorAll(".ans")).forEach(function(row){
     var input=row.querySelector("input"), fb=row.querySelector(".fb"), ok=row.dataset.answer.split("|"), tol=parseFloat(row.dataset.tol||"0");
     function check(){
-      var raw=input.value.trim().toLowerCase(), v=raw.replace(/[,$\s]/g,"");
+      var raw=input.value.trim().toLowerCase(), v=raw.replace(/[,$%\s]/g,"");
       if(raw===""){fb.className="fb no";fb.textContent="Type an answer first.";return;}
       var good=ok.some(function(a){
         var n=parseFloat(a), x=parseFloat(v);
