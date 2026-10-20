@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Video Game Sales Explorer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+/* Layout: one reading column; one card per Part, worked top to bottom; answers checked in place */
+:root{
+  --bg:#FAFAF7; --surface:#FFFFFF; --fg:#1F2328; --muted:#5B6168; --line:#E2E1DA;
+  --accent:#3F3FB0; --accent-soft:#ECECFA; --code-bg:#F2F1EC;
+  --ok:#1E7A46; --ok-soft:#E3F4EA; --no:#B03A2E;
+  --core:#1E7A46; --extra:#8A6D00; --extra-soft:#FFF4C2;
+  --font-body:"Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  --font-mono:"JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#A9A9F5; --accent-soft:#24244A; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#A9A9F5; --accent-soft:#24244A; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:18px;line-height:1.6;margin:0}
+.wrap{max-width:800px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:22px}
+h1{font-size:2rem;line-height:1.2;margin:0;text-wrap:balance}
+h2{font-size:1.35rem;margin:0;text-wrap:balance}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+p{margin:0}
+code,.f{font-family:var(--font-mono);font-size:.92em;background:var(--code-bg);padding:2px 7px;border-radius:5px;white-space:nowrap}
+.f{white-space:normal;word-break:break-all}
+kbd{font-family:var(--font-mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:3px;border-radius:5px;padding:0 6px;background:var(--surface)}
+.top{display:flex;flex-direction:column;gap:10px}
+.progress{display:flex;align-items:center;gap:12px;font-weight:700}
+.bar{flex:1;height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.story{background:var(--accent-soft);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.rules{display:flex;flex-direction:column;gap:6px;margin:0;padding-left:22px}
+.tablebox{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--code-bg)}
+td.l{font-family:var(--font-mono);font-weight:700;width:3.2em;text-align:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.card.done{border-color:var(--ok)}
+.card-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:20px}
+.tag.core{background:var(--ok-soft);color:var(--core)}
+.tag.extra{background:var(--extra-soft);color:var(--extra)}
+.why{color:var(--muted)}
+.q{font-size:1.1rem;font-weight:700}
+ol.do{margin:0;padding-left:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:10px}
+ol.do>li{counter-increment:s;display:grid;grid-template-columns:2.2em 1fr;gap:8px;align-items:start}
+ol.do>li::before{content:counter(s);font-weight:700;background:var(--fg);color:var(--bg);border-radius:50%;width:1.7em;height:1.7em;display:grid;place-items:center;font-size:.85rem;margin-top:2px}
+ol.do>li>div{min-width:0}
+.see{display:block;color:var(--muted);font-size:.92rem}
+.see::before{content:"You should see: ";font-weight:700}
+.answers{display:flex;flex-direction:column;gap:10px;background:var(--code-bg);border-radius:10px;padding:14px}
+.ans{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ans label{flex:1 1 240px;font-weight:700}
+.ans input{font:inherit;width:9.5em;padding:6px 10px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.ans button,.donebtn,.dl{font:inherit;font-weight:700;padding:6px 14px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer;text-decoration:none;display:inline-block}
+.ans button:hover,.donebtn:hover,.dl:hover{background:var(--accent-soft)}
+.fb{flex-basis:100%;font-weight:700;font-size:.95rem}
+.fb.yes{color:var(--ok)} .fb.no{color:var(--no)}
+details{border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+details>summary{cursor:pointer;padding:10px 14px;font-weight:700;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ ";color:var(--accent)}
+details[open]>summary::before{content:"▾ "}
+details>div{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px}
+details.sol>summary{color:var(--accent)}
+.warn{border-left:4px solid var(--accent);padding:4px 0 4px 12px;font-size:.95rem}
+.donebtn{align-self:flex-start}
+.donebtn.on{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:480px){body{font-size:17px}h1{font-size:1.6rem}}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">CAP1788 · Lecture 6 · Exploratory Data Analysis</div>
+  <h1>Video Game Sales Explorer</h1>
+  <div class="progress"><span id="ptext">0 of 3 done</span><div class="bar"><span id="pbar"></span></div></div>
+</header>
+
+<section class="story">
+  <p><strong>The story:</strong> We have sales data for <strong>16,715 video games</strong>, from 1980 to 2016. One row is one game on one console.</p>
+  <p><strong>Global_Sales</strong> is the money the game made around the world, in <strong>millions of dollars</strong>. For example, 82.53 means 82.53 million.</p>
+  <p>This lesson takes <strong>3 days</strong>. Today is <strong>Day 1</strong>. Day 2 and Day 3 will appear on this page later.</p>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>How to use this page</h2>
+  <ul class="rules">
+    <li>Follow your instructor's screen. Do one Part at a time.</li>
+    <li>Type your answer in the box and click <strong>Check</strong>.</li>
+    <li>Stuck? Open <strong>Hint 1</strong>, then <strong>Hint 2</strong>. The <strong>Solution</strong> is last.</li>
+    <li>Lost? Raise your hand and say the Part and Step number.</li>
+    <li><strong>Save</strong> after every Part: <kbd>Ctrl</kbd> + <kbd>S</kbd>. We use the same file all 3 days.</li>
+  </ul>
+</section>
+
+<div class="eyebrow" style="font-size:1rem;color:var(--fg)">Day 1</div>
+
+<!-- ============ PART 1 ============ -->
+<section class="card" data-card="d1p1">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 1 · Set up the data</h2></div>
+  <p class="why">Keep only the columns we need, make a table, and remove 2 games with no name.</p>
+  <ol class="do">
+    <li><div>Go to <strong>Canvas</strong>. Download <code>lec6-video_games_sales.csv</code>. Open it from your <strong>Downloads</strong> folder.</div></li>
+    <li><div><strong>File → Save As → Browse → Desktop</strong>. Name: <code>Games-YourLastName</code>. Save as type: <strong>Excel Workbook (*.xlsx)</strong>. Click <strong>Save</strong>.<span class="see">The top of Excel says Games-YourLastName.xlsx</span></div></li>
+    <li><div>Hold <kbd>Ctrl</kbd> and click these <strong>column letters</strong> at the very top: <code>F</code> <code>G</code> <code>H</code> <code>I</code> <code>L</code> <code>M</code> <code>N</code>. Right-click one of them → <strong>Delete</strong>.<span class="see">9 columns left: Name, Platform, Year_of_Release, Genre, Publisher, Global_Sales, Critic_Score, Developer, Rating.</span></div></li>
+    <li><div>Click <code>A1</code> → <strong>Home → Format as Table</strong> → pick a style → check <strong>My table has headers</strong> → OK.</div></li>
+    <li><div>Click <code>K1</code>. Type <code>Blank names</code>. Click <code>L1</code>. Type <span class="f">=COUNTBLANK(A2:A16716)</span> and press <kbd>Enter</kbd>.</div></li>
+    <li><div>Click the arrow in <code>A1</code> (Name) → uncheck <strong>(Select All)</strong> → scroll down → check <strong>(Blanks)</strong> → OK.<span class="see">2 rows. Both are GEN games from 1993.</span>Select both row numbers on the left. Right-click → <strong>Delete Row</strong>. Then arrow in <code>A1</code> → <strong>Clear Filter From "Name"</strong>.<span class="see">L1 now says 0.</span></div></li>
+    <li><div>Click inside the table. <strong>Table Design</strong> tab → check <strong>Total Row</strong>. Click <code>C2</code>, press <kbd>Ctrl</kbd> + <kbd>↓</kbd> to jump to the bottom. In the <strong>Total</strong> row: Year_of_Release → arrow → <strong>Max</strong>. Global_Sales → arrow → <strong>Average</strong>.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="2"><label for="d1a">Blank names in L1 (before you delete):</label><input id="d1a" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="2016"><label for="d1b">Max Year_of_Release (Total row):</label><input id="d1b" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="0.53" data-tol="0.006"><label for="d1c">Average Global_Sales, 2 decimals:</label><input id="d1c" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1 · Deleting columns</summary><div>
+    <p>Click the gray <strong>letters</strong> at the very top, not the cells. We delete 4 sales columns (NA, EU, JP, Other) and 3 critic/user columns (Critic_Count, User_Score, User_Count). We keep <strong>Global_Sales</strong> and <strong>Critic_Score</strong>.</p></div></details>
+  <details><summary>Hint 2 · The Total row</summary><div>
+    <p>The Total row is at the very bottom, row 16715. If you don't see the arrow in a Total cell, click that cell first. The average shows many decimals, like 0.5335…. Type 2 decimals.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>Blank names: <strong>2</strong>. After deleting them, we have <strong>16,713</strong> games.</p>
+    <p>Max year: <strong>2016</strong>. Average Global_Sales: <strong>0.53</strong> million dollars per game.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ PART 2 ============ -->
+<section class="card" data-card="d1p2">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 2 · Pivot Practice</h2></div>
+  <p class="why">Build your first PivotTable and learn the 4 boxes: Filters, Columns, Rows, Values.</p>
+  <ol class="do">
+    <li><div>Click any cell inside your table. <strong>Insert → Recommended PivotTables</strong> → click the first one → <strong>OK</strong>.<span class="see">A new sheet. A PivotTable on the left. The Field List on the right.</span></div></li>
+    <li><div>At the bottom of the Field List, drag fields into the 4 boxes so they match this table. Drag out anything extra.
+      <div class="tablebox" style="margin-top:6px"><table>
+        <tr><th>Box</th><th>Field</th></tr>
+        <tr><td>Filters</td><td>Publisher</td></tr>
+        <tr><td>Columns</td><td>Genre</td></tr>
+        <tr><td>Rows</td><td>Platform</td></tr>
+        <tr><td>Values</td><td>Sum of Global_Sales</td></tr>
+      </table></div></div></li>
+    <li><div>Click the arrow next to <strong>Publisher</strong> (above the PivotTable) → click <strong>Nintendo</strong> → OK.<span class="see">10 consoles down the side, from 3DS to WiiU.</span></div></li>
+    <li><div>Double-click the sheet tab. Type <code>Pivot Practice</code>. Press <kbd>Enter</kbd>. Save.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="1788.81" data-tol="0.01"><label for="d2a">Nintendo Grand Total (bottom-right number):</label><input id="d2a" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="wii"><label for="d2b">Which Nintendo console sold the most?</label><input id="d2b"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1 · The Field List is gone</summary><div>
+    <p>Click any cell inside the PivotTable. Still gone? <strong>PivotTable Analyze</strong> tab → <strong>Field List</strong>.</p></div></details>
+  <details><summary>Hint 2 · Finding the top console</summary><div>
+    <p>Look at the <strong>Grand Total</strong> column on the far right. Find the biggest number. The console name is on the left of that row.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p>Nintendo Grand Total: <strong>1,788.81</strong> million dollars. Top console: <strong>Wii</strong>, with 386.25.</p></div></details>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<!-- ============ PART 3 ============ -->
+<section class="card" data-card="d1p3">
+  <div class="card-head"><span class="tag core">CORE</span><h2>Part 3 · Sales by Genre</h2></div>
+  <p class="q">Guess first: which type of game made the most money in history? Write your guess down.</p>
+  <ol class="do">
+    <li><div>Go back to the <strong>lec6-video_games_sales</strong> sheet (the first tab). Click inside the table. <strong>Insert → PivotTable → OK</strong>.<span class="see">A new, empty PivotTable on a new sheet.</span></div></li>
+    <li><div>Drag <strong>Genre</strong> to <strong>Rows</strong>. Drag <strong>Global_Sales</strong> to <strong>Values</strong>.<span class="see">12 genres, from Action to Strategy.</span></div></li>
+    <li><div><strong>Right-click</strong> any number → <strong>Sort → Sort Largest to Smallest</strong>.</div></li>
+    <li><div>Select the numbers. <strong>Home → Comma Style</strong> (the <strong>,</strong> button).<span class="see">Numbers look like 1,745.26</span></div></li>
+    <li><div>Double-click the header <strong>Sum of Global_Sales</strong>. In <strong>Custom Name</strong>, type <code>Global Sales in Millions ($)</code> → OK.</div></li>
+    <li><div>Rename the sheet tab <code>Sales by Genre</code>. Save.</div></li>
+  </ol>
+  <div class="answers">
+    <div class="ans" data-answer="action"><label for="d3a">Top genre:</label><input id="d3a"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="1745.26" data-tol="0.01"><label for="d3b">Top genre's sales:</label><input id="d3b" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="3"><label for="d3c">What place is Shooter in? (number)</label><input id="d3c" inputmode="numeric"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="strategy"><label for="d3d">Lowest genre:</label><input id="d3d"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+    <div class="ans" data-answer="8917.53" data-tol="0.01"><label for="d3e">Grand Total:</label><input id="d3e" inputmode="decimal"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div>
+  </div>
+  <details><summary>Hint 1 · Sorting</summary><div>
+    <p>Right-click a <strong>number</strong>, not a genre name. If you right-click a name, Sort sorts by the alphabet.</p></div></details>
+  <details><summary>Hint 2 · Renaming the header</summary><div>
+    <p>Double-click exactly on the words <strong>Sum of Global_Sales</strong>. A box opens. The name goes in the top line, called Custom Name.</p></div></details>
+  <details class="sol"><summary>Solution</summary><div>
+    <p><strong>Action</strong> wins with <strong>1,745.26</strong> million. Sports 1,332.00. Shooter is <strong>#3</strong> with 1,052.94. Lowest is <strong>Strategy</strong> with 174.50. Grand Total <strong>8,917.53</strong>.</p>
+    <p>Many people guess Shooter. The data says Action. That is EDA checking our guess.</p></div></details>
+  <div class="warn"><strong>EXTRA:</strong> Click inside this PivotTable → <strong>PivotTable Analyze → PivotChart → Column → OK</strong>. A chart appears that matches your table.</div>
+  <button class="donebtn" type="button">I finished this Part</button>
+</section>
+
+<div class="warn"><strong>End of Day 1.</strong> Press <kbd>Ctrl</kbd> + <kbd>S</kbd>. Keep <code>Games-YourLastName.xlsx</code> on your Desktop. Next class we open the same file.</div>
+
+</div>
+
+<script>
+(function(){
+  var KEY="cap1788-l6-eda-v1", state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  var cards=[].slice.call(document.querySelectorAll("[data-card]"));
+  function paint(){
+    var n=0;
+    cards.forEach(function(c){
+      var on=!!state[c.dataset.card], b=c.querySelector(".donebtn");
+      c.classList.toggle("done",on); b.classList.toggle("on",on);
+      b.textContent=on?"✓ Done (click to undo)":"I finished this Part";
+      if(on)n++;
+    });
+    document.getElementById("ptext").textContent=n+" of "+cards.length+" done";
+    document.getElementById("pbar").style.width=(100*n/cards.length)+"%";
+  }
+  cards.forEach(function(c){
+    c.querySelector(".donebtn").addEventListener("click",function(){state[c.dataset.card]=!state[c.dataset.card];save();paint();});
+  });
+  [].slice.call(document.querySelectorAll(".ans")).forEach(function(row){
+    var input=row.querySelector("input"), fb=row.querySelector(".fb"), ok=row.dataset.answer.split("|"), tol=parseFloat(row.dataset.tol||"0");
+    function check(){
+      var raw=input.value.trim().toLowerCase(), v=raw.replace(/[,$\s]/g,"");
+      if(raw===""){fb.className="fb no";fb.textContent="Type an answer first.";return;}
+      var good=ok.some(function(a){
+        var n=parseFloat(a), x=parseFloat(v);
+        if(!isNaN(n) && /^-?\d*\.?\d+$/.test(v)) return Math.abs(x-n)<=(tol||1e-9);
+        return raw.replace(/\s+/g," ")===a;
+      });
+      if(good){fb.className="fb yes";fb.textContent="✓ Correct!";}
+      else{fb.className="fb no";fb.textContent="Not yet. Check your formula, then open Hint 1.";}
+    }
+    row.querySelector("button").addEventListener("click",check);
+    input.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
