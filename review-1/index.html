@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Sunshine Paws Review 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#FAFAF7; --surface:#FFFFFF; --fg:#1F2328; --muted:#5B6168; --line:#E2E1DA;
+  --accent:#0E7C7B; --accent-soft:#E0F2F1; --code-bg:#F2F1EC;
+  --ok:#1E7A46; --ok-soft:#E3F4EA; --no:#B03A2E;
+  --core:#1E7A46; --extra:#8A6D00; --extra-soft:#FFF4C2; --guided:#6C3483; --guided-soft:#F3E8F8;
+  --font-body:"Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  --font-mono:"JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#5FD0CD; --accent-soft:#16302F; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; --guided:#D2A6E6; --guided-soft:#2E2236; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#5FD0CD; --accent-soft:#16302F; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; --guided:#D2A6E6; --guided-soft:#2E2236; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:18px;line-height:1.6;margin:0}
+.wrap{max-width:800px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:22px}
+h1{font-size:2rem;line-height:1.2;margin:0;text-wrap:balance}
+h2{font-size:1.35rem;margin:0;text-wrap:balance}
+h3{font-size:1.1rem;margin:0}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+code,.f{font-family:var(--font-mono);font-size:.92em;background:var(--code-bg);padding:2px 7px;border-radius:5px;white-space:nowrap}
+.f{white-space:normal;word-break:break-all}
+kbd{font-family:var(--font-mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:3px;border-radius:5px;padding:0 6px;background:var(--surface)}
+.top{display:flex;flex-direction:column;gap:10px}
+.pages{display:flex;flex-wrap:wrap;gap:8px;font-size:.95rem}
+.pages a,.pages span{padding:2px 10px;border-radius:20px;border:1px solid var(--line);text-decoration:none}
+.pages span{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.progress{display:flex;align-items:center;gap:12px;font-weight:700}
+.bar{flex:1;height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.story{background:var(--accent-soft);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.rules{display:flex;flex-direction:column;gap:6px;margin:0;padding-left:22px}
+.tablebox{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--code-bg)}
+td.l{font-family:var(--font-mono);font-weight:700;width:3.2em;text-align:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:16px}
+.card.done{border-color:var(--ok)}
+.card-head{display:flex;flex-direction:column;gap:4px}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:20px;white-space:nowrap}
+.tag.core{background:var(--ok-soft);color:var(--core)}
+.tag.extra{background:var(--extra-soft);color:var(--extra)}
+.tag.guided{background:var(--guided-soft);color:var(--guided)}
+.q{font-size:1.1rem;font-weight:700}
+.why{color:var(--muted)}
+.task{border-top:2px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:12px}
+.task-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nudge{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;padding:8px 12px;font-size:.97rem}
+.nudge b{display:block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.nudge ol{margin:4px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.answers{display:flex;flex-direction:column;gap:10px;background:var(--code-bg);border-radius:10px;padding:14px}
+.ans{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ans label{flex:1 1 260px;font-weight:700}
+.ans input,.ans select{font:inherit;padding:6px 10px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.ans input{width:9.5em}
+.ans select{max-width:100%}
+.ans button,.donebtn,.dl{font:inherit;font-weight:700;padding:6px 14px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer;text-decoration:none;display:inline-block}
+.ans button:hover,.donebtn:hover,.dl:hover{background:var(--accent-soft)}
+.fb{flex-basis:100%;font-weight:700;font-size:.95rem}
+.fb:empty{display:none}
+.fb.yes{color:var(--ok)} .fb.no{color:var(--no)}
+details{border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+details>summary{cursor:pointer;padding:10px 14px;font-weight:700;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ ";color:var(--accent)}
+details[open]>summary::before{content:"▾ "}
+details>div{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px}
+details.sol>summary{color:var(--accent)}
+.hints{display:flex;flex-direction:column;gap:8px}
+.warn{border-left:4px solid var(--accent);padding:4px 0 4px 12px;font-size:.97rem;display:flex;flex-direction:column;gap:6px}
+.donebtn{align-self:flex-start}
+.donebtn.on{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.shot{border:2px dashed var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.shot.has{border-style:solid;border-color:var(--ok)}
+.shot b{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.shot .what{font-size:.97rem}
+.drop{border-radius:8px;background:var(--code-bg);padding:14px;text-align:center;cursor:pointer;font-weight:700;color:var(--muted)}
+.drop:focus-visible,.drop.armed{outline:3px solid var(--accent);outline-offset:2px;color:var(--fg)}
+.shot-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.shot input[type=file]{font:inherit;font-size:.9rem;max-width:100%}
+.shot img{max-width:100%;border:1px solid var(--line);border-radius:6px}
+.shot .clear{font:inherit;font-weight:700;padding:4px 12px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer}
+.shot .note{font-size:.85rem;color:var(--muted)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:480px){body{font-size:17px}h1{font-size:1.6rem}.ans input{width:100%}}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">CAP1788 · Part 1 Review · Page 1 of 3 · Lectures 1 and 2</div>
+  <h1>Sunshine Paws Rescue: Review 1</h1>
+  <nav class="pages" aria-label="Review pages"><span>Review 1</span> <a href="../review-2/">Review 2</a> <a href="../review-3/">Review 3</a></nav>
+  <div class="progress"><span id="ptext">0 of 3 exercises done</span><div class="bar"><span id="pbar"></span></div></div>
+</header>
+
+<section class="story">
+  <p><strong>The story:</strong> Sunshine Paws Rescue finds homes for pets at 5 adoption sites around Miami-Dade. The director, Ms. Yolanda, sent us every adoption from January to September 2026. One row is one adoption.</p>
+  <p>Her volunteers typed the records by hand, so the file has a few problems. Over three reviews we explore it, clean it, and answer her questions with every skill from Lectures 1 to 6.</p>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>Before you start</h2>
+  <div class="warn"><p>Download the data: <a class="dl" href="sunshine_adoptions.csv" download>sunshine_adoptions.csv</a>. Open it from Downloads. Then <strong>File → Save As → Browse → Desktop</strong>, name it <code>Sunshine-YourLastName</code>, type <strong>Excel Workbook (*.xlsx)</strong>. We use this same file for all three reviews.</p><p>Save often: <kbd>Ctrl</kbd> + <kbd>S</kbd>.</p></div>
+  <h2 style="margin-top:6px">How to use this page</h2>
+  <ul class="rules">
+    <li>Each task tells you the goal and the question. It does <strong>not</strong> tell you every click. You know these tools.</li>
+    <li>Read the <strong>Nudge</strong> first. Still stuck? Open <strong>Hint 1</strong> (the tool), then <strong>Hint 2</strong> (the key step). The <strong>Solution</strong> is last. Try first.</li>
+    <li><strong>GUIDED</strong> tasks show the first few clicks. You finish the rest.</li>
+    <li>Type your answer and click <strong>Check</strong>. <strong>CORE</strong> tasks first. <strong>EXTRA</strong> tasks if you have time.</li>
+    <li>Your checkmarks save on this computer.</li>
+    <li><strong>Screenshot boxes:</strong> press <kbd>Windows</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>, drag a box around your work, then click the screenshot box on this page and press <kbd>Ctrl</kbd> + <kbd>V</kbd>. Your screenshots stay on this computer.</li>
+  </ul>
+  <div class="warn"><p>Your answers go on the sheets named in each task: <strong>Supplier</strong>, <strong>Adoptions</strong> (cells L1 to O1 only), and <strong>Counts</strong>.</p></div>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>The columns in the file</h2>
+  <div class="tablebox"><table>
+    <tr><th>Col</th><th>Name</th><th>What it means</th></tr>
+    <tr><td class="l">A</td><td>Adoption ID</td><td>The adoption's number, like 70001</td></tr>
+    <tr><td class="l">B</td><td>Adoption Date</td><td>The day the pet went home</td></tr>
+    <tr><td class="l">C</td><td>Shelter</td><td>Doral, Hialeah, Homestead, Little Haiti, or Miami Gardens</td></tr>
+    <tr><td class="l">D</td><td>Pet Code</td><td>Two codes in one cell: species, a dash, then size. <code>DOG-M</code> = dog, medium. <code>GP-S</code> = guinea pig, small.</td></tr>
+    <tr><td class="l">E</td><td>Age (yrs)</td><td>Age in whole years. 0 means under 1 year old.</td></tr>
+    <tr><td class="l">F</td><td>Weight (lb)</td><td>Weight in pounds</td></tr>
+    <tr><td class="l">G</td><td>Days in Shelter</td><td>Days from arrival to adoption</td></tr>
+    <tr><td class="l">H</td><td>Adoption Fee</td><td>What the family paid, in dollars</td></tr>
+  </table></div>
+  <div class="tablebox"><table>
+    <tr><th>Species codes</th><th>Size codes</th></tr>
+    <tr><td><code>DOG</code> dog · <code>CAT</code> cat · <code>RAB</code> rabbit · <code>GP</code> guinea pig · <code>BRD</code> bird</td><td><code>S</code> small · <code>M</code> medium · <code>L</code> large · <code>XL</code> extra large</td></tr>
+  </table></div>
+</section>
+
+<!-- ============ EXERCISE 1 ============ -->
+<section class="card" data-card="ex1">
+  <div class="card-head"><div class="eyebrow">Exercise 1 · Lectures 1 and 2 · Sheet: Supplier</div><h2>Pick the pet food supplier</h2></div>
+  <p class="q">Question: Which pet food supplier gives Sunshine Paws the best value?</p>
+  <p class="why">Ms. Yolanda got prices from 4 food suppliers. She wants the best deal, but she also cares about quality and fast delivery.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Task 1 · Build the supplier table</h3><span class="tag core">CORE</span></div>
+    <p>Insert a new sheet and name it <code>Supplier</code>. Type this table into <code>A1:E5</code> (row 1 is the header). Then format it: row 1 <strong>bold</strong> with a fill color, <strong>All Borders</strong> on <code>A1:E5</code>, <code>C2:C5</code> as <strong>Currency</strong>, and AutoFit the columns.<div class="tablebox"><table><tr><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th></tr><tr><td>Supplier</td><td>Bag Size (lb)</td><td>Price per Bag</td><td>Rating</td><td>Delivery Days</td></tr><tr><td>Gator Chow</td><td>30</td><td>42.00</td><td>4.1</td><td>3</td></tr><tr><td>Palmetto Pet Supply</td><td>40</td><td>54.00</td><td>4.6</td><td>5</td></tr><tr><td>Biscayne Bites</td><td>25</td><td>31.25</td><td>3.9</td><td>2</td></tr><tr><td>Everglades Feed Co.</td><td>50</td><td>67.50</td><td>4.4</td><td>7</td></tr></table></div></p>
+    <div class="nudge"><b>Nudge</b>Type everything first. Format second. Every format button you need is on the Home tab.</div>
+    <div class="answers"><div class="ans" data-answer="67.5"><label for="ex1t1a1">What does C5 show after you format it as Currency?</label><input id="ex1t1a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>New sheet: the <strong>+</strong> next to the sheet tabs. Rename: double-click the tab. Formats on <strong>Home</strong>: Bold (<strong>B</strong>), Fill Color (paint bucket), Borders (the square grid arrow), the Number Format box (it says General). AutoFit: double-click the line between two column letters.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Select <code>A1:E1</code>, then Bold and Fill Color. Select <code>A1:E5</code>, then Borders arrow → <strong>All Borders</strong>. Select <code>C2:C5</code>, then Number Format box → <strong>Currency</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><code>C5</code> shows <strong>$67.50</strong>. Your table has a shaded bold header, lines around every cell, and dollar signs in column C.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex1t1"><b>Your screenshot</b><p class="what">Take a screenshot of the <strong>Supplier</strong> sheet showing your formatted table in A1:E5.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 1">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex1t1f">Or pick the file:</label><input id="ex1t1f" type="file" accept="image/*"></div><img alt="Your screenshot for task 1" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 2 · Price per pound</h3><span class="tag core">CORE</span></div>
+    <p>In <code>F1</code> type <code>Price per lb</code>. In <code>F2</code> write a formula that divides the price of the bag by its size. Copy it down to <code>F5</code> with the Fill Handle. Format <code>F2:F5</code> as Currency.</p>
+    <div class="nudge"><b>Nudge</b>Price per pound = price ÷ pounds. Every formula starts with an equal sign.</div>
+    <div class="answers"><div class="ans" data-answer="biscayne bites|biscayne"><label for="ex1t2a1">Which supplier is the cheapest per pound?</label><input id="ex1t2a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="1.25"><label for="ex1t2a2">What is that supplier's price per lb?</label><input id="ex1t2a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Use the <code>/</code> sign to divide. The <strong>Fill Handle</strong> is the small square at the bottom right of a selected cell.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><span class="f">=C2/B2</span>, then drag the Fill Handle from <code>F2</code> down to <code>F5</code> (or double-click it).</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><span class="f">=C2/B2</span> gives $1.40, $1.35, $1.25, $1.35. <strong>Biscayne Bites</strong> is cheapest at <strong>$1.25</strong> per lb. But it also has the lowest rating (3.9). Cheapest is not always the best value.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex1t2"><b>Your screenshot</b><p class="what">Take a screenshot of the <strong>Supplier</strong> sheet with Price per lb in F1:F5. Click F2 first so the formula shows in the formula bar.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 2">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex1t2f">Or pick the file:</label><input id="ex1t2f" type="file" accept="image/*"></div><img alt="Your screenshot for task 2" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 3 · Average and a chart</h3><span class="tag core">CORE</span></div>
+    <p>In <code>A6</code> type <code>Average</code>. In <code>D6</code> and <code>F6</code>, use the <strong>AutoSum</strong> button to get the average. Then make a <strong>Clustered Column</strong> chart that shows each Supplier and its Price per lb (<code>A1:A5</code> and <code>F1:F5</code>). Title it <code>Price per Pound by Supplier</code>.</p>
+    <div class="nudge"><b>Nudge</b>AutoSum has a small arrow next to it. For the chart, select both columns first, then use Recommended Charts.</div>
+    <div class="answers"><div class="ans" data-answer="4.25"><label for="ex1t3a1">Average rating in D6:</label><input id="ex1t3a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="1.3375" data-tol="0.006"><label for="ex1t3a2">Average price per lb in F6 (2 decimals):</label><input id="ex1t3a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p><strong>Home → AutoSum arrow → Average</strong>. For the chart: <strong>Insert → Recommended Charts</strong>. Hold <kbd>Ctrl</kbd> to select two columns that are not next to each other.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Click <code>D6</code> → AutoSum arrow → Average → check it says <code>=AVERAGE(D2:D5)</code> → <kbd>Enter</kbd>. Select <code>A1:A5</code>, hold <kbd>Ctrl</kbd>, select <code>F1:F5</code> → Insert → Recommended Charts → Clustered Column → OK. Click the title and type.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><code>D6</code> = <span class="f">=AVERAGE(D2:D5)</span> = <strong>4.25</strong>. <code>F6</code> = <span class="f">=AVERAGE(F2:F5)</span> = <strong>$1.34</strong> (the exact value is 1.3375). On the chart, Biscayne Bites has the shortest column.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex1t3"><b>Your screenshot</b><p class="what">Take a screenshot of the <strong>Supplier</strong> sheet with row 6 (averages) and your titled chart.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 3">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex1t3f">Or pick the file:</label><input id="ex1t3f" type="file" accept="image/*"></div><img alt="Your screenshot for task 3" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 4 · Concept check: kinds of analytics</h3><span class="tag core">CORE</span></div>
+    <p>Ms. Yolanda has questions. Pick the right label for each one.</p>
+    <div class="nudge"><b>Nudge</b>Ask yourself: is it about the past, the future, or what we should do?</div>
+    <div class="answers"><div class="ans" data-answer="descriptive"><label for="ex1t4a1">"Which supplier was the cheapest last month?"</label><select id="ex1t4a1"><option value="">Choose…</option><option value="descriptive">Descriptive</option><option value="predictive">Predictive</option><option value="prescriptive">Prescriptive</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="predictive"><label for="ex1t4a2">"How many bags of food will we need in December?"</label><select id="ex1t4a2"><option value="">Choose…</option><option value="descriptive">Descriptive</option><option value="predictive">Predictive</option><option value="prescriptive">Prescriptive</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="prescriptive"><label for="ex1t4a3">"Which supplier should we sign a one-year contract with?"</label><select id="ex1t4a3"><option value="">Choose…</option><option value="descriptive">Descriptive</option><option value="predictive">Predictive</option><option value="prescriptive">Prescriptive</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="business intelligence"><label for="ex1t4a4">A team builds a weekly dashboard so managers can see how many pets were adopted.</label><select id="ex1t4a4"><option value="">Choose…</option><option value="data science">Data Science</option><option value="business intelligence">Business Intelligence</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="data science"><label for="ex1t4a5">A team builds a machine learning model that predicts which pets will be adopted fast.</label><select id="ex1t4a5"><option value="">Choose…</option><option value="data science">Data Science</option><option value="business intelligence">Business Intelligence</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p><strong>Descriptive</strong> = what happened. <strong>Predictive</strong> = what will happen. <strong>Prescriptive</strong> = what should we do.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><strong>Business Intelligence</strong> = reports and dashboards about what is happening now. <strong>Data Science</strong> = advanced methods, like machine learning, programming, and models.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Descriptive · Predictive · Prescriptive · Business Intelligence · Data Science. Remember the minivan exercise: comparing today's prices is descriptive, guessing resale value in 5 years is predictive, and picking the van is prescriptive.</p></div></details>
+    </div>
+    
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 5 · Data, information, knowledge (and a PDF)</h3><span class="tag extra">EXTRA</span></div>
+    <p>Label each sentence. Then save the <strong>Supplier</strong> sheet as a PDF on your Desktop.</p>
+    <div class="nudge"><b>Nudge</b>Data is raw. Information has meaning. Knowledge is what we learned from experience.</div>
+    <div class="answers"><div class="ans" data-answer="data"><label for="ex1t5a1">The numbers 25 and 31.25 typed in B4 and C4.</label><select id="ex1t5a1"><option value="">Choose…</option><option value="data">Data</option><option value="information">Information</option><option value="knowledge">Knowledge</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="information"><label for="ex1t5a2">"Biscayne Bites costs $1.25 per pound, the lowest price."</label><select id="ex1t5a2"><option value="">Choose…</option><option value="data">Data</option><option value="information">Information</option><option value="knowledge">Knowledge</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="knowledge"><label for="ex1t5a3">"Last year our dogs refused the cheapest food, so price alone is not the best choice."</label><select id="ex1t5a3"><option value="">Choose…</option><option value="data">Data</option><option value="information">Information</option><option value="knowledge">Knowledge</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>PDF: <strong>File → Save As → Browse</strong>, then change <strong>Save as type</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Save as type: <strong>PDF (*.pdf)</strong> → Desktop → Save. Excel saves the sheet you are on.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Data · Information · Knowledge. The PDF shows your Supplier table and chart.</p></div></details>
+    </div>
+    
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<!-- ============ EXERCISE 2 ============ -->
+<section class="card" data-card="ex2">
+  <div class="card-head"><div class="eyebrow">Exercise 2 · Lecture 2 · Sheet: Adoptions</div><h2>First look at the adoption records</h2></div>
+  <p class="q">Question: What does this year of adoptions look like at a glance?</p>
+  <p class="why">Now open the real file. Ms. Yolanda says it holds 500 adoptions from January to September 2026.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Task 1 · Count the rows and tidy the columns</h3><span class="tag core">CORE</span></div>
+    <p>Go to the sheet named <code>sunshine_adoptions</code> and rename the tab <code>Adoptions</code>. How many rows of data are there (not counting the header)? Then AutoFit columns <code>A:H</code>, format column <code>B</code> as <strong>Short Date</strong>, and column <code>H</code> as <strong>Currency</strong>.</p>
+    <div class="nudge"><b>Nudge</b><kbd>Ctrl</kbd> + <kbd>End</kbd> jumps to the last cell with data. Look at its row number.</div>
+    <div class="answers"><div class="ans" data-answer="502"><label for="ex2t1a1">Row number of the last row:</label><input id="ex2t1a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="501"><label for="ex2t1a2">Rows of data (adoptions):</label><input id="ex2t1a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Rename: double-click the tab. Last row: press <kbd>Ctrl</kbd> + <kbd>End</kbd>. Formats: Home → Number Format box.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><kbd>Ctrl</kbd> + <kbd>End</kbd> lands on <code>H502</code>. Row 1 is the header, so subtract 1.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Last row <strong>502</strong>, so <strong>501</strong> adoptions. Ms. Yolanda said 500. Keep that in mind. We find out why on Review 2.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t1"><b>Your screenshot</b><p class="what">Take a screenshot of the top of the <strong>Adoptions</strong> sheet: the tab name, dates in column B, and dollar signs in column H.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 1">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t1f">Or pick the file:</label><input id="ex2t1f" type="file" accept="image/*"></div><img alt="Your screenshot for task 1" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 2 · Two numbers for Ms. Yolanda</h3><span class="tag core">CORE</span></div>
+    <p>In <code>L1</code> type <code>Total fees</code>. In <code>M1</code>, add up all the adoption fees in <code>H2:H502</code>. In <code>N1</code> type <code>Avg days</code>. In <code>O1</code>, find the average of <code>G2:G502</code>.</p>
+    <div class="nudge"><b>Nudge</b>We put answers in row 1, far to the right. Filters never hide row 1.</div>
+    <div class="answers"><div class="ans" data-answer="48502"><label for="ex2t2a1">Total fees (M1):</label><input id="ex2t2a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="41.4032" data-tol="0.006"><label for="ex2t2a2">Average days in shelter (O1), 2 decimals:</label><input id="ex2t2a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>SUM adds. AVERAGE finds the mean. Type the formula with the range.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><span class="f">=SUM(H2:H502)</span> and <span class="f">=AVERAGE(G2:G502)</span></p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Total fees <strong>$48,502</strong>. Average wait <strong>41.40</strong> days.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t2"><b>Your screenshot</b><p class="what">Take a screenshot of <strong>Adoptions</strong> cells L1 to O1. Click M1 first so the formula shows.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 2">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t2f">Or pick the file:</label><input id="ex2t2f" type="file" accept="image/*"></div><img alt="Your screenshot for task 2" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 3 · Sort and filter</h3><span class="tag core">CORE</span></div>
+    <p>Sort column <code>G</code> (Days in Shelter) from largest to smallest. What is the longest wait, and how many pets waited that long? Then sort column <code>A</code> smallest to largest to put the file back in order. Next, turn on <strong>Filter</strong> and show only <code>Homestead</code> in column <code>C</code>.</p>
+    <div class="nudge"><b>Nudge</b>Click one cell in the data first. Sort and Filter are both on the Data tab.</div>
+    <div class="answers"><div class="ans" data-answer="200"><label for="ex2t3a1">Longest wait (days):</label><input id="ex2t3a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="4"><label for="ex2t3a2">How many pets waited that long?</label><input id="ex2t3a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="84"><label for="ex2t3a3">Homestead: how many records found?</label><input id="ex2t3a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="8"><label for="ex2t3a4">Open the Shelter filter list. How many different names are in it?</label><input id="ex2t3a4" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Click a cell in <code>G</code> → <strong>Data → Sort Largest to Smallest</strong> (Z→A). <strong>Data → Filter</strong> adds arrows to row 1. The count shows at the bottom left: "__ of 501 records found."</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Arrow in <code>C1</code> → uncheck <strong>(Select All)</strong> → check <strong>Homestead</strong> → OK. In that same list, read every name slowly. Some look alike but are not the same.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Longest wait <strong>200</strong> days, and <strong>4</strong> pets tie (IDs 70267, 70309, 70326, 70366). Homestead: <strong>84 of 501</strong>. The list has <strong>8</strong> names: " Doral" (with a space), Doral, Hialeah, Homestead, Little Haiti, Little Hati, Miami Gardens, Miami Gdns. The rescue has only 5 sites. We clean this up in Review 3. Clear the filter when you're done.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t3"><b>Your screenshot</b><p class="what">Take a screenshot of <strong>Adoptions</strong> filtered to Homestead, including the "84 of 501 records found" message at the bottom left.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 3">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t3f">Or pick the file:</label><input id="ex2t3f" type="file" accept="image/*"></div><img alt="Your screenshot for task 3" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 4 · Concept check: what kind of data is this?</h3><span class="tag core">CORE</span></div>
+    <p>Answer about the whole Adoptions file.</p>
+    <div class="nudge"><b>Nudge</b>Structured means rows and columns. Time series means one thing tracked over time.</div>
+    <div class="answers"><div class="ans" data-answer="structured"><label for="ex2t4a1">Is this file structured or unstructured data?</label><select id="ex2t4a1"><option value="">Choose…</option><option value="structured">Structured</option><option value="unstructured">Unstructured</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="cross-sectional"><label for="ex2t4a2">Each row is one adoption, and we look at all of them together. This file is:</label><select id="ex2t4a2"><option value="">Choose…</option><option value="cross-sectional">Cross-sectional</option><option value="time series">Time series</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="sample"><label for="ex2t4a3">Our question is about every pet adopted in all of South Florida. This file is a:</label><select id="ex2t4a3"><option value="">Choose…</option><option value="population">Population</option><option value="sample">Sample</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="population"><label for="ex2t4a4">Our question is only about Sunshine Paws in 2026. This file is the:</label><select id="ex2t4a4"><option value="">Choose…</option><option value="population">Population</option><option value="sample">Sample</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="no"><label for="ex2t4a5">Is this file Big Data?</label><select id="ex2t4a5"><option value="">Choose…</option><option value="yes">Yes</option><option value="no">No</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>A date column alone does not make a file a time series. Ask: is the question about change over time?</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Big Data is about Volume, Velocity, and Variety (plus Veracity and Value). 501 rows opens in Excel in one second.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Structured · Cross-sectional · Sample · Population · No. Same file, two answers for population vs sample: it depends on the question.</p></div></details>
+    </div>
+    
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 5 · Ethics</h3><span class="tag extra">EXTRA</span></div>
+    <p>This file has no adopter names, phone numbers, or home addresses. Why do you think Ms. Yolanda left them out?</p>
+    <div class="nudge"><b>Nudge</b>Think about privacy, and about what we actually need to answer her questions.</div>
+    
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Would you want your name and address in a file that gets emailed around?</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Do any of Ms. Yolanda's questions need a person's name?</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Privacy: adopters did not agree to be studied, and the file could be shared or leaked. Also, we only collect what we need. None of her questions need names.</p></div></details>
+    </div>
+    
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<!-- ============ EXERCISE 3 ============ -->
+<section class="card" data-card="ex3">
+  <div class="card-head"><div class="eyebrow">Exercise 3 · Lecture 2 · Sheet: Counts</div><h2>Where and when do adoptions happen?</h2></div>
+  <p class="q">Question: Which shelter is busiest, and which month brings in the most fees?</p>
+  <p class="why">Two small tables, two charts. One looks across shelters. One looks across time.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Task 1 · Count each shelter</h3><span class="tag core">CORE</span></div>
+    <p>Insert a sheet named <code>Counts</code>. Type <code>Shelter</code> in <code>A1</code> and <code>Adoptions</code> in <code>B1</code>. Type the 5 shelter names in <code>A2:A6</code>: Doral, Hialeah, Homestead, Little Haiti, Miami Gardens. Use the Filter on <code>Adoptions</code> column <code>C</code> to count each one. Type each count in column <code>B</code>.</p>
+    <div class="nudge"><b>Nudge</b>Check only one exact name at a time. The count is at the bottom left of Excel.</div>
+    <div class="answers"><div class="ans" data-answer="102"><label for="ex3t1a1">Doral:</label><input id="ex3t1a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="119"><label for="ex3t1a2">Hialeah:</label><input id="ex3t1a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="84"><label for="ex3t1a3">Homestead:</label><input id="ex3t1a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="87"><label for="ex3t1a4">Little Haiti:</label><input id="ex3t1a4" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="97"><label for="ex3t1a5">Miami Gardens:</label><input id="ex3t1a5" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>On Adoptions: arrow in <code>C1</code> → uncheck <strong>(Select All)</strong> → check one name → OK → read "__ of 501 records found."</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Skip " Doral" (with a space), Little Hati, and Miami Gdns for now. Count only the 5 correct names.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Doral <strong>102</strong> · Hialeah <strong>119</strong> · Homestead <strong>84</strong> · Little Haiti <strong>87</strong> · Miami Gardens <strong>97</strong>. These add up to 489, not 501. The other 12 rows hide under the misspelled names.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex3t1"><b>Your screenshot</b><p class="what">Take a screenshot of the <strong>Counts</strong> sheet, A1:B6.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 1">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t1f">Or pick the file:</label><input id="ex3t1f" type="file" accept="image/*"></div><img alt="Your screenshot for task 1" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 2 · Column chart by shelter</h3><span class="tag core">CORE</span></div>
+    <p>Make a <strong>Clustered Column</strong> chart from <code>Counts!A1:B6</code>. Title it <code>Adoptions by Shelter</code>.</p>
+    <div class="nudge"><b>Nudge</b>Select the data first, then Insert → Recommended Charts.</div>
+    <div class="answers"><div class="ans" data-answer="hialeah"><label for="ex3t2a1">Which shelter has the tallest column?</label><input id="ex3t2a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Select <code>A1:B6</code> → <strong>Insert → Recommended Charts</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Pick <strong>Clustered Column</strong> → OK. Click the chart title and type the new title.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>Hialeah</strong> (119 adoptions). Homestead is the shortest column.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex3t2"><b>Your screenshot</b><p class="what">Take a screenshot of your <strong>Adoptions by Shelter</strong> column chart.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 2">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t2f">Or pick the file:</label><input id="ex3t2f" type="file" accept="image/*"></div><img alt="Your screenshot for task 2" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 3 · Fees by month</h3><span class="tag core">CORE</span></div>
+    <p>In <code>D1</code> type <code>Month</code> and in <code>E1</code> type <code>Fees</code>. In <code>D2:D10</code>, type the first day of each month, from <code>1/1/2026</code> to <code>9/1/2026</code>. For each month, filter <code>Adoptions</code> column <code>B</code> to that month, click the column letter <code>H</code>, and read the <strong>Sum</strong> at the bottom right of Excel. Type it in column <code>E</code>.</p>
+    <div class="nudge"><b>Nudge</b>In the date filter list, dates are grouped by year, then month. Click the + next to 2026.</div>
+    <div class="answers"><div class="ans" data-answer="4845"><label for="ex3t3a1">January fees:</label><input id="ex3t3a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="6403"><label for="ex3t3a2">June fees:</label><input id="ex3t3a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="5933"><label for="ex3t3a3">September fees:</label><input id="ex3t3a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>When rows are filtered, the Sum at the bottom right only adds the rows you can see.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Example for March: arrow in <code>B1</code> → uncheck (Select All) → + next to 2026 → check March → OK → click letter H → bottom right says Sum: 4,905.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><div class="tablebox"><table><tr><th>Month</th><th>Fees</th></tr><tr><td>January</td><td>$4,845</td></tr><tr><td>February</td><td>$3,927</td></tr><tr><td>March</td><td>$4,905</td></tr><tr><td>April</td><td>$5,277</td></tr><tr><td>May</td><td>$6,211</td></tr><tr><td>June</td><td>$6,403</td></tr><tr><td>July</td><td>$5,661</td></tr><tr><td>August</td><td>$5,340</td></tr><tr><td>September</td><td>$5,933</td></tr></table></div></div></details>
+    </div>
+    <div class="shot" data-shot="ex3t3"><b>Your screenshot</b><p class="what">Take a screenshot of the <strong>Counts</strong> sheet, D1:E10.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 3">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t3f">Or pick the file:</label><input id="ex3t3f" type="file" accept="image/*"></div><img alt="Your screenshot for task 3" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 4 · Line chart with formatted axes</h3><span class="tag core">CORE</span></div>
+    <p>Make a <strong>Line</strong> chart from <code>D1:E10</code>. Title it <code>Adoption Fees by Month</code>. Format the horizontal axis numbers as <code>mmm</code> (Jan, Feb, Mar) and the vertical axis as <strong>Currency with 0 decimal places</strong>.</p>
+    <div class="nudge"><b>Nudge</b>Right-click an axis → Format Axis. The Number section is at the very bottom of the panel.</div>
+    <div class="answers"><div class="ans" data-answer="june|jun"><label for="ex3t4a1">Which month brought in the most fees?</label><input id="ex3t4a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="february|feb"><label for="ex3t4a2">Which month brought in the least?</label><input id="ex3t4a2" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="month and fees (d:e)"><label for="ex3t4a3">Which of your two tables on Counts is a time series?</label><select id="ex3t4a3"><option value="">Choose…</option><option value="shelter and adoptions (a:b)">Shelter and Adoptions (A:B)</option><option value="month and fees (d:e)">Month and Fees (D:E)</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Format Axis → Axis Options (bar chart icon) → <strong>Number</strong>. Horizontal: Category <strong>Date</strong> or <strong>Custom</strong>. Vertical: Category <strong>Currency</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Horizontal: type <code>mmm</code> in Format Code → <strong>Add</strong>. Vertical: Currency, Decimal places <code>0</code>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Most: <strong>June</strong> ($6,403). Least: <strong>February</strong> ($3,927). D:E tracks one thing over time, so it is a time series. A line shows change over time. Columns compare categories.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex3t4"><b>Your screenshot</b><p class="what">Take a screenshot of your <strong>Adoption Fees by Month</strong> line chart with Jan, Feb, Mar on the bottom and $ on the side.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 4">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t4f">Or pick the file:</label><input id="ex3t4f" type="file" accept="image/*"></div><img alt="Your screenshot for task 4" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var KEY="cap1788-review-1-v1", state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  var cards=[].slice.call(document.querySelectorAll("[data-card]"));
+  function paint(){
+    var n=0;
+    cards.forEach(function(c){
+      var on=!!state[c.dataset.card], b=c.querySelector(".donebtn");
+      c.classList.toggle("done",on); b.classList.toggle("on",on);
+      b.textContent=on?"✓ Done (click to undo)":"I finished this exercise";
+      if(on)n++;
+    });
+    document.getElementById("ptext").textContent=n+" of "+cards.length+" exercises done";
+    document.getElementById("pbar").style.width=(100*n/cards.length)+"%";
+  }
+  cards.forEach(function(c){
+    c.querySelector(".donebtn").addEventListener("click",function(){state[c.dataset.card]=!state[c.dataset.card];save();paint();});
+  });
+  [].slice.call(document.querySelectorAll(".ans")).forEach(function(row){
+    var input=row.querySelector("input,select"), fb=row.querySelector(".fb"),
+        ok=row.dataset.answer.split("|"), tol=parseFloat(row.dataset.tol||"0");
+    function check(){
+      var raw=String(input.value||"").trim().toLowerCase().replace(/\s+/g," ");
+      if(raw===""){fb.className="fb no";fb.textContent=input.tagName==="SELECT"?"Pick an answer first.":"Type an answer first.";return;}
+      var v=raw.replace(/[,$%\s]/g,"");
+      var good=ok.some(function(a){
+        var n=parseFloat(a), x=parseFloat(v);
+        if(input.tagName!=="SELECT" && !isNaN(n) && /^-?\d*\.?\d+$/.test(a) && /^-?\d*\.?\d+$/.test(v)) return Math.abs(x-n)<=(tol||1e-9);
+        return raw===a;
+      });
+      if(good){fb.className="fb yes";fb.textContent="✓ Correct!";}
+      else{fb.className="fb no";fb.textContent="Not yet. Check your work, then open Hint 1.";}
+    }
+    row.querySelector("button").addEventListener("click",check);
+    input.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  });
+
+  // ---- screenshots: kept in this browser (IndexedDB), keyed by page + task ----
+  var PAGEKEY="cap1788-review-1-v1", dbp=null, active=null;
+  function db(){
+    if(dbp) return dbp;
+    dbp=new Promise(function(res){
+      try{
+        var r=indexedDB.open("cap1788-shots",1);
+        r.onupgradeneeded=function(){r.result.createObjectStore("shots");};
+        r.onsuccess=function(){res(r.result);};
+        r.onerror=function(){res(null);};
+      }catch(e){res(null);}
+    });
+    return dbp;
+  }
+  function put(k,v){return db().then(function(d){if(!d)return;try{var tx=d.transaction("shots","readwrite");v===null?tx.objectStore("shots").delete(k):tx.objectStore("shots").put(v,k);}catch(e){}});}
+  function get(k){return db().then(function(d){return new Promise(function(res){if(!d)return res(null);try{var q=d.transaction("shots").objectStore("shots").get(k);q.onsuccess=function(){res(q.result||null);};q.onerror=function(){res(null);};}catch(e){res(null);}});});}
+  function shrink(file){
+    return new Promise(function(res,rej){
+      var fr=new FileReader();
+      fr.onload=function(){
+        var im=new Image();
+        im.onload=function(){
+          var w=im.naturalWidth,h=im.naturalHeight,max=1600;
+          if(w>max){h=Math.round(h*max/w);w=max;}
+          var c=document.createElement("canvas");c.width=w;c.height=h;
+          c.getContext("2d").drawImage(im,0,0,w,h);
+          try{res(c.toDataURL("image/jpeg",0.85));}catch(e){res(fr.result);}
+        };
+        im.onerror=rej; im.src=fr.result;
+      };
+      fr.onerror=rej; fr.readAsDataURL(file);
+    });
+  }
+  function show(box,url){
+    var img=box.querySelector("img"), clr=box.querySelector(".clear"), drop=box.querySelector(".drop");
+    if(url){img.src=url;img.hidden=false;clr.hidden=false;box.classList.add("has");drop.innerHTML="Screenshot saved. Click here and press <kbd>Ctrl</kbd> + <kbd>V</kbd> to replace it.";}
+    else{img.removeAttribute("src");img.hidden=true;clr.hidden=true;box.classList.remove("has");drop.innerHTML="Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd>";}
+  }
+  function take(box,file){
+    if(!file||!/^image\//.test(file.type))return;
+    shrink(file).then(function(url){show(box,url);put(PAGEKEY+":"+box.dataset.shot,url);});
+  }
+  [].slice.call(document.querySelectorAll(".shot")).forEach(function(box){
+    var drop=box.querySelector(".drop");
+    function arm(){if(active)active.querySelector(".drop").classList.remove("armed");active=box;drop.classList.add("armed");}
+    drop.addEventListener("click",function(){drop.focus();arm();});
+    drop.addEventListener("focus",arm);
+    box.querySelector("input[type=file]").addEventListener("change",function(e){take(box,e.target.files[0]);e.target.value="";});
+    box.querySelector(".clear").addEventListener("click",function(){show(box,null);put(PAGEKEY+":"+box.dataset.shot,null);});
+    box.addEventListener("dragover",function(e){e.preventDefault();});
+    box.addEventListener("drop",function(e){e.preventDefault();if(e.dataTransfer&&e.dataTransfer.files[0])take(box,e.dataTransfer.files[0]);});
+    get(PAGEKEY+":"+box.dataset.shot).then(function(url){if(url)show(box,url);});
+  });
+  document.addEventListener("paste",function(e){
+    if(!active||!e.clipboardData||!active.contains(document.activeElement))return;
+    var items=[].slice.call(e.clipboardData.items||[]), it=items.filter(function(x){return x.type&&x.type.indexOf("image/")===0;})[0];
+    if(!it){active.querySelector(".drop").textContent="No picture on the clipboard. Take the screenshot first (Windows + Shift + S).";return;}
+    e.preventDefault(); take(active,it.getAsFile());
+  });
+  paint();
+})();
+</script>
+</body>
+</html>

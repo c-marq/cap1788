@@ -1,0 +1,36 @@
+{
+  "rescue": "Sunshine Paws Rescue",
+  "updated": "2026-09-30",
+  "codes": [
+    {
+      "code": "DOG",
+      "species": "Dog",
+      "base_fee": "150"
+    },
+    {
+      "code": "CAT",
+      "species": "Cat",
+      "base_fee": "95"
+    },
+    {
+      "code": "RAB",
+      "species": "Rabbit",
+      "base_fee": "60"
+    },
+    {
+      "code": "GP",
+      "species": "Guinea Pig",
+      "base_fee": "30"
+    },
+    {
+      "code": "BRD",
+      "species": "Bird",
+      "base_fee": "40"
+    },
+    {
+      "code": "TRT",
+      "species": "Turtle",
+      "base_fee": "25"
+    }
+  ]
+}

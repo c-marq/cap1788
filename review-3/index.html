@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Sunshine Paws Review 3</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#FAFAF7; --surface:#FFFFFF; --fg:#1F2328; --muted:#5B6168; --line:#E2E1DA;
+  --accent:#A34A12; --accent-soft:#FCEBDD; --code-bg:#F2F1EC;
+  --ok:#1E7A46; --ok-soft:#E3F4EA; --no:#B03A2E;
+  --core:#1E7A46; --extra:#8A6D00; --extra-soft:#FFF4C2; --guided:#6C3483; --guided-soft:#F3E8F8;
+  --font-body:"Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  --font-mono:"JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#F2A66B; --accent-soft:#3A2416; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; --guided:#D2A6E6; --guided-soft:#2E2236; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#F2A66B; --accent-soft:#3A2416; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; --guided:#D2A6E6; --guided-soft:#2E2236; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:18px;line-height:1.6;margin:0}
+.wrap{max-width:800px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:22px}
+h1{font-size:2rem;line-height:1.2;margin:0;text-wrap:balance}
+h2{font-size:1.35rem;margin:0;text-wrap:balance}
+h3{font-size:1.1rem;margin:0}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+code,.f{font-family:var(--font-mono);font-size:.92em;background:var(--code-bg);padding:2px 7px;border-radius:5px;white-space:nowrap}
+.f{white-space:normal;word-break:break-all}
+kbd{font-family:var(--font-mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:3px;border-radius:5px;padding:0 6px;background:var(--surface)}
+.top{display:flex;flex-direction:column;gap:10px}
+.pages{display:flex;flex-wrap:wrap;gap:8px;font-size:.95rem}
+.pages a,.pages span{padding:2px 10px;border-radius:20px;border:1px solid var(--line);text-decoration:none}
+.pages span{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.progress{display:flex;align-items:center;gap:12px;font-weight:700}
+.bar{flex:1;height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.story{background:var(--accent-soft);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.rules{display:flex;flex-direction:column;gap:6px;margin:0;padding-left:22px}
+.tablebox{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--code-bg)}
+td.l{font-family:var(--font-mono);font-weight:700;width:3.2em;text-align:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:16px}
+.card.done{border-color:var(--ok)}
+.card-head{display:flex;flex-direction:column;gap:4px}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:20px;white-space:nowrap}
+.tag.core{background:var(--ok-soft);color:var(--core)}
+.tag.extra{background:var(--extra-soft);color:var(--extra)}
+.tag.guided{background:var(--guided-soft);color:var(--guided)}
+.q{font-size:1.1rem;font-weight:700}
+.why{color:var(--muted)}
+.task{border-top:2px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:12px}
+.task-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nudge{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;padding:8px 12px;font-size:.97rem}
+.nudge b{display:block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.nudge ol{margin:4px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.answers{display:flex;flex-direction:column;gap:10px;background:var(--code-bg);border-radius:10px;padding:14px}
+.ans{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ans label{flex:1 1 260px;font-weight:700}
+.ans input,.ans select{font:inherit;padding:6px 10px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.ans input{width:9.5em}
+.ans select{max-width:100%}
+.ans button,.donebtn,.dl{font:inherit;font-weight:700;padding:6px 14px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer;text-decoration:none;display:inline-block}
+.ans button:hover,.donebtn:hover,.dl:hover{background:var(--accent-soft)}
+.fb{flex-basis:100%;font-weight:700;font-size:.95rem}
+.fb:empty{display:none}
+.fb.yes{color:var(--ok)} .fb.no{color:var(--no)}
+details{border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+details>summary{cursor:pointer;padding:10px 14px;font-weight:700;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ ";color:var(--accent)}
+details[open]>summary::before{content:"▾ "}
+details>div{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px}
+details.sol>summary{color:var(--accent)}
+.hints{display:flex;flex-direction:column;gap:8px}
+.warn{border-left:4px solid var(--accent);padding:4px 0 4px 12px;font-size:.97rem;display:flex;flex-direction:column;gap:6px}
+.donebtn{align-self:flex-start}
+.donebtn.on{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.shot{border:2px dashed var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.shot.has{border-style:solid;border-color:var(--ok)}
+.shot b{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.shot .what{font-size:.97rem}
+.drop{border-radius:8px;background:var(--code-bg);padding:14px;text-align:center;cursor:pointer;font-weight:700;color:var(--muted)}
+.drop:focus-visible,.drop.armed{outline:3px solid var(--accent);outline-offset:2px;color:var(--fg)}
+.shot-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.shot input[type=file]{font:inherit;font-size:.9rem;max-width:100%}
+.shot img{max-width:100%;border:1px solid var(--line);border-radius:6px}
+.shot .clear{font:inherit;font-weight:700;padding:4px 12px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer}
+.shot .note{font-size:.85rem;color:var(--muted)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:480px){body{font-size:17px}h1{font-size:1.6rem}.ans input{width:100%}}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">CAP1788 · Part 1 Review · Page 3 of 3 · Lectures 5 and 6</div>
+  <h1>Sunshine Paws Rescue: Review 3</h1>
+  <nav class="pages" aria-label="Review pages"><a href="../review-1/">Review 1</a> <a href="../review-2/">Review 2</a> <span>Review 3</span></nav>
+  <div class="progress"><span id="ptext">0 of 3 exercises done</span><div class="bar"><span id="pbar"></span></div></div>
+</header>
+
+<section class="story">
+  <p><strong>The story:</strong> Sunshine Paws Rescue finds homes for pets at 5 adoption sites around Miami-Dade. The director, Ms. Yolanda, sent us every adoption from January to September 2026. One row is one adoption.</p>
+  <p>Her volunteers typed the records by hand, so the file has a few problems. Over three reviews we explore it, clean it, and answer her questions with every skill from Lectures 1 to 6.</p>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>Before you start</h2>
+  <div class="warn"><p>Open your file: <strong>File → Open → Recent → Sunshine-YourLastName.xlsx</strong>. You need the <strong>Adoptions</strong> sheet (as a Table) and the <strong>Codes</strong> sheet from Review 2. Missing Codes? Download <a class="dl" href="sunshine_codes.json" download>sunshine_codes.json</a> and do Review 2, Exercise 6, Tasks 2 and 3 first.</p><p>Save often: <kbd>Ctrl</kbd> + <kbd>S</kbd>.</p></div>
+  <h2 style="margin-top:6px">How to use this page</h2>
+  <ul class="rules">
+    <li>Each task tells you the goal and the question. It does <strong>not</strong> tell you every click. You know these tools.</li>
+    <li>Read the <strong>Nudge</strong> first. Still stuck? Open <strong>Hint 1</strong> (the tool), then <strong>Hint 2</strong> (the key step). The <strong>Solution</strong> is last. Try first.</li>
+    <li><strong>GUIDED</strong> tasks show the first few clicks. You finish the rest.</li>
+    <li>Type your answer and click <strong>Check</strong>. <strong>CORE</strong> tasks first. <strong>EXTRA</strong> tasks if you have time.</li>
+    <li>Your checkmarks save on this computer.</li>
+    <li><strong>Screenshot boxes:</strong> press <kbd>Windows</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>, drag a box around your work, then click the screenshot box on this page and press <kbd>Ctrl</kbd> + <kbd>V</kbd>. Your screenshots stay on this computer.</li>
+  </ul>
+  <div class="warn"><p>All of Review 3 happens on the <strong>Clean</strong> sheet (plus one fix on <strong>Codes</strong>). Your answer area on Clean is columns <strong>P:Q</strong>.</p></div>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>The columns in the file</h2>
+  <div class="tablebox"><table>
+    <tr><th>Col</th><th>Name</th><th>What it means</th></tr>
+    <tr><td class="l">A</td><td>Adoption ID</td><td>The adoption's number, like 70001</td></tr>
+    <tr><td class="l">B</td><td>Adoption Date</td><td>The day the pet went home</td></tr>
+    <tr><td class="l">C</td><td>Shelter</td><td>Doral, Hialeah, Homestead, Little Haiti, or Miami Gardens</td></tr>
+    <tr><td class="l">D</td><td>Pet Code</td><td>Two codes in one cell: species, a dash, then size. <code>DOG-M</code> = dog, medium. <code>GP-S</code> = guinea pig, small.</td></tr>
+    <tr><td class="l">E</td><td>Age (yrs)</td><td>Age in whole years. 0 means under 1 year old.</td></tr>
+    <tr><td class="l">F</td><td>Weight (lb)</td><td>Weight in pounds</td></tr>
+    <tr><td class="l">G</td><td>Days in Shelter</td><td>Days from arrival to adoption</td></tr>
+    <tr><td class="l">H</td><td>Adoption Fee</td><td>What the family paid, in dollars</td></tr>
+  </table></div>
+  <div class="tablebox"><table>
+    <tr><th>Species codes</th><th>Size codes</th></tr>
+    <tr><td><code>DOG</code> dog · <code>CAT</code> cat · <code>RAB</code> rabbit · <code>GP</code> guinea pig · <code>BRD</code> bird</td><td><code>S</code> small · <code>M</code> medium · <code>L</code> large · <code>XL</code> extra large</td></tr>
+  </table></div>
+</section>
+
+<!-- ============ EXERCISE 7 ============ -->
+<section class="card" data-card="ex7">
+  <div class="card-head"><div class="eyebrow">Exercise 7 · Lecture 5 · Sheet: Clean</div><h2>Clean the records</h2></div>
+  <p class="q">Question: What's wrong with the data, and how do we fix it before anyone trusts our numbers?</p>
+  <p class="why">We found the problems in Reviews 1 and 2. Now we fix them on a copy, so the original stays safe.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Task 1 · Make a Clean copy and count blanks</h3><span class="tag core">CORE</span></div>
+    <p>Right-click the <strong>Adoptions</strong> tab → <strong>Move or Copy</strong> → <strong>Create a copy</strong>. Rename the copy <code>Clean</code>. Everything in Review 3 happens on <strong>Clean</strong>. On Clean only, delete columns <code>L:O</code> (your old answers). Your new answer area is columns <code>P:Q</code>. In <code>P1</code> type <code>Blank weights</code>. In <code>Q1</code> count the empty cells in <code>F2:F502</code>.</p>
+    <div class="nudge"><b>Nudge</b>Excel has a COUNT function made just for empty cells.</div>
+    <div class="answers"><div class="ans" data-answer="9"><label for="ex7t1a1">Blank weights (Q1):</label><input id="ex7t1a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="no, leave them blank and add a note"><label for="ex7t1a2">Should we guess the missing weights?</label><select id="ex7t1a2"><option value="">Choose…</option><option value="no, leave them blank and add a note">No, leave them blank and add a Note</option><option value="yes, type the average weight">Yes, type the average weight</option><option value="yes, copy the weight from the row above">Yes, copy the weight from the row above</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>COUNTBLANK. Delete columns: select the column letters L to O → right-click → <strong>Delete</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><span class="f">=COUNTBLANK(F2:F502)</span>. Add a Note on <code>F1</code>: <em>9 weights missing. Not guessed.</em></p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>9</strong> blanks. We can't weigh a pet that already went home, so we leave them blank and write a Note. Guessing would be making up data.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex7t1"><b>Your screenshot</b><p class="what">Take a screenshot of the <strong>Clean</strong> sheet: the tab name and P1:Q1. Click Q1 first so the formula shows.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 1">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex7t1f">Or pick the file:</label><input id="ex7t1f" type="file" accept="image/*"></div><img alt="Your screenshot for task 1" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 2 · Remove the hidden spaces</h3><span class="tag core">CORE</span></div>
+    <p>In <code>P2</code> type <code>Space Doral</code>. In <code>Q2</code> count the cells in <code>C2:C502</code> that say <code>" Doral"</code> (with a space in front). Then fix them: insert a helper column right after <code>C</code>, use TRIM on <code>C2</code>, Paste Values over column C, and delete the helper. In <code>P3</code> type <code>Doral</code> and count Doral in <code>Q3</code>.</p>
+    <div class="nudge"><b>Nudge</b>The space goes inside the quotes. TRIM removes extra spaces.</div>
+    <div class="answers"><div class="ans" data-answer="5"><label for="ex7t2a1">Space Doral before the fix:</label><input id="ex7t2a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="0"><label for="ex7t2a2">Q2 after the fix:</label><input id="ex7t2a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="107"><label for="ex7t2a3">Doral after the fix (Q3):</label><input id="ex7t2a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p><span class="f">=COUNTIF(C2:C502,&quot; Doral&quot;)</span>. Insert a column: right-click <code>D1</code> → <strong>Insert → Table Columns to the Left</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>In <code>D2</code>: <span class="f">=TRIM(C2)</span> (Excel may show <code>=TRIM([@Shelter])</code>). Copy <code>D2:D502</code> → click <code>C2</code> → <strong>Paste → Values (123)</strong>. Right-click <code>D1</code> → <strong>Delete → Table Columns</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Before: <strong>5</strong>. After: <strong>0</strong>. Doral is now <strong>107</strong> (102 + 5).</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex7t2"><b>Your screenshot</b><p class="what">Take a screenshot of <strong>Clean</strong> P1:Q3 after the fix.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 2">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex7t2f">Or pick the file:</label><input id="ex7t2f" type="file" accept="image/*"></div><img alt="Your screenshot for task 2" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 3 · Fix spellings and remove the duplicate</h3><span class="tag core">CORE</span></div>
+    <p>Filter column <code>C</code> to find the two misspelled names. Add a <strong>Comment</strong> (not a Note) on the first misspelled cell asking the team to confirm. Then type the correct name in each misspelled cell. Next, delete the duplicate row (Adoption ID 70263, the <strong>second</strong> copy). Finally, count each shelter again in <code>P4:Q8</code>.</p>
+    <div class="nudge"><b>Nudge</b>The red cells from Review 2 are still on this copy. They show you the duplicate.</div>
+    <div class="answers"><div class="ans" data-answer="89"><label for="ex7t3a1">Little Haiti now:</label><input id="ex7t3a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="101"><label for="ex7t3a2">Miami Gardens now:</label><input id="ex7t3a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="501"><label for="ex7t3a3">What row is the last data row now?</label><input id="ex7t3a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>The two misspellings are <code>Little Hati</code> and <code>Miami Gdns</code>. Right-click a cell → <strong>New Comment</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Filter C to <code>Miami Gdns</code> only → type <code>Miami Gardens</code> in each visible cell. Do the same for Little Hati. For the duplicate: right-click the second red cell in column A → <strong>Delete → Table Rows</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Doral 107 · Hialeah 119 · Homestead 84 · Little Haiti 89 · Miami Gardens 101. Total 500. Last data row is <strong>501</strong>. Little Haiti went from 87 to 90 (spelling), then 89 (the duplicate was a Little Haiti row).</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex7t3"><b>Your screenshot</b><p class="what">Take a screenshot of <strong>Clean</strong> P4:Q8, plus your Comment on one of the fixed cells.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 3">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex7t3f">Or pick the file:</label><input id="ex7t3f" type="file" accept="image/*"></div><img alt="Your screenshot for task 3" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 4 · The outlier</h3><span class="tag core">CORE</span></div>
+    <p>In <code>P10:P13</code> type MIN, MAX, AVERAGE, MEDIAN. In <code>Q10:Q13</code> find them for Age (<code>E2:E501</code>). Then fix <code>E70</code> (140 should be 14) and watch the numbers change.</p>
+    <div class="nudge"><b>Nudge</b>Write down AVERAGE and MEDIAN before you fix E70.</div>
+    <div class="answers"><div class="ans" data-answer="3.286" data-tol="0.006"><label for="ex7t4a1">AVERAGE Age before the fix, 2 decimals:</label><input id="ex7t4a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="3.034" data-tol="0.006"><label for="ex7t4a2">AVERAGE Age after the fix, 2 decimals:</label><input id="ex7t4a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="2.0"><label for="ex7t4a3">MEDIAN Age after the fix:</label><input id="ex7t4a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="median is the middle value, so one extreme number barely changes it"><label for="ex7t4a4">Why did MEDIAN not move?</label><select id="ex7t4a4"><option value="">Choose…</option><option value="median is the middle value, so one extreme number barely changes it">MEDIAN is the middle value, so one extreme number barely changes it</option><option value="median ignores numbers over 100">MEDIAN ignores numbers over 100</option><option value="excel didn&#x27;t recalculate">Excel didn&#x27;t recalculate</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p><span class="f">=MEDIAN(E2:E501)</span> works like AVERAGE.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Click <code>E70</code> → type <code>14</code> → <kbd>Enter</kbd>. Update the Note too.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Before: MAX 140, AVERAGE <strong>3.29</strong>, MEDIAN 2. After: MAX 15, AVERAGE <strong>3.03</strong>, MEDIAN <strong>2</strong>. One typo pulled the average up. The median didn't care. Use MEDIAN to spot outliers.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex7t4"><b>Your screenshot</b><p class="what">Take a screenshot of <strong>Clean</strong> P10:Q13 after you fixed E70.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 4">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex7t4f">Or pick the file:</label><input id="ex7t4f" type="file" accept="image/*"></div><img alt="Your screenshot for task 4" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 5 · Numbers stored as text, and wrangling words</h3><span class="tag core">CORE</span></div>
+    <p>Go to <strong>Codes</strong>. In <code>E1</code> type <code>=SUM(C2:C7)</code>. Why is it 0? Fix it, then check <code>E1</code> again. Then answer the concept questions.</p>
+    <div class="nudge"><b>Nudge</b>Look for small green triangles in the corner of the cells.</div>
+    <div class="answers"><div class="ans" data-answer="0"><label for="ex7t5a1">E1 before the fix:</label><input id="ex7t5a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="400"><label for="ex7t5a2">E1 after the fix:</label><input id="ex7t5a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="organize"><label for="ex7t5a3">Deleting columns the owner doesn't need, and sorting:</label><select id="ex7t5a3"><option value="">Choose…</option><option value="organize">Organize</option><option value="clean">Clean</option><option value="transform">Transform</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="clean"><label for="ex7t5a4">Fixing spaces, typos, and duplicates:</label><select id="ex7t5a4"><option value="">Choose…</option><option value="organize">Organize</option><option value="clean">Clean</option><option value="transform">Transform</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="transform"><label for="ex7t5a5">Splitting Pet Code into species and size:</label><select id="ex7t5a5"><option value="">Choose…</option><option value="organize">Organize</option><option value="clean">Clean</option><option value="transform">Transform</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="data dictionary"><label for="ex7t5a6">A table that lists each column's name, meaning, and type:</label><select id="ex7t5a6"><option value="">Choose…</option><option value="data dictionary">Data dictionary</option><option value="metadata">Metadata</option><option value="comment">Comment</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="metadata"><label for="ex7t5a7">Data about the data, like the file's date or who made it:</label><select id="ex7t5a7"><option value="">Choose…</option><option value="data dictionary">Data dictionary</option><option value="metadata">Metadata</option><option value="comment">Comment</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Numbers that sit on the left side of a cell are usually text. SUM skips text.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Select <code>C2:C7</code> → click the yellow <strong>!</strong> → <strong>Convert to Number</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Before <strong>0</strong>, after <strong>400</strong>. The JSON stored the fees in quotes, so they came in as text. Organize · Clean · Transform · Data dictionary · Metadata. Our Notes and Comments are documentation: they tell the next person what changed and why.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex7t5"><b>Your screenshot</b><p class="what">Take a screenshot of <strong>Codes</strong> C1:E7 after Convert to Number.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 5">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex7t5f">Or pick the file:</label><input id="ex7t5f" type="file" accept="image/*"></div><img alt="Your screenshot for task 5" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<!-- ============ EXERCISE 8 ============ -->
+<section class="card" data-card="ex8">
+  <div class="card-head"><div class="eyebrow">Exercise 8 · Lectures 5 and 6 · Sheet: Clean</div><h2>Build new columns</h2></div>
+  <p class="q">Question: Which species and sizes are we placing, and how long do they stay?</p>
+  <p class="why">Pet Code hides two facts in one cell. We split it, look up the species name, and label each pet's stay and age group. All new columns go on Clean, right next to the table.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Task 1 · Species code (LEFT + SEARCH)</h3><span class="tag core">CORE</span><span class="tag guided">GUIDED</span></div>
+    <p>In <code>I1</code> type <code>Species Code</code>. In <code>I2</code>, write a formula that returns the letters before the dash in <code>D2</code>. It must work for 3-letter codes (DOG-S) and 2-letter codes (GP-S).</p>
+    <div class="nudge"><b>Guided start</b><ol><li>In a spare cell (like <code>Q26</code>), type <span class="f">=SEARCH("-",D18)</span>. It tells you where the dash is in GP-S.</li><li>The letters you want are one less than that number.</li><li>Now put SEARCH inside LEFT, in <code>I2</code>.</li></ol></div>
+    <div class="answers"><div class="ans" data-answer="3"><label for="ex8t1a1">What does SEARCH return for D18 (GP-S)?</label><input id="ex8t1a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="dog"><label for="ex8t1a2">What does I2 show?</label><input id="ex8t1a2" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="gp"><label for="ex8t1a3">What does I18 show?</label><input id="ex8t1a3" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>LEFT(text, how many letters). SEARCH finds the position of the dash.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><span class="f">=LEFT(D2,SEARCH(&quot;-&quot;,D2)-1)</span></p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>SEARCH finds the dash at position <strong>3</strong> in GP-S, so LEFT takes 2 letters. I2 = <strong>DOG</strong>, I18 = <strong>GP</strong>. A fixed LEFT(D2,3) would give "GP-". That's why we need SEARCH. Delete the spare cell when you're done.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex8t1"><b>Your screenshot</b><p class="what">Take a screenshot of <strong>Clean</strong> columns D and I, rows 1 to 20. Click I2 first so the formula shows.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 1">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex8t1f">Or pick the file:</label><input id="ex8t1f" type="file" accept="image/*"></div><img alt="Your screenshot for task 1" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 2 · Size code and a wildcard</h3><span class="tag core">CORE</span></div>
+    <p>In <code>J1</code> type <code>Size Code</code>. In <code>J2</code>, return the letters after the dash (S, M, L, or XL). Then in <code>P15</code> type <code>Large</code> and in <code>Q15</code> count Pet Codes that end in <code>-L</code>.</p>
+    <div class="nudge"><b>Nudge</b>How many letters come after the dash? The total length minus the dash position.</div>
+    <div class="answers"><div class="ans" data-answer="xl"><label for="ex8t2a1">What does J15 show?</label><input id="ex8t2a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="89"><label for="ex8t2a2">Large pets (Q15):</label><input id="ex8t2a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="111"><label for="ex8t2a3">EXTRA: how many would "*L" (no dash) count?</label><input id="ex8t2a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>RIGHT(text, how many). LEN gives the total number of characters. In COUNTIF, <code>*</code> means "anything."</p></div></details>
+      <details><summary>Hint 2</summary><div><p><span class="f">=RIGHT(D2,LEN(D2)-SEARCH(&quot;-&quot;,D2))</span> · <span class="f">=COUNTIF(D2:D501,&quot;*-L&quot;)</span></p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>J15 = <strong>XL</strong>. Large = <strong>89</strong>. "*-L" means "ends with -L," and XL codes end with -XL. Without the dash, "*L" counts 111 (89 L + 22 XL).</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex8t2"><b>Your screenshot</b><p class="what">Take a screenshot of <strong>Clean</strong> columns D, I, J for rows 1 to 20, plus P15:Q15.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 2">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex8t2f">Or pick the file:</label><input id="ex8t2f" type="file" accept="image/*"></div><img alt="Your screenshot for task 2" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 3 · XLOOKUP the species name</h3><span class="tag core">CORE</span></div>
+    <p>In <code>K1</code> type <code>Species</code>. In <code>K2</code>, look up the Species Code in <code>Codes!A2:A7</code> and return the name from <code>Codes!B2:B7</code>. If a code isn't found, show <code>Not found</code>. How many rows say Not found? Fix that Pet Code.</p>
+    <div class="nudge"><b>Nudge</b>Use $ on the Codes ranges, so they don't move when the formula fills down.</div>
+    <div class="answers"><div class="ans" data-answer="1"><label for="ex8t3a1">How many rows say Not found?</label><input id="ex8t3a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="70238"><label for="ex8t3a2">Which Adoption ID?</label><input id="ex8t3a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="dog-m"><label for="ex8t3a3">What should D239 say?</label><input id="ex8t3a3" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>XLOOKUP(what to find, where to look, what to return, if not found).</p></div></details>
+      <details><summary>Hint 2</summary><div><p><span class="f">=XLOOKUP(I2,Codes!$A$2:$A$7,Codes!$B$2:$B$7,&quot;Not found&quot;)</span> · count with <span class="f">=COUNTIF(K2:K501,&quot;Not found&quot;)</span> in <code>Q16</code>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>1</strong> row: <code>D239</code>, Adoption ID <strong>70238</strong>, says <code>DGO-M</code>. That's a typo for <strong>DOG-M</strong>. Fix D239, and K239 turns into Dog by itself. XLOOKUP found a problem our other checks missed.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex8t3"><b>Your screenshot</b><p class="what">Take a screenshot of <strong>Clean</strong> columns I to K for rows 1 to 20, plus P16:Q16 showing 0 after your fix.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 3">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex8t3f">Or pick the file:</label><input id="ex8t3f" type="file" accept="image/*"></div><img alt="Your screenshot for task 3" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 4 · XLOOKUP a stay group (next smaller)</h3><span class="tag core">CORE</span></div>
+    <p>In <code>L1</code> type <code>Stay Group</code>. In <code>L2</code>, use the scale in <code>Codes!A11:B14</code> to label each Days in Shelter value (Quick, Normal, Long, Very Long). Count each group in <code>P17:Q20</code>.</p>
+    <div class="nudge"><b>Nudge</b>A pet with 45 days has no exact match in the scale. It should fall back to the 30 row.</div>
+    <div class="answers"><div class="ans" data-answer="63"><label for="ex8t4a1">Very Long:</label><input id="ex8t4a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="263"><label for="ex8t4a2">Quick:</label><input id="ex8t4a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>XLOOKUP has a 5th argument, match mode. <code>-1</code> means exact match, or else the next smaller item.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><span class="f">=XLOOKUP(G2,Codes!$A$11:$A$14,Codes!$B$11:$B$14,&quot;Not found&quot;,-1)</span></p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Quick 263 · Normal 121 · Long 53 · Very Long <strong>63</strong>. Same idea as the letter grades in Lecture 6: an 86 falls to the 80 row and gets a B.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex8t4"><b>Your screenshot</b><p class="what">Take a screenshot of <strong>Clean</strong> columns G and L, plus your Stay Group counts in P17:Q20.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 4">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex8t4f">Or pick the file:</label><input id="ex8t4f" type="file" accept="image/*"></div><img alt="Your screenshot for task 4" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 5 · Nested IF for age groups</h3><span class="tag core">CORE</span></div>
+    <p>In <code>M1</code> type <code>Age Group</code>. In <code>M2</code>, write a nested IF: age 0 is <code>Baby</code>, 8 or more is <code>Senior</code>, anything else is <code>Adult</code>. EXTRA: in <code>N1</code> type <code>Discount</code>, and in <code>N2</code> subtract the Adoption Fee from the base fee (look it up in Codes column C). What is the average discount?</p>
+    <div class="nudge"><b>Nudge</b>Put the second IF inside the "if false" part of the first IF.</div>
+    <div class="answers"><div class="ans" data-answer="49"><label for="ex8t5a1">How many Seniors?</label><input id="ex8t5a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="115"><label for="ex8t5a2">How many Babies?</label><input id="ex8t5a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="11.456" data-tol="0.006"><label for="ex8t5a3">EXTRA: average discount, 2 decimals:</label><input id="ex8t5a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>IF(test, if true, if false). Test for 0 first, then for 8 or more.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><span class="f">=IF(E2=0,&quot;Baby&quot;,IF(E2&gt;=8,&quot;Senior&quot;,&quot;Adult&quot;))</span> · EXTRA: <span class="f">=XLOOKUP(I2,Codes!$A$2:$A$7,Codes!$C$2:$C$7)-H2</span></p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Baby <strong>115</strong> · Adult 336 · Senior <strong>49</strong>. Average discount <strong>$11.46</strong> (seniors are half price, long stays get $25 off, and event days are free).</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex8t5"><b>Your screenshot</b><p class="what">Take a screenshot of <strong>Clean</strong> columns E and M, plus your Age Group counts.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 5">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex8t5f">Or pick the file:</label><input id="ex8t5f" type="file" accept="image/*"></div><img alt="Your screenshot for task 5" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<!-- ============ EXERCISE 9 ============ -->
+<section class="card" data-card="ex9">
+  <div class="card-head"><div class="eyebrow">Exercise 9 · Lecture 6 · Sheet: new PivotTable sheets</div><h2>Explore with PivotTables</h2></div>
+  <p class="q">Question: Which shelters bring in the most, which species are adopted most, and who waits the longest?</p>
+  <p class="why">The data is clean. Now we explore it. Every PivotTable starts from a cell inside the Clean table.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Task 1 · Fees by shelter</h3><span class="tag core">CORE</span><span class="tag guided">GUIDED</span></div>
+    <p>Make a PivotTable from the Clean table that shows the <strong>Sum of Adoption Fee</strong> for each <strong>Shelter</strong>. Sort it largest to smallest and apply <strong>Comma Style</strong>. Rename the sheet <code>Fees by Shelter</code>.</p>
+    <div class="nudge"><b>Guided start</b><ol><li>Click any cell inside the Clean table.</li><li><strong>Insert → Recommended PivotTables</strong>.</li><li>Pick <em>Sum of Adoption Fee by Shelter</em> if you see it. If not, pick any one, then fix the fields in the Field List.</li></ol></div>
+    <div class="answers"><div class="ans" data-answer="hialeah"><label for="ex9t1a1">Which shelter brought in the most?</label><input id="ex9t1a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="11499"><label for="ex9t1a2">How much?</label><input id="ex9t1a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="48377"><label for="ex9t1a3">Grand Total:</label><input id="ex9t1a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Field List: <code>Shelter</code> → Rows. <code>Adoption Fee</code> → Values.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Right-click a number → <strong>Sort → Sort Largest to Smallest</strong>. Select the numbers → <strong>Home → Comma Style</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Hialeah 11,499.00 · Doral 11,243.00 · Miami Gardens 9,563.00 · Little Haiti 8,097.00 · Homestead 7,975.00 · Grand Total <strong>48,377.00</strong>. One row per shelter, and only 5 rows. On the raw Adoptions sheet the total was 48,502: the difference is the deleted duplicate ($125).</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex9t1"><b>Your screenshot</b><p class="what">Take a screenshot of your <strong>Fees by Shelter</strong> PivotTable, sorted, with commas.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 1">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex9t1f">Or pick the file:</label><input id="ex9t1f" type="file" accept="image/*"></div><img alt="Your screenshot for task 1" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 2 · Percent of the total</h3><span class="tag core">CORE</span></div>
+    <p>Change the numbers to show <strong>% of Grand Total</strong>.</p>
+    <div class="nudge"><b>Nudge</b>Right-click a number in the PivotTable. The option is called Show Values As.</div>
+    <div class="answers"><div class="ans" data-answer="23.77" data-tol="0.006"><label for="ex9t2a1">Hialeah percent:</label><input id="ex9t2a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="23.24" data-tol="0.006"><label for="ex9t2a2">Doral percent:</label><input id="ex9t2a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Right-click a number → <strong>Show Values As</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Show Values As → <strong>% of Grand Total</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Hialeah 23.77% · Doral 23.24% · Miami Gardens 19.77% · Little Haiti 16.74% · Homestead 16.49%. Hialeah and Doral are almost tied, about 1 in every 4 dollars each.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex9t2"><b>Your screenshot</b><p class="what">Take a screenshot of the same PivotTable showing percentages.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 2">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex9t2f">Or pick the file:</label><input id="ex9t2f" type="file" accept="image/*"></div><img alt="Your screenshot for task 2" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 3 · Count and average by species</h3><span class="tag core">CORE</span></div>
+    <p>Make a new PivotTable (sheet <code>Species</code>): <strong>Species</strong> in Rows, <strong>Adoption ID</strong> in Values. Change it to <strong>Count</strong>. Then replace it with the <strong>Average of Days in Shelter</strong>.</p>
+    <div class="nudge"><b>Nudge</b>Adoption ID is a number, so Excel adds it up. Adding IDs means nothing. Change how it's summarized.</div>
+    <div class="answers"><div class="ans" data-answer="dog|dogs"><label for="ex9t3a1">Which species is adopted most?</label><input id="ex9t3a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="220"><label for="ex9t3a2">How many?</label><input id="ex9t3a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="cat|cats"><label for="ex9t3a3">Which species waits longest on average?</label><input id="ex9t3a3" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="42.7193" data-tol="0.06"><label for="ex9t3a4">Its average days, 1 decimal:</label><input id="ex9t3a4" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Right-click a number → <strong>Summarize Values By → Count</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Drag <code>Count of Adoption ID</code> out of Values. Drag <code>Days in Shelter</code> in → right-click → Summarize Values By → <strong>Average</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Counts: Dog 220 · Cat 171 · Rabbit 44 · Guinea Pig 38 · Bird 27. Average days: Cat 42.72 · Dog 42.00 · Guinea Pig 41.68 · Rabbit 37.57 · Bird 31.81. Cats wait slightly longer than dogs.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex9t3"><b>Your screenshot</b><p class="what">Take a screenshot of your <strong>Species</strong> PivotTable showing Average of Days in Shelter.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 3">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex9t3f">Or pick the file:</label><input id="ex9t3f" type="file" accept="image/*"></div><img alt="Your screenshot for task 3" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 4 · Group ages and chart them</h3><span class="tag core">CORE</span></div>
+    <p>Make a new PivotTable (sheet <code>Ages</code>): <strong>Age (yrs)</strong> in Rows, <strong>Count of Adoption ID</strong> in Values. Group the ages starting at 0, ending at 19, by 5. Then insert a <strong>PivotChart</strong> (Clustered Column).</p>
+    <div class="nudge"><b>Nudge</b>Right-click an age (a row label), not a count.</div>
+    <div class="answers"><div class="ans" data-answer="0-4"><label for="ex9t4a1">Which age group is adopted most?</label><input id="ex9t4a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="374"><label for="ex9t4a2">How many?</label><input id="ex9t4a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="4"><label for="ex9t4a3">How many in 15-19?</label><input id="ex9t4a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Right-click any age → <strong>Group</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Starting at <code>0</code>, Ending at <code>19</code>, By <code>5</code>. Then <strong>PivotTable Analyze → PivotChart → Clustered Column</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>0-4 374 · 5-9 97 · 10-14 25 · 15-19 4. Young pets go home fastest. If you see a group like 140-144, the age typo isn't fixed yet (Exercise 7).</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex9t4"><b>Your screenshot</b><p class="what">Take a screenshot of your <strong>Ages</strong> PivotTable with the grouped ages and the PivotChart.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 4">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex9t4f">Or pick the file:</label><input id="ex9t4f" type="file" accept="image/*"></div><img alt="Your screenshot for task 4" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 5 · One shelter, two directions</h3><span class="tag core">CORE</span></div>
+    <p>Make a new PivotTable (sheet <code>Hialeah</code>): <strong>Shelter</strong> in Filters (choose Hialeah), <strong>Species</strong> in Rows, <strong>Size Code</strong> in Columns, <strong>Count of Adoption ID</strong> in Values. Then answer the concept questions.</p>
+    <div class="nudge"><b>Nudge</b>The Filters box sits above the PivotTable. Pick Hialeah from its arrow.</div>
+    <div class="answers"><div class="ans" data-answer="dog|dogs"><label for="ex9t5a1">Most common species in Hialeah:</label><input id="ex9t5a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="m|medium"><label for="ex9t5a2">Most common size for that species:</label><input id="ex9t5a2" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="24"><label for="ex9t5a3">How many?</label><input id="ex9t5a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="data wrangling"><label for="ex9t5a4">Fixing spaces, typos, and duplicates (Exercise 7) is:</label><select id="ex9t5a4"><option value="">Choose…</option><option value="data wrangling">Data wrangling</option><option value="exploratory data analysis (eda)">Exploratory Data Analysis (EDA)</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="exploratory data analysis (eda)"><label for="ex9t5a5">Summarizing with PivotTables and charts to find patterns is:</label><select id="ex9t5a5"><option value="">Choose…</option><option value="data wrangling">Data wrangling</option><option value="exploratory data analysis (eda)">Exploratory Data Analysis (EDA)</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="after the data is cleaned, before reporting or modeling"><label for="ex9t5a6">When does EDA happen?</label><select id="ex9t5a6"><option value="">Choose…</option><option value="after the data is cleaned, before reporting or modeling">After the data is cleaned, before reporting or modeling</option><option value="before we collect the data">Before we collect the data</option><option value="only at the very end, after the report">Only at the very end, after the report</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="it summarizes hundreds of rows in a few clicks, with no formulas"><label for="ex9t5a7">What is the biggest benefit of a PivotTable?</label><select id="ex9t5a7"><option value="">Choose…</option><option value="it summarizes hundreds of rows in a few clicks, with no formulas">It summarizes hundreds of rows in a few clicks, with no formulas</option><option value="it fixes typos for us">It fixes typos for us</option><option value="it replaces the data">It replaces the data</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Drag Shelter to <strong>Filters</strong>, Species to <strong>Rows</strong>, Size Code to <strong>Columns</strong>, Adoption ID to <strong>Values</strong> (Count).</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Find the biggest number inside the grid (not the Grand Totals). Conditional Formatting → Top 10 Items with 1 helps.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Dog M 24 · Cat M 19 · Dog S 14. <strong>Dog M</strong> wins with <strong>24</strong> of Hialeah's 119. Wrangling · EDA · after cleaning, before reporting · summarizes in a few clicks. EXTRA: write one prescriptive recommendation for Ms. Yolanda.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex9t5"><b>Your screenshot</b><p class="what">Take a screenshot of your <strong>Hialeah</strong> PivotTable with the Filters box showing Hialeah.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 5">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex9t5f">Or pick the file:</label><input id="ex9t5f" type="file" accept="image/*"></div><img alt="Your screenshot for task 5" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var KEY="cap1788-review-3-v1", state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  var cards=[].slice.call(document.querySelectorAll("[data-card]"));
+  function paint(){
+    var n=0;
+    cards.forEach(function(c){
+      var on=!!state[c.dataset.card], b=c.querySelector(".donebtn");
+      c.classList.toggle("done",on); b.classList.toggle("on",on);
+      b.textContent=on?"✓ Done (click to undo)":"I finished this exercise";
+      if(on)n++;
+    });
+    document.getElementById("ptext").textContent=n+" of "+cards.length+" exercises done";
+    document.getElementById("pbar").style.width=(100*n/cards.length)+"%";
+  }
+  cards.forEach(function(c){
+    c.querySelector(".donebtn").addEventListener("click",function(){state[c.dataset.card]=!state[c.dataset.card];save();paint();});
+  });
+  [].slice.call(document.querySelectorAll(".ans")).forEach(function(row){
+    var input=row.querySelector("input,select"), fb=row.querySelector(".fb"),
+        ok=row.dataset.answer.split("|"), tol=parseFloat(row.dataset.tol||"0");
+    function check(){
+      var raw=String(input.value||"").trim().toLowerCase().replace(/\s+/g," ");
+      if(raw===""){fb.className="fb no";fb.textContent=input.tagName==="SELECT"?"Pick an answer first.":"Type an answer first.";return;}
+      var v=raw.replace(/[,$%\s]/g,"");
+      var good=ok.some(function(a){
+        var n=parseFloat(a), x=parseFloat(v);
+        if(input.tagName!=="SELECT" && !isNaN(n) && /^-?\d*\.?\d+$/.test(a) && /^-?\d*\.?\d+$/.test(v)) return Math.abs(x-n)<=(tol||1e-9);
+        return raw===a;
+      });
+      if(good){fb.className="fb yes";fb.textContent="✓ Correct!";}
+      else{fb.className="fb no";fb.textContent="Not yet. Check your work, then open Hint 1.";}
+    }
+    row.querySelector("button").addEventListener("click",check);
+    input.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  });
+
+  // ---- screenshots: kept in this browser (IndexedDB), keyed by page + task ----
+  var PAGEKEY="cap1788-review-3-v1", dbp=null, active=null;
+  function db(){
+    if(dbp) return dbp;
+    dbp=new Promise(function(res){
+      try{
+        var r=indexedDB.open("cap1788-shots",1);
+        r.onupgradeneeded=function(){r.result.createObjectStore("shots");};
+        r.onsuccess=function(){res(r.result);};
+        r.onerror=function(){res(null);};
+      }catch(e){res(null);}
+    });
+    return dbp;
+  }
+  function put(k,v){return db().then(function(d){if(!d)return;try{var tx=d.transaction("shots","readwrite");v===null?tx.objectStore("shots").delete(k):tx.objectStore("shots").put(v,k);}catch(e){}});}
+  function get(k){return db().then(function(d){return new Promise(function(res){if(!d)return res(null);try{var q=d.transaction("shots").objectStore("shots").get(k);q.onsuccess=function(){res(q.result||null);};q.onerror=function(){res(null);};}catch(e){res(null);}});});}
+  function shrink(file){
+    return new Promise(function(res,rej){
+      var fr=new FileReader();
+      fr.onload=function(){
+        var im=new Image();
+        im.onload=function(){
+          var w=im.naturalWidth,h=im.naturalHeight,max=1600;
+          if(w>max){h=Math.round(h*max/w);w=max;}
+          var c=document.createElement("canvas");c.width=w;c.height=h;
+          c.getContext("2d").drawImage(im,0,0,w,h);
+          try{res(c.toDataURL("image/jpeg",0.85));}catch(e){res(fr.result);}
+        };
+        im.onerror=rej; im.src=fr.result;
+      };
+      fr.onerror=rej; fr.readAsDataURL(file);
+    });
+  }
+  function show(box,url){
+    var img=box.querySelector("img"), clr=box.querySelector(".clear"), drop=box.querySelector(".drop");
+    if(url){img.src=url;img.hidden=false;clr.hidden=false;box.classList.add("has");drop.innerHTML="Screenshot saved. Click here and press <kbd>Ctrl</kbd> + <kbd>V</kbd> to replace it.";}
+    else{img.removeAttribute("src");img.hidden=true;clr.hidden=true;box.classList.remove("has");drop.innerHTML="Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd>";}
+  }
+  function take(box,file){
+    if(!file||!/^image\//.test(file.type))return;
+    shrink(file).then(function(url){show(box,url);put(PAGEKEY+":"+box.dataset.shot,url);});
+  }
+  [].slice.call(document.querySelectorAll(".shot")).forEach(function(box){
+    var drop=box.querySelector(".drop");
+    function arm(){if(active)active.querySelector(".drop").classList.remove("armed");active=box;drop.classList.add("armed");}
+    drop.addEventListener("click",function(){drop.focus();arm();});
+    drop.addEventListener("focus",arm);
+    box.querySelector("input[type=file]").addEventListener("change",function(e){take(box,e.target.files[0]);e.target.value="";});
+    box.querySelector(".clear").addEventListener("click",function(){show(box,null);put(PAGEKEY+":"+box.dataset.shot,null);});
+    box.addEventListener("dragover",function(e){e.preventDefault();});
+    box.addEventListener("drop",function(e){e.preventDefault();if(e.dataTransfer&&e.dataTransfer.files[0])take(box,e.dataTransfer.files[0]);});
+    get(PAGEKEY+":"+box.dataset.shot).then(function(url){if(url)show(box,url);});
+  });
+  document.addEventListener("paste",function(e){
+    if(!active||!e.clipboardData||!active.contains(document.activeElement))return;
+    var items=[].slice.call(e.clipboardData.items||[]), it=items.filter(function(x){return x.type&&x.type.indexOf("image/")===0;})[0];
+    if(!it){active.querySelector(".drop").textContent="No picture on the clipboard. Take the screenshot first (Windows + Shift + S).";return;}
+    e.preventDefault(); take(active,it.getAsFile());
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
