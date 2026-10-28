@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Exam 1 Practice</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#FAFAF7; --surface:#FFFFFF; --fg:#1F2328; --muted:#5B6168; --line:#E2E1DA;
+  --accent:#1D6FA8; --accent-soft:#E2EEF8; --code-bg:#F2F1EC;
+  --ok:#1E7A46; --ok-soft:#E3F4EA; --no:#B03A2E;
+  --core:#1E7A46; --extra:#8A6D00; --extra-soft:#FFF4C2; --guided:#6C3483; --guided-soft:#F3E8F8;
+  --font-body:"Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  --font-mono:"JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#79B8EA; --accent-soft:#16283A; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; --guided:#D2A6E6; --guided-soft:#2E2236; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#79B8EA; --accent-soft:#16283A; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; --guided:#D2A6E6; --guided-soft:#2E2236; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:18px;line-height:1.6;margin:0}
+.wrap{max-width:800px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:22px}
+h1{font-size:2rem;line-height:1.2;margin:0;text-wrap:balance}
+h2{font-size:1.35rem;margin:0;text-wrap:balance}
+h3{font-size:1.1rem;margin:0}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+code,.f{font-family:var(--font-mono);font-size:.92em;background:var(--code-bg);padding:2px 7px;border-radius:5px;white-space:nowrap}
+.f{white-space:normal;word-break:break-all}
+kbd{font-family:var(--font-mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:3px;border-radius:5px;padding:0 6px;background:var(--surface)}
+.top{display:flex;flex-direction:column;gap:10px}
+.pages{display:flex;flex-wrap:wrap;gap:8px;font-size:.95rem}
+.pages a,.pages span{padding:2px 10px;border-radius:20px;border:1px solid var(--line);text-decoration:none}
+.pages span{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.progress{display:flex;align-items:center;gap:12px;font-weight:700}
+.bar{flex:1;height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.story{background:var(--accent-soft);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.rules{display:flex;flex-direction:column;gap:6px;margin:0;padding-left:22px}
+.tablebox{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--code-bg)}
+td.l{font-family:var(--font-mono);font-weight:700;width:3.2em;text-align:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:16px}
+.card.done{border-color:var(--ok)}
+.card-head{display:flex;flex-direction:column;gap:4px}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:20px;white-space:nowrap}
+.tag.core{background:var(--ok-soft);color:var(--core)}
+.tag.extra{background:var(--extra-soft);color:var(--extra)}
+.tag.guided{background:var(--guided-soft);color:var(--guided)}
+.q{font-size:1.1rem;font-weight:700}
+.why{color:var(--muted)}
+.task{border-top:2px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:12px}
+.task-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nudge{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;padding:8px 12px;font-size:.97rem}
+.nudge b{display:block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.nudge ol{margin:4px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.answers{display:flex;flex-direction:column;gap:10px;background:var(--code-bg);border-radius:10px;padding:14px}
+.ans{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ans label{flex:1 1 260px;font-weight:700}
+.ans input,.ans select{font:inherit;padding:6px 10px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.ans input{width:9.5em}
+.ans select{max-width:100%}
+.ans button,.donebtn,.dl{font:inherit;font-weight:700;padding:6px 14px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer;text-decoration:none;display:inline-block}
+.ans button:hover,.donebtn:hover,.dl:hover{background:var(--accent-soft)}
+.fb{flex-basis:100%;font-weight:700;font-size:.95rem}
+.fb:empty{display:none}
+.fb.yes{color:var(--ok)} .fb.no{color:var(--no)}
+details{border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+details>summary{cursor:pointer;padding:10px 14px;font-weight:700;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ ";color:var(--accent)}
+details[open]>summary::before{content:"▾ "}
+details>div{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px}
+details.sol>summary{color:var(--accent)}
+.hints{display:flex;flex-direction:column;gap:8px}
+.warn{border-left:4px solid var(--accent);padding:4px 0 4px 12px;font-size:.97rem;display:flex;flex-direction:column;gap:6px}
+.donebtn{align-self:flex-start}
+.donebtn.on{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.shot{border:2px dashed var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.shot.has{border-style:solid;border-color:var(--ok)}
+.shot b{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.shot .what{font-size:.97rem}
+.drop{border-radius:8px;background:var(--code-bg);padding:14px;text-align:center;cursor:pointer;font-weight:700;color:var(--muted)}
+.drop:focus-visible,.drop.armed{outline:3px solid var(--accent);outline-offset:2px;color:var(--fg)}
+.shot-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.shot input[type=file]{font:inherit;font-size:.9rem;max-width:100%}
+.shot img{max-width:100%;border:1px solid var(--line);border-radius:6px}
+.shot .clear{font:inherit;font-weight:700;padding:4px 12px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer}
+.shot .note{font-size:.85rem;color:var(--muted)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:480px){body{font-size:17px}h1{font-size:1.6rem}.ans input{width:100%}}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">CAP1788 · Part 1 · Exam 1 Practice · Lectures 1 to 6</div>
+  <h1>Exam 1 Practice</h1>
+  <nav class="pages" aria-label="Exam 1 Practice"><span>Exam 1 Practice</span></nav>
+  <div class="progress"><span id="ptext">0 of 5 exercises done</span><div class="bar"><span id="pbar"></span></div></div>
+</header>
+
+<section class="story">
+  <p><strong>The story:</strong> This dataset tracks orders placed by customers of a fictional store. Some order numbers appear multiple times because the order contains different items. All geographic data is there for shipping purposes.</p>
+  <p><strong>One row = one item in an order.</strong> When a question says "orders", count rows. The file has 9,426 rows and 6,455 different Order IDs.</p>
+  <p>Each task on this page is one question from the Exam 1 Practice, with the same number (Q1 to Q22). On the real exam you show your work the same way: one sheet per question.</p>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>Before you start</h2>
+  <div class="warn"><p>Download both files from Canvas: <code>Exam1-Practice.csv</code> and <code>exam1practice.json</code>. Open <code>Exam1-Practice.csv</code> from Downloads by double-clicking it (don't copy and paste its text, or the ® signs break). Then <strong>File → Save As → Browse → Desktop</strong>, name it <code>Exam1Practice-LastName</code>, type <strong>Excel Workbook (*.xlsx)</strong>. Then set up the <code>data</code> sheet in the next box.</p><p>Save often: <kbd>Ctrl</kbd> + <kbd>S</kbd>.</p></div>
+  <h2 style="margin-top:6px">How to use this page</h2>
+  <ul class="rules">
+    <li>Each task tells you the goal and the question. It does <strong>not</strong> tell you every click. You know these tools.</li>
+    <li>Read the <strong>Nudge</strong> first. Still stuck? Open <strong>Hint 1</strong> (the tool), then <strong>Hint 2</strong> (the key step). The <strong>Solution</strong> is last. Try first.</li>
+    <li><strong>GUIDED</strong> tasks show the first few clicks. You finish the rest.</li>
+    <li>Type your answer and click <strong>Check</strong>. <strong>CORE</strong> tasks first. <strong>EXTRA</strong> tasks if you have time.</li>
+    <li>Your checkmarks save on this computer.</li>
+    <li><strong>Screenshot boxes:</strong> press <kbd>Windows</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>, drag a box around your work, then click the screenshot box on this page and press <kbd>Ctrl</kbd> + <kbd>V</kbd>. Your screenshots stay on this computer.</li>
+  </ul>
+  <div class="warn"><p><strong>Show your work:</strong> every question gets its own sheet named Q1, Q2, and so on. Never answer on the <code>data</code> sheet. To make a question sheet: Right-click the <code>data</code> tab → <strong>Move or Copy</strong> → (move to end) → check <strong>Create a copy</strong> → OK. Double-click the new tab and rename it. PivotTable questions (Q15 to Q21) make their own sheet: rename it to the question number. Answers below a table start in row 9430, so row 9429 stays empty under the Total Row.</p></div>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>Set up the <code>data</code> sheet (once, before Q1)</h2>
+  <ol class="rules" style="padding-left:22px"><li>Click <code>A1</code>. <strong>Home → Format as Table</strong> → pick a style. Check that the range is <code>$A$1:$L$9427</code> and <strong>My table has headers</strong> is checked → OK.</li><li><strong>Table Design → Total Row</strong>. The Total Row is row 9428. If Excel put a number in it (usually <code>L9428</code>), click that cell → arrow → <strong>None</strong>. Keep the word Total in <code>A9428</code>.</li><li>Select columns A to L by their letters → double-click the line between any two letters (AutoFit).</li><li>Make column <code>B</code> (Item) about twice as wide as column <code>C</code> (Department): right-click the letter C → <strong>Column Width</strong> → read the number → Cancel. Right-click the letter B → Column Width → type twice that number → OK.</li><li>Double-click the sheet tab → type <code>data</code> → <kbd>Enter</kbd> → <kbd>Ctrl</kbd> + <kbd>S</kbd>.</li></ol><p>Your table now runs from row 1 (headers) to row 9427, with the Total Row in row 9428. Every question sheet starts as a copy of this sheet.</p>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>The columns in the file</h2>
+  <div class="tablebox"><table>
+    <tr><th>Col</th><th>Name</th><th>What it means</th></tr>
+    <tr><td class="l">A</td><td>Order ID</td><td>The order's number. One order with several items has several rows with the same Order ID.</td></tr>
+    <tr><td class="l">B</td><td>Item</td><td>The product. Some names have special signs like ® and ™.</td></tr>
+    <tr><td class="l">C</td><td>Department</td><td>Furniture, Office Supplies, or Technology</td></tr>
+    <tr><td class="l">D</td><td>Category</td><td>17 product groups, like Paper or Office Machines</td></tr>
+    <tr><td class="l">E</td><td>City</td><td>Where the order was shipped</td></tr>
+    <tr><td class="l">F</td><td>State</td><td>The state (49 names, including District of Columbia)</td></tr>
+    <tr><td class="l">G</td><td>Region</td><td>Central, East, South, or West</td></tr>
+    <tr><td class="l">H</td><td>Customer Segment</td><td>Consumer, Corporate, Home Office, or Small Business</td></tr>
+    <tr><td class="l">I</td><td>Order Date</td><td>The day of the order, 1/1/2017 to 12/28/2020</td></tr>
+    <tr><td class="l">J</td><td>Unit Price</td><td>The price of one unit, in dollars</td></tr>
+    <tr><td class="l">K</td><td>Order Quantity</td><td>How many units were ordered</td></tr>
+    <tr><td class="l">L</td><td>Shipping Cost</td><td>What the store charged to ship that row, in dollars</td></tr>
+  </table></div>
+</section>
+
+<!-- ============ EXERCISE 1 ============ -->
+<section class="card" data-card="ex1">
+  <div class="card-head"><div class="eyebrow">Exercise 1 · Q1 to Q5 · Sheets: Q1 to Q5</div><h2>Quick numbers</h2></div>
+  <p class="q">Question: What do the basic numbers say about these orders?</p>
+  <p class="why">Five short questions. Each one uses the Total Row, a filter, or one function.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Q1 · Average quantity</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q1.</strong> What is the average quantity per order? Round to two decimal places.<br>Work on sheet <code>Q1</code> (a copy of <code>data</code>). Use the Total Row cell under Order Quantity, <code>K9428</code>.</p>
+    <div class="nudge"><b>Nudge</b>The Total Row can do more than Sum. Each Total Row cell has its own list of functions.</div>
+    <div class="answers"><div class="ans" data-answer="13.7984" data-tol="0.006"><label for="ex1t1a1">Q1: average Order Quantity (2 decimals):</label><input id="ex1t1a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Click <code>K9428</code>. A small arrow appears next to it. The list has Average, Count, Max, Min, Sum and more.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><code>K9428</code> → arrow → <strong>Average</strong>. Then <strong>Home → Decrease Decimal</strong> until you see 2 decimal places.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><code>K9428</code> shows <strong>13.80</strong>. Excel writes <span class="f">=SUBTOTAL(101,[Order Quantity])</span> for you. One row is one item in an order, so this is the average per row, the way the question means it.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex1t1"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q1</strong> showing the Total Row, with the average in K9428.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 1">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex1t1f">Or pick the file:</label><input id="ex1t1f" type="file" accept="image/*"></div><img alt="Your screenshot for task 1" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q2 · Median shipping to the West</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q2.</strong> What is the median shipping price to the West region?<br>Work on sheet <code>Q2</code>. Filter column <code>G</code> (Region) to West. Copy the Shipping Cost cells you can see (<code>L2:L9427</code>) and paste them below the table, starting in <code>N9430</code>. In <code>O9430</code> type <code>West median</code>. In <code>P9430</code> write a MEDIAN of the pasted values.</p>
+    <div class="nudge"><b>Nudge</b>MEDIAN does not skip hidden rows. A MEDIAN of column L while it is filtered still uses every region. That is why you copy the West values out first.</div>
+    <div class="answers"><div class="ans" data-answer="6"><label for="ex1t2a1">Q2: median Shipping Cost for the West region:</label><input id="ex1t2a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>A Table already has filter arrows in row 1. When rows are filtered, <kbd>Ctrl</kbd> + <kbd>C</kbd> copies only the rows you can see. The <strong>Name Box</strong> (left of the formula bar) selects any range you type.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Arrow in <code>G1</code> → uncheck <strong>(Select All)</strong> → check <strong>West</strong> → OK. Name Box → type <code>L2:L9427</code> → <kbd>Enter</kbd> → <kbd>Ctrl</kbd> + <kbd>C</kbd>. Name Box → <code>N9430</code> → <kbd>Enter</kbd> → <kbd>Ctrl</kbd> + <kbd>V</kbd>. In <code>P9430</code> type <span class="f">=MEDIAN(N9430:N11378)</span>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>The 1,949 West values land in <code>N9430:N11378</code>. <code>P9430</code> <span class="f">=MEDIAN(N9430:N11378)</span> shows <strong>6</strong>. In this file the median of every row is also 6, so the shortcut happens to give the same number. On the exam it may not. Copy the visible values first.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex1t2"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q2</strong> around N9430:P9430. Click P9430 first so the MEDIAN formula shows in the formula bar.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 2">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex1t2f">Or pick the file:</label><input id="ex1t2f" type="file" accept="image/*"></div><img alt="Your screenshot for task 2" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q3 · Grand Total column</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q3.</strong> In column M, create a heading named "Grand Total". All cells in this column should contain a formula which multiplies the Unit Price by the Order Quantity, then adds the Shipping Cost. What is the sum of all of these grand totals? Format this number using accounting style.<br>Work on sheet <code>Q3</code>. Type the heading in <code>M1</code> and the formula in <code>M2</code>. Show the Sum in the Total Row cell <code>M9428</code>.</p>
+    <div class="nudge"><b>Nudge</b>When you type a heading in <code>M1</code>, the Table grows to column M. Write the formula once in <code>M2</code>. The Table copies it down.</div>
+    <div class="answers"><div class="ans" data-answer="9422501"><label for="ex1t3a1">Q3: sum of all the Grand Totals (M9428):</label><input id="ex1t3a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Multiply with <code>*</code>, add with <code>+</code>. The Total Row arrow in <code>M9428</code> has Sum. Accounting is the <strong>$</strong> button on the Home tab.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><code>M2</code>: <span class="f">=J2*K2+L2</span>. Excel may show <span class="f">=[@[Unit Price]]*[@[Order Quantity]]+[@[Shipping Cost]]</span> instead. Both are correct. Then <code>M9428</code> → arrow → <strong>Sum</strong> → <strong>Home → Accounting Number Format ($)</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><code>M2</code> shows 7 (2 × 2 + 3). <code>M9428</code> shows <strong>$9,422,501.00</strong>. A blank Shipping Cost counts as 0 in a formula, so those rows still get a Grand Total.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex1t3"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q3</strong> showing M9428 in Accounting format. Click M2 first so the formula shows.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 3">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex1t3f">Or pick the file:</label><input id="ex1t3f" type="file" accept="image/*"></div><img alt="Your screenshot for task 3" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q4 · Unit price of $1000 or more</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q4.</strong> How many orders contain an item whose unit price is at least $1000?<br>Work on sheet <code>Q4</code>. Filter column <code>J</code> (Unit Price), then count the rows with the Total Row cell <code>J9428</code>.</p>
+    <div class="nudge"><b>Nudge</b>"At least 1000" means 1000 or more. Each row counts as one order here.</div>
+    <div class="answers"><div class="ans" data-answer="71"><label for="ex1t4a1">Q4: orders with a Unit Price of at least $1000:</label><input id="ex1t4a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Arrow in <code>J1</code> → <strong>Number Filters</strong>. The Total Row cell <code>J9428</code> can Count.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Arrow in <code>J1</code> → Number Filters → <strong>Greater Than Or Equal To</strong> → <code>1000</code> → OK. <code>J9428</code> → arrow → <strong>Count</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>71</strong> rows. <code>J9428</code> shows 71 (<span class="f">=SUBTOTAL(103,[Unit Price])</span> counts only the rows you can see). The status bar says 71 of 9426 records found. <span class="f">=COUNTIF(J2:J9427,&quot;&gt;=1000&quot;)</span> gives the same number. <em>Greater Than</em> gives 66, because 5 rows cost exactly $1000.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex1t4"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q4</strong>: the filtered table, J9428, and the status bar at the bottom left.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 4">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex1t4f">Or pick the file:</label><input id="ex1t4f" type="file" accept="image/*"></div><img alt="Your screenshot for task 4" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q5 · Missing regions</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q5.</strong> How many missing values are there in the Region column? You must use a function for this exercise.<br>Work on sheet <code>Q5</code>. In <code>F9430</code> type <code>Missing:</code> and in <code>G9430</code> write the function.</p>
+    <div class="nudge"><b>Nudge</b>One function counts empty cells. Its name says so.</div>
+    <div class="answers"><div class="ans" data-answer="2"><label for="ex1t5a1">Q5: missing values in the Region column:</label><input id="ex1t5a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>COUNTBLANK counts the empty cells in a range.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><span class="f">=COUNTBLANK(G2:G9427)</span>. Leave out the header (row 1) and the Total Row (row 9428).</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><code>G9430</code> <span class="f">=COUNTBLANK(G2:G9427)</span> = <strong>2</strong>. The blank Region cells are in rows 2431 and 6804.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex1t5"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q5</strong> showing F9430:G9430. Click G9430 first so the formula shows.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 5">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex1t5f">Or pick the file:</label><input id="ex1t5f" type="file" accept="image/*"></div><img alt="Your screenshot for task 5" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<!-- ============ EXERCISE 2 ============ -->
+<section class="card" data-card="ex2">
+  <div class="card-head"><div class="eyebrow">Exercise 2 · Q6 to Q10 · Sheets: Q6 to Q10</div><h2>New columns, counts and filters</h2></div>
+  <p class="q">Question: Which orders ship with UPS, and which orders match a date or an item?</p>
+  <p class="why">Two new columns with a function, then COUNTIF, a date filter, and Paste Values.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Q6 · Region Code column</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q6.</strong> In column M, create a heading named "Region Code". All cells in this column should contain a formula or function that extracts the first letter of the values in the Region column.<br>Work on sheet <code>Q6</code>. The Region column is <code>G</code>.</p>
+    <div class="nudge"><b>Nudge</b>Which function takes characters from the left side of a text?</div>
+    <div class="answers"><div class="ans" data-answer="1949"><label for="ex2t1a1">Self-check: filter column M to W. How many records found?</label><input id="ex2t1a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p><code>LEFT(text, how many characters)</code>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><code>M1</code>: <code>Region Code</code>. <code>M2</code>: <span class="f">=LEFT(G2,1)</span>. The Table fills it down.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><span class="f">=LEFT(G2,1)</span> (or <span class="f">=LEFT([@Region],1)</span>). <code>M2</code> shows E. Filter M to W: <strong>1949 of 9426 records found</strong>, the same as the West rows. The 2 rows with a blank Region show nothing in M. Clear the filter when you're done.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t1"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q6</strong> with column M. Click M2 first so the formula shows.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 1">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t1f">Or pick the file:</label><input id="ex2t1f" type="file" accept="image/*"></div><img alt="Your screenshot for task 1" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q7 · Shipper column</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q7.</strong> In column M, create a heading named "Shipper". All cells in this column should contain a formula or function that enters a value of "UPS" for orders in the West region and "Fedex" for orders in any other region.<br>Work on sheet <code>Q7</code>. Then filter column M to count each shipper.</p>
+    <div class="nudge"><b>Nudge</b>One test, two possible answers. Which function picks between two answers?</div>
+    <div class="answers"><div class="ans" data-answer="1949"><label for="ex2t2a1">Self-check: how many rows say UPS?</label><input id="ex2t2a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="7477"><label for="ex2t2a2">Self-check: how many rows say Fedex?</label><input id="ex2t2a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p><code>IF(test, value if true, value if false)</code>. Text inside a formula goes in double quotes.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><code>M2</code>: <span class="f">=IF(G2=&quot;West&quot;,&quot;UPS&quot;,&quot;Fedex&quot;)</span></p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><span class="f">=IF(G2=&quot;West&quot;,&quot;UPS&quot;,&quot;Fedex&quot;)</span>. UPS <strong>1,949</strong>, Fedex <strong>7,477</strong>. They add up to 9,426. The 2 rows with a blank Region get Fedex, because a blank is not "West".</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t2"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q7</strong> with column M. Click M2 first so the formula shows.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 2">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t2f">Or pick the file:</label><input id="ex2t2f" type="file" accept="image/*"></div><img alt="Your screenshot for task 2" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q8 · Count the 1s</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q8.</strong> Below the table, enter a formula or function that shows how many values in column J (Unit Price) are equal to 1. Apply the same formula to columns K and L.<br>Work on sheet <code>Q8</code>. Write it in <code>J9430</code>, then copy it to <code>K9430</code> and <code>L9430</code>.</p>
+    <div class="nudge"><b>Nudge</b>Count the cells that meet one condition. Write it once, then use the Fill Handle to the right.</div>
+    <div class="answers"><div class="ans" data-answer="42"><label for="ex2t3a1">J9430: Unit Price values equal to 1:</label><input id="ex2t3a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="628"><label for="ex2t3a2">K9430: Order Quantity values equal to 1:</label><input id="ex2t3a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="1254"><label for="ex2t3a3">L9430: Shipping Cost values equal to 1:</label><input id="ex2t3a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p><code>COUNTIF(range, criteria)</code>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><code>J9430</code>: <span class="f">=COUNTIF(J2:J9427,1)</span>. Drag the Fill Handle from <code>J9430</code> to <code>L9430</code>. The J changes to K and L by itself.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>J <strong>42</strong>, K <strong>628</strong>, L <strong>1,254</strong>. Relative references move with the formula: <code>K9430</code> says <span class="f">=COUNTIF(K2:K9427,1)</span>.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t3"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q8</strong> showing J9430:L9430. Click K9430 first so the formula shows.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 3">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t3f">Or pick the file:</label><input id="ex2t3f" type="file" accept="image/*"></div><img alt="Your screenshot for task 3" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q9 · Orders from May 1 to May 8, 2018</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q9.</strong> How many orders were placed between 5/1/2018 and 5/8/2018?<br>Work on sheet <code>Q9</code>. Filter column <code>I</code> (Order Date). Count both end days: 5/1 and 5/8 are included.</p>
+    <div class="nudge"><b>Nudge</b>Date Filters has a choice called Between.</div>
+    <div class="answers"><div class="ans" data-answer="52"><label for="ex2t4a1">Q9: orders placed from 5/1/2018 to 5/8/2018:</label><input id="ex2t4a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Arrow in <code>I1</code> → <strong>Date Filters → Between</strong>. The Total Row cell <code>I9428</code> can Count.</p></div></details>
+      <details><summary>Hint 2</summary><div><p><strong>is after or equal to</strong> <code>5/1/2018</code>, And, <strong>is before or equal to</strong> <code>5/8/2018</code> → OK. <code>I9428</code> → arrow → <strong>Count</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>52</strong> rows (52 of 9426 records found). 8 of them are from 5/1 and 5 from 5/8. If you chose <em>is after</em> instead of <em>is after or equal to</em>, you lost the 5/1 orders.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t4"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q9</strong>: the filtered table, I9428, and the status bar.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 4">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t4f">Or pick the file:</label><input id="ex2t4f" type="file" accept="image/*"></div><img alt="Your screenshot for task 4" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q10 · JM Magazine Binder</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q10.</strong> Find only those orders for an item named "JM Magazine Binder." Copy the results below your table (starting in A9430) without any formatting.<br>Work on sheet <code>Q10</code>. Copy the data rows only, not the header row.</p>
+    <div class="nudge"><b>Nudge</b>Filter first. Then copy what you see and paste only the values.</div>
+    <div class="answers"><div class="ans" data-answer="3"><label for="ex2t5a1">Self-check: how many rows did you paste?</label><input id="ex2t5a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="85878"><label for="ex2t5a2">Self-check: what Order ID is in A9430?</label><input id="ex2t5a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>The Item filter list has a Search box. Paste Values is on <strong>Home → Paste arrow → Values (123)</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Arrow in <code>B1</code> → Search box: type <code>JM Magazine Binder</code> → OK. Name Box → <code>A2:L9427</code> → <kbd>Enter</kbd> → <kbd>Ctrl</kbd> + <kbd>C</kbd> (only the rows you see are copied). Click <code>A9430</code> → <strong>Home → Paste arrow → Values (123)</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>3</strong> rows land in <code>A9430:L9432</code>. <code>A9430</code> is Order ID <strong>85878</strong>. The dates show as numbers (like 44112) because Paste Values drops the date format. That is what "without any formatting" means.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t5"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q10</strong> showing the pasted rows A9430:L9432.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 5">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t5f">Or pick the file:</label><input id="ex2t5f" type="file" accept="image/*"></div><img alt="Your screenshot for task 5" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<!-- ============ EXERCISE 3 ============ -->
+<section class="card" data-card="ex3">
+  <div class="card-head"><div class="eyebrow">Exercise 3 · Q11 to Q14 · Sheets: Q11 to Q14</div><h2>Find the problems</h2></div>
+  <p class="q">Question: Which Order IDs repeat, which items cost the most, and which number looks wrong?</p>
+  <p class="why">Conditional Formatting colors the cells for you. Basic statistics point to a number that doesn't fit.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Q11 · Duplicate Order IDs</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q11.</strong> Use the feature that applies a yellow fill color to any duplicate Order IDs. How many duplicates exist?<br>Work on sheet <code>Q11</code>. Color <code>A2:A9427</code>. Then filter column <code>A</code> by the yellow color and count with the Total Row cell <code>A9428</code>.</p>
+    <div class="nudge"><b>Nudge</b>Conditional Formatting has a rule for duplicates. To count colored cells, filter by color.</div>
+    <div class="answers"><div class="ans" data-answer="5212"><label for="ex3t1a1">Q11: how many duplicates (yellow cells) exist?</label><input id="ex3t1a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p><strong>Home → Conditional Formatting → Highlight Cells Rules → Duplicate Values</strong>. Then arrow in <code>A1</code> → <strong>Filter by Color → Filter by Cell Color</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>In the Duplicate Values box, the format list starts on <strong>Light Red Fill with Dark Red Text</strong>. The question asks for yellow, so pick <strong>Yellow Fill with Dark Yellow Text</strong> → OK. Arrow in <code>A1</code> → Filter by Color → Filter by Cell Color → the yellow. <code>A9428</code> → arrow → <strong>Count</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>5,212</strong> cells turn yellow (5212 of 9426 records found). These are all the rows whose Order ID appears more than once. 2,241 different Order IDs repeat. One order with 3 items has 3 rows, so a repeated Order ID is not an error in this file.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex3t1"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q11</strong> filtered to yellow, with the count in A9428 and the status bar.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 1">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t1f">Or pick the file:</label><input id="ex3t1f" type="file" accept="image/*"></div><img alt="Your screenshot for task 1" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q12 · Top 25 prices</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q12.</strong> Use the feature that applies a green fill color to the top 25 most expensive (Unit Price) items. Which Category do most of these expensive items belong to?<br>Work on sheet <code>Q12</code>. Color <code>J2:J9427</code>. Then filter column <code>J</code> by the green color and look at column <code>D</code> (Category).</p>
+    <div class="nudge"><b>Nudge</b>Top/Bottom Rules can do more than 10. Change the number.</div>
+    <div class="answers"><div class="ans" data-answer="28"><label for="ex3t2a1">How many cells turned green?</label><input id="ex3t2a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="office machines"><label for="ex3t2a2">Q12: which Category do most of them belong to?</label><input id="ex3t2a2" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p><strong>Home → Conditional Formatting → Top/Bottom Rules → Top 10 Items</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Change 10 to <code>25</code> → <strong>Green Fill with Dark Green Text</strong> → OK. Arrow in <code>J1</code> → Filter by Color → Filter by Cell Color → the green. Read column D.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>28</strong> cells turn green, not 25. The 25th highest price is $2,550, and 7 rows have that price, so Excel colors all of them. Office Machines 20 · Copiers and Fax 8. Most belong to <strong>Office Machines</strong>.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex3t2"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q12</strong> filtered to green, showing columns D and J.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 2">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t2f">Or pick the file:</label><input id="ex3t2f" type="file" accept="image/*"></div><img alt="Your screenshot for task 2" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q13 · Find the outlier</h3><span class="tag core">CORE</span><span class="tag guided">GUIDED</span></div>
+    <p><strong>Q13.</strong> Perform some basic statistical analysis on the last three columns to help you find outliers. Did you find an outlier that is a likely error? If so, indicate the column and the value.<br>Work on sheet <code>Q13</code>. In <code>I9430:I9433</code> type AVERAGE, MEDIAN, MIN, MAX. In <code>J9430:L9433</code> find each one for columns J, K and L. Then add a Note on the cell you think is wrong that says why.</p>
+    <div class="nudge"><b>Guided start</b><ol><li>Click <code>I9430</code>, type <code>AVERAGE</code>, and type <code>MEDIAN</code>, <code>MIN</code>, <code>MAX</code> in the three cells below it.</li><li>In <code>J9430</code> type <span class="f">=AVERAGE(J2:J9427)</span>. Write MEDIAN, MIN and MAX the same way in <code>J9431:J9433</code>.</li><li>Select <code>J9430:J9433</code> and drag the Fill Handle to column L. Now look at each MAX next to the rest of its column.</li></ol></div>
+    <div class="answers"><div class="ans" data-answer="shipping cost"><label for="ex3t3a1">Q13: which column has the likely error?</label><select id="ex3t3a1"><option value="">Choose…</option><option value="unit price">Unit Price</option><option value="order quantity">Order Quantity</option><option value="shipping cost">Shipping Cost</option></select><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="265"><label for="ex3t3a2">Q13: what is the value?</label><input id="ex3t3a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>A big MAX is not always an error. Sort the column from largest to smallest and look at the next few values. Is the biggest one far from the rest? Does it make sense for that item?</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Arrow in <code>L1</code> → <strong>Sort Largest to Smallest</strong>. Compare the top value with the next one, then filter column B to that item and compare its other shipping costs. Do the same for J and K. Right-click the cell → <strong>New Note</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Stats (J, K, L): AVERAGE 88.29, 13.80, 12.83 · MEDIAN 21, 10, 6 · MIN 1, 1, 0 · MAX 6,783, 170, 265.<br>Answer: <strong>Shipping Cost, 265</strong>. It is Order 91261 (row 8963 on <code>data</code>): 12 units of Global Leather and Oak Executive Chair, Black. The next highest shipping cost is 154. The same chair ships for $65 in 13 other orders, even an order of 12 chairs. The Unit Price MAX (6,783) is real: the same item has that price in all 7 of its rows. The Order Quantity MAX (170) sits right next to 167 and 162.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex3t3"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q13</strong> showing I9430:L9433 and your Note.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 3">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t3f">Or pick the file:</label><input id="ex3t3f" type="file" accept="image/*"></div><img alt="Your screenshot for task 3" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q14 · Delete City and Nevada</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q14.</strong> Delete the City column. Delete all orders sent to the State of Nevada. If you did this correctly, your table (including the total row) should now end at row 9385.<br>Work on sheet <code>Q14</code>, a copy of <code>data</code>. Never delete anything on the <code>data</code> sheet.</p>
+    <div class="nudge"><b>Nudge</b>Delete the column first. Then filter State to Nevada and delete the rows you see.</div>
+    <div class="answers"><div class="ans" data-answer="43"><label for="ex3t4a1">Self-check: how many Nevada rows did you delete?</label><input id="ex3t4a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="9385"><label for="ex3t4a2">Self-check: what row is your Total row on now?</label><input id="ex3t4a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Right-click a cell in the column → <strong>Delete → Table Columns</strong>. To delete rows: filter to Nevada, select only the Nevada row numbers, right-click a selected row number → <strong>Delete</strong> (or <strong>Delete Row</strong>). The Total Row (row 9428) stays on screen when you filter. Don't select it.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Right-click <code>E1</code> → Delete → Table Columns. State is now column <code>E</code>. Arrow in <code>E1</code> → uncheck (Select All) → check <strong>Nevada</strong> → OK. Click row number <strong>3116</strong> (the first Nevada row), hold <kbd>Shift</kbd>, click row number <strong>9404</strong> (the last Nevada row, directly above the Total Row) → right-click row number 9404 → <strong>Delete</strong> (or <strong>Delete Row</strong>). Excel deletes only the rows you can see. Arrow in <code>E1</code> → <strong>Clear Filter</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>43</strong> Nevada rows. The Total row is now row <strong>9385</strong>: 9,426 − 43 = 9,383 data rows, plus the header and the Total row. Still on row 9428? Look at the sheet tab: you may have deleted on a different sheet. No Total Row at all? It was in your selection and got deleted: <strong>Table Design → Total Row</strong> turns it back on.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex3t4"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q14</strong> showing the last rows of the table and the Total row on row 9385.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 4">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t4f">Or pick the file:</label><input id="ex3t4f" type="file" accept="image/*"></div><img alt="Your screenshot for task 4" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<!-- ============ EXERCISE 4 ============ -->
+<section class="card" data-card="ex4">
+  <div class="card-head"><div class="eyebrow">Exercise 4 · Q15 to Q19 · New PivotTable sheets</div><h2>PivotTables</h2></div>
+  <p class="q">Question: Which department, state, region and segment stand out?</p>
+  <p class="why">Every PivotTable comes from the Table on the <code>data</code> sheet. Each one lands on its own new sheet: rename it to the question number.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Q15 · Quantity by department</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q15.</strong> Create a PivotTable from the dataset in your Data sheet. Display the total Order Quantity for each of the three Departments. Sort from lowest to highest values. Which department has the fewest items?<br>Rename the new sheet <code>Q15</code>.</p>
+    <div class="nudge"><b>Nudge</b>Click one cell in the table on <code>data</code> first. Then Insert → PivotTable.</div>
+    <div class="answers"><div class="ans" data-answer="furniture"><label for="ex4t1a1">Q15: which department has the fewest items?</label><input id="ex4t1a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="26652"><label for="ex4t1a2">Its total Order Quantity:</label><input id="ex4t1a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p><strong>Insert → PivotTable → From Table/Range → New Worksheet → OK</strong>. Drag fields from the Field List into Rows and Values.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Department → <strong>Rows</strong>. Order Quantity → <strong>Values</strong> (Sum of Order Quantity). Right-click a number → <strong>Sort → Sort Smallest to Largest</strong>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Furniture 26,652 · Technology 31,870 · Office Supplies 71,542. Fewest: <strong>Furniture</strong>.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex4t1"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q15</strong> with the sorted PivotTable.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 1">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex4t1f">Or pick the file:</label><input id="ex4t1f" type="file" accept="image/*"></div><img alt="Your screenshot for task 1" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q16 · Average shipping by state</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q16.</strong> Create a PivotTable from the dataset in your Data sheet. Display the average Shipping Cost per State. Sort from highest to lowest values. Format all averages to two decimal places. Which state has the highest average shipping costs?<br>Rename the new sheet <code>Q16</code>.</p>
+    <div class="nudge"><b>Nudge</b>Values start as Sum. Change how the field is summarized.</div>
+    <div class="answers"><div class="ans" data-answer="indiana"><label for="ex4t2a1">Q16: which state has the highest average shipping cost?</label><input id="ex4t2a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="16.7023" data-tol="0.006"><label for="ex4t2a2">Its average (2 decimals):</label><input id="ex4t2a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Right-click a number → <strong>Summarize Values By → Average</strong>. Right-click a number → <strong>Number Format</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>State → Rows. Shipping Cost → Values → right-click → Summarize Values By → Average. Right-click → Number Format → Number, 2 decimal places → OK. Right-click → Sort → Sort Largest to Smallest.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>Indiana 16.70</strong>, then Vermont 16.20, Wyoming 16.00. A PivotTable Average skips blank Shipping Cost cells.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex4t2"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q16</strong> showing the top of the sorted PivotTable.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 2">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex4t2f">Or pick the file:</label><input id="ex4t2f" type="file" accept="image/*"></div><img alt="Your screenshot for task 2" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q17 · Orders by region</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q17.</strong> Create a PivotTable from the dataset in your Data sheet. Display the four Regions alongside a count of how many orders went to each of the regions. Filter out the blanks. Sort from highest to lowest values. Which region had the most orders?<br>Rename the new sheet <code>Q17</code>.</p>
+    <div class="nudge"><b>Nudge</b>Count, not Sum. Order ID is a number, so Excel starts it as Sum.</div>
+    <div class="answers"><div class="ans" data-answer="east"><label for="ex4t3a1">Q17: which region had the most orders?</label><input id="ex4t3a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="3098"><label for="ex4t3a2">How many orders went there?</label><input id="ex4t3a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Right-click a number → <strong>Summarize Values By → Count</strong>. The <strong>Row Labels</strong> arrow has a list where you can uncheck (blank).</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Region → Rows. Order ID → Values → right-click → Summarize Values By → Count. Row Labels arrow → uncheck <strong>(blank)</strong> → OK. Sort Largest to Smallest.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>East 3,098 · Central 2,589 · West 1,949 · South 1,788. Grand Total 9,424 (9,426 minus the 2 blanks). Most: <strong>East</strong>.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex4t3"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q17</strong> with the four regions sorted.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 3">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex4t3f">Or pick the file:</label><input id="ex4t3f" type="file" accept="image/*"></div><img alt="Your screenshot for task 3" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q18 · Department and state</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q18.</strong> Create a PivotTable from the dataset in your Data sheet. For which Department in which State did we collect the most shipping fees from? Hint: Use the feature that highlights the top value in your table to quickly find the answer.<br>Rename the new sheet <code>Q18</code>.</p>
+    <div class="nudge"><b>Nudge</b>Two fields: one in Rows, one in Columns. Then highlight the top 1 inside the table, not the Grand Totals.</div>
+    <div class="answers"><div class="ans" data-answer="furniture"><label for="ex4t4a1">Q18: which Department?</label><input id="ex4t4a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="texas"><label for="ex4t4a2">In which State?</label><input id="ex4t4a2" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="6006"><label for="ex4t4a3">Shipping fees collected there:</label><input id="ex4t4a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>State → Rows, Department → Columns, Shipping Cost → Values. Then <strong>Home → Conditional Formatting → Top/Bottom Rules → Top 10 Items</strong>, changed to 1.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Select only the inside numbers <code>B5:D53</code>. Leave out row 54 and column E (the Grand Totals). Then Top 10 Items → <code>1</code> → OK.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>Furniture in Texas: 6,006</strong>. If the Grand Totals are in your selection, the cell that lights up is the Grand Total (120,866), which answers nothing. The next highest inside cell is Furniture in California, 5,003.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex4t4"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q18</strong> showing the highlighted cell with its state and department.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 4">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex4t4f">Or pick the file:</label><input id="ex4t4f" type="file" accept="image/*"></div><img alt="Your screenshot for task 4" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q19 · Share of Corporate orders</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q19.</strong> Create a PivotTable from the dataset in your Data sheet. Configure the table properly to answer this question about the Customer Segment field: What percentage of the orders went to Corporate customers?<br>Rename the new sheet <code>Q19</code>.</p>
+    <div class="nudge"><b>Nudge</b>Count the orders first. Then show each count as a share of the total.</div>
+    <div class="answers"><div class="ans" data-answer="35.81" data-tol="0.006"><label for="ex4t5a1">Q19: percentage of orders that went to Corporate customers (2 decimals):</label><input id="ex4t5a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Right-click a number → <strong>Show Values As → % of Grand Total</strong>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Customer Segment → Rows. Order ID → Values → right-click → Summarize Values By → Count. Right-click → Show Values As → % of Grand Total.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Corporate <strong>35.81%</strong> (3,375 of 9,426 rows). Home Office 24.57% · Consumer 20.09% · Small Business 19.53%.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex4t5"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q19</strong> with the percentages.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 5">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex4t5f">Or pick the file:</label><input id="ex4t5f" type="file" accept="image/*"></div><img alt="Your screenshot for task 5" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<!-- ============ EXERCISE 5 ============ -->
+<section class="card" data-card="ex5">
+  <div class="card-head"><div class="eyebrow">Exercise 5 · Q20 to Q22 · New sheets</div><h2>Grouping and Power Query</h2></div>
+  <p class="q">Question: Which price range costs the most to ship, what sells most in Florida, and can we load a JSON file?</p>
+  <p class="why">Grouping turns hundreds of prices into a few ranges. Power Query opens a JSON file one layer at a time.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Q20 · Price groups</h3><span class="tag core">CORE</span><span class="tag guided">GUIDED</span></div>
+    <p><strong>Q20.</strong> Create a PivotTable from the dataset in your Data sheet. Convert the Unit Price values to ranges in increments of 500 (e.g. 1-500, 501-1000, ... 6501-7000). Question: Which price group has, on average, the highest shipping costs? Be sure to round all shipping costs to two decimal places.<br>Rename the new sheet <code>Q20</code>.</p>
+    <div class="nudge"><b>Guided start</b><ol><li>Insert → PivotTable (from the data table) → New Worksheet. Unit Price → <strong>Rows</strong>. Shipping Cost → <strong>Values</strong> → right-click → Summarize Values By → <strong>Average</strong>.</li><li>Right-click any price in column A → <strong>Group</strong>.</li><li>Starting at: <code>1</code>. Ending at: leave <code>6783</code>. By: <code>500</code> → OK. Then format and sort the averages.</li></ol></div>
+    <div class="answers"><div class="ans" data-answer="501-1000|501 - 1000|501 to 1000"><label for="ex5t1a1">Q20: which price group has the highest average shipping cost?</label><input id="ex5t1a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="33.6169" data-tol="0.006"><label for="ex5t1a2">Its average (2 decimals):</label><input id="ex5t1a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Group is on the right-click menu of a row label (a price in column A), not of a number in the Values column.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Right-click a number → Number Format → Number, 2 decimal places. Right-click → Sort → Sort Largest to Smallest.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>501-1000 at 33.62</strong>. 2501-3000 30.00 · 3001-3500 24.00 · 6501-7000 24.00 · 1501-2000 21.05 · 1001-1500 18.18 · 2001-2500 15.00 · 1-500 12.43 · 3501-4000 9.00. 9 groups show, because Excel only lists ranges that have rows. Most rows (9,206) are in 1-500.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex5t1"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q20</strong> with the sorted price groups.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 1">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex5t1f">Or pick the file:</label><input id="ex5t1f" type="file" accept="image/*"></div><img alt="Your screenshot for task 1" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q21 · Florida categories</h3><span class="tag core">CORE</span></div>
+    <p><strong>Q21.</strong> Create a PivotTable from the dataset in your Data sheet. Configure the table to focus ONLY on the State of Florida. Show the total Order Quantity for each product Category. Which product category was associated with the highest order quantity?<br>Rename the new sheet <code>Q21</code>.</p>
+    <div class="nudge"><b>Nudge</b>A field in the Filters area filters the whole PivotTable.</div>
+    <div class="answers"><div class="ans" data-answer="paper"><label for="ex5t2a1">Q21: which category has the highest order quantity in Florida?</label><input id="ex5t2a1" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="817"><label for="ex5t2a2">Its total Order Quantity:</label><input id="ex5t2a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>State → <strong>Filters</strong>. Then use the filter arrow in <code>B1</code>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>State → Filters → arrow in <code>B1</code> → <strong>Florida</strong> → OK. Category → Rows. Order Quantity → Values. Sort Largest to Smallest.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Paper 817 · Office Furnishings 705 · Computer Peripherals 611. Florida total 5,163. Highest: <strong>Paper</strong>.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex5t2"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q21</strong> with Florida in B1 and the sorted categories.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 2">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex5t2f">Or pick the file:</label><input id="ex5t2f" type="file" accept="image/*"></div><img alt="Your screenshot for task 2" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q22 · Songs from a JSON file</h3><span class="tag core">CORE</span><span class="tag guided">GUIDED</span></div>
+    <p><strong>Q22.</strong> Create a new sheet. Download the exam1practice.json. Connect to this JSON file using PowerQuery. Note the following requirements/steps: a) In the first step, click "List" next to "songs." You should now have 407 records to convert to a table. b) Of the available columns, keep only release_date and title. Do not use the original column name. c) Convert the release_date column to a Date data type. d) Load this table into Excel. Sort dates from oldest to newest. Rename the sheet to Q22 and delete any blank sheets.<br>"Do not use the original column name" means: uncheck <strong>Use original column name as prefix</strong>.</p>
+    <div class="nudge"><b>Guided start</b><ol><li><strong>Data → Get Data → From File → From JSON</strong> → pick <code>exam1practice.json</code> in Downloads → Import.</li><li>Power Query shows one record with 19 fields. Find <strong>songs</strong> and click the word <strong>List</strong> next to it.</li><li><strong>Transform → To Table</strong> → OK. Then click the expand button (two arrows) in the Column1 header.</li></ol></div>
+    <div class="answers"><div class="ans" data-answer="407"><label for="ex5t3a1">Self-check: how many rows loaded?</label><input id="ex5t3a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="136"><label for="ex5t3a2">Self-check: how many rows have no release_date?</label><input id="ex5t3a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="1/1/2002|01/01/2002|2002-01-01|1/1/02"><label for="ex5t3a3">Self-check: what is the oldest release_date (cell A2)?</label><input id="ex5t3a3" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>In the expand box, uncheck <strong>(Select All Columns)</strong>, then check only <strong>release_date</strong> and <strong>title</strong>. Uncheck <strong>Use original column name as prefix</strong> at the bottom.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Click the <strong>ABC123</strong> icon in the release_date header → <strong>Date</strong>. <strong>Home → Close &amp; Load</strong>. In Excel: arrow in <code>A1</code> → <strong>Sort Oldest to Newest</strong>. Rename the new sheet <code>Q22</code>. Right-click the empty sheet you made first → Delete.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p><strong>407</strong> rows in <code>A2:B408</code>. 271 have a date, from 1/1/2002 to 7/31/2020. The other <strong>136</strong> are blank (null in Power Query) and sort to the bottom, rows 273 to 408. The blanks are not your mistake: the file has no date for those songs.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex5t3"><b>Your screenshot</b><p class="what">Take a screenshot of sheet <strong>Q22</strong> showing the top rows, with 1/1/2002 in A2.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 3">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex5t3f">Or pick the file:</label><input id="ex5t3f" type="file" accept="image/*"></div><img alt="Your screenshot for task 3" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your instructor if you get stuck.</span></div></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var KEY="cap1788-exam01-practice-v1", state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  var cards=[].slice.call(document.querySelectorAll("[data-card]"));
+  function paint(){
+    var n=0;
+    cards.forEach(function(c){
+      var on=!!state[c.dataset.card], b=c.querySelector(".donebtn");
+      c.classList.toggle("done",on); b.classList.toggle("on",on);
+      b.textContent=on?"✓ Done (click to undo)":"I finished this exercise";
+      if(on)n++;
+    });
+    document.getElementById("ptext").textContent=n+" of "+cards.length+" exercises done";
+    document.getElementById("pbar").style.width=(100*n/cards.length)+"%";
+  }
+  cards.forEach(function(c){
+    c.querySelector(".donebtn").addEventListener("click",function(){state[c.dataset.card]=!state[c.dataset.card];save();paint();});
+  });
+  [].slice.call(document.querySelectorAll(".ans")).forEach(function(row){
+    var input=row.querySelector("input,select"), fb=row.querySelector(".fb"),
+        ok=row.dataset.answer.split("|"), tol=parseFloat(row.dataset.tol||"0");
+    function check(){
+      var raw=String(input.value||"").trim().toLowerCase().replace(/\s+/g," ");
+      if(raw===""){fb.className="fb no";fb.textContent=input.tagName==="SELECT"?"Pick an answer first.":"Type an answer first.";return;}
+      var v=raw.replace(/[,$%\s]/g,"");
+      var good=ok.some(function(a){
+        var n=parseFloat(a), x=parseFloat(v);
+        if(input.tagName!=="SELECT" && !isNaN(n) && /^-?\d*\.?\d+$/.test(a) && /^-?\d*\.?\d+$/.test(v)) return Math.abs(x-n)<=(tol||1e-9);
+        return raw===a;
+      });
+      if(good){fb.className="fb yes";fb.textContent="✓ Correct!";}
+      else{fb.className="fb no";fb.textContent="Not yet. Check your work, then open Hint 1.";}
+    }
+    row.querySelector("button").addEventListener("click",check);
+    input.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  });
+
+  // ---- screenshots: kept in this browser (IndexedDB), keyed by page + task ----
+  var PAGEKEY="cap1788-exam01-practice-v1", dbp=null, active=null;
+  function db(){
+    if(dbp) return dbp;
+    dbp=new Promise(function(res){
+      try{
+        var r=indexedDB.open("cap1788-shots",1);
+        r.onupgradeneeded=function(){r.result.createObjectStore("shots");};
+        r.onsuccess=function(){res(r.result);};
+        r.onerror=function(){res(null);};
+      }catch(e){res(null);}
+    });
+    return dbp;
+  }
+  function put(k,v){return db().then(function(d){if(!d)return;try{var tx=d.transaction("shots","readwrite");v===null?tx.objectStore("shots").delete(k):tx.objectStore("shots").put(v,k);}catch(e){}});}
+  function get(k){return db().then(function(d){return new Promise(function(res){if(!d)return res(null);try{var q=d.transaction("shots").objectStore("shots").get(k);q.onsuccess=function(){res(q.result||null);};q.onerror=function(){res(null);};}catch(e){res(null);}});});}
+  function shrink(file){
+    return new Promise(function(res,rej){
+      var fr=new FileReader();
+      fr.onload=function(){
+        var im=new Image();
+        im.onload=function(){
+          var w=im.naturalWidth,h=im.naturalHeight,max=1600;
+          if(w>max){h=Math.round(h*max/w);w=max;}
+          var c=document.createElement("canvas");c.width=w;c.height=h;
+          c.getContext("2d").drawImage(im,0,0,w,h);
+          try{res(c.toDataURL("image/jpeg",0.85));}catch(e){res(fr.result);}
+        };
+        im.onerror=rej; im.src=fr.result;
+      };
+      fr.onerror=rej; fr.readAsDataURL(file);
+    });
+  }
+  function show(box,url){
+    var img=box.querySelector("img"), clr=box.querySelector(".clear"), drop=box.querySelector(".drop");
+    if(url){img.src=url;img.hidden=false;clr.hidden=false;box.classList.add("has");drop.innerHTML="Screenshot saved. Click here and press <kbd>Ctrl</kbd> + <kbd>V</kbd> to replace it.";}
+    else{img.removeAttribute("src");img.hidden=true;clr.hidden=true;box.classList.remove("has");drop.innerHTML="Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd>";}
+  }
+  function take(box,file){
+    if(!file||!/^image\//.test(file.type))return;
+    shrink(file).then(function(url){show(box,url);put(PAGEKEY+":"+box.dataset.shot,url);});
+  }
+  [].slice.call(document.querySelectorAll(".shot")).forEach(function(box){
+    var drop=box.querySelector(".drop");
+    function arm(){if(active)active.querySelector(".drop").classList.remove("armed");active=box;drop.classList.add("armed");}
+    drop.addEventListener("click",function(){drop.focus();arm();});
+    drop.addEventListener("focus",arm);
+    box.querySelector("input[type=file]").addEventListener("change",function(e){take(box,e.target.files[0]);e.target.value="";});
+    box.querySelector(".clear").addEventListener("click",function(){show(box,null);put(PAGEKEY+":"+box.dataset.shot,null);});
+    box.addEventListener("dragover",function(e){e.preventDefault();});
+    box.addEventListener("drop",function(e){e.preventDefault();if(e.dataTransfer&&e.dataTransfer.files[0])take(box,e.dataTransfer.files[0]);});
+    get(PAGEKEY+":"+box.dataset.shot).then(function(url){if(url)show(box,url);});
+  });
+  document.addEventListener("paste",function(e){
+    if(!active||!e.clipboardData||!active.contains(document.activeElement))return;
+    var items=[].slice.call(e.clipboardData.items||[]), it=items.filter(function(x){return x.type&&x.type.indexOf("image/")===0;})[0];
+    if(!it){active.querySelector(".drop").textContent="No picture on the clipboard. Take the screenshot first (Windows + Shift + S).";return;}
+    e.preventDefault(); take(active,it.getAsFile());
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
