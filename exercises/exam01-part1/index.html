@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Exam 1, Part 1</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#FAFAF7; --surface:#FFFFFF; --fg:#1F2328; --muted:#5B6168; --line:#E2E1DA;
+  --accent:#B02A5B; --accent-soft:#FBE6EE; --code-bg:#F2F1EC;
+  --ok:#1E7A46; --ok-soft:#E3F4EA; --no:#B03A2E;
+  --core:#1E7A46; --extra:#8A6D00; --extra-soft:#FFF4C2; --guided:#6C3483; --guided-soft:#F3E8F8;
+  --font-body:"Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  --font-mono:"JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#F08CB0; --accent-soft:#3A1B27; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; --guided:#D2A6E6; --guided-soft:#2E2236; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#F08CB0; --accent-soft:#3A1B27; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; --guided:#D2A6E6; --guided-soft:#2E2236; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:18px;line-height:1.6;margin:0}
+.wrap{max-width:800px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:22px}
+h1{font-size:2rem;line-height:1.2;margin:0;text-wrap:balance}
+h2{font-size:1.35rem;margin:0;text-wrap:balance}
+h3{font-size:1.1rem;margin:0}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+code,.f{font-family:var(--font-mono);font-size:.92em;background:var(--code-bg);padding:2px 7px;border-radius:5px;white-space:nowrap}
+.f{white-space:normal;word-break:break-all}
+kbd{font-family:var(--font-mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:3px;border-radius:5px;padding:0 6px;background:var(--surface)}
+.top{display:flex;flex-direction:column;gap:10px}
+.pages{display:flex;flex-wrap:wrap;gap:8px;font-size:.95rem}
+.pages a,.pages span{padding:2px 10px;border-radius:20px;border:1px solid var(--line);text-decoration:none}
+.pages span{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.progress{display:flex;align-items:center;gap:12px;font-weight:700}
+.bar{flex:1;height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.story{background:var(--accent-soft);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.rules{display:flex;flex-direction:column;gap:6px;margin:0;padding-left:22px}
+.tablebox{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--code-bg)}
+td.l{font-family:var(--font-mono);font-weight:700;width:3.2em;text-align:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:16px}
+.card.done{border-color:var(--ok)}
+.card-head{display:flex;flex-direction:column;gap:4px}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:20px;white-space:nowrap}
+.tag.core{background:var(--ok-soft);color:var(--core)}
+.tag.extra{background:var(--extra-soft);color:var(--extra)}
+.tag.guided{background:var(--guided-soft);color:var(--guided)}
+.q{font-size:1.1rem;font-weight:700}
+.why{color:var(--muted)}
+.task{border-top:2px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:12px}
+.task-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nudge{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;padding:8px 12px;font-size:.97rem}
+.nudge b{display:block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.nudge ol{margin:4px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.answers{display:flex;flex-direction:column;gap:10px;background:var(--code-bg);border-radius:10px;padding:14px}
+.ans{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ans label{flex:1 1 260px;font-weight:700}
+.ans input,.ans select{font:inherit;padding:6px 10px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.ans input{width:9.5em}
+.ans select{max-width:100%}
+.ans button,.donebtn,.dl{font:inherit;font-weight:700;padding:6px 14px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer;text-decoration:none;display:inline-block}
+.ans button:hover,.donebtn:hover,.dl:hover{background:var(--accent-soft)}
+.fb{flex-basis:100%;font-weight:700;font-size:.95rem}
+.fb:empty{display:none}
+.fb.yes{color:var(--ok)} .fb.no{color:var(--no)}
+details{border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+details>summary{cursor:pointer;padding:10px 14px;font-weight:700;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ ";color:var(--accent)}
+details[open]>summary::before{content:"▾ "}
+details>div{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px}
+details.sol>summary{color:var(--accent)}
+.hints{display:flex;flex-direction:column;gap:8px}
+.warn{border-left:4px solid var(--accent);padding:4px 0 4px 12px;font-size:.97rem;display:flex;flex-direction:column;gap:6px}
+.donebtn{align-self:flex-start}
+.donebtn.on{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.shot{border:2px dashed var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.shot.has{border-style:solid;border-color:var(--ok)}
+.shot b{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.shot .what{font-size:.97rem}
+.drop{border-radius:8px;background:var(--code-bg);padding:14px;text-align:center;cursor:pointer;font-weight:700;color:var(--muted)}
+.drop:focus-visible,.drop.armed{outline:3px solid var(--accent);outline-offset:2px;color:var(--fg)}
+.shot-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.shot input[type=file]{font:inherit;font-size:.9rem;max-width:100%}
+.shot img{max-width:100%;border:1px solid var(--line);border-radius:6px}
+.shot .clear{font:inherit;font-weight:700;padding:4px 12px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer}
+.shot .note{font-size:.85rem;color:var(--muted)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:480px){body{font-size:17px}h1{font-size:1.6rem}.ans input{width:100%}}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">CAP1788 · Part 1 · Exam 1 · Part 1 of 2 · Lectures 1 to 6</div>
+  <h1>Exam 1, Part 1</h1>
+  <nav class="pages" aria-label="Exam 1 parts"><span>Part 1</span> <a href="../exam01-part2/">Part 2</a></nav>
+  <div class="progress"><span id="ptext">0 of 3 exercises done</span><div class="bar"><span id="pbar"></span></div></div>
+</header>
+
+<section class="story">
+  <p><strong>The story:</strong> This dataset keeps track of how many vacation packages have been marketed to a large collection of customers. Those with a 1 in the last column ended up purchasing a package.</p>
+  <p><strong>One row = one customer.</strong> The file has 4,888 rows. Some columns have blank cells. The columns table below says which.</p>
+  <p>Each task on this page is one question of the exam, with the same number as in Canvas (Q1 to Q9). The question text is the same as in Canvas; the line <strong>Where to work</strong> is added here.</p>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>Before you start</h2>
+  <div class="warn"><p>In Canvas, click the <strong>exam file</strong> link in the quiz. The file <code>exam1-travel.csv</code> lands in Downloads. Open it from Downloads by double-clicking it. Then <strong>File → Save As → Browse → Desktop</strong>, name it <code>Exam1Part1-LastName</code>, type <strong>Excel Workbook (*.xlsx)</strong>. Then set up the <code>data</code> sheet in the next box.</p><p>Save often: <kbd>Ctrl</kbd> + <kbd>S</kbd>.</p></div>
+  <h2 style="margin-top:6px">How to use this page</h2>
+  <ul class="rules">
+    <li><strong>This is the exam.</strong> You type your answers in Canvas, not on this page. Each question here has the same number as in Canvas.</li>
+    <li>Each task tells you the goal and the question. It does <strong>not</strong> tell you every click. You know these tools. Read the goal, then read the one-line <strong>Nudge</strong>. There are no hints and no solutions.</li>
+    <li>Work on the sheet and in the cells each task names. Your instructor grades your workbook, so your work has to be there to find.</li>
+    <li>Click <strong>I finished this exercise</strong> to track your progress. It saves on this computer only.</li>
+    <li>The last question in Canvas is the upload. Your .xlsx file goes there.</li>
+    <li>You have one hour for this part.</li>
+  </ul>
+  <div class="warn"><p><strong>Show your work:</strong> every question gets its own sheet named Q1, Q2, and so on. Never answer on the <code>data</code> sheet. To make a question sheet: Right-click the <code>data</code> tab → <strong>Move or Copy</strong> → (move to end) → check <strong>Create a copy</strong> → OK. Double-click the new tab and rename it. Answers below the table start in row 4892, so row 4891 stays empty under the Total Row.</p></div>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>Set up the <code>data</code> sheet (once, before Q1)</h2>
+  <ol class="rules" style="padding-left:22px"><li>Click <code>A1</code>. <strong>Home → Format as Table</strong> → pick a style. Check that the range is <code>$A$1:$O$4889</code> and <strong>My table has headers</strong> is checked → OK.</li><li><strong>Table Design → Total Row</strong>. The Total Row is row 4890. Delete any value Excel put in it (usually in <code>O4890</code>): click that cell → arrow → <strong>None</strong>. Keep the word Total in <code>A4890</code>.</li><li>Double-click the sheet tab → type <code>data</code> → <kbd>Enter</kbd> → <kbd>Ctrl</kbd> + <kbd>S</kbd>.</li></ol><p>Your table now runs from row 1 (the headings) to row 4889, with the Total Row in row 4890. Every question sheet starts as a copy of this sheet.</p><p>This setup is part of the exam. Do it before Q1. The exam text writes DATA in capital letters. Excel treats data and DATA as the same sheet name.</p>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>The columns in the file</h2>
+  <div class="tablebox"><table>
+    <tr><th>Col</th><th>Name</th><th>What it means</th></tr>
+    <tr><td class="l">A</td><td>CustomerID</td><td>The customer's number, like 200000</td></tr>
+    <tr><td class="l">B</td><td>Gender</td><td>Female or Male</td></tr>
+    <tr><td class="l">C</td><td>Age</td><td>The customer's age in years. Some cells are blank</td></tr>
+    <tr><td class="l">D</td><td>MaritalStatus</td><td>Single, Married, or Divorced</td></tr>
+    <tr><td class="l">E</td><td>Children</td><td>How many children the customer has. Some cells are blank</td></tr>
+    <tr><td class="l">F</td><td>OrganizationType</td><td>The size of the customer's employer: Small Business, Medium Business, or Large Business</td></tr>
+    <tr><td class="l">G</td><td>Title</td><td>The customer's job level in the company</td></tr>
+    <tr><td class="l">H</td><td>Income</td><td>The customer's income. Some cells are blank</td></tr>
+    <tr><td class="l">I</td><td>PrefHotelStar</td><td>The hotel star rating the customer prefers. Some cells are blank</td></tr>
+    <tr><td class="l">J</td><td>AnnualTrips</td><td>How many trips the customer takes in a year. Some cells are blank</td></tr>
+    <tr><td class="l">K</td><td>TypeofContact</td><td>How the customer was contacted: Self Enquiry or Company Invited. Some cells are blank</td></tr>
+    <tr><td class="l">L</td><td>ProductPitched</td><td>The vacation package the salesperson pitched: Basic, Standard, Deluxe, Super Deluxe, or Luxury</td></tr>
+    <tr><td class="l">M</td><td>DurationOfPitch</td><td>How long the sales pitch lasted. Some cells are blank</td></tr>
+    <tr><td class="l">N</td><td>Follow-ups</td><td>How many follow-ups the salesperson did after the pitch. Some cells are blank</td></tr>
+    <tr><td class="l">O</td><td>Purchased?</td><td>A <code>1</code> means the customer bought a package. An empty cell means the customer did not</td></tr>
+  </table></div>
+</section>
+
+<!-- ============ EXERCISE 1 ============ -->
+<section class="card" data-card="ex1">
+  <div class="card-head"><div class="eyebrow">Exercise 1 · Q1 to Q3 · Sheets: Q1 to Q3</div><h2>Quick numbers</h2></div>
+  <p class="q">Question: What do the basic numbers say about these customers?</p>
+  <p class="why">Three short questions about the whole file.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Q1 · Average pitch time</h3><span class="tag core">CORE</span></div>
+    <p>Before answering this first question, please make sure you followed all of the important steps shown in the instructions:</p>
+    <p>1) Download and Open the exam file in Excel.</p>
+    <p>2) Save it as an Excel Workbook (.xlsx) file.</p>
+    <p>3) Convert your dataset into a nicely-formatted table with a total row. Delete any values that Excel may include in the total row.</p>
+    <p>4) Rename the current worksheet tab to DATA. This ensures that you always have an "original" dataset with proper formatting to copy and use for each exam question.</p>
+    <p>For this question, copy the DATA sheet and rename the new sheet to Q1. Then answer the question below in the Q1 sheet:</p>
+    <p>Question: What is the average duration of a sales pitch? Round to two decimal places.</p>
+    <p><strong>Where to work:</strong> Sheet <code>Q1</code>. DurationOfPitch is column <code>M</code>.</p>
+    <div class="nudge"><b>Nudge</b>The Total Row can do more than Sum. Each Total Row cell has its own list of functions.</div>
+    <div class="warn"><p>Answer in Canvas: <strong>Question 1</strong></p></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q2 · Median age</h3><span class="tag core">CORE</span></div>
+    <p>As before, copy the DATA sheet and rename the new sheet to Q2. Keep repeating this process for each question.</p>
+    <p>Question: What is the median age of the customers in this dataset?</p>
+    <p><strong>Where to work:</strong> Sheet <code>Q2</code>. Age is column <code>C</code>, rows 2 to 4889. Put your answer in a cell below your data table.</p>
+    <div class="nudge"><b>Nudge</b>The Total Row list has no median, so write the MEDIAN function in a cell yourself.</div>
+    <div class="warn"><p>Answer in Canvas: <strong>Question 2</strong></p></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q3 · Large business</h3><span class="tag core">CORE</span></div>
+    <p>Question: How many customers reported working for a large business?</p>
+    <p><strong>Where to work:</strong> Sheet <code>Q3</code>. OrganizationType is column <code>F</code>.</p>
+    <div class="nudge"><b>Nudge</b>A filter shows only some of the rows. The Total Row can count the rows you can see.</div>
+    <div class="warn"><p>Answer in Canvas: <strong>Question 3</strong></p></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<!-- ============ EXERCISE 2 ============ -->
+<section class="card" data-card="ex2">
+  <div class="card-head"><div class="eyebrow">Exercise 2 · Q4 to Q6 · Sheets: Q4 to Q6</div><h2>Age, pitch times and blanks</h2></div>
+  <p class="q">Question: How many customers are 40 or older, what is the gap between the longest and the shortest pitch, and how many ages are missing?</p>
+  <p class="why">Three questions about the Age and DurationOfPitch columns.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Q4 · 40 or older</h3><span class="tag core">CORE</span></div>
+    <p>Question: How many customers are 40 years or older?</p>
+    <p><strong>Where to work:</strong> Sheet <code>Q4</code>. Age is column <code>C</code>.</p>
+    <div class="nudge"><b>Nudge</b>"40 or older" includes 40. Number Filters has a choice for that.</div>
+    <div class="warn"><p>Answer in Canvas: <strong>Question 4</strong></p></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q5 · Highest, lowest and the difference</h3><span class="tag core">CORE</span></div>
+    <p>Two steps for this question, which you answer in these cells below your data table: type "Max:" in L4892, "Min:" in L4893 and "Diff:" in L4894, and put each result in column M of the same row.</p>
+    <p>1. Using functions, discover the highest and lowest values for the DurationOfPitch column.</p>
+    <p>2. Using subtraction, calculate the difference between the highest and lowest values. Use cell references, not typed numbers.</p>
+    <p>Question: What answer did you get after the calculation in step 2?</p>
+    <p><strong>Where to work:</strong> Sheet <code>Q5</code>. Labels in <code>L4892:L4894</code>, results in <code>M4892:M4894</code>.</p>
+    <div class="nudge"><b>Nudge</b>MAX and MIN each look at one column. Subtraction is the minus sign, not a function.</div>
+    <div class="warn"><p>Answer in Canvas: <strong>Question 5</strong></p></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q6 · Missing ages</h3><span class="tag core">CORE</span></div>
+    <p>Question: How many missing values are there in the Age column?</p>
+    <p><strong>Where to work:</strong> Sheet <code>Q6</code>. Age is column <code>C</code>, rows 2 to 4889. Put your answer in a cell below your data table.</p>
+    <div class="nudge"><b>Nudge</b>One function counts empty cells. Its name says so.</div>
+    <div class="warn"><p>Answer in Canvas: <strong>Question 6</strong></p></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<!-- ============ EXERCISE 3 ============ -->
+<section class="card" data-card="ex3">
+  <div class="card-head"><div class="eyebrow">Exercise 3 · Q7 to Q9 · Sheets: Q7 to Q9</div><h2>New columns and a search</h2></div>
+  <p class="q">Question: Which formula builds each new column, and how short was the shortest pitch that sold a package?</p>
+  <p class="why">Two new columns next to the Table, then one search of the data.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Q7 · Gender2 column</h3><span class="tag core">CORE</span></div>
+    <p>Create a new heading in cell P1 named Gender2. In P2, enter the appropriate formula that will extract the first letter in B2. If done correctly, cell P2 will only have either an "F" or "M" value. Make sure that this is done for all of column P to the end of your data table.</p>
+    <p>Question: What is the optimal strategy for extracting this letter?</p>
+    <p><strong>Where to work:</strong> Sheet <code>Q7</code>. Gender is column <code>B</code>. Heading in <code>P1</code>, formula in <code>P2</code>, filled down to <code>P4889</code>.</p>
+    <div class="nudge"><b>Nudge</b>Check your formula on one F row and one M row before you fill it down.</div>
+    <div class="warn"><p>Answer in Canvas: <strong>Question 7</strong></p></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q8 · Purchase2 column</h3><span class="tag core">CORE</span></div>
+    <p>Create a new heading in cell P1 named Purchase2. In P2, enter the appropriate formula that will analyze cell O2 and transform a value of 1 into "Yes" and empty cells into "No". If done correctly, cell P2 will only have either a Yes or No value. Make sure that this analysis is done for all of column P to the end of your data table.</p>
+    <p>Question: What is the optimal strategy for transforming this text?</p>
+    <p><strong>Where to work:</strong> Sheet <code>Q8</code>. Purchased? is column <code>O</code>. Heading in <code>P1</code>, formula in <code>P2</code>, filled down to <code>P4889</code>.</p>
+    <div class="nudge"><b>Nudge</b>Each row gets one of two answers. Words in a formula go in double quotes.</div>
+    <div class="warn"><p>Answer in Canvas: <strong>Question 8</strong></p></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Q9 · Shortest pitch that sold</h3><span class="tag core">CORE</span></div>
+    <p>Question: Which is the shortest-length sales pitch that resulted in a purchase?</p>
+    <p><strong>Where to work:</strong> Sheet <code>Q9</code>. DurationOfPitch is column <code>M</code> and Purchased? is column <code>O</code>.</p>
+    <div class="nudge"><b>Nudge</b>Keep only the customers who bought. Then find the smallest pitch time.</div>
+    <div class="warn"><p>Answer in Canvas: <strong>Question 9</strong></p></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>When you finish</h2>
+  <ol class="rules" style="padding-left:22px"><li>Press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save your workbook.</li><li>Close Excel.</li><li>In Canvas, open <strong>Question 10</strong>, the last question. Upload your <code>.xlsx</code> file (<code>Exam1Part1-LastName.xlsx</code>).</li></ol><p>Upload the <code>.xlsx</code> workbook, not the <code>.csv</code> file. Your work is graded from the workbook.</p>
+</section>
+
+</div>
+
+<script>
+(function(){
+  var KEY="cap1788-exam01-part1-v1", state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  var cards=[].slice.call(document.querySelectorAll("[data-card]"));
+  function paint(){
+    var n=0;
+    cards.forEach(function(c){
+      var on=!!state[c.dataset.card], b=c.querySelector(".donebtn");
+      c.classList.toggle("done",on); b.classList.toggle("on",on);
+      b.textContent=on?"✓ Done (click to undo)":"I finished this exercise";
+      if(on)n++;
+    });
+    document.getElementById("ptext").textContent=n+" of "+cards.length+" exercises done";
+    document.getElementById("pbar").style.width=(100*n/cards.length)+"%";
+  }
+  cards.forEach(function(c){
+    c.querySelector(".donebtn").addEventListener("click",function(){state[c.dataset.card]=!state[c.dataset.card];save();paint();});
+  });
+  [].slice.call(document.querySelectorAll(".ans")).forEach(function(row){
+    var input=row.querySelector("input,select"), fb=row.querySelector(".fb"),
+        ok=row.dataset.answer.split("|"), tol=parseFloat(row.dataset.tol||"0");
+    function check(){
+      var raw=String(input.value||"").trim().toLowerCase().replace(/\s+/g," ");
+      if(raw===""){fb.className="fb no";fb.textContent=input.tagName==="SELECT"?"Pick an answer first.":"Type an answer first.";return;}
+      var v=raw.replace(/[,$%\s]/g,"");
+      var good=ok.some(function(a){
+        var n=parseFloat(a), x=parseFloat(v);
+        if(input.tagName!=="SELECT" && !isNaN(n) && /^-?\d*\.?\d+$/.test(a) && /^-?\d*\.?\d+$/.test(v)) return Math.abs(x-n)<=(tol||1e-9);
+        return raw===a;
+      });
+      if(good){fb.className="fb yes";fb.textContent="✓ Correct!";}
+      else{fb.className="fb no";fb.textContent="Not yet. Check your work, then open Hint 1.";}
+    }
+    row.querySelector("button").addEventListener("click",check);
+    input.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  });
+
+  // ---- screenshots: kept in this browser (IndexedDB), keyed by page + task ----
+  var PAGEKEY="cap1788-exam01-part1-v1", dbp=null, active=null;
+  function db(){
+    if(dbp) return dbp;
+    dbp=new Promise(function(res){
+      try{
+        var r=indexedDB.open("cap1788-shots",1);
+        r.onupgradeneeded=function(){r.result.createObjectStore("shots");};
+        r.onsuccess=function(){res(r.result);};
+        r.onerror=function(){res(null);};
+      }catch(e){res(null);}
+    });
+    return dbp;
+  }
+  function put(k,v){return db().then(function(d){if(!d)return;try{var tx=d.transaction("shots","readwrite");v===null?tx.objectStore("shots").delete(k):tx.objectStore("shots").put(v,k);}catch(e){}});}
+  function get(k){return db().then(function(d){return new Promise(function(res){if(!d)return res(null);try{var q=d.transaction("shots").objectStore("shots").get(k);q.onsuccess=function(){res(q.result||null);};q.onerror=function(){res(null);};}catch(e){res(null);}});});}
+  function shrink(file){
+    return new Promise(function(res,rej){
+      var fr=new FileReader();
+      fr.onload=function(){
+        var im=new Image();
+        im.onload=function(){
+          var w=im.naturalWidth,h=im.naturalHeight,max=1600;
+          if(w>max){h=Math.round(h*max/w);w=max;}
+          var c=document.createElement("canvas");c.width=w;c.height=h;
+          c.getContext("2d").drawImage(im,0,0,w,h);
+          try{res(c.toDataURL("image/jpeg",0.85));}catch(e){res(fr.result);}
+        };
+        im.onerror=rej; im.src=fr.result;
+      };
+      fr.onerror=rej; fr.readAsDataURL(file);
+    });
+  }
+  function show(box,url){
+    var img=box.querySelector("img"), clr=box.querySelector(".clear"), drop=box.querySelector(".drop");
+    if(url){img.src=url;img.hidden=false;clr.hidden=false;box.classList.add("has");drop.innerHTML="Screenshot saved. Click here and press <kbd>Ctrl</kbd> + <kbd>V</kbd> to replace it.";}
+    else{img.removeAttribute("src");img.hidden=true;clr.hidden=true;box.classList.remove("has");drop.innerHTML="Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd>";}
+  }
+  function take(box,file){
+    if(!file||!/^image\//.test(file.type))return;
+    shrink(file).then(function(url){show(box,url);put(PAGEKEY+":"+box.dataset.shot,url);});
+  }
+  [].slice.call(document.querySelectorAll(".shot")).forEach(function(box){
+    var drop=box.querySelector(".drop");
+    function arm(){if(active)active.querySelector(".drop").classList.remove("armed");active=box;drop.classList.add("armed");}
+    drop.addEventListener("click",function(){drop.focus();arm();});
+    drop.addEventListener("focus",arm);
+    box.querySelector("input[type=file]").addEventListener("change",function(e){take(box,e.target.files[0]);e.target.value="";});
+    box.querySelector(".clear").addEventListener("click",function(){show(box,null);put(PAGEKEY+":"+box.dataset.shot,null);});
+    box.addEventListener("dragover",function(e){e.preventDefault();});
+    box.addEventListener("drop",function(e){e.preventDefault();if(e.dataTransfer&&e.dataTransfer.files[0])take(box,e.dataTransfer.files[0]);});
+    get(PAGEKEY+":"+box.dataset.shot).then(function(url){if(url)show(box,url);});
+  });
+  document.addEventListener("paste",function(e){
+    if(!active||!e.clipboardData||!active.contains(document.activeElement))return;
+    var items=[].slice.call(e.clipboardData.items||[]), it=items.filter(function(x){return x.type&&x.type.indexOf("image/")===0;})[0];
+    if(!it){active.querySelector(".drop").textContent="No picture on the clipboard. Take the screenshot first (Windows + Shift + S).";return;}
+    e.preventDefault(); take(active,it.getAsFile());
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
