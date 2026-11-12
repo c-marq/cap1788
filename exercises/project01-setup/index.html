@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CAP1788 Final Project Session 1: Set up your workbook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#FAFAF7; --surface:#FFFFFF; --fg:#1F2328; --muted:#5B6168; --line:#E2E1DA;
+  --accent:#1B65A6; --accent-soft:#E3EEF8; --code-bg:#F2F1EC;
+  --ok:#1E7A46; --ok-soft:#E3F4EA; --no:#B03A2E;
+  --core:#1E7A46; --extra:#8A6D00; --extra-soft:#FFF4C2; --guided:#6C3483; --guided-soft:#F3E8F8;
+  --font-body:"Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  --font-mono:"JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#7DB7E8; --accent-soft:#1B2A38; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; --guided:#D2A6E6; --guided-soft:#2E2236; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#7DB7E8; --accent-soft:#1B2A38; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; --guided:#D2A6E6; --guided-soft:#2E2236; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:18px;line-height:1.6;margin:0}
+.wrap{max-width:800px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:22px}
+h1{font-size:2rem;line-height:1.2;margin:0;text-wrap:balance}
+h2{font-size:1.35rem;margin:0;text-wrap:balance}
+h3{font-size:1.1rem;margin:0}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+code,.f{font-family:var(--font-mono);font-size:.92em;background:var(--code-bg);padding:2px 7px;border-radius:5px;white-space:nowrap}
+.f{white-space:normal;word-break:break-all}
+kbd{font-family:var(--font-mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:3px;border-radius:5px;padding:0 6px;background:var(--surface)}
+.top{display:flex;flex-direction:column;gap:10px}
+.pages{display:flex;flex-wrap:wrap;gap:8px;font-size:.95rem}
+.pages a,.pages span{padding:2px 10px;border-radius:20px;border:1px solid var(--line);text-decoration:none}
+.pages span{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.progress{display:flex;align-items:center;gap:12px;font-weight:700}
+.bar{flex:1;height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.story{background:var(--accent-soft);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.rules{display:flex;flex-direction:column;gap:6px;margin:0;padding-left:22px}
+.tablebox{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--code-bg)}
+td.l{font-family:var(--font-mono);font-weight:700;width:3.2em;text-align:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:16px}
+.card.done{border-color:var(--ok)}
+.card-head{display:flex;flex-direction:column;gap:4px}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:20px;white-space:nowrap}
+.tag.core{background:var(--ok-soft);color:var(--core)}
+.tag.extra{background:var(--extra-soft);color:var(--extra)}
+.tag.guided{background:var(--guided-soft);color:var(--guided)}
+.q{font-size:1.1rem;font-weight:700}
+.why{color:var(--muted)}
+.task{border-top:2px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:12px}
+.task-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nudge{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;padding:8px 12px;font-size:.97rem}
+.nudge b{display:block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.nudge ol{margin:4px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.answers{display:flex;flex-direction:column;gap:10px;background:var(--code-bg);border-radius:10px;padding:14px}
+.ans{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ans label{flex:1 1 260px;font-weight:700}
+.ans input,.ans select{font:inherit;padding:6px 10px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.ans input{width:9.5em}
+.ans select{max-width:100%}
+.ans button,.donebtn,.dl{font:inherit;font-weight:700;padding:6px 14px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer;text-decoration:none;display:inline-block}
+.ans button:hover,.donebtn:hover,.dl:hover{background:var(--accent-soft)}
+.fb{flex-basis:100%;font-weight:700;font-size:.95rem}
+.fb:empty{display:none}
+.fb.yes{color:var(--ok)} .fb.no{color:var(--no)}
+details{border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+details>summary{cursor:pointer;padding:10px 14px;font-weight:700;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ ";color:var(--accent)}
+details[open]>summary::before{content:"▾ "}
+details>div{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px}
+details.sol>summary{color:var(--accent)}
+.hints{display:flex;flex-direction:column;gap:8px}
+.warn{border-left:4px solid var(--accent);padding:4px 0 4px 12px;font-size:.97rem;display:flex;flex-direction:column;gap:6px}
+.donebtn{align-self:flex-start}
+.donebtn.on{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.shot{border:2px dashed var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.shot.has{border-style:solid;border-color:var(--ok)}
+.shot b{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.shot .what{font-size:.97rem}
+.drop{border-radius:8px;background:var(--code-bg);padding:14px;text-align:center;cursor:pointer;font-weight:700;color:var(--muted)}
+.drop:focus-visible,.drop.armed{outline:3px solid var(--accent);outline-offset:2px;color:var(--fg)}
+.shot-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.shot input[type=file]{font:inherit;font-size:.9rem;max-width:100%}
+.shot img{max-width:100%;border:1px solid var(--line);border-radius:6px}
+.shot .clear{font:inherit;font-weight:700;padding:4px 12px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer}
+.shot .note{font-size:.85rem;color:var(--muted)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:480px){body{font-size:17px}h1{font-size:1.6rem}.ans input{width:100%}}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">CAP1788 &middot; Final Project &middot; Session 1</div>
+  <h1>Set up your workbook</h1>
+  <nav class="pages" aria-label="Final project pages"><a href="../project00-kickoff/">Kickoff</a> <span>Session 1</span></nav>
+  <div class="progress"><span id="ptext">0 of 3 exercises done</span><div class="bar"><span id="pbar"></span></div></div>
+</header>
+
+<section class="story">
+  <p><strong>Today:</strong> you build the workbook you keep until Tue Dec 8. You work with your partner. One of you owns the file in OneDrive and shares it with the other.</p>
+  <p>At the end you have three sheets: <code>Raw Data</code>, <code>Cleaning</code> and <code>Notes</code>. You also know how messy your data is, and you have your first question.</p>
+</section>
+
+<section class="card" style="gap:10px">
+  <h2>Before you start</h2>
+  <div class="warn"><p>Use Excel for Microsoft 365 on a Windows computer. Sign in with your MDC account.</p><p>Your dataset is the one you picked on Nov 12. Open only the boxes for your dataset. The columns are on the <a href="../project00-kickoff/#s3">kickoff page, section 3</a>.</p><p>Work as a pair, one task at a time. The partner who saved the file types. The other partner reads the steps and checks. Swap for the next task if you like.</p><p>Today's work is not graded. The lists on this page help you check your own work. Screenshots are for you: skip them if you are short on time.</p><p>Stuck? Ask your professor or the tutor. At the bottom of the page: how your project is graded.</p><p>Save often: <kbd>Ctrl</kbd> + <kbd>S</kbd>.</p></div>
+  <h2 style="margin-top:6px">How to use this page</h2>
+  <ul class="rules">
+    <li>Each task tells you the goal and the question. It does <strong>not</strong> tell you every click. You know these tools.</li>
+    <li>Read the <strong>Nudge</strong> first. Still stuck? Open <strong>Hint 1</strong> (the tool), then <strong>Hint 2</strong> (the key step). The <strong>Solution</strong> is last. Try first.</li>
+    <li><strong>GUIDED</strong> tasks show the first few clicks. You finish the rest.</li>
+    <li>Type your answer and click <strong>Check</strong>. <strong>CORE</strong> tasks first. <strong>EXTRA</strong> tasks if you have time.</li>
+    <li>Your checkmarks save on this computer.</li>
+    <li><strong>Screenshot boxes:</strong> press <kbd>Windows</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>, drag a box around your work, then click the screenshot box on this page and press <kbd>Ctrl</kbd> + <kbd>V</kbd>. Your screenshots stay on this computer.</li>
+  </ul>
+  <div class="warn"><p>Your answers go in these cells: the three formulas for the mess check go in the Cleaning sheet, in the column named in your dataset's box. Your question and your three problems go in the Notes sheet.</p></div>
+</section>
+
+<!-- ============ EXERCISE 1 ============ -->
+<section class="card" data-card="ex1">
+  <div class="card-head"><div class="eyebrow">Exercise 1 · Hand in</div><h2>Your Nov 12 box</h2></div>
+  <p class="q">Question: Does your professor know your group, your dataset and your reason?</p>
+  <p class="why">Your professor needs this before you start. It takes two minutes.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Task 1 · Give your professor your box</h3><span class="tag core">CORE</span></div>
+    <p>Open the kickoff page on the computer and browser you used on Thu Nov 12. Find the box in section 4. Give your professor the three things in it: who is in your group, which dataset you picked, and why.</p>
+    <div class="nudge"><b>Nudge</b>Open the <a href="../project00-kickoff/#s4">kickoff page, section 4</a>. Read the box to your professor. Working alone? Say that you are alone, then say the dataset and why.</div>
+    
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>The box is on the kickoff page, in the section called <em>Bring this on Tuesday, Nov 17</em>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Your box saves on the computer you used on Nov 12. If it is empty, you are on another computer. Just tell your professor the three things.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Your professor knows your group, your dataset and your reason. Nothing else is needed for this task.</p></div></details>
+    </div>
+    
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<!-- ============ EXERCISE 2 ============ -->
+<section class="card" data-card="ex2">
+  <div class="card-head"><div class="eyebrow">Exercise 2 · Set up</div><h2>Build the workbook</h2></div>
+  <p class="q">Question: Is your workbook saved in OneDrive, shared, and set up with three sheets?</p>
+  <p class="why">This is the workbook you keep until Tue Dec 8. Set it up once, then every class builds on it. Sheet names: <code>Raw Data</code>, <code>Cleaning</code>, <code>Notes</code>.</p>
+  
+  <div class="task">
+    <div class="task-head"><h3>Task 1 · Open your CSV and save it in OneDrive</h3><span class="tag core">CORE</span><span class="tag guided">GUIDED</span></div>
+    <p>Download the CSV for your dataset. Open it in Excel. Save it as an Excel Workbook in OneDrive, in your MDC account, with the name <code>Final-LastName1-LastName2.xlsx</code>. Example: <code>Final-Garcia-Lopez.xlsx</code>. Working alone: <code>Final-Garcia.xlsx</code>. The partner who saved the file types. The other partner reads the steps and checks.</p><ul class="rules"><li><a href="https://drive.google.com/uc?export=download&amp;id=1r2zzZvcevDNoSomNUMTar_NNO8GQaSPi">Download: Miami 311 requests</a> (<code>final-project-miami-311-march-2024.csv</code>)</li><li><a href="https://drive.google.com/uc?export=download&amp;id=1kHmnrIKCyFy1h88UTYh9FzpeyFQ1rEcw">Download: Starbucks drinks nutrition</a> (<code>final-project-starbucks-drinks.csv</code>)</li><li><a href="https://drive.google.com/uc?export=download&amp;id=1BjcPB5bqRPkxix7kOm5knD9LiM4E78up">Download: College tuition and costs</a> (<code>final-project-college-tuition.csv</code>)</li></ul><p>Download does not work? <a href="https://drive.google.com/drive/folders/1C_yq9B9B7hl2Co8b9m2bS9ljwT6WVKct">Open the Datasets folder in Google Drive</a>.</p>
+    <div class="nudge"><b>Guided start</b><ol><li>Open File Explorer, click <strong>Downloads</strong>, double-click the file. It opens in Excel. (Steps are in <a href="../project00-kickoff/#s2">kickoff section 2</a>.) If a yellow bar says Protected View, click <strong>Enable Editing</strong>.</li><li>Click <strong>File</strong>, then <strong>Save As</strong> (some versions say <strong>Save a Copy</strong>).</li><li>Choose <strong>OneDrive - Miami Dade College</strong>. Type the file name.</li><li>Do not skip this step. In <strong>Save as type</strong>, choose <strong>Excel Workbook (*.xlsx)</strong>. Click <strong>Save</strong>.</li></ol></div>
+    
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Save As is on the File menu. The OneDrive folder is in the list on the left of the Save As window.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>The file name must end in <code>.xlsx</code>, not <code>.csv</code>. If you do not see OneDrive, sign in at the top right of Excel with your MDC account.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>File, Save As, OneDrive - Miami Dade College, file name <code>Final-LastName1-LastName2.xlsx</code>, type Excel Workbook (*.xlsx), Save. The title bar now shows your file name and <code>.xlsx</code>.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t1"><b>Your screenshot</b><p class="what">The top of Excel with your file name and OneDrive in the title bar.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 1">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t1f">Or pick the file:</label><input id="ex2t1f" type="file" accept="image/*"></div><img alt="Your screenshot for task 1" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 2 · Share the workbook with your partner</h3><span class="tag core">CORE</span><span class="tag guided">GUIDED</span></div>
+    <p>The partner who saved the file shares it with the other so both can open and edit it. The other partner reads the steps and checks. Working alone? Skip this task.</p>
+    <div class="nudge"><b>Guided start</b><ol><li>Click <strong>Share</strong> at the top right of Excel.</li><li>Type your partner's MDC email address.</li><li>Make sure it says <strong>Can edit</strong>.</li><li>Click <strong>Send</strong>. Your partner opens the email and clicks the link. If the file opens in the browser, your partner clicks <strong>Open in Desktop App</strong>.</li></ol></div>
+    
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>The Share button is at the top right of the Excel window, next to Comments.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>If it does not say Can edit, click the link-settings gear in the Share window, choose <b>Specific people</b>, tick <b>Allow editing</b>, then <b>Apply</b>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Share, partner's MDC email, Can edit, Send. Your partner clicks the link in the email and opens the file in Excel on the computer (Open in Desktop App if it opened in the browser). The top right says Editing, not Viewing.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t2"><b>Your screenshot</b><p class="what">The Share window with your partner's email and Can edit.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 2">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t2f">Or pick the file:</label><input id="ex2t2f" type="file" accept="image/*"></div><img alt="Your screenshot for task 2" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 3 · Name the Raw Data sheet and copy it to Cleaning</h3><span class="tag core">CORE</span></div>
+    <p>Your workbook needs a sheet called <code>Raw Data</code> that stays exactly as the CSV. Then you make a copy of it called <code>Cleaning</code>. You work in Cleaning. You never type in Raw Data.</p>
+    <div class="nudge"><b>Nudge</b>Double-click the sheet tab to rename it. Right-click the tab, choose <strong>Move or Copy</strong>, tick <strong>Create a copy</strong>.</div>
+    
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Sheet tabs are at the bottom left. Right-click a tab to see Rename and Move or Copy.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>In Move or Copy, tick <b>Create a copy</b> and pick <b>(move to end)</b>. The copy is named <code>Raw Data (2)</code>. Rename it to <code>Cleaning</code>.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Two tabs: <code>Raw Data</code> and <code>Cleaning</code>, both with the same rows and columns.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t3"><b>Your screenshot</b><p class="what">The sheet tabs at the bottom: Raw Data and Cleaning.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 3">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t3f">Or pick the file:</label><input id="ex2t3f" type="file" accept="image/*"></div><img alt="Your screenshot for task 3" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 4 · Format the Cleaning sheet as a Table</h3><span class="tag core">CORE</span></div>
+    <p>On the Cleaning sheet, turn your data into a Table and give it the name <code>tblClean</code>.</p>
+    <div class="nudge"><b>Nudge</b>Click one cell in the data. Press <kbd>Ctrl</kbd> + <kbd>T</kbd>. Tick <strong>My table has headers</strong>. Then type the name in the <strong>Table Name</strong> box.</div>
+    
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>After Format as Table, the <b>Table Design</b> tab appears when you click inside the table. The Table Name box is at the far left of that tab.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Type <code>tblClean</code> in the Table Name box and press <kbd>Enter</kbd>. Table names have no spaces.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>The Cleaning sheet shows colored rows with filter arrows. Click inside it: the Table Design tab shows and the Table Name box says <code>tblClean</code>.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t4"><b>Your screenshot</b><p class="what">The Table Design tab with the Table Name box showing the name.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 4">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t4f">Or pick the file:</label><input id="ex2t4f" type="file" accept="image/*"></div><img alt="Your screenshot for task 4" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Task 5 · Add a Notes sheet with your question</h3><span class="tag core">CORE</span></div>
+    <p>Add a new sheet called <code>Notes</code>. In A1 type <code>Notes</code>. In A3 type <code>Central question</code>. In B3 write your central question in one sentence, in plain English. A draft is fine. You can change it later.</p>
+    <div class="nudge"><b>Nudge</b>Click the <strong>+</strong> next to the sheet tabs. Rename the new sheet <code>Notes</code>. Look at the kickoff page for ideas, or use your own.</div>
+    
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>The + button is right after the last sheet tab. Double-click the new tab to rename it.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>One sentence. It asks about your dataset and ends with a question mark. Example shape: <em>Which group has the highest average of something?</em></p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>A Notes sheet with <code>Notes</code> in A1, <code>Central question</code> in A3 and your one-sentence question in B3.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex2t5"><b>Your screenshot</b><p class="what">The Notes sheet with your question in B3.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 5">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t5f">Or pick the file:</label><input id="ex2t5f" type="file" accept="image/*"></div><img alt="Your screenshot for task 5" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<!-- ============ EXERCISE 3 ============ -->
+<section class="card" data-card="ex3">
+  <div class="card-head"><div class="eyebrow">Exercise 3 · Sheet: Cleaning, then Notes</div><h2>How messy is your data?</h2></div>
+  <p class="q">Question: What problems does your dataset have, and how many rows does each touch?</p>
+  <p class="why">A good project starts with knowing the mess. Open only the box for your dataset. The answers are the same for every pair on that dataset.</p>
+  
+<details class="dsbox"><summary>Open if your dataset is Miami 311 requests</summary>
+  <div class="task">
+    <div class="task-head"><h3>Mess check: Miami 311 requests</h3><span class="tag core">CORE</span></div>
+    <p>Find out how messy your dataset is. First read the row count in the status bar. Then type three formulas in R1, R2 and R3 on the Cleaning sheet. Column R is a few columns to the right of your table. Excel does not add it to the table, and the columns between stay free for helper columns later. The four Check rows follow this order: row count, then the three formulas.</p>
+    <div class="nudge"><b>Nudge</b>For the row count, click a cell in the <code>ticket_id</code> column inside the table and press <kbd>Ctrl</kbd> + <kbd>Space</kbd> once. Read <strong>Count</strong> in the status bar at the bottom. For the three formulas, type <code>=COUNTBLANK(</code> or <code>=COUNTIF(</code> then point at the top edge of the column header, where the pointer turns into a black arrow, and click once. Excel writes the column name. Write CLOSED with no stars around it.</div>
+    <div class="answers"><div class="ans" data-answer="4205"><label for="ex3t1a1">Rows in the table: the Count in the status bar for the <code>ticket_id</code> column</label><input id="ex3t1a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="24"><label for="ex3t1a2"><code>ticket_closed_date_time</code>: how many blank cells?</label><input id="ex3t1a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="4094"><label for="ex3t1a3"><code>ticket_status</code>: how many are exactly CLOSED?</label><input id="ex3t1a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="9"><label for="ex3t1a4"><code>issue_Description</code>: how many cells have a double space?</label><input id="ex3t1a4" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Use COUNTBLANK for empty cells. Use COUNTIF for the other two. A double space is two spaces in a row. Ctrl+Space once selects the data of that column without the header. If the status bar does not show Count, right-click the status bar and tick <b>Count</b>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>If Excel wrote <code>[#Headers]</code> in your formula, you clicked the header cell. Delete the formula and try again at the top edge, or type the column name yourself, for example <code>tblClean[ticket_status]</code>.</p><p>COUNTIF needs the column and the text to look for. For the double space, the text is: a star, a space, a space, a star, in quotes.</p><p>If you get 4,136 for CLOSED, you used stars. The stars also count DUPLICATE (CLOSED). Write <code>"CLOSED"</code> with no stars.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Row count: 4,205.</p><p><span class="f">=COUNTBLANK(tblClean[ticket_closed_date_time])</span> gives 24.</p><p><span class="f">=COUNTIF(tblClean[ticket_status],&quot;CLOSED&quot;)</span> gives 4,094.</p><p><span class="f">=COUNTIF(tblClean[issue_Description],&quot;*  *&quot;)</span> gives 9.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex3t1"><b>Your screenshot</b><p class="what">Cells R1 to R3 with the three results, and the status bar Count.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t1f">Or pick the file:</label><input id="ex3t1f" type="file" accept="image/*"></div><img alt="Your screenshot" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
+  </div>
+</details>
+<details class="dsbox"><summary>Open if your dataset is College tuition and costs</summary>
+  <div class="task">
+    <div class="task-head"><h3>Mess check: College tuition and costs</h3><span class="tag core">CORE</span></div>
+    <p>Find out how messy your dataset is. First read the row count in the status bar. Then type three formulas in N1, N2 and N3 on the Cleaning sheet. Column N is a few columns to the right of your table. Excel does not add it to the table, and the columns between stay free for helper columns later. The four Check rows follow this order: row count, then the three formulas.</p>
+    <div class="nudge"><b>Nudge</b>For the row count, click a cell in the <code>name</code> column inside the table and press <kbd>Ctrl</kbd> + <kbd>Space</kbd> once. Read <strong>Count</strong> in the status bar at the bottom. For the three formulas, type <code>=COUNTIF(</code> then point at the top edge of the column header, where the pointer turns into a black arrow, and click once. Excel writes the column name. In room_and_board and state, NA is text, not an empty cell.</div>
+    <div class="answers"><div class="ans" data-answer="2973"><label for="ex3t2a1">Rows in the table: the Count in the status bar for the <code>name</code> column</label><input id="ex3t2a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="1094"><label for="ex3t2a2"><code>room_and_board</code>: how many cells say NA?</label><input id="ex3t2a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="52"><label for="ex3t2a3"><code>state</code>: how many cells say NA?</label><input id="ex3t2a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="1"><label for="ex3t2a4"><code>name</code>: how many cells have a double space?</label><input id="ex3t2a4" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Use COUNTIF with the text NA in quotes for the first two. Use COUNTIF with a double space for name. COUNTBLANK would show 0 for room_and_board, because NA is not empty. Ctrl+Space once selects the data of that column without the header. If the status bar does not show Count, right-click the status bar and tick <b>Count</b>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>If Excel wrote <code>[#Headers]</code> in your formula, you clicked the header cell. Delete the formula and try again at the top edge, or type the column name yourself, for example <code>tblClean[state]</code>.</p><p>COUNTIF needs the column and the text to look for. For the double space, the text is: a star, a space, a space, a star, in quotes.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Row count: 2,973.</p><p><span class="f">=COUNTIF(tblClean[room_and_board],&quot;NA&quot;)</span> gives 1,094.</p><p><span class="f">=COUNTIF(tblClean[state],&quot;NA&quot;)</span> gives 52.</p><p><span class="f">=COUNTIF(tblClean[name],&quot;*  *&quot;)</span> gives 1.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex3t2"><b>Your screenshot</b><p class="what">Cells N1 to N3 with the three results, and the status bar Count.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t2f">Or pick the file:</label><input id="ex3t2f" type="file" accept="image/*"></div><img alt="Your screenshot" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
+  </div>
+</details>
+<details class="dsbox"><summary>Open if your dataset is Starbucks drinks nutrition</summary>
+  <div class="task">
+    <div class="task-head"><h3>Mess check: Starbucks drinks nutrition</h3><span class="tag core">CORE</span></div>
+    <p>Find out how messy your dataset is. First read the row count in the status bar. Then type three formulas in T1, T2 and T3 on the Cleaning sheet. Column T is a few columns to the right of your table. Excel does not add it to the table, and the columns between stay free for helper columns later. The four Check rows follow this order: row count, then the three formulas.</p>
+    <div class="nudge"><b>Nudge</b>For the row count, click a cell in the <code>product_name</code> column inside the table and press <kbd>Ctrl</kbd> + <kbd>Space</kbd> once. Read <strong>Count</strong> in the status bar at the bottom. For the three formulas, type <code>=COUNTBLANK(</code> or <code>=COUNTIF(</code> then point at the top edge of the column header, where the pointer turns into a black arrow, and click once. Excel writes the column name. The zeros are real numbers, not blanks.</div>
+    <div class="answers"><div class="ans" data-answer="1147"><label for="ex3t3a1">Rows in the table: the Count in the status bar for the <code>product_name</code> column</label><input id="ex3t3a1" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="0"><label for="ex3t3a2"><code>calories</code>: how many blank cells?</label><input id="ex3t3a2" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="40"><label for="ex3t3a3"><code>calories</code>: how many cells are 0?</label><input id="ex3t3a3" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div><div class="ans" data-answer="165"><label for="ex3t3a4"><code>milk</code>: how many cells are 0?</label><input id="ex3t3a4" inputmode="decimal" autocomplete="off"><button type="button">Check</button><span class="fb" aria-live="polite"></span></div></div>
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>COUNTBLANK counts empty cells. COUNTIF with 0 counts cells that hold the number 0. Ctrl+Space once selects the data of that column without the header. If the status bar does not show Count, right-click the status bar and tick <b>Count</b>.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>If Excel wrote <code>[#Headers]</code> in your formula, you clicked the header cell. Delete the formula and try again at the top edge, or type the column name yourself, for example <code>tblClean[calories]</code>.</p><p>In this file no cell is empty, so COUNTBLANK gives 0. That is a real answer. To find the zeros, use COUNTIF and write <code>0</code> as the thing to look for.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Row count: 1,147.</p><p><span class="f">=COUNTBLANK(tblClean[calories])</span> gives 0.</p><p><span class="f">=COUNTIF(tblClean[calories],0)</span> gives 40.</p><p><span class="f">=COUNTIF(tblClean[milk],0)</span> gives 165.</p></div></details>
+    </div>
+    <div class="shot" data-shot="ex3t3"><b>Your screenshot</b><p class="what">Cells T1 to T3 with the three results, and the status bar Count.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t3f">Or pick the file:</label><input id="ex3t3f" type="file" accept="image/*"></div><img alt="Your screenshot" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
+  </div>
+</details>
+  <div class="task">
+    <div class="task-head"><h3>Write three problems in Notes</h3><span class="tag core">CORE</span></div>
+    <p>Open the Notes sheet. Below your question, write three problems you found in your data. One line each. Say which column, what is wrong and how many rows. Use the numbers from the mess check, or look at the columns yourself.</p>
+    <div class="nudge"><b>Nudge</b>In A5 type <code>Three problems found</code>. Write one problem per line in B5, B6 and B7. Start each with its number: <code>1. </code>, <code>2. </code>, <code>3. </code>.</div>
+    
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Ideas for your dataset:</p><ul class="rules"><li>Miami 311: <code>ticket_closed_date_time</code>, <code>issue_Description</code>, <code>ticket_status</code>, <code>District</code>.</li><li>College tuition: <code>room_and_board</code>, <code>state</code>, <code>name</code>.</li><li>Starbucks: <code>calories</code>, <code>milk</code>, <code>whip</code>, <code>product_name</code>.</li></ul></div></details>
+      <details><summary>Hint 2</summary><div><p>Each line has three parts: the column, what is wrong, how many rows. Example shape: <em>Column X has N blank cells.</em></p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Any three real problems that you can point to in the data. Use your own words. Example shape: <em>Column X has N cells that say NA.</em></p></div></details>
+    </div>
+    <div class="shot" data-shot="ex3t4"><b>Your screenshot</b><p class="what">The Notes sheet with your question and three problems.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t4f">Or pick the file:</label><input id="ex3t4f" type="file" accept="image/*"></div><img alt="Your screenshot" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
+  </div>
+  <div class="task">
+    <div class="task-head"><h3>Extra: find a fourth problem</h3><span class="tag extra">EXTRA</span></div>
+    <p>Look at your data again. Find one more problem. Write it in B8 as <code>4. ...</code>.</p>
+    <div class="nudge"><b>Nudge</b>Scroll through the Cleaning sheet. Look at columns you did not count yet.</div>
+    
+    <div class="hints">
+      <details><summary>Hint 1</summary><div><p>Sort or filter a column with the arrows in the table header to see odd values.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>Look for blanks, odd text, zeros, repeated rows or codes that need words.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>Any real problem you can point to, with the column and how many rows.</p></div></details>
+    </div>
+    
+  </div>
+  <button class="donebtn" type="button">I finished this exercise</button>
+</section>
+
+<section class="card" id="done" style="gap:10px">
+  <h2>Done today when...</h2>
+  <p>Answer each line with Yes or No. Fix every No before you leave.</p>
+  <div class="ynlist"><fieldset class="yn" data-yn="tabs"><legend>The three sheet tabs are named <code>Raw Data</code>, <code>Cleaning</code> and <code>Notes</code>.</legend><label><input type="radio" name="yn-tabs" value="yes"> Yes</label> <label><input type="radio" name="yn-tabs" value="no"> No</label></fieldset><fieldset class="yn" data-yn="raw"><legend>Raw Data is untouched. Press <kbd>Ctrl</kbd> + <kbd>End</kbd> on it. The last cell is <b>N4206</b> (Miami 311), <b>J2974</b> (College tuition) or <b>O1148</b> (Starbucks).</legend><label><input type="radio" name="yn-raw" value="yes"> Yes</label> <label><input type="radio" name="yn-raw" value="no"> No</label></fieldset><fieldset class="yn" data-yn="tbl"><legend>Cleaning is a Table named <code>tblClean</code>. Click inside it and the Table Design tab shows.</legend><label><input type="radio" name="yn-tbl" value="yes"> Yes</label> <label><input type="radio" name="yn-tbl" value="no"> No</label></fieldset><fieldset class="yn" data-yn="rows"><legend>The status bar Count for the first column of the table is <b>4,205</b> (Miami 311), <b>2,973</b> (College tuition) or <b>1,147</b> (Starbucks).</legend><label><input type="radio" name="yn-rows" value="yes"> Yes</label> <label><input type="radio" name="yn-rows" value="no"> No</label></fieldset><fieldset class="yn" data-yn="file"><legend>The file is in OneDrive, in your MDC account. Your partner opened it in Excel on the computer, typed anything in a cell of the Notes sheet, and you saw it. Then your partner deleted it. (Working alone: the file is in OneDrive.)</legend><label><input type="radio" name="yn-file" value="yes"> Yes</label> <label><input type="radio" name="yn-file" value="no"> No</label></fieldset><fieldset class="yn" data-yn="notes"><legend>The Notes sheet has your question in B3 and three problems in B5 to B7.</legend><label><input type="radio" name="yn-notes" value="yes"> Yes</label> <label><input type="radio" name="yn-notes" value="no"> No</label></fieldset></div>
+  <p class="ynsum" id="ynsum" role="status" aria-live="polite">0 of 6 Yes</p>
+  <details class="dsbox"><summary>What done looks like: Miami 311 requests</summary>
+<div>
+<figure class="donepic"><img src="img/s1-311.png" alt="Excel for Miami 311 requests with the Raw Data, Cleaning and Notes tabs, the Cleaning table and the status bar Count 4,205" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><div class="pending">Screenshot coming</div></figure>
+<ul class="rules">
+<li>Tabs: <code>Raw Data</code>, <code>Cleaning</code>, <code>Notes</code>.</li>
+<li>Raw Data: cell A1 says <code>ticket_id</code>, A2 says <code>24-10082500</code>. <kbd>Ctrl</kbd> + <kbd>End</kbd> goes to <code>N4206</code>.</li>
+<li>Cleaning: a Table named <code>tblClean</code>, 14 columns. The status bar Count for column A is <b>4,205</b>.</li>
+<li>Notes: <code>Central question</code> in A3 with your question in B3. <code>Three problems found</code> in A5 with the problems in B5 to B7.</li>
+</ul></div></details>
+  <details class="dsbox"><summary>What done looks like: Starbucks drinks nutrition</summary>
+<div>
+<figure class="donepic"><img src="img/s1-starbucks.png" alt="Excel for Starbucks drinks nutrition with the Raw Data, Cleaning and Notes tabs, the Cleaning table and the status bar Count 1,147" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><div class="pending">Screenshot coming</div></figure>
+<ul class="rules">
+<li>Tabs: <code>Raw Data</code>, <code>Cleaning</code>, <code>Notes</code>.</li>
+<li>Raw Data: cell A1 says <code>product_name</code>, A2 says <code>brewed coffee - dark roast</code>. <kbd>Ctrl</kbd> + <kbd>End</kbd> goes to <code>O1148</code>.</li>
+<li>Cleaning: a Table named <code>tblClean</code>, 15 columns. The status bar Count for column A is <b>1,147</b>.</li>
+<li>Notes: <code>Central question</code> in A3 with your question in B3. <code>Three problems found</code> in A5 with the problems in B5 to B7.</li>
+</ul></div></details>
+  <details class="dsbox"><summary>What done looks like: College tuition and costs</summary>
+<div>
+<figure class="donepic"><img src="img/s1-tuition.png" alt="Excel for College tuition and costs with the Raw Data, Cleaning and Notes tabs, the Cleaning table and the status bar Count 2,973" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><div class="pending">Screenshot coming</div></figure>
+<ul class="rules">
+<li>Tabs: <code>Raw Data</code>, <code>Cleaning</code>, <code>Notes</code>.</li>
+<li>Raw Data: cell A1 says <code>name</code>, A2 says <code>Aaniiih Nakoda College</code>. <kbd>Ctrl</kbd> + <kbd>End</kbd> goes to <code>J2974</code>.</li>
+<li>Cleaning: a Table named <code>tblClean</code>, 10 columns. The status bar Count for column A is <b>2,973</b>.</li>
+<li>Notes: <code>Central question</code> in A3 with your question in B3. <code>Three problems found</code> in A5 with the problems in B5 to B7.</li>
+</ul></div></details>
+</section>
+
+<section class="card" id="grading" style="gap:10px">
+  <h2>How your project is graded</h2>
+  <p>The project is 100 points. Seven parts. Both partners get the same grade. Each of you submits the file. There is no Q&amp;A after the talk.</p>
+  <div class="tablebox"><table><tr><th>Part</th><th>What we look for</th><th>Points</th></tr><tr><td class="l">A</td><td><b>Question and dataset</b><br>Your question and your dataset name are written on the Dashboard. Your data can answer the question.</td><td class="pts">10</td></tr><tr><td class="l">B</td><td><b>Raw data and Final sheets</b><br>A Raw Data sheet you did not change. A Final sheet with values only: one header row, no blank rows, no blank columns.</td><td class="pts">10</td></tr><tr><td class="l">C</td><td><b>Cleaning</b><br>A Cleaning sheet that started as a copy. A Table. One explore or clean function. One math function. Real problems fixed. A short note that says what you changed.</td><td class="pts">20</td></tr><tr><td class="l">D</td><td><b>PivotTables and findings</b><br>2 or 3 PivotTables built from Final. They answer your question. One sentence next to each that says what you found. The numbers in the sentence match. Easy to read.</td><td class="pts">20</td></tr><tr><td class="l">E</td><td><b>PivotCharts and Dashboard</b><br>A PivotChart for each PivotTable, each with a title. A Dashboard with all the charts, none on top of another, all seen without scrolling. Written insights that say what someone should do.</td><td class="pts">15</td></tr><tr><td class="l">F</td><td><b>Live presentation</b><br>Tue Dec 8. 5 to 8 minutes. Excel only. Start with your question, your dataset name and where the data came from. Walk through each sheet in order and say what you did and why. End on the Dashboard and say your insights. Pairs: both partners speak.</td><td class="pts">20</td></tr><tr><td class="l">G</td><td><b>File and hand-in</b><br>One .xlsx file. Every sheet has a clear name. Your names on the Dashboard. Each of you submits the same file in Canvas before class on Tue Dec 8.</td><td class="pts">5</td></tr><tr><td></td><td><b>Total</b></td><td class="pts">100</td></tr></table></div>
+  <h3>Bonus: a Slicer, +3</h3>
+  <p>A Slicer on the Dashboard that works on at least two charts. It is not required. We have not taught it yet. We will show you in class. The total stays at 100 or less.</p>
+  <h3>Things you may not have heard yet</h3>
+  <p>The kickoff page said grading details come in class. These are on the list:</p>
+  <ul class="rules"><li>Your question and the dataset name are written on the Dashboard.</li><li>In Final: one header row, no blank rows, no blank columns, a name on every column.</li><li>A short note on the Cleaning sheet, one line for each change.</li><li>One sentence next to each PivotTable that says what you found.</li><li>A title on every PivotChart that says what it shows.</li><li>No chart sits on top of another. You can see every chart on one screen.</li><li>Written insights on the Dashboard. An insight says what someone should do, based on a finding.</li><li>In the talk: start with your question, your dataset name and where the data came from.</li><li>In the talk: go through the sheets in order, say what and why for each, end on the Dashboard, and say the insights out loud.</li><li>Every sheet has a clear name. Not Sheet1.</li><li>Your names are on the Dashboard. Each of you submits the workbook in Canvas before class on Tue Dec 8.</li></ul>
+</section>
+
+</div>
+<style>
+.rules code{white-space:normal;word-break:break-all}
+details.dsbox{border:2px solid var(--line);border-radius:10px}
+details.dsbox>summary{font-size:1.02rem}
+details.dsbox>.task{border-top:0;padding:0 14px 14px}
+.pts{font-family:var(--font-mono);font-weight:700;text-align:right;white-space:nowrap}
+.ynlist{display:flex;flex-direction:column;gap:10px}
+fieldset.yn{border:1px solid var(--line);border-radius:8px;margin:0;padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
+fieldset.yn legend{padding:0 6px;font-weight:700}
+fieldset.yn label{font-weight:700;display:inline-flex;gap:6px;align-items:center}
+fieldset.yn input{width:1.15em;height:1.15em;accent-color:var(--accent)}
+.ynsum{font-weight:700;color:var(--accent)}
+.ynsum.all{color:var(--ok)}
+figure.donepic{margin:0}
+figure.donepic img{max-width:100%;border:1px solid var(--line);border-radius:6px}
+.pending{border:2px dashed var(--line);border-radius:10px;padding:34px 14px;text-align:center;font-weight:700;color:var(--muted)}
+</style>
+<script type="text/javascript">
+(function(){
+  var YNKEY="cap1788-project01-setup-v1:yn", s={};
+  try{s=JSON.parse(localStorage.getItem(YNKEY)||"{}")||{}}catch(e){s={}}
+  var sets=[].slice.call(document.querySelectorAll("fieldset.yn")), sum=document.getElementById("ynsum");
+  function paint(){
+    var y=0; sets.forEach(function(fs){ if(s[fs.dataset.yn]==="yes") y++; });
+    sum.textContent=y+" of "+sets.length+" Yes"+(y===sets.length?". You are done today.":"");
+    sum.className="ynsum"+(y===sets.length?" all":"");
+  }
+  sets.forEach(function(fs){
+    [].slice.call(fs.querySelectorAll("input")).forEach(function(inp){
+      if(s[fs.dataset.yn]===inp.value) inp.checked=true;
+      inp.addEventListener("change",function(){ s[fs.dataset.yn]=inp.value; try{localStorage.setItem(YNKEY,JSON.stringify(s))}catch(e){} paint(); });
+    });
+  });
+  paint();
+})();
+</script>
+
+<script>
+(function(){
+  var KEY="cap1788-project01-setup-v1", state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){state={}}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+  var cards=[].slice.call(document.querySelectorAll("[data-card]"));
+  function paint(){
+    var n=0;
+    cards.forEach(function(c){
+      var on=!!state[c.dataset.card], b=c.querySelector(".donebtn");
+      c.classList.toggle("done",on); b.classList.toggle("on",on);
+      b.textContent=on?"✓ Done (click to undo)":"I finished this exercise";
+      if(on)n++;
+    });
+    document.getElementById("ptext").textContent=n+" of "+cards.length+" exercises done";
+    document.getElementById("pbar").style.width=(100*n/cards.length)+"%";
+  }
+  cards.forEach(function(c){
+    c.querySelector(".donebtn").addEventListener("click",function(){state[c.dataset.card]=!state[c.dataset.card];save();paint();});
+  });
+  [].slice.call(document.querySelectorAll(".ans")).forEach(function(row){
+    var input=row.querySelector("input,select"), fb=row.querySelector(".fb"),
+        ok=row.dataset.answer.split("|"), tol=parseFloat(row.dataset.tol||"0");
+    function check(){
+      var raw=String(input.value||"").trim().toLowerCase().replace(/\s+/g," ");
+      if(raw===""){fb.className="fb no";fb.textContent=input.tagName==="SELECT"?"Pick an answer first.":"Type an answer first.";return;}
+      var v=raw.replace(/[,$%\s]/g,"");
+      var good=ok.some(function(a){
+        var n=parseFloat(a), x=parseFloat(v);
+        if(input.tagName!=="SELECT" && !isNaN(n) && /^-?\d*\.?\d+$/.test(a) && /^-?\d*\.?\d+$/.test(v)) return Math.abs(x-n)<=(tol||1e-9);
+        return raw===a;
+      });
+      if(good){fb.className="fb yes";fb.textContent="✓ Correct!";}
+      else{fb.className="fb no";fb.textContent="Not yet. Check your work, then open Hint 1.";}
+    }
+    row.querySelector("button").addEventListener("click",check);
+    input.addEventListener("keydown",function(e){if(e.key==="Enter")check();});
+  });
+
+  // ---- screenshots: kept in this browser (IndexedDB), keyed by page + task ----
+  var PAGEKEY="cap1788-project01-setup-v1", dbp=null, active=null;
+  function db(){
+    if(dbp) return dbp;
+    dbp=new Promise(function(res){
+      try{
+        var r=indexedDB.open("cap1788-shots",1);
+        r.onupgradeneeded=function(){r.result.createObjectStore("shots");};
+        r.onsuccess=function(){res(r.result);};
+        r.onerror=function(){res(null);};
+      }catch(e){res(null);}
+    });
+    return dbp;
+  }
+  function put(k,v){return db().then(function(d){if(!d)return;try{var tx=d.transaction("shots","readwrite");v===null?tx.objectStore("shots").delete(k):tx.objectStore("shots").put(v,k);}catch(e){}});}
+  function get(k){return db().then(function(d){return new Promise(function(res){if(!d)return res(null);try{var q=d.transaction("shots").objectStore("shots").get(k);q.onsuccess=function(){res(q.result||null);};q.onerror=function(){res(null);};}catch(e){res(null);}});});}
+  function shrink(file){
+    return new Promise(function(res,rej){
+      var fr=new FileReader();
+      fr.onload=function(){
+        var im=new Image();
+        im.onload=function(){
+          var w=im.naturalWidth,h=im.naturalHeight,max=1600;
+          if(w>max){h=Math.round(h*max/w);w=max;}
+          var c=document.createElement("canvas");c.width=w;c.height=h;
+          c.getContext("2d").drawImage(im,0,0,w,h);
+          try{res(c.toDataURL("image/jpeg",0.85));}catch(e){res(fr.result);}
+        };
+        im.onerror=rej; im.src=fr.result;
+      };
+      fr.onerror=rej; fr.readAsDataURL(file);
+    });
+  }
+  function show(box,url){
+    var img=box.querySelector("img"), clr=box.querySelector(".clear"), drop=box.querySelector(".drop");
+    if(url){img.src=url;img.hidden=false;clr.hidden=false;box.classList.add("has");drop.innerHTML="Screenshot saved. Click here and press <kbd>Ctrl</kbd> + <kbd>V</kbd> to replace it.";}
+    else{img.removeAttribute("src");img.hidden=true;clr.hidden=true;box.classList.remove("has");drop.innerHTML="Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd>";}
+  }
+  function take(box,file){
+    if(!file||!/^image\//.test(file.type))return;
+    shrink(file).then(function(url){show(box,url);put(PAGEKEY+":"+box.dataset.shot,url);});
+  }
+  [].slice.call(document.querySelectorAll(".shot")).forEach(function(box){
+    var drop=box.querySelector(".drop");
+    function arm(){if(active)active.querySelector(".drop").classList.remove("armed");active=box;drop.classList.add("armed");}
+    drop.addEventListener("click",function(){drop.focus();arm();});
+    drop.addEventListener("focus",arm);
+    box.querySelector("input[type=file]").addEventListener("change",function(e){take(box,e.target.files[0]);e.target.value="";});
+    box.querySelector(".clear").addEventListener("click",function(){show(box,null);put(PAGEKEY+":"+box.dataset.shot,null);});
+    box.addEventListener("dragover",function(e){e.preventDefault();});
+    box.addEventListener("drop",function(e){e.preventDefault();if(e.dataTransfer&&e.dataTransfer.files[0])take(box,e.dataTransfer.files[0]);});
+    get(PAGEKEY+":"+box.dataset.shot).then(function(url){if(url)show(box,url);});
+  });
+  document.addEventListener("paste",function(e){
+    if(!active||!e.clipboardData||!active.contains(document.activeElement))return;
+    var items=[].slice.call(e.clipboardData.items||[]), it=items.filter(function(x){return x.type&&x.type.indexOf("image/")===0;})[0];
+    if(!it){active.querySelector(".drop").textContent="No picture on the clipboard. Take the screenshot first (Windows + Shift + S).";return;}
+    e.preventDefault(); take(active,it.getAsFile());
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
