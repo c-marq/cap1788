@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>CAP1788 Final Project Kickoff</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{
+  --bg:#FAFAF7; --surface:#FFFFFF; --fg:#1F2328; --muted:#5B6168; --line:#E2E1DA;
+  --accent:#B4540A; --accent-soft:#FDEBD9; --code-bg:#F2F1EC;
+  --ok:#1E7A46; --ok-soft:#E3F4EA; --no:#B03A2E;
+  --core:#1E7A46; --extra:#8A6D00; --extra-soft:#FFF4C2; --guided:#6C3483; --guided-soft:#F3E8F8;
+  --font-body:"Atkinson Hyperlegible", "Segoe UI", Arial, sans-serif;
+  --font-mono:"JetBrains Mono", Consolas, "Courier New", monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#F2A56B; --accent-soft:#33241A; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; --guided:#D2A6E6; --guided-soft:#2E2236; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#16181B; --surface:#1F2226; --fg:#ECECE8; --muted:#A3A8AE; --line:#33373C;
+  --accent:#F2A56B; --accent-soft:#33241A; --code-bg:#2A2D31;
+  --ok:#5CCB8A; --ok-soft:#173326; --no:#F08A7E;
+  --core:#5CCB8A; --extra:#F0D060; --extra-soft:#36301A; --guided:#D2A6E6; --guided-soft:#2E2236; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:18px;line-height:1.6;margin:0}
+.wrap{max-width:800px;margin:0 auto;padding-block:28px 80px;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));display:flex;flex-direction:column;gap:22px}
+h1{font-size:2rem;line-height:1.2;margin:0;text-wrap:balance}
+h2{font-size:1.35rem;margin:0;text-wrap:balance}
+h3{font-size:1.1rem;margin:0}
+.eyebrow{font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:700}
+p{margin:0}
+a{color:var(--accent)}
+code,.f{font-family:var(--font-mono);font-size:.92em;background:var(--code-bg);padding:2px 7px;border-radius:5px;white-space:nowrap}
+.f{white-space:normal;word-break:break-all}
+kbd{font-family:var(--font-mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:3px;border-radius:5px;padding:0 6px;background:var(--surface)}
+.top{display:flex;flex-direction:column;gap:10px}
+.pages{display:flex;flex-wrap:wrap;gap:8px;font-size:.95rem}
+.pages a,.pages span{padding:2px 10px;border-radius:20px;border:1px solid var(--line);text-decoration:none}
+.pages span{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.progress{display:flex;align-items:center;gap:12px;font-weight:700}
+.bar{flex:1;height:10px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .3s}
+.story{background:var(--accent-soft);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.rules{display:flex;flex-direction:column;gap:6px;margin:0;padding-left:22px}
+.tablebox{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.95rem}
+th,td{border:1px solid var(--line);padding:6px 10px;text-align:left;vertical-align:top}
+th{background:var(--code-bg)}
+td.l{font-family:var(--font-mono);font-weight:700;width:3.2em;text-align:center}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:20px;display:flex;flex-direction:column;gap:16px}
+.card.done{border-color:var(--ok)}
+.card-head{display:flex;flex-direction:column;gap:4px}
+.tag{font-size:.72rem;font-weight:700;letter-spacing:.06em;padding:2px 9px;border-radius:20px;white-space:nowrap}
+.tag.core{background:var(--ok-soft);color:var(--core)}
+.tag.extra{background:var(--extra-soft);color:var(--extra)}
+.tag.guided{background:var(--guided-soft);color:var(--guided)}
+.q{font-size:1.1rem;font-weight:700}
+.why{color:var(--muted)}
+.task{border-top:2px solid var(--line);padding-top:14px;display:flex;flex-direction:column;gap:12px}
+.task-head{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.nudge{border-left:4px solid var(--accent);background:var(--accent-soft);border-radius:0 8px 8px 0;padding:8px 12px;font-size:.97rem}
+.nudge b{display:block;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.nudge ol{margin:4px 0 0;padding-left:22px;display:flex;flex-direction:column;gap:4px}
+.answers{display:flex;flex-direction:column;gap:10px;background:var(--code-bg);border-radius:10px;padding:14px}
+.ans{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.ans label{flex:1 1 260px;font-weight:700}
+.ans input,.ans select{font:inherit;padding:6px 10px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg)}
+.ans input{width:9.5em}
+.ans select{max-width:100%}
+.ans button,.donebtn,.dl{font:inherit;font-weight:700;padding:6px 14px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer;text-decoration:none;display:inline-block}
+.ans button:hover,.donebtn:hover,.dl:hover{background:var(--accent-soft)}
+.fb{flex-basis:100%;font-weight:700;font-size:.95rem}
+.fb:empty{display:none}
+.fb.yes{color:var(--ok)} .fb.no{color:var(--no)}
+details{border:1px solid var(--line);border-radius:8px;background:var(--surface)}
+details>summary{cursor:pointer;padding:10px 14px;font-weight:700;list-style:none}
+details>summary::-webkit-details-marker{display:none}
+details>summary::before{content:"▸ ";color:var(--accent)}
+details[open]>summary::before{content:"▾ "}
+details>div{padding:0 14px 14px;display:flex;flex-direction:column;gap:8px}
+details.sol>summary{color:var(--accent)}
+.hints{display:flex;flex-direction:column;gap:8px}
+.warn{border-left:4px solid var(--accent);padding:4px 0 4px 12px;font-size:.97rem;display:flex;flex-direction:column;gap:6px}
+.donebtn{align-self:flex-start}
+.donebtn.on{background:var(--ok-soft);border-color:var(--ok);color:var(--ok)}
+.shot{border:2px dashed var(--line);border-radius:10px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}
+.shot.has{border-style:solid;border-color:var(--ok)}
+.shot b{font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.shot .what{font-size:.97rem}
+.drop{border-radius:8px;background:var(--code-bg);padding:14px;text-align:center;cursor:pointer;font-weight:700;color:var(--muted)}
+.drop:focus-visible,.drop.armed{outline:3px solid var(--accent);outline-offset:2px;color:var(--fg)}
+.shot-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.shot input[type=file]{font:inherit;font-size:.9rem;max-width:100%}
+.shot img{max-width:100%;border:1px solid var(--line);border-radius:6px}
+.shot .clear{font:inherit;font-weight:700;padding:4px 12px;border-radius:8px;border:2px solid var(--fg);background:var(--surface);color:var(--fg);cursor:pointer}
+.shot .note{font-size:.85rem;color:var(--muted)}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+@media (max-width:480px){body{font-size:17px}h1{font-size:1.6rem}.ans input{width:100%}}
+@media (prefers-reduced-motion:reduce){.bar span{transition:none}}
+
+.sec{display:flex;flex-direction:column;gap:14px}
+.sec h2{display:flex;gap:10px;align-items:baseline}
+.num{flex:none;font-family:var(--font-mono);background:var(--accent);color:#fff;border-radius:8px;padding:0 9px;font-size:1rem}
+@media (prefers-color-scheme: dark){.num{color:#16181B}}
+.steps{display:flex;flex-direction:column;gap:10px;margin:0;padding-left:24px}
+.ds{display:flex;flex-direction:column;gap:10px}
+#dsb .ds,#dtu .ds{border-top:2px solid var(--line);padding-top:16px}
+.ds h4{margin:8px 0 0;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.fname,.src{color:var(--muted);font-size:.9rem}
+.fname code{white-space:normal;overflow-wrap:anywhere}
+.src{overflow-wrap:anywhere}
+td.cn{width:40%;overflow-wrap:anywhere}
+td.cn code{white-space:normal;overflow-wrap:anywhere}
+.btns{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.viewlink{font-weight:700}
+.dsnav{display:flex;flex-wrap:wrap;gap:8px}
+.dsnav a{padding:2px 12px;border-radius:20px;border:1px solid var(--line);text-decoration:none}
+.field{display:flex;flex-direction:column;gap:4px}
+.field label{font-weight:700}
+.field input,.field select,.field textarea{font:inherit;padding:8px 10px;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--fg);width:100%}
+.field textarea{min-height:5.5em;resize:vertical}
+.hint{color:var(--muted);font-size:.9rem}
+.savemsg{font-weight:700;color:var(--ok);min-height:1.6em}
+.when{font-weight:700;white-space:nowrap}
+@media (max-width:480px){.when{white-space:normal}}
+.linklist{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px;overflow-wrap:anywhere}
+.printonly{display:none}
+@media print{
+  body{background:#fff;color:#000;font-size:12pt}
+  .noprint,.btns,.dl{display:none!important}
+  .card{border:0;padding:0;break-inside:avoid}
+  .wrap{padding-block:0}
+  .printonly{display:block}
+  #s1,#s2,#s3,#s5,#s6{display:none}
+  .field input,.field select,.field textarea{border:1px solid #000;background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="eyebrow">CAP1788 &middot; Final Project &middot; Kickoff</div>
+  <h1>Final Project: pick your dataset</h1>
+  <p>This page has everything you need today. Every link is here.</p>
+  <p>You work with one partner. You choose one of three datasets. Then you fill in the box in section 4.</p>
+</header>
+
+<section class="card sec" id="s1">
+  <h2><span class="num">1</span> What the final project is</h2>
+  <p>Your final project is a data story in Excel.</p>
+  <p>You work in pairs. Two students per group.</p>
+  <p>You use Excel only.</p>
+  <p>Your workbook has these sheets:</p>
+  <ul class="rules">
+    <li><b>Raw Data.</b> The data as it came. You do not change it.</li>
+    <li><b>Cleaning.</b> Use Format as Table. Fix what is wrong or missing in the data. Use at least one explore or clean function, such as COUNTIF, IF or TRIM. Use at least one math function, such as SUM or AVERAGE.</li>
+    <li><b>Final.</b> The cleaned data, with Paste Values.</li>
+  </ul>
+  <p>Then you build PivotTables and PivotCharts that answer one plain-English question.</p>
+  <p>You put the charts together on one dashboard sheet.</p>
+  <p>You present it live in class on Tuesday, Dec 8. Your presentation is 5 to 8 minutes.</p>
+  <p>You do not need to know the answers yet. You are choosing a topic you can talk about for 5 to 8 minutes.</p>
+</section>
+
+<section class="card sec" id="s2">
+  <h2><span class="num">2</span> Today in the tutoring hour</h2>
+  <ol class="steps">
+    <li><b>Find your partner.</b> Sit together.</li>
+    <li><b>Download a dataset.</b> Go to a dataset card in step 3 and click <b>Download CSV</b>. The file goes to your Downloads folder. Your browser may show a small download box. Click it to open the file, or use File Explorer in the next step.</li>
+    <li><b>Open the file.</b> Open File Explorer. Click <b>Downloads</b>. Double-click the file. It opens in Excel. If it opens in another program, right-click the file, choose <b>Open with</b>, then choose <b>Excel</b>.</li>
+    <li><b>Protected View.</b> Excel may show a yellow bar that says Protected View. Click <b>Enable Editing</b>.</li>
+    <li><b>Do not save yet.</b> On Tuesday you will use Save As and make an .xlsx file. If Excel asks &ldquo;Do you want to save?&rdquo; when you close the file, click <b>Don't Save</b>.</li>
+    <li><b>Read the card.</b> Look at the columns in Excel and in the card. Read the 3 questions. Read the Heads up.</li>
+    <li><b>Do this for all three datasets.</b> Each of you can open a different one, then compare.</li>
+    <li><b>Choose together.</b> Pick one dataset. Talk about why. Two groups may pick the same dataset.</li>
+    <li><b>Fill in the box.</b> It is in section 4 on this page.</li>
+  </ol>
+  <p class="hint">Stuck? Ask the tutor.</p>
+</section>
+
+<section class="card sec" id="s3">
+  <h2><span class="num">3</span> The three datasets</h2>
+  <nav class="dsnav" aria-label="Jump to a dataset">
+    <a href="#d311">Miami 311</a><a href="#dsb">Starbucks drinks</a><a href="#dtu">College tuition</a>
+  </nav>
+  <div id="d311"><article class="ds">
+<h3>Miami 311 requests, March 2024</h3>
+<p class="fname">File name: <code>final-project-miami-311-march-2024.csv</code></p>
+<h4>What it is</h4><p>Requests that people in the City of Miami sent to the city&#x27;s 311 line in March 2024. Each row shows the department that handled the request and how many days it took.</p>
+<h4>Size</h4><p>4,205 rows and 14 columns. One row is one request.</p>
+<h4>Columns</h4>
+<div class="tablebox"><table><thead><tr><th>Column</th><th>What it means</th></tr></thead><tbody>
+<tr><td class="cn"><code>ticket_id</code></td><td>The ID of the request, such as 24-10082500.</td></tr>
+<tr><td class="cn"><code>issue_type</code></td><td>A short code for the kind of request.</td></tr>
+<tr><td class="cn"><code>issue_Description</code></td><td>The kind of request, in words.</td></tr>
+<tr><td class="cn"><code>case_owner</code></td><td>The city department that handles it.</td></tr>
+<tr><td class="cn"><code>zip_code</code></td><td>The ZIP code where the request is from. It is a label, not an amount. One row has ZIP code 0.</td></tr>
+<tr><td class="cn"><code>District</code></td><td>The city district number. It is a label, not an amount.</td></tr>
+<tr><td class="cn"><code>ticket_created_date_time</code></td><td>The date and time the request came in. Excel shows it as a date and time.</td></tr>
+<tr><td class="cn"><code>ticket_closed_date_time</code></td><td>The date and time the request was closed. A few rows are empty.</td></tr>
+<tr><td class="cn"><code>ticket_status</code></td><td>Where the request stands now: closed, open, cancelled and so on.</td></tr>
+<tr><td class="cn"><code>method_received</code></td><td>How the request came in. PHONE is a phone call. WEB is the website. IPHONE and ANDROID are phone apps. EMAIL is email. The other values are codes.</td></tr>
+<tr><td class="cn"><code>goal_days</code></td><td>The number of days the city aims to finish this kind of request.</td></tr>
+<tr><td class="cn"><code>actual_completed_days</code></td><td>The number of days the request took.</td></tr>
+<tr><td class="cn"><code>Ticket_Priority</code></td><td>How urgent the request was marked. These are short codes.</td></tr>
+<tr><td class="cn"><code>OverDueFlag</code></td><td>The city&#x27;s own overdue mark. 1 means overdue. 0 means not overdue. Use it as given. A few rows with 0 still show more days than the goal.</td></tr>
+</tbody></table></div>
+<h4>3 questions you could answer</h4>
+<ol class="rules"><li>Which three kinds of requests came in most often? Which department handles them?</li><li>Which district waits the longest, on average, for a request to be closed?</li><li>Do requests sent by web or app get closed faster or slower than phone calls?</li></ol>
+<h4>Heads up</h4>
+<div class="warn"><p>When you average actual_completed_days, use only requests with ticket_status CLOSED. Other statuses carry numbers that will give you the wrong average.</p><p>Use the column as it is. Do not work out the days yourself.</p><p>District 0 has very few requests. Look at how many requests are behind an average before you trust it.</p><p>Some request types are about animals. You may filter them out if you want. In issue_Description, search for the word ANIMAL. If you filter, say so on your Cleaning sheet.</p></div>
+<p class="btns"><a class="dl" href="https://drive.google.com/uc?export=download&id=1r2zzZvcevDNoSomNUMTar_NNO8GQaSPi">Download CSV</a> <a class="viewlink" href="https://drive.google.com/file/d/1r2zzZvcevDNoSomNUMTar_NNO8GQaSPi/view">View in Drive</a></p>
+<p class="src">Data: City of Miami 311 Service Requests Since 2015, (c) City of Miami, Department of Innovation and Technology, GIS Team, licensed CC BY 4.0 (https://creativecommons.org/licenses/by/4.0/). March 2024 only; address, coordinate and folio columns removed; date fields reformatted to YYYY-MM-DD HH:MM:SS.</p>
+</article></div>
+  <div id="dsb"><article class="ds">
+<h3>Starbucks drinks nutrition</h3>
+<p class="fname">File name: <code>final-project-starbucks-drinks.csv</code></p>
+<h4>What it is</h4><p>Nutrition facts for Starbucks drinks, from the official Starbucks nutrition guide. Each row is one drink in one size, with one milk choice and whip or no whip.</p>
+<h4>Size</h4><p>1,147 rows and 15 columns. One row is one drink, in one size, with one milk choice.</p>
+<h4>Columns</h4>
+<div class="tablebox"><table><thead><tr><th>Column</th><th>What it means</th></tr></thead><tbody>
+<tr><td class="cn"><code>product_name</code></td><td>The name of the drink. Some names are all lowercase and some are capitalized. Some have accents, such as Caffè.</td></tr>
+<tr><td class="cn"><code>size</code></td><td>The size of the drink. Most are short, tall, grande, venti or trenta. A few say solo, doppio, triple, quad, 1 scoop or 1 shot.</td></tr>
+<tr><td class="cn"><code>milk</code></td><td>The kind of milk, as a code. 0 is none. 1 is nonfat. 2 is 2%. 3 is soy. 4 is coconut. 5 is whole.</td></tr>
+<tr><td class="cn"><code>whip</code></td><td>Whipped cream, as a code. 1 means whip was added. 0 means no whip.</td></tr>
+<tr><td class="cn"><code>serv_size_m_l</code></td><td>The serving size in milliliters.</td></tr>
+<tr><td class="cn"><code>calories</code></td><td>The calories in the drink. Some drinks show 0.</td></tr>
+<tr><td class="cn"><code>total_fat_g</code></td><td>Total fat, in grams.</td></tr>
+<tr><td class="cn"><code>saturated_fat_g</code></td><td>Saturated fat, in grams.</td></tr>
+<tr><td class="cn"><code>trans_fat_g</code></td><td>Trans fat, in grams.</td></tr>
+<tr><td class="cn"><code>cholesterol_mg</code></td><td>Cholesterol, in milligrams.</td></tr>
+<tr><td class="cn"><code>sodium_mg</code></td><td>Sodium, in milligrams.</td></tr>
+<tr><td class="cn"><code>total_carbs_g</code></td><td>Total carbohydrates, in grams.</td></tr>
+<tr><td class="cn"><code>fiber_g</code></td><td>Fiber, in grams.</td></tr>
+<tr><td class="cn"><code>sugar_g</code></td><td>Sugar, in grams.</td></tr>
+<tr><td class="cn"><code>caffeine_mg</code></td><td>Caffeine, in milligrams.</td></tr>
+</tbody></table></div>
+<h4>3 questions you could answer</h4>
+<ol class="rules"><li>Which kinds of drinks, such as Frappuccino, latte or tea, have the most sugar in a grande?</li><li>How much do the calories change when the same drink is made with whole milk, nonfat milk or soy milk?</li><li>Which sizes and drinks give the most caffeine for the calories?</li></ol>
+<h4>Heads up</h4>
+<div class="warn"><p>The milk and whip columns are codes. Turn them into words so your PivotTable shows names, not numbers.</p><p>The file has no drink type column. You build one from product_name, for example Latte or Frappuccino.</p><p>The cleaning here is mostly turning codes into words. You still show your cleaning on the Cleaning sheet. Plan to add helper columns, for example a Milk Type column.</p><p>The same drink shows up in several sizes and with several milks. Look at how many rows are behind an average before you trust it.</p><p>Some drinks show 0 calories. Decide whether to keep them, and say what you decided on your Cleaning sheet.</p></div>
+<p class="btns"><a class="dl" href="https://drive.google.com/uc?export=download&id=1kHmnrIKCyFy1h88UTYh9FzpeyFQ1rEcw">Download CSV</a> <a class="viewlink" href="https://drive.google.com/file/d/1kHmnrIKCyFy1h88UTYh9FzpeyFQ1rEcw/view">View in Drive</a></p>
+<p class="src">Nutrition facts published by Starbucks. Data file from the TidyTuesday project.</p>
+</article></div>
+  <div id="dtu"><article class="ds">
+<h3>College tuition and costs</h3>
+<p class="fname">File name: <code>final-project-college-tuition.csv</code></p>
+<h4>What it is</h4><p>What US colleges and universities charge for one school year, for students who live in the state and students who come from out of state.</p>
+<h4>Size</h4><p>2,973 rows and 10 columns. One row is one school.</p>
+<h4>Columns</h4>
+<div class="tablebox"><table><thead><tr><th>Column</th><th>What it means</th></tr></thead><tbody>
+<tr><td class="cn"><code>name</code></td><td>The name of the school.</td></tr>
+<tr><td class="cn"><code>state</code></td><td>The state the school is in. It says NA for Puerto Rico, DC and a few territories. The state_code column is filled in for those.</td></tr>
+<tr><td class="cn"><code>state_code</code></td><td>The two-letter code for the state.</td></tr>
+<tr><td class="cn"><code>type</code></td><td>Public, Private or For Profit. One school says Other.</td></tr>
+<tr><td class="cn"><code>degree_length</code></td><td>2 Year or 4 Year. One school says Other.</td></tr>
+<tr><td class="cn"><code>room_and_board</code></td><td>The yearly cost of housing and meals.</td></tr>
+<tr><td class="cn"><code>in_state_tuition</code></td><td>The yearly tuition for students from the same state.</td></tr>
+<tr><td class="cn"><code>in_state_total</code></td><td>Tuition plus room and board for students from the same state. If room_and_board is NA, this is just the tuition.</td></tr>
+<tr><td class="cn"><code>out_of_state_tuition</code></td><td>The yearly tuition for students from another state.</td></tr>
+<tr><td class="cn"><code>out_of_state_total</code></td><td>Tuition plus room and board for students from another state. If room_and_board is NA, this is just the tuition.</td></tr>
+</tbody></table></div>
+<h4>3 questions you could answer</h4>
+<ol class="rules"><li>Which states have the highest average in-state tuition at 4-year public schools?</li><li>How much more is out-of-state tuition than in-state tuition at public schools, compared with private schools?</li><li>How does in-state tuition at 2-year schools compare with 4-year schools, and how many schools are in each group?</li></ol>
+<h4>Heads up</h4>
+<div class="warn"><p>Some schools have the text NA in room_and_board, because they do not list housing. If you drag that column into Values, the PivotTable counts it instead of adding it up. Decide how to handle the NA before you use it.</p><p>This file is fairly tidy. You still show your cleaning on the Cleaning sheet. Start with the NA values.</p><p>Many 2-year schools have no room and board. When you compare 2-year and 4-year schools, use tuition, not totals.</p></div>
+<p class="btns"><a class="dl" href="https://drive.google.com/uc?export=download&id=1BjcPB5bqRPkxix7kOm5knD9LiM4E78up">Download CSV</a> <a class="viewlink" href="https://drive.google.com/file/d/1BjcPB5bqRPkxix7kOm5knD9LiM4E78up/view">View in Drive</a></p>
+<p class="src">Chronicle of Higher Education, based on US Department of Education data, via TidyTuesday.</p>
+</article></div>
+</section>
+
+<section class="card sec" id="s4">
+  <h2><span class="num">4</span> Bring this on Tuesday, Nov 17</h2>
+  <p>Do this with your partner. On Tuesday, Nov 17, you will tell your professor three things: who is in your group, which dataset you picked, and why.</p>
+  <p class="hint noprint">What you type is saved on this computer. Use the same computer and browser on Tuesday. If you are not sure, also write your names, dataset and why on paper or in a note on your phone. The tutor can check your box today.</p>
+  <form id="kick" onsubmit="return false">
+    <div class="field"><label for="p1">Partner 1 name</label><input id="p1" type="text" autocomplete="off"></div>
+    <div class="field"><label for="p2">Partner 2 name</label><input id="p2" type="text" autocomplete="off"></div>
+    <div class="field"><label for="ds">Dataset (choose one of three)</label>
+      <select id="ds"><option value="">Choose one</option><option>Miami 311 requests</option><option>Starbucks drinks nutrition</option><option>College tuition and costs</option></select></div>
+    <div class="field"><label for="why">Why we chose it (2 or 3 sentences)</label><textarea id="why" rows="5"></textarea></div>
+    <div class="field"><label for="q">Our first question (optional)</label><textarea id="q" rows="3"></textarea></div>
+  </form>
+  <p class="savemsg" id="savemsg" role="status" aria-live="polite"></p>
+  <p class="btns noprint"><button class="dl" type="button" id="printbtn">Print</button></p>
+</section>
+
+<section class="card sec" id="s5">
+  <h2><span class="num">5</span> What we do each class</h2>
+  <div class="tablebox"><table><thead><tr><th>When</th><th>What we do</th></tr></thead><tbody><tr><td class='when'>Thu Nov 12 (tutoring hour)</td><td>Pairs. Look at the datasets. Choose.</td></tr><tr><td class='when'>Tue Nov 17</td><td>Tell your professor your group, dataset and why. Open the CSV, save as .xlsx, make the Raw Data sheet. Write your question.</td></tr><tr><td class='when'>Thu Nov 19</td><td>Cleaning sheet and Final sheet.</td></tr><tr><td class='when'>Tue Nov 24</td><td>PivotTables that answer your question.</td></tr><tr><td class='when'>Tue Dec 1</td><td>PivotCharts and the dashboard sheet.</td></tr><tr><td class='when'>Thu Dec 3</td><td>Finish. Practice your presentation.</td></tr><tr><td class='when'>Tue Dec 8</td><td>Presentations.</td></tr></tbody></table></div>
+  <p>No class Thu Nov 26 (Thanksgiving). No meeting Thu Dec 10.</p>
+  <p>Grading details come in class.</p>
+</section>
+
+<section class="card sec" id="s6">
+  <h2><span class="num">6</span> All links in one place</h2>
+  <ul class="linklist">
+    <li><a href="https://drive.google.com/drive/folders/1C_yq9B9B7hl2Co8b9m2bS9ljwT6WVKct">Datasets folder in Google Drive</a></li>
+    <li><a href="https://drive.google.com/uc?export=download&id=1r2zzZvcevDNoSomNUMTar_NNO8GQaSPi">Download: Miami 311 requests (final-project-miami-311-march-2024.csv)</a></li>
+    <li><a href="https://drive.google.com/uc?export=download&id=1kHmnrIKCyFy1h88UTYh9FzpeyFQ1rEcw">Download: Starbucks drinks nutrition (final-project-starbucks-drinks.csv)</a></li>
+    <li><a href="https://drive.google.com/uc?export=download&id=1BjcPB5bqRPkxix7kOm5knD9LiM4E78up">Download: College tuition and costs (final-project-college-tuition.csv)</a></li>
+  </ul>
+</section>
+
+</div>
+<script>
+(function(){
+  var KEY="cap1788-project00-kickoff-v1", ids=["p1","p2","ds","why","q"], state={};
+  try{state=JSON.parse(localStorage.getItem(KEY)||"{}")||{}}catch(e){state={}}
+  var msg=document.getElementById("savemsg"), t=null;
+  ids.forEach(function(id){
+    var el=document.getElementById(id);
+    if(state[id]!==undefined) el.value=state[id];
+    function on(){
+      state[id]=el.value;
+      try{localStorage.setItem(KEY,JSON.stringify(state));msg.textContent="Saved on this computer.";}
+      catch(e){msg.textContent="Could not save here. Print this page or write your answers on paper.";}
+    }
+    el.addEventListener("input",on); el.addEventListener("change",on);
+  });
+  document.getElementById("printbtn").addEventListener("click",function(){window.print();});
+})();
+</script>
+
+</body>
+</html>
