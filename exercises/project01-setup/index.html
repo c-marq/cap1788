@@ -132,7 +132,7 @@ details.sol>summary{color:var(--accent)}
     <li>Your checkmarks save on this computer.</li>
     <li><strong>Screenshot boxes:</strong> press <kbd>Windows</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>, drag a box around your work, then click the screenshot box on this page and press <kbd>Ctrl</kbd> + <kbd>V</kbd>. Your screenshots stay on this computer.</li>
   </ul>
-  <div class="warn"><p>Your answers go in these cells: the three formulas for the mess check go in the Cleaning sheet, in the column named in your dataset's box. Your question and your three problems go in the Notes sheet.</p></div>
+  <div class="warn"><p>Your answers go in these cells: the three formulas for the mess check go in the Cleaning sheet, in the column named in your dataset's box. Your questions, your three problems and the AI used line go in the Notes sheet.</p></div>
 </section>
 
 <!-- ============ EXERCISE 1 ============ -->
@@ -211,16 +211,27 @@ details.sol>summary{color:var(--accent)}
     <div class="shot" data-shot="ex2t4"><b>Your screenshot</b><p class="what">The Table Design tab with the Table Name box showing the name.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 4">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t4f">Or pick the file:</label><input id="ex2t4f" type="file" accept="image/*"></div><img alt="Your screenshot for task 4" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
   </div>
   <div class="task">
-    <div class="task-head"><h3>Task 5 · Add a Notes sheet with your question</h3><span class="tag core">CORE</span></div>
-    <p>Add a new sheet called <code>Notes</code>. In A1 type <code>Notes</code>. In A3 type <code>Central question</code>. In B3 write your central question in one sentence, in plain English. A draft is fine. You can change it later.</p>
-    <div class="nudge"><b>Nudge</b>Click the <strong>+</strong> next to the sheet tabs. Rename the new sheet <code>Notes</code>. Look at the kickoff page for ideas, or use your own.</div>
+    <div class="task-head"><h3>Task 5 · Add a Notes sheet and ask AI for questions</h3><span class="tag core">CORE</span><span class="tag guided">GUIDED</span></div>
+    <p>Add a new sheet called <code>Notes</code>. Then use AI to help you think of questions about your data. AI suggests. You and your partner decide. Your professor tells you which AI to use (Copilot or ChatGPT). Some good questions need a new column that you make from the columns you have, for example a month from a date. That is fine: you make new columns in Session 2.</p><div class="aibox"><p class="ailabel" id="ailabel">Prompt to copy</p><pre class="aiprompt" id="aiprompt" tabindex="0" aria-labelledby="ailabel">We are college students in an intro data analytics class. My partner and I are doing a final project in Excel. We will clean the data, add new columns, build PivotTables and PivotCharts, and make a dashboard.
+
+Our dataset is [dataset name]. At the end of this message are the column names and the first 10 rows.
+
+Please:
+1. Tell us in plain words what one row of this data is.
+2. Suggest 5 central questions we could answer with a PivotTable. Some questions can use a new column that we make from the columns we have, for example a month from a date, a group from a number, or Yes or No from a text column.
+3. For each question, say which columns it uses, any new column we would need to make and how, and whether the PivotTable needs Count, Sum or Average.
+4. Do not answer the questions or make up any numbers. We will find the answers in Excel.
+
+Our data:
+</pre><button type="button" class="aicopy" id="aicopy">Copy prompt</button> <span class="aidone" id="aidone" role="status" aria-live="polite"></span></div><p>Write your answers on the Notes sheet:</p><ul class="rules"><li>A3 <code>Central question</code>, and in B3 your question in one sentence, in your own words. A draft is fine.</li><li>A10 <code>More questions</code>, and in B10 to B12 two or three more questions you want to answer. They can come from the AI list or from you.</li><li>A14 <code>AI used</code>, and in B14 which AI you used and one thing you changed. Example: <em>ChatGPT. We changed its question 2 to ask about weekends.</em></li></ul><p>Rows 5 to 8 stay free for the problems you find in Exercise 3.</p>
+    <div class="nudge"><b>Guided start</b><ol><li>Click the <strong>+</strong> next to the sheet tabs. Double-click the new tab and rename it <code>Notes</code>. In A1 type <code>Notes</code>.</li><li>Open the AI in the browser and sign in. Click <strong>Copy prompt</strong> above, click in the chat box and press <kbd>Ctrl</kbd> + <kbd>V</kbd>. Change <code>[dataset name]</code> to your dataset.</li><li>Go to the <code>Raw Data</code> sheet. Click A1, then hold <kbd>Shift</kbd> and click <strong>N11</strong> (Miami 311), <strong>J11</strong> (College tuition) or <strong>O11</strong> (Starbucks). Press <kbd>Ctrl</kbd> + <kbd>C</kbd>.</li><li>In the chat, click at the very end, after <code>Our data:</code>, and press <kbd>Ctrl</kbd> + <kbd>V</kbd>. Send it. Read the answer together.</li></ol></div>
     
     <div class="hints">
-      <details><summary>Hint 1</summary><div><p>The + button is right after the last sheet tab. Double-click the new tab to rename it.</p></div></details>
-      <details><summary>Hint 2</summary><div><p>One sentence. It asks about your dataset and ends with a question mark. Example shape: <em>Which group has the highest average of something?</em></p></div></details>
-      <details class="sol"><summary>Solution</summary><div><p>A Notes sheet with <code>Notes</code> in A1, <code>Central question</code> in A3 and your one-sentence question in B3.</p></div></details>
+      <details><summary>Hint 1</summary><div><p>Copilot: <code>copilot.microsoft.com</code>. ChatGPT: <code>chatgpt.com</code>. The copied cells are the column names and the first 10 rows of your data.</p></div></details>
+      <details><summary>Hint 2</summary><div><p>The AI sees only 10 rows, so check that every column it names is really in your data. If your paste shows up as a picture instead of text, that is fine too. Pick the question you both find most interesting, not the first one on the list.</p></div></details>
+      <details class="sol"><summary>Solution</summary><div><p>A Notes sheet with <code>Notes</code> in A1, <code>Central question</code> in A3 and your question in B3, <code>More questions</code> in A10 with two or three questions in B10 to B12, and <code>AI used</code> in A14 with the AI and what you changed in B14.</p></div></details>
     </div>
-    <div class="shot" data-shot="ex2t5"><b>Your screenshot</b><p class="what">The Notes sheet with your question in B3.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 5">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t5f">Or pick the file:</label><input id="ex2t5f" type="file" accept="image/*"></div><img alt="Your screenshot for task 5" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
+    <div class="shot" data-shot="ex2t5"><b>Your screenshot</b><p class="what">The Notes sheet with your question in B3 and your other questions in B10 to B12.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot for task 5">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex2t5f">Or pick the file:</label><input id="ex2t5f" type="file" accept="image/*"></div><img alt="Your screenshot for task 5" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
   </div>
   <button class="donebtn" type="button">I finished this exercise</button>
 </section>
@@ -303,7 +314,7 @@ details.sol>summary{color:var(--accent)}
 <section class="card" id="done" style="gap:10px">
   <h2>Done today when...</h2>
   <p>Answer each line with Yes or No. Fix every No before you leave.</p>
-  <div class="ynlist"><fieldset class="yn" data-yn="tabs"><legend>The three sheet tabs are named <code>Raw Data</code>, <code>Cleaning</code> and <code>Notes</code>.</legend><label><input type="radio" name="yn-tabs" value="yes"> Yes</label> <label><input type="radio" name="yn-tabs" value="no"> No</label></fieldset><fieldset class="yn" data-yn="raw"><legend>Raw Data is untouched. Press <kbd>Ctrl</kbd> + <kbd>End</kbd> on it. The last cell is <b>N4206</b> (Miami 311), <b>J2974</b> (College tuition) or <b>O1148</b> (Starbucks).</legend><label><input type="radio" name="yn-raw" value="yes"> Yes</label> <label><input type="radio" name="yn-raw" value="no"> No</label></fieldset><fieldset class="yn" data-yn="tbl"><legend>Cleaning is a Table named <code>tblClean</code>. Click inside it and the Table Design tab shows.</legend><label><input type="radio" name="yn-tbl" value="yes"> Yes</label> <label><input type="radio" name="yn-tbl" value="no"> No</label></fieldset><fieldset class="yn" data-yn="rows"><legend>The status bar Count for the first column of the table is <b>4,205</b> (Miami 311), <b>2,973</b> (College tuition) or <b>1,147</b> (Starbucks).</legend><label><input type="radio" name="yn-rows" value="yes"> Yes</label> <label><input type="radio" name="yn-rows" value="no"> No</label></fieldset><fieldset class="yn" data-yn="file"><legend>The file is in OneDrive, in your MDC account. Your partner opened it in Excel on the computer, typed anything in a cell of the Notes sheet, and you saw it. Then your partner deleted it. (Working alone: the file is in OneDrive.)</legend><label><input type="radio" name="yn-file" value="yes"> Yes</label> <label><input type="radio" name="yn-file" value="no"> No</label></fieldset><fieldset class="yn" data-yn="notes"><legend>The Notes sheet has your question in B3 and three problems in B5 to B7.</legend><label><input type="radio" name="yn-notes" value="yes"> Yes</label> <label><input type="radio" name="yn-notes" value="no"> No</label></fieldset></div>
+  <div class="ynlist"><fieldset class="yn" data-yn="tabs"><legend>The three sheet tabs are named <code>Raw Data</code>, <code>Cleaning</code> and <code>Notes</code>.</legend><label><input type="radio" name="yn-tabs" value="yes"> Yes</label> <label><input type="radio" name="yn-tabs" value="no"> No</label></fieldset><fieldset class="yn" data-yn="raw"><legend>Raw Data is untouched. Press <kbd>Ctrl</kbd> + <kbd>End</kbd> on it. The last cell is <b>N4206</b> (Miami 311), <b>J2974</b> (College tuition) or <b>O1148</b> (Starbucks).</legend><label><input type="radio" name="yn-raw" value="yes"> Yes</label> <label><input type="radio" name="yn-raw" value="no"> No</label></fieldset><fieldset class="yn" data-yn="tbl"><legend>Cleaning is a Table named <code>tblClean</code>. Click inside it and the Table Design tab shows.</legend><label><input type="radio" name="yn-tbl" value="yes"> Yes</label> <label><input type="radio" name="yn-tbl" value="no"> No</label></fieldset><fieldset class="yn" data-yn="rows"><legend>The status bar Count for the first column of the table is <b>4,205</b> (Miami 311), <b>2,973</b> (College tuition) or <b>1,147</b> (Starbucks).</legend><label><input type="radio" name="yn-rows" value="yes"> Yes</label> <label><input type="radio" name="yn-rows" value="no"> No</label></fieldset><fieldset class="yn" data-yn="file"><legend>The file is in OneDrive, in your MDC account. Your partner opened it in Excel on the computer, typed anything in a cell of the Notes sheet, and you saw it. Then your partner deleted it. (Working alone: the file is in OneDrive.)</legend><label><input type="radio" name="yn-file" value="yes"> Yes</label> <label><input type="radio" name="yn-file" value="no"> No</label></fieldset><fieldset class="yn" data-yn="notes"><legend>The Notes sheet has your question in B3, three problems in B5 to B7, more questions in B10 to B12 and the AI used line in B14.</legend><label><input type="radio" name="yn-notes" value="yes"> Yes</label> <label><input type="radio" name="yn-notes" value="no"> No</label></fieldset></div>
   <p class="ynsum" id="ynsum" role="status" aria-live="polite">0 of 6 Yes</p>
   <details class="dsbox"><summary>What done looks like: Miami 311 requests</summary>
 <div>
@@ -312,7 +323,7 @@ details.sol>summary{color:var(--accent)}
 <li>Tabs: <code>Raw Data</code>, <code>Cleaning</code>, <code>Notes</code>.</li>
 <li>Raw Data: cell A1 says <code>ticket_id</code>, A2 says <code>24-10082500</code>. <kbd>Ctrl</kbd> + <kbd>End</kbd> goes to <code>N4206</code>.</li>
 <li>Cleaning: a Table named <code>tblClean</code>, 14 columns. The status bar Count for column A is <b>4,205</b>.</li>
-<li>Notes: <code>Central question</code> in A3 with your question in B3. <code>Three problems found</code> in A5 with the problems in B5 to B7.</li>
+<li>Notes: <code>Central question</code> in A3 with your question in B3. <code>Three problems found</code> in A5 with the problems in B5 to B7. <code>More questions</code> in A10 with your questions in B10 to B12. <code>AI used</code> in A14, filled in B14.</li>
 </ul></div></details>
   <details class="dsbox"><summary>What done looks like: Starbucks drinks nutrition</summary>
 <div>
@@ -321,7 +332,7 @@ details.sol>summary{color:var(--accent)}
 <li>Tabs: <code>Raw Data</code>, <code>Cleaning</code>, <code>Notes</code>.</li>
 <li>Raw Data: cell A1 says <code>product_name</code>, A2 says <code>brewed coffee - dark roast</code>. <kbd>Ctrl</kbd> + <kbd>End</kbd> goes to <code>O1148</code>.</li>
 <li>Cleaning: a Table named <code>tblClean</code>, 15 columns. The status bar Count for column A is <b>1,147</b>.</li>
-<li>Notes: <code>Central question</code> in A3 with your question in B3. <code>Three problems found</code> in A5 with the problems in B5 to B7.</li>
+<li>Notes: <code>Central question</code> in A3 with your question in B3. <code>Three problems found</code> in A5 with the problems in B5 to B7. <code>More questions</code> in A10 with your questions in B10 to B12. <code>AI used</code> in A14, filled in B14.</li>
 </ul></div></details>
   <details class="dsbox"><summary>What done looks like: College tuition and costs</summary>
 <div>
@@ -330,7 +341,7 @@ details.sol>summary{color:var(--accent)}
 <li>Tabs: <code>Raw Data</code>, <code>Cleaning</code>, <code>Notes</code>.</li>
 <li>Raw Data: cell A1 says <code>name</code>, A2 says <code>Aaniiih Nakoda College</code>. <kbd>Ctrl</kbd> + <kbd>End</kbd> goes to <code>J2974</code>.</li>
 <li>Cleaning: a Table named <code>tblClean</code>, 10 columns. The status bar Count for column A is <b>2,973</b>.</li>
-<li>Notes: <code>Central question</code> in A3 with your question in B3. <code>Three problems found</code> in A5 with the problems in B5 to B7.</li>
+<li>Notes: <code>Central question</code> in A3 with your question in B3. <code>Three problems found</code> in A5 with the problems in B5 to B7. <code>More questions</code> in A10 with your questions in B10 to B12. <code>AI used</code> in A14, filled in B14.</li>
 </ul></div></details>
 </section>
 
@@ -361,6 +372,12 @@ fieldset.yn input{width:1.15em;height:1.15em;accent-color:var(--accent)}
 .ynsum.all{color:var(--ok)}
 figure.donepic{margin:0}
 figure.donepic img{max-width:100%;border:1px solid var(--line);border-radius:6px}
+.aibox{border:2px solid var(--accent);border-radius:10px;padding:10px 14px;margin:10px 0}
+.ailabel{font-weight:700;margin:0 0 6px}
+pre.aiprompt{white-space:pre-wrap;word-break:break-word;font-family:var(--font-mono);font-size:.92rem;margin:0 0 10px;padding:10px;border:1px solid var(--line);border-radius:6px;max-height:none}
+button.aicopy{font:inherit;font-weight:700;padding:8px 14px;border-radius:8px;border:2px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+button.aicopy:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.aidone{font-weight:700;color:var(--ok)}
 .pending{border:2px dashed var(--line);border-radius:10px;padding:34px 14px;text-align:center;font-weight:700;color:var(--muted)}
 </style>
 <script type="text/javascript">
@@ -380,6 +397,20 @@ figure.donepic img{max-width:100%;border:1px solid var(--line);border-radius:6px
     });
   });
   paint();
+})();
+(function(){
+  var b=document.getElementById("aicopy"), pre=document.getElementById("aiprompt"), done=document.getElementById("aidone");
+  if(!b||!pre) return;
+  function said(){ done.textContent="Copied. Paste it in the chat."; }
+  function fallback(){
+    var r=document.createRange(); r.selectNodeContents(pre); var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+    var okc=false; try{ okc=document.execCommand("copy"); }catch(e){}
+    done.textContent = okc ? "Copied. Paste it in the chat." : "Press Ctrl + C now to copy the selected prompt.";
+  }
+  b.addEventListener("click",function(){
+    var txt=pre.textContent;
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(said,fallback); } else { fallback(); }
+  });
 })();
 </script>
 
