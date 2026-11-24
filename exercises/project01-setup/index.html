@@ -253,7 +253,7 @@ Our data:
   <p class="q">Question: What problems does your dataset have, and how many rows does each touch?</p>
   <p class="why">A good project starts with knowing the mess. Open only the box for your dataset. The answers are the same for every pair on that dataset.</p>
   
-<details class="dsbox" data-ds="311"><summary>Open if your dataset is Miami 311 requests</summary>
+<details class="dsbox dspath" data-ds="311"><summary>Open if your dataset is Miami 311 requests</summary>
   <div class="task">
     <div class="task-head"><h3>Mess check: Miami 311 requests</h3><span class="tag core">CORE</span></div>
     <p>Find out how messy your dataset is. First read the row count in the status bar. Then type three formulas in R1, R2 and R3 on the Cleaning sheet. Column R is a few columns to the right of your table. Excel does not add it to the table, and the columns between stay free for helper columns later. The four Check rows follow this order: row count, then the three formulas.</p>
@@ -267,7 +267,7 @@ Our data:
     <div class="shot" data-shot="ex3t1"><b>Your screenshot</b><p class="what">Cells R1 to R3 with the three results, and the status bar Count.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t1f">Or pick the file:</label><input id="ex3t1f" type="file" accept="image/*"></div><img alt="Your screenshot" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
   </div>
 </details>
-<details class="dsbox" data-ds="tuition"><summary>Open if your dataset is College tuition and costs</summary>
+<details class="dsbox dspath" data-ds="tuition"><summary>Open if your dataset is College tuition and costs</summary>
   <div class="task">
     <div class="task-head"><h3>Mess check: College tuition and costs</h3><span class="tag core">CORE</span></div>
     <p>Find out how messy your dataset is. First read the row count in the status bar. Then type three formulas in N1, N2 and N3 on the Cleaning sheet. Column N is a few columns to the right of your table. Excel does not add it to the table, and the columns between stay free for helper columns later. The four Check rows follow this order: row count, then the three formulas.</p>
@@ -281,7 +281,7 @@ Our data:
     <div class="shot" data-shot="ex3t2"><b>Your screenshot</b><p class="what">Cells N1 to N3 with the three results, and the status bar Count.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t2f">Or pick the file:</label><input id="ex3t2f" type="file" accept="image/*"></div><img alt="Your screenshot" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
   </div>
 </details>
-<details class="dsbox" data-ds="sbux"><summary>Open if your dataset is Starbucks drinks nutrition</summary>
+<details class="dsbox dspath" data-ds="sbux"><summary>Open if your dataset is Starbucks drinks nutrition</summary>
   <div class="task">
     <div class="task-head"><h3>Mess check: Starbucks drinks nutrition</h3><span class="tag core">CORE</span></div>
     <p>Find out how messy your dataset is. First read the row count in the status bar. Then type three formulas in T1, T2 and T3 on the Cleaning sheet. Column T is a few columns to the right of your table. Excel does not add it to the table, and the columns between stay free for helper columns later. The four Check rows follow this order: row count, then the three formulas.</p>
@@ -373,6 +373,9 @@ Our data:
 details.dsbox{border:2px solid var(--line);border-radius:10px}
 details.dsbox>summary{font-size:1.02rem}
 details.dsbox>.task{border-top:0;padding:0 14px 14px}
+html[data-pick] details.dspath{border:0;border-radius:0}
+html[data-pick] details.dspath>summary{display:none}
+html[data-pick] details.dspath>.task{padding:0}
 .pts{font-family:var(--font-mono);font-weight:700;text-align:right;white-space:nowrap}
 .ynlist{display:flex;flex-direction:column;gap:10px}
 fieldset.yn{border:1px solid var(--line);border-radius:8px;margin:0;padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center}
