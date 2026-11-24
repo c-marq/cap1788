@@ -135,6 +135,27 @@ details.sol>summary{color:var(--accent)}
   <div class="warn"><p>Your answers go in these cells: the summary block on the Cleaning sheet, to the right of the Table, with one empty column between. The helper columns go inside the Table. Your cleaning note goes under the summary block.</p></div>
 </section>
 
+<section class="card" id="askai" style="gap:10px">
+  <h2>Ask ChatGPT to explain a step</h2>
+  <p>Use it when a step is done but you are not sure what it does or why. ChatGPT explains. You and your partner decide. Every number still comes from your workbook.</p>
+  <div class="aibox"><p class="ailabel" id="ailabel">Prompt to copy</p>
+  <pre class="aiprompt" id="aiprompt" tabindex="0" role="group" aria-labelledby="ailabel">We are college students doing a final project in Excel. Our dataset is [dataset name]. Our central question is: [paste your question from Notes B3]
+
+In our Cleaning sheet we did this step:
+[paste the step: the formula, or the line from your cleaning note]
+
+Please:
+1. Explain in plain words what this step does.
+2. Explain why it matters for our question.
+3. Give us one sentence we could say about this step in our presentation.
+4. Do not change our numbers or make up new ones. If you are not sure, say so.</pre>
+  <button type="button" class="aicopy" id="aicopy">Copy prompt</button> <span class="aidone" id="aidone" role="status" aria-live="polite"></span></div>
+  <ol class="rules"><li>Open ChatGPT at <code>chatgpt.com</code> and sign in.</li>
+  <li>Click <b>Copy prompt</b>, click in the chat box and press <kbd>Ctrl</kbd> + <kbd>V</kbd>.</li>
+  <li>Replace the three parts in square brackets: your dataset, your question, and the step (copy the formula from the formula bar, or the line from your cleaning note).</li>
+  <li>Send it. Read the answer together. If the sentence for the presentation is useful, write it in your own words in the Notes sheet.</li></ol>
+</section>
+
 <!-- ============ EXERCISE 1 ============ -->
 <section class="card" data-card="ex1">
   <div class="card-head"><div class="eyebrow">Exercise 1 · Sheet: Cleaning · Three skills</div><h2>Helper column, proof, average</h2></div>
@@ -429,7 +450,7 @@ details.sol>summary{color:var(--accent)}
   <p class="ynsum" id="ynsum" role="status" aria-live="polite">0 of 8 Yes</p>
   <details class="dsbox"><summary>What done looks like: Miami 311 requests</summary>
 <div>
-<figure class="donepic"><img src="img/s2-311.png" alt="Excel, the Cleaning sheet of an example workbook for Miami 311 requests: a Table with blue filter arrows on the headings, columns ticket_id to Ticket_Priority, and six tabs at the bottom: Raw Data, Cleaning, Final, Notes, Dashboard, PivotTable recipe." hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><div class="pending">Screenshot coming</div><figcaption>This picture shows the left side of the Cleaning sheet. Your helper columns are further to the right, in O and P. The summary block and the note are also further right and are not in the picture. Your window may look a little different on Windows. The example workbook also has Dashboard and PivotTable recipe tabs. You make your own PivotTable and Dashboard tabs in later sessions.</figcaption></figure>
+<figure class="donepic"><img src="img/s2-311.png" alt="Excel on Windows, the Cleaning sheet of an example workbook for Miami 311 requests, with four red numbered marks. 1: the helper columns description_clean and days_closed_only (columns O and P) at the right end of the Table. 2: the summary block, Before (Raw Data) and After (Cleaning table): descriptions with a double space 9 and 0, rows that have a number of days 4205 and 4094, status exactly CLOSED 4094, the trap with stars 4136, average days to close 13.16 and 5.87. 3: the cleaning note, five lines. 4: the Final tab. Tabs: Raw Data, Cleaning, Final, Notes. The status bar shows Count: 4205." hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><div class="pending">Screenshot coming</div><figcaption>The red numbers: 1 your helper columns at the right end of the Table, 2 the summary block, 3 the cleaning note, 4 the Final tab. The status bar at the bottom right shows the Count. Helper columns in O and P. The summary block and the cleaning note are to the right of the Table. Your window may look a little different.</figcaption></figure>
 <ul class="rules">
 <li>Tabs: <code>Raw Data</code>, <code>Cleaning</code>, <code>Final</code>, <code>Notes</code>.</li>
 <li>Cleaning Table, 16 columns, ending in <code>description_clean</code> and <code>days_closed_only</code>. The status bar Count for column A is <b>4,205</b>.</li>
@@ -439,7 +460,7 @@ details.sol>summary{color:var(--accent)}
 </ul></div></details>
   <details class="dsbox"><summary>What done looks like: College tuition and costs</summary>
 <div>
-<figure class="donepic"><img src="img/s2-tuition.png" alt="Excel, the Cleaning sheet of an example workbook for college tuition: a Table with columns name to board_share, including the helper columns tuition_gap and board_share (percents, empty for schools with no room and board), and six tabs: Raw Data, Cleaning, Final, Notes, Dashboard, PivotTable recipe." hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><div class="pending">Screenshot coming</div><figcaption>This picture shows the whole Table. The summary block and the note are to the right of it and are not in the picture. Yours may show no comma in tuition_gap. Your window may look a little different on Windows. The example workbook also has Dashboard and PivotTable recipe tabs. You make your own PivotTable and Dashboard tabs in later sessions.</figcaption></figure>
+<figure class="donepic"><img src="img/s2-tuition.png" alt="Excel on Windows, the Cleaning sheet of an example workbook for college tuition, with four red numbered marks. 1: the helper columns tuition_gap and board_share (columns K and L) at the right end of the Table. 2: the summary block, Before (Raw Data) and After (Cleaning table): cells that say NA in room_and_board 1094 and 0, blank cells 0 and 1094, cells with something 2973 and 1879, average room_and_board 10,095.28 both, average gap 4,041.43. 3: the cleaning note, six lines. 4: the Final tab. Tabs: Raw Data, Cleaning, Final, Notes. The status bar shows Count: 2973." hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><div class="pending">Screenshot coming</div><figcaption>The red numbers: 1 your helper columns at the right end of the Table, 2 the summary block, 3 the cleaning note, 4 the Final tab. The status bar at the bottom right shows the Count. Helper columns in K and L. The summary block and the cleaning note are to the right of the Table. Two long note lines run past the right edge of the picture. Yours may show no comma in tuition_gap. Your window may look a little different.</figcaption></figure>
 <ul class="rules">
 <li>Tabs: <code>Raw Data</code>, <code>Cleaning</code>, <code>Final</code>, <code>Notes</code>.</li>
 <li>Cleaning Table, 12 columns, ending in <code>tuition_gap</code> and <code>board_share</code>. The status bar Count for column A is <b>2,973</b>.</li>
@@ -449,7 +470,7 @@ details.sol>summary{color:var(--accent)}
 </ul></div></details>
   <details class="dsbox"><summary>What done looks like: Starbucks drinks nutrition</summary>
 <div>
-<figure class="donepic"><img src="img/s2-starbucks.png" alt="Excel, the Cleaning sheet of an example workbook for Starbucks drinks: a Table with columns product_name to whip_label, including the helper columns milk_label (None, Nonfat, 2%, Whole, Soy, Coconut) and whip_label (No whip), and six tabs: Raw Data, Cleaning, Final, Notes, Dashboard, PivotTable recipe." hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><div class="pending">Screenshot coming</div><figcaption>This picture shows the left side of the Cleaning sheet. Your third helper column, zero_calorie, is in R, further to the right. The summary block and the note are further right still and are not in the picture. Your window may look a little different on Windows. The example workbook also has Dashboard and PivotTable recipe tabs. You make your own PivotTable and Dashboard tabs in later sessions.</figcaption></figure>
+<figure class="donepic"><img src="img/s2-starbucks.png" alt="Excel on Windows, the Cleaning sheet of an example workbook for Starbucks drinks, with four red numbered marks. 1: the helper columns milk_label, whip_label and zero_calorie (columns P, Q and R) at the right end of the Table. 2: the summary block, Before (Raw Data) and After (Cleaning table): milk code 0 and the word None 165 and 165, whip code 1 and the word Whip 283 and 283, rows with 0 calories 40 and 40, average calories 228.39 both, stretch average without the 0-calorie rows 236.65. 3: the cleaning note, five lines. 4: the Final tab. Tabs: Raw Data, Cleaning, Final, Notes. The status bar shows Count: 1147." hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><div class="pending">Screenshot coming</div><figcaption>The red numbers: 1 your helper columns at the right end of the Table, 2 the summary block, 3 the cleaning note, 4 the Final tab. The status bar at the bottom right shows the Count. Helper columns in P, Q and R. The summary block and the cleaning note are to the right of the Table. Your window may look a little different.</figcaption></figure>
 <ul class="rules">
 <li>Tabs: <code>Raw Data</code>, <code>Cleaning</code>, <code>Final</code>, <code>Notes</code>.</li>
 <li>Cleaning Table, 18 columns, ending in <code>milk_label</code>, <code>whip_label</code> and <code>zero_calorie</code>. The status bar Count for column A is <b>1,147</b>.</li>
@@ -493,6 +514,14 @@ figure.donepic{margin:0}
 figure.donepic img{max-width:100%;border:1px solid var(--line);border-radius:6px}
 figure.donepic figcaption{font-size:.95rem;color:var(--muted);margin-top:6px}
 .pending{border:2px dashed var(--line);border-radius:10px;padding:34px 14px;text-align:center;font-weight:700;color:var(--muted)}
+.aibox{border:2px solid var(--accent);border-radius:10px;padding:10px 14px;margin:4px 0}
+.ailabel{font-weight:700;margin:0 0 6px}
+pre.aiprompt{white-space:pre-wrap;word-break:break-word;font-family:var(--font-mono);font-size:.92rem;margin:0 0 10px;padding:10px;border:1px solid var(--line);border-radius:6px}
+button.aicopy{font:inherit;font-weight:700;padding:8px 14px;border-radius:8px;border:2px solid var(--accent);background:var(--accent);color:#fff;cursor:pointer}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) button.aicopy{color:#16181B}}
+:root[data-theme="dark"] button.aicopy{color:#16181B}
+button.aicopy:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.aidone{font-weight:700;color:var(--ok)}
 </style>
 <script type="text/javascript">
 (function(){
@@ -511,6 +540,20 @@ figure.donepic figcaption{font-size:.95rem;color:var(--muted);margin-top:6px}
     });
   });
   paint();
+})();
+(function(){
+  var b=document.getElementById("aicopy"), pre=document.getElementById("aiprompt"), done=document.getElementById("aidone");
+  if(!b||!pre) return;
+  function said(){ done.textContent=""; setTimeout(function(){ done.textContent="Copied. Paste it in the chat."; },50); }
+  function fallback(){
+    var r=document.createRange(); r.selectNodeContents(pre); var sel=window.getSelection(); sel.removeAllRanges(); sel.addRange(r);
+    var okc=false; try{ okc=document.execCommand("copy"); }catch(e){}
+    done.textContent = okc ? "Copied. Paste it in the chat." : "Press Ctrl + C now to copy the selected prompt.";
+  }
+  b.addEventListener("click",function(){
+    var txt=pre.textContent;
+    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(said,fallback); } else { fallback(); }
+  });
 })();
 </script>
 
