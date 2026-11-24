@@ -135,6 +135,17 @@ details.sol>summary{color:var(--accent)}
   <div class="warn"><p>Your answers go in these cells: the three formulas for the mess check go in the Cleaning sheet, in the column named in your dataset's box. Your questions, your three problems and the AI used line go in the Notes sheet.</p></div>
 </section>
 
+<section class="card" id="mydata" style="gap:10px">
+  <h2>Your dataset</h2>
+  <p id="pickq">Pick your dataset. The page then shows only your steps, numbers and pictures. Your choice is saved on this computer for every project page.</p>
+  <div class="pickrow" role="group" aria-label="Your dataset">
+    <button type="button" class="pick" data-pick="311" aria-pressed="false">Miami 311 requests</button>
+    <button type="button" class="pick" data-pick="tuition" aria-pressed="false">College tuition and costs</button>
+    <button type="button" class="pick" data-pick="sbux" aria-pressed="false">Starbucks drinks nutrition</button>
+    <button type="button" class="pick pickall" data-pick="" aria-pressed="true">Show all three</button>
+  </div>
+  <p class="picknow" id="picknow" role="status" aria-live="polite"></p>
+</section>
 <!-- ============ EXERCISE 1 ============ -->
 <section class="card" data-card="ex1">
   <div class="card-head"><div class="eyebrow">Exercise 1 · Hand in</div><h2>Your Nov 12 box</h2></div>
@@ -164,7 +175,7 @@ details.sol>summary{color:var(--accent)}
   
   <div class="task">
     <div class="task-head"><h3>Task 1 · Open your CSV and save it in OneDrive</h3><span class="tag core">CORE</span><span class="tag guided">GUIDED</span></div>
-    <p>Download the CSV for your dataset. Open it in Excel. Save it as an Excel Workbook in OneDrive, in your MDC account, with the name <code>Final-LastName1-LastName2.xlsx</code>. Example: <code>Final-Garcia-Lopez.xlsx</code>. Working alone: <code>Final-Garcia.xlsx</code>. The partner who saved the file types. The other partner reads the steps and checks.</p><ul class="rules"><li><a href="https://drive.google.com/uc?export=download&amp;id=1r2zzZvcevDNoSomNUMTar_NNO8GQaSPi">Download: Miami 311 requests</a> (<code>final-project-miami-311-march-2024.csv</code>)</li><li><a href="https://drive.google.com/uc?export=download&amp;id=1kHmnrIKCyFy1h88UTYh9FzpeyFQ1rEcw">Download: Starbucks drinks nutrition</a> (<code>final-project-starbucks-drinks.csv</code>)</li><li><a href="https://drive.google.com/uc?export=download&amp;id=1BjcPB5bqRPkxix7kOm5knD9LiM4E78up">Download: College tuition and costs</a> (<code>final-project-college-tuition.csv</code>)</li></ul><p>Download does not work? <a href="https://drive.google.com/drive/folders/1C_yq9B9B7hl2Co8b9m2bS9ljwT6WVKct">Open the Datasets folder in Google Drive</a>.</p>
+    <p>Download the CSV for your dataset. Open it in Excel. Save it as an Excel Workbook in OneDrive, in your MDC account, with the name <code>Final-LastName1-LastName2.xlsx</code>. Example: <code>Final-Garcia-Lopez.xlsx</code>. Working alone: <code>Final-Garcia.xlsx</code>. The partner who saved the file types. The other partner reads the steps and checks.</p><ul class="rules"><li data-ds="311"><a href="https://drive.google.com/uc?export=download&amp;id=1r2zzZvcevDNoSomNUMTar_NNO8GQaSPi">Download: Miami 311 requests</a> (<code>final-project-miami-311-march-2024.csv</code>)</li><li data-ds="sbux"><a href="https://drive.google.com/uc?export=download&amp;id=1kHmnrIKCyFy1h88UTYh9FzpeyFQ1rEcw">Download: Starbucks drinks nutrition</a> (<code>final-project-starbucks-drinks.csv</code>)</li><li data-ds="tuition"><a href="https://drive.google.com/uc?export=download&amp;id=1BjcPB5bqRPkxix7kOm5knD9LiM4E78up">Download: College tuition and costs</a> (<code>final-project-college-tuition.csv</code>)</li></ul><p>Download does not work? <a href="https://drive.google.com/drive/folders/1C_yq9B9B7hl2Co8b9m2bS9ljwT6WVKct">Open the Datasets folder in Google Drive</a>.</p>
     <div class="nudge"><b>Guided start</b><ol><li>Open File Explorer, click <strong>Downloads</strong>, double-click the file. It opens in Excel. (Steps are in <a href="../project00-kickoff/#s2">kickoff section 2</a>.) If a yellow bar says Protected View, click <strong>Enable Editing</strong>.</li><li>Click <strong>File</strong>, then <strong>Save As</strong> (some versions say <strong>Save a Copy</strong>).</li><li>Choose <strong>OneDrive - Miami Dade College</strong>. Type the file name.</li><li>Do not skip this step. In <strong>Save as type</strong>, choose <strong>Excel Workbook (*.xlsx)</strong>. Click <strong>Save</strong>.</li></ol></div>
     
     <div class="hints">
@@ -224,7 +235,7 @@ Please:
 
 Our data:
 </pre><button type="button" class="aicopy" id="aicopy">Copy prompt</button> <span class="aidone" id="aidone" role="status" aria-live="polite"></span></div><p>Write your answers on the Notes sheet:</p><ul class="rules"><li>A3 <code>Central question</code>, and in B3 your question in one sentence, in your own words. A draft is fine.</li><li>A10 <code>More questions</code>, and in B10 to B12 two or three more questions you want to answer. They can come from the AI list or from you.</li><li>A14 <code>AI used</code>, and in B14 which AI you used and one thing you changed. Example: <em>ChatGPT. We changed its question 2 to ask about weekends.</em></li></ul><p>Rows 5 to 8 stay free for the problems you find in Exercise 3.</p>
-    <div class="nudge"><b>Guided start</b><ol><li>Click the <strong>+</strong> next to the sheet tabs. Double-click the new tab and rename it <code>Notes</code>. In A1 type <code>Notes</code>.</li><li>Open the AI in the browser and sign in. Click <strong>Copy prompt</strong> above, click in the chat box and press <kbd>Ctrl</kbd> + <kbd>V</kbd>. Change <code>[dataset name]</code> to your dataset, for example <code>Miami 311 requests</code>.</li><li>Go to the <code>Raw Data</code> sheet. Click A1, then hold <kbd>Shift</kbd> and click <strong>N11</strong> (Miami 311), <strong>J11</strong> (College tuition) or <strong>O11</strong> (Starbucks). Or type <code>A1:N11</code> (or <code>A1:J11</code>, <code>A1:O11</code>) in the Name Box, left of the formula bar, and press <kbd>Enter</kbd>. Press <kbd>Ctrl</kbd> + <kbd>C</kbd>.</li><li>In the chat, press <kbd>Ctrl</kbd> + <kbd>End</kbd> to go to the very end, after <code>Our data:</code>, then press <kbd>Ctrl</kbd> + <kbd>V</kbd>. Send it. Read the answer together.</li></ol></div>
+    <div class="nudge"><b>Guided start</b><ol><li>Click the <strong>+</strong> next to the sheet tabs. Double-click the new tab and rename it <code>Notes</code>. In A1 type <code>Notes</code>.</li><li>Open the AI in the browser and sign in. Click <strong>Copy prompt</strong> above, click in the chat box and press <kbd>Ctrl</kbd> + <kbd>V</kbd>. Change <code>[dataset name]</code> to your dataset, for example <code>Miami 311 requests</code>.</li><li>Go to the <code>Raw Data</code> sheet. Click A1, then hold <kbd>Shift</kbd> and click <span class="dsline" data-ds="311"><strong>N11</strong> (Miami 311) </span><span class="dsline" data-ds="tuition"><strong>J11</strong> (College tuition) </span><span class="dsline" data-ds="sbux"><strong>O11</strong> (Starbucks) </span>. Or type <span class="dsline" data-ds="311"><code>A1:N11</code> </span><span class="dsline" data-ds="tuition"><code>A1:J11</code> </span><span class="dsline" data-ds="sbux"><code>A1:O11</code> </span>in the Name Box, left of the formula bar, and press <kbd>Enter</kbd>. Press <kbd>Ctrl</kbd> + <kbd>C</kbd>.</li><li>In the chat, press <kbd>Ctrl</kbd> + <kbd>End</kbd> to go to the very end, after <code>Our data:</code>, then press <kbd>Ctrl</kbd> + <kbd>V</kbd>. Send it. Read the answer together.</li></ol></div>
     
     <div class="hints">
       <details><summary>Hint 1</summary><div><p>ChatGPT is at <code>chatgpt.com</code>. Sign in with your account. The copied cells are the column names and the first 10 rows of your data.</p></div></details>
@@ -242,7 +253,7 @@ Our data:
   <p class="q">Question: What problems does your dataset have, and how many rows does each touch?</p>
   <p class="why">A good project starts with knowing the mess. Open only the box for your dataset. The answers are the same for every pair on that dataset.</p>
   
-<details class="dsbox"><summary>Open if your dataset is Miami 311 requests</summary>
+<details class="dsbox" data-ds="311"><summary>Open if your dataset is Miami 311 requests</summary>
   <div class="task">
     <div class="task-head"><h3>Mess check: Miami 311 requests</h3><span class="tag core">CORE</span></div>
     <p>Find out how messy your dataset is. First read the row count in the status bar. Then type three formulas in R1, R2 and R3 on the Cleaning sheet. Column R is a few columns to the right of your table. Excel does not add it to the table, and the columns between stay free for helper columns later. The four Check rows follow this order: row count, then the three formulas.</p>
@@ -256,7 +267,7 @@ Our data:
     <div class="shot" data-shot="ex3t1"><b>Your screenshot</b><p class="what">Cells R1 to R3 with the three results, and the status bar Count.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t1f">Or pick the file:</label><input id="ex3t1f" type="file" accept="image/*"></div><img alt="Your screenshot" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
   </div>
 </details>
-<details class="dsbox"><summary>Open if your dataset is College tuition and costs</summary>
+<details class="dsbox" data-ds="tuition"><summary>Open if your dataset is College tuition and costs</summary>
   <div class="task">
     <div class="task-head"><h3>Mess check: College tuition and costs</h3><span class="tag core">CORE</span></div>
     <p>Find out how messy your dataset is. First read the row count in the status bar. Then type three formulas in N1, N2 and N3 on the Cleaning sheet. Column N is a few columns to the right of your table. Excel does not add it to the table, and the columns between stay free for helper columns later. The four Check rows follow this order: row count, then the three formulas.</p>
@@ -270,7 +281,7 @@ Our data:
     <div class="shot" data-shot="ex3t2"><b>Your screenshot</b><p class="what">Cells N1 to N3 with the three results, and the status bar Count.</p><div class="drop" tabindex="0" role="button" aria-label="Paste screenshot">Click here, then press <kbd>Ctrl</kbd> + <kbd>V</kbd></div><div class="shot-row"><label for="ex3t2f">Or pick the file:</label><input id="ex3t2f" type="file" accept="image/*"></div><img alt="Your screenshot" hidden><div class="shot-row"><button class="clear" type="button" hidden>Remove screenshot</button><span class="note">Saved on this computer only. Show it to your professor or the tutor if you get stuck.</span></div></div>
   </div>
 </details>
-<details class="dsbox"><summary>Open if your dataset is Starbucks drinks nutrition</summary>
+<details class="dsbox" data-ds="sbux"><summary>Open if your dataset is Starbucks drinks nutrition</summary>
   <div class="task">
     <div class="task-head"><h3>Mess check: Starbucks drinks nutrition</h3><span class="tag core">CORE</span></div>
     <p>Find out how messy your dataset is. First read the row count in the status bar. Then type three formulas in T1, T2 and T3 on the Cleaning sheet. Column T is a few columns to the right of your table. Excel does not add it to the table, and the columns between stay free for helper columns later. The four Check rows follow this order: row count, then the three formulas.</p>
@@ -290,7 +301,7 @@ Our data:
     <div class="nudge"><b>Nudge</b>In A5 type <code>Three problems found</code>. Write one problem per line in B5, B6 and B7. Start each with its number: <code>1. </code>, <code>2. </code>, <code>3. </code>.</div>
     
     <div class="hints">
-      <details><summary>Hint 1</summary><div><p>Ideas for your dataset:</p><ul class="rules"><li>Miami 311: <code>ticket_closed_date_time</code>, <code>issue_Description</code>, <code>ticket_status</code>, <code>District</code>.</li><li>College tuition: <code>room_and_board</code>, <code>state</code>, <code>name</code>.</li><li>Starbucks: <code>calories</code>, <code>milk</code>, <code>whip</code>, <code>product_name</code>.</li></ul></div></details>
+      <details><summary>Hint 1</summary><div><p>Ideas for your dataset:</p><ul class="rules"><li data-ds="311">Miami 311: <code>ticket_closed_date_time</code>, <code>issue_Description</code>, <code>ticket_status</code>, <code>District</code>.</li><li data-ds="tuition">College tuition: <code>room_and_board</code>, <code>state</code>, <code>name</code>.</li><li data-ds="sbux">Starbucks: <code>calories</code>, <code>milk</code>, <code>whip</code>, <code>product_name</code>.</li></ul></div></details>
       <details><summary>Hint 2</summary><div><p>Each line has three parts: the column, what is wrong, how many rows. Example shape: <em>Column X has N blank cells.</em></p></div></details>
       <details class="sol"><summary>Solution</summary><div><p>Any three real problems that you can point to in the data. Use your own words. Example shape: <em>Column X has N cells that say NA.</em></p></div></details>
     </div>
@@ -314,9 +325,9 @@ Our data:
 <section class="card" id="done" style="gap:10px">
   <h2>Done today when...</h2>
   <p>Answer each line with Yes or No. Fix every No before you leave.</p>
-  <div class="ynlist"><fieldset class="yn" data-yn="tabs"><legend>The three sheet tabs are named <code>Raw Data</code>, <code>Cleaning</code> and <code>Notes</code>.</legend><label><input type="radio" name="yn-tabs" value="yes"> Yes</label> <label><input type="radio" name="yn-tabs" value="no"> No</label></fieldset><fieldset class="yn" data-yn="raw"><legend>Raw Data is untouched. Press <kbd>Ctrl</kbd> + <kbd>End</kbd> on it. The last cell is <b>N4206</b> (Miami 311), <b>J2974</b> (College tuition) or <b>O1148</b> (Starbucks).</legend><label><input type="radio" name="yn-raw" value="yes"> Yes</label> <label><input type="radio" name="yn-raw" value="no"> No</label></fieldset><fieldset class="yn" data-yn="tbl"><legend>Cleaning is a Table named <code>tblClean</code>. Click inside it and the Table Design tab shows.</legend><label><input type="radio" name="yn-tbl" value="yes"> Yes</label> <label><input type="radio" name="yn-tbl" value="no"> No</label></fieldset><fieldset class="yn" data-yn="rows"><legend>The status bar Count for the first column of the table is <b>4,205</b> (Miami 311), <b>2,973</b> (College tuition) or <b>1,147</b> (Starbucks).</legend><label><input type="radio" name="yn-rows" value="yes"> Yes</label> <label><input type="radio" name="yn-rows" value="no"> No</label></fieldset><fieldset class="yn" data-yn="file"><legend>The file is in OneDrive, in your MDC account. Your partner opened it in Excel on the computer, typed anything in a cell of the Notes sheet, and you saw it. Then your partner deleted it. (Working alone: the file is in OneDrive.)</legend><label><input type="radio" name="yn-file" value="yes"> Yes</label> <label><input type="radio" name="yn-file" value="no"> No</label></fieldset><fieldset class="yn" data-yn="notes"><legend>The Notes sheet has your question in B3, three problems in B5 to B7, more questions in B10 to B12 and the AI used line in B14.</legend><label><input type="radio" name="yn-notes" value="yes"> Yes</label> <label><input type="radio" name="yn-notes" value="no"> No</label></fieldset></div>
+  <div class="ynlist"><fieldset class="yn" data-yn="tabs"><legend>The three sheet tabs are named <code>Raw Data</code>, <code>Cleaning</code> and <code>Notes</code>.</legend><label><input type="radio" name="yn-tabs" value="yes"> Yes</label> <label><input type="radio" name="yn-tabs" value="no"> No</label></fieldset><fieldset class="yn" data-yn="raw"><legend>Raw Data is untouched. Press <kbd>Ctrl</kbd> + <kbd>End</kbd> on it. The last cell is <span class="dsline" data-ds="311"><b>N4206</b> (Miami 311) </span><span class="dsline" data-ds="tuition"><b>J2974</b> (College tuition) </span><span class="dsline" data-ds="sbux"><b>O1148</b> (Starbucks) </span>.</legend><label><input type="radio" name="yn-raw" value="yes"> Yes</label> <label><input type="radio" name="yn-raw" value="no"> No</label></fieldset><fieldset class="yn" data-yn="tbl"><legend>Cleaning is a Table named <code>tblClean</code>. Click inside it and the Table Design tab shows.</legend><label><input type="radio" name="yn-tbl" value="yes"> Yes</label> <label><input type="radio" name="yn-tbl" value="no"> No</label></fieldset><fieldset class="yn" data-yn="rows"><legend>The status bar Count for the first column of the table is <span class="dsline" data-ds="311"><b>4,205</b> (Miami 311) </span><span class="dsline" data-ds="tuition"><b>2,973</b> (College tuition) </span><span class="dsline" data-ds="sbux"><b>1,147</b> (Starbucks) </span>.</legend><label><input type="radio" name="yn-rows" value="yes"> Yes</label> <label><input type="radio" name="yn-rows" value="no"> No</label></fieldset><fieldset class="yn" data-yn="file"><legend>The file is in OneDrive, in your MDC account. Your partner opened it in Excel on the computer, typed anything in a cell of the Notes sheet, and you saw it. Then your partner deleted it. (Working alone: the file is in OneDrive.)</legend><label><input type="radio" name="yn-file" value="yes"> Yes</label> <label><input type="radio" name="yn-file" value="no"> No</label></fieldset><fieldset class="yn" data-yn="notes"><legend>The Notes sheet has your question in B3, three problems in B5 to B7, more questions in B10 to B12 and the AI used line in B14.</legend><label><input type="radio" name="yn-notes" value="yes"> Yes</label> <label><input type="radio" name="yn-notes" value="no"> No</label></fieldset></div>
   <p class="ynsum" id="ynsum" role="status" aria-live="polite">0 of 6 Yes</p>
-  <details class="dsbox"><summary>What done looks like: Miami 311 requests</summary>
+  <details class="dsbox" data-ds="311"><summary>What done looks like: Miami 311 requests</summary>
 <div>
 <figure class="donepic"><img src="img/s1-311.png" alt="Excel for Miami 311 requests: the Cleaning sheet as a Table, with the Raw Data, Cleaning and Notes tabs" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><div class="pending">Screenshot coming</div></figure>
 <ul class="rules">
@@ -325,7 +336,7 @@ Our data:
 <li>Cleaning: a Table named <code>tblClean</code>, 14 columns. The status bar Count for column A is <b>4,205</b>.</li>
 <li>Notes: <code>Central question</code> in A3 with your question in B3. <code>Three problems found</code> in A5 with the problems in B5 to B7. <code>More questions</code> in A10 with your questions in B10 to B12. <code>AI used</code> in A14, filled in B14.</li>
 </ul></div></details>
-  <details class="dsbox"><summary>What done looks like: Starbucks drinks nutrition</summary>
+  <details class="dsbox" data-ds="sbux"><summary>What done looks like: Starbucks drinks nutrition</summary>
 <div>
 <figure class="donepic"><img src="img/s1-starbucks.png" alt="Excel for Starbucks drinks nutrition: the Cleaning sheet as a Table, with the Raw Data, Cleaning and Notes tabs" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><div class="pending">Screenshot coming</div></figure>
 <ul class="rules">
@@ -334,7 +345,7 @@ Our data:
 <li>Cleaning: a Table named <code>tblClean</code>, 15 columns. The status bar Count for column A is <b>1,147</b>.</li>
 <li>Notes: <code>Central question</code> in A3 with your question in B3. <code>Three problems found</code> in A5 with the problems in B5 to B7. <code>More questions</code> in A10 with your questions in B10 to B12. <code>AI used</code> in A14, filled in B14.</li>
 </ul></div></details>
-  <details class="dsbox"><summary>What done looks like: College tuition and costs</summary>
+  <details class="dsbox" data-ds="tuition"><summary>What done looks like: College tuition and costs</summary>
 <div>
 <figure class="donepic"><img src="img/s1-tuition.png" alt="Excel for College tuition and costs: the Cleaning sheet as a Table, with the Raw Data, Cleaning and Notes tabs" hidden onload="this.hidden=false;this.nextElementSibling.hidden=true"><div class="pending">Screenshot coming</div></figure>
 <ul class="rules">
@@ -380,6 +391,15 @@ button.aicopy{font:inherit;font-weight:700;padding:8px 14px;border-radius:8px;bo
 :root[data-theme="dark"] button.aicopy{color:#16181B}
 button.aicopy:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .aidone{font-weight:700;color:var(--ok)}
+html[data-pick="311"] [data-ds]:not([data-ds="311"]),html[data-pick="tuition"] [data-ds]:not([data-ds="tuition"]),html[data-pick="sbux"] [data-ds]:not([data-ds="sbux"]){display:none!important}
+.pickrow{display:flex;flex-wrap:wrap;gap:8px}
+button.pick{font:inherit;font-weight:700;padding:10px 14px;border-radius:8px;border:2px solid var(--accent);background:transparent;color:inherit;cursor:pointer}
+button.pick[aria-pressed="true"]{background:var(--accent);color:#fff}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) button.pick[aria-pressed="true"]{color:#16181B}}
+:root[data-theme="dark"] button.pick[aria-pressed="true"]{color:#16181B}
+button.pick:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button.pickall{font-weight:400}
+.picknow{font-weight:700;color:var(--accent);margin:0}
 .pending{border:2px dashed var(--line);border-radius:10px;padding:34px 14px;text-align:center;font-weight:700;color:var(--muted)}
 </style>
 <script type="text/javascript">
@@ -399,6 +419,20 @@ button.aicopy:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
     });
   });
   paint();
+})();
+(function(){
+  var KEYD="cap1788-final-dataset", NAMES={"311":"Miami 311 requests","tuition":"College tuition and costs","sbux":"Starbucks drinks nutrition"};
+  var btns=[].slice.call(document.querySelectorAll("button.pick")), now=document.getElementById("picknow");
+  function apply(k){
+    if(k&&NAMES[k]){ document.documentElement.setAttribute("data-pick",k); }
+    else { document.documentElement.removeAttribute("data-pick"); k=""; }
+    btns.forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-pick")===k ? "true" : "false"); });
+    [].slice.call(document.querySelectorAll('details.dsbox[data-ds]')).forEach(function(d){ if(k && d.getAttribute("data-ds")===k && d.closest(".card") && !/What done/.test(d.querySelector("summary").textContent)) d.open=true; });
+    now.textContent = k ? "Showing only: "+NAMES[k]+". Pick another to change it." : "Showing all three datasets.";
+  }
+  var saved=""; try{saved=localStorage.getItem(KEYD)||""}catch(e){}
+  apply(saved);
+  btns.forEach(function(b){ b.addEventListener("click",function(){ var k=b.getAttribute("data-pick"); try{ if(k) localStorage.setItem(KEYD,k); else localStorage.removeItem(KEYD); }catch(e){} apply(k); }); });
 })();
 (function(){
   var b=document.getElementById("aicopy"), pre=document.getElementById("aiprompt"), done=document.getElementById("aidone");
